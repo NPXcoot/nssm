@@ -748,7 +748,7 @@ minetest.register_tool("nssm:ant_sword", {
 		damage_groups = {fleshy=8},
 	},
 })
-	
+
 minetest.register_craftitem("nssm:stoneater_mandible", {
 	description = "Stoneater Mandible",
 	image = "stoneater_mandible.png",
@@ -758,12 +758,8 @@ minetest.register_craftitem("nssm:ant_mandible", {
 	description = "Ant Mandible",
 	image = "ant_mandible.png",
 })
-	
-
-
 
 --ricette
-
 
 minetest.register_craft({
 	output = 'nssm:mantis_sword',
@@ -1004,7 +1000,7 @@ minetest.register_craft({
 	cooktime = 16,
 })
 
-	
+
 minetest.register_craft({
 	output = 'nssm:ant_sword',
 	recipe = {
@@ -1023,620 +1019,70 @@ minetest.register_craft({
 	}
 })
 
+
+
+
 --Eggs
 
-minetest.register_craftitem("nssm:tarantula_egg", {
-	description = "Tarantula Egg",
-	image = "tarantula_egg.png",
+function nssm_register_egg (name, descr)
+
+
+minetest.register_craftitem("nssm:".. name .."_egg", {
+	description = descr .. " Egg",
+	image = name .. "_egg.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
 		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:tarantula")
+		core.after(0.1, function()
+			minetest.add_entity(pos1, "nssm:".. name)
 		end)
 		itemstack:take_item()
 		return itemstack
 	end,
 })
 
-minetest.register_craftitem("nssm:daddy_egg", {
-	description = "Daddy Long Legs Egg",
-	image = "daddy_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:daddy_long_legs")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
+end
 
-minetest.register_craftitem("nssm:uloboros_egg", {
-	description = "Uloboros Egg",
-	image = "uloboros_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:uloboros")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:black_widow_egg", {
-	description = "Black Widow Egg",
-	image = "black_widow_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:black_widow")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:black_widow_egg", {
-	description = "Black Widow Egg",
-	image = "black_widow_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:black_widow")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:pumpboom_egg", {
-	description = "Small Pumpboom Egg",
-	image = "pumpboom_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:pumpboom_small")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:medium_pumpboom_egg", {
-	description = "Medium Pumpboom Egg",
-	image = "medium_pumpboom_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:pumpboom_medium")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:big_pumpboom_egg", {
-	description = "Large Pumpboom Egg",
-	image = "big_pumpboom_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:pumpboom_large")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:pumpking_egg", {
-	description = "Pumpking Egg",
-	image = "pumpking_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:pumpking")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:manticore_egg", {
-	description = "Manticore Egg",
-	image = "manticore_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:manticore")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:kraken_egg", {
-	description = "Kraken Egg",
-	image = "kraken_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:kraken")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:crab_egg", {
-	description = "Crab Egg",
-	image = "crab_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:crab")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:octopus_egg", {
-	description = "Octopus Egg",
-	image = "octopus_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:octopus")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:dolidorsaurus_egg", {
-	description = "Dolidrosaurus Egg",
-	image = "dolidrosaurus_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:dolidrosaurus")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:crocodile_egg", {
-	description = "Crocodile Egg",
-	image = "crocodile_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:crocodile")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:ant_soldier_egg", {
-	description = "Ant Soldier Egg",
-	image = "ant_soldier_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:ant_soldier")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:ant_queen_egg", {
-	description = "Ant Queen Egg",
-	image = "ant_queen_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:ant_queen")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:ant_worker_egg", {
-	description = "Ant Worker Egg",
-	image = "ant_worker_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:ant_worker")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:dahaka_egg", {
-	description = "Dahaka Egg",
-	image = "dahaka_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:dahaka")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:sandworm_egg", {
-	description = "Sandworm Egg",
-	image = "sandworm_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:sandworm")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:night_master_egg", {
-	description = "Night Master Egg",
-	image = "night_master_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:night_master")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:moonheron_egg", {
-	description = "Moonheron Egg",
-	image = "moonheron_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:moonheron")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:srausics_egg", {
-	description = "Scrausics Egg",
-	image = "scrausics_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:scrausics")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:phoenix_egg", {
-	description = "Phoenix Egg",
-	image = "phoenix_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:phoenix")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:larva_egg", {
-	description = "Larva Egg",
-	image = "larva_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:larva")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:mantis_egg", {
-	description = "Mantis Egg",
-	image = "mantis_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:mantis")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:mantis_beast_egg", {
-	description = "Mantis Beast Egg",
-	image = "mantis_beast_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:mantis_beast")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:masticone_egg", {
-	description = "Masticone Egg",
-	image = "masticone_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:masticone")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:lava_titan_egg", {
-	description = "Lava Titan Egg",
-	image = "lava_titan_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:lava_titan")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:icelamander_egg", {
-	description = "Icelamander Egg",
-	image = "icelamander_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:icelamander")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:icesnake_egg", {
-	description = "Ice Snake Egg",
-	image = "icesnake_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:icesnake")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:snow_biter_egg", {
-	description = "Snowbiter Egg",
-	image = "snow_biter_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:snow_biter")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:white_werewolf_egg", {
-	description = "White Werewolf Egg",
-	image = "white_werewolf_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:white_werewolf")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:werewolf_egg", {
-	description = "Werewolf Egg",
-	image = "werewolf_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:werewolf")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:echidna_egg", {
-	description = "Echidna Egg",
-	image = "echidna_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:echidna")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:spiderduck_egg", {
-	description = "Spiderduck Egg",
-	image = "spiderduck_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:spiderduck")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:enderduck_egg", {
-	description = "Enderduck Egg",
-	image = "enderduck_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:enderduck")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:duckking_egg", {
-	description = "Duckking Egg",
-	image = "duckking_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:duckking")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:duck_egg", {
-	description = "Duck Egg",
-	image = "duck_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:duck")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:swimming_duck_egg", {
-	description = "Swimming Duck Egg",
-	image = "swimming_duck_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:swimming_duck")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:bloco_egg", {
-	description = "Bloco Egg",
-	image = "bloco_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:bloco")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:signosigno_egg", {
-	description = "Signosigno Egg",
-	image = "signo_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:signosigno")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:stone_eater_egg", {
-	description = "Stoneater Egg",
-	image = "stone_eater_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:stone_eater")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:flying_duck_egg", {
-	description = "Flying Duck Egg",
-	image = "flying_duck_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:flying_duck")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
+nssm_register_egg ('flying_duck', 'Flying Duck')
+nssm_register_egg ('stone_eater', 'Stoneater')
+nssm_register_egg ('signosigno', 'Signosigno')
+nssm_register_egg ('bloco', 'Bloco')
+nssm_register_egg ('swimming_duck', 'Swimming Duck')
+nssm_register_egg ('duck', 'Duck')
+nssm_register_egg ('duckking', 'Duckking')
+nssm_register_egg ('enderduck', 'Enderduck')
+nssm_register_egg ('spiderduck', 'Spiderduck')
+nssm_register_egg ('echidna', 'Echidna')
+nssm_register_egg ('werewolf', 'Werewolf')
+nssm_register_egg ('white_werewolf', 'White Werewolf')
+nssm_register_egg ('snow_biter', 'Snow Biter')
+nssm_register_egg ('icelamander', 'Icelamander')
+nssm_register_egg ('icesnake', 'Icesnake')
+nssm_register_egg ('lava_titan', 'Lava Titan')
+nssm_register_egg ('masticone', 'Masticone')
+nssm_register_egg ('mantis_beast', 'Mantis Beast')
+nssm_register_egg ('mantis', 'mantis')
+nssm_register_egg ('larva', 'Larva')
+nssm_register_egg ('phoenix', 'Phoenix')
+nssm_register_egg ('night_master', 'Night Master')
+nssm_register_egg ('scrausics', 'Scrausics')
+nssm_register_egg ('moonheron', 'Moonheron')
+nssm_register_egg ('dahaka', 'Dahaka')
+nssm_register_egg ('sandworm', 'Sandworm')
+nssm_register_egg ('ant_queen', 'Ant Queen')
+nssm_register_egg ('ant_soldier', 'Ant Soldier')
+nssm_register_egg ('ant_worker', 'Ant Worker')
+nssm_register_egg ('crocodile', 'Crocodile')
+nssm_register_egg ('dolidrosaurus', 'Dolidrosaurus')
+nssm_register_egg ('crab', 'Crab')
+nssm_register_egg ('octopus', 'Octopus')
+nssm_register_egg ('black_widow', 'Black Widow')
+nssm_register_egg ('uloboros', 'Uloboros')
+nssm_register_egg ('tarantula', 'Tarantula')
+nssm_register_egg ('daddy_long_legs', 'Daddy Long Legs')
+nssm_register_egg ('kraken', 'Kraken')
+nssm_register_egg ('pumpking', 'Pumpking')
+nssm_register_egg ('manticore', 'Manticore')
+nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
+nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
+nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
