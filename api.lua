@@ -2183,8 +2183,8 @@ minetest.register_entity(name, {
 		if self.webber==true then
 		local pos = self.object:getpos()
 					if (math.random(1,50)==1) then
-						dx=math.random(1,3)
-						dz=math.random(1,3)
+						local dx=math.random(1,3)
+						local dz=math.random(1,3)
 						local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
 						local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 						local n = minetest.env:get_node(p).name
