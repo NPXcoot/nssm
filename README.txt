@@ -11,4 +11,5 @@ We would like to thank:
 
 License GPL v3
 
-The mod makes the game really hard, please read the Guide, available on the thread of the mod, before playing!
+The mod makes the game really hard, please read the Guide before playing:
+https://dl.orangedox.com/a9tDekhYmWRkJt0J0a
