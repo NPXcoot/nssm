@@ -1,4 +1,3 @@
-nssm:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 100, 750000, 1, 10, 40)
 nssm:register_mob("nssm:scrausics", {
 	type = "monster",
 	hp_max = 23,

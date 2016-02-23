@@ -1,4 +1,3 @@
-nssm:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 31000)
 nssm:register_mob("nssm:snow_biter", {
 	type = "monster",
 	hp_max = 20,

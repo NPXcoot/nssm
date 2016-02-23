@@ -46,6 +46,8 @@ nssm:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt
 nssm:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 10000, 1, -31000, 31000)
 nssm:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 31000)
 nssm:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 20000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 31000)
+
 
 -- FOREST
 nssm:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree"}, 0, 20, 40, 200, 1, -31000, 22)
@@ -55,6 +57,7 @@ nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tre
 nssm:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 100, 750000, 1, 10, 40)
 nssm:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 120, 5200000, 2, 10, 40)
 nssm:spawn_specific("nssm:phoenix", {"air"}, {"air"}, 10, 20, 120, 5200000, 1, 10, 40)
+nssm:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 100, 750000, 1, 10, 40)
 
 -- PINE FOREST
 nssm:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 300, 1, -31000, 31000)
