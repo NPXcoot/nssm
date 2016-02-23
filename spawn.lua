@@ -64,3 +64,8 @@ nssm:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:
 nssm:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 400, 1, -31000, 31000)
 nssm:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 500, 1, -31000, 31000)
 nssm:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 10000, 1, -31000, 31000)
+
+-- NSSB SPECIAL
+if minetest.get_modpath("nssb") then
+nssm:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
+end
