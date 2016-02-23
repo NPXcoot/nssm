@@ -104,5 +104,9 @@ nssm:register_mob("nssm:xgaloctopus", {
 		run_end = 100,
 		punch_start = 120,
 		punch_end = 160,
-	}
+	},
+	replace_rate = 1,
+	replace_what = {"default:torch"},
+	replace_with = "default:water_source",
+	replace_offset = 0,
 })
