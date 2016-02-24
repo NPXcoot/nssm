@@ -57,17 +57,17 @@ nssm:register_mob("nssm:dahaka", {
 		local v = self.object:getvelocity()
 		local pos = self.object:getpos()
 		local c=3
-			for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
-				for dy=0,5 do
-					for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="default:water_source" and n~="default:water_flowing") then
-								minetest.env:set_node(t, {name="air"})
-						end
+		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+			for dy=0,5 do
+				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+					local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.env:get_node(p).name
+					if (n~="default:water_source" and n~="default:water_flowing") then
+							minetest.env:set_node(t, {name="air"})
 					end
 				end
 			end
+		end
 	end,
 })
