@@ -8,7 +8,6 @@ nssm:register_mob("nssm:stone_eater", {
 	textures = {{"stone_eater.png"}},
 	visual_size = {x=10, y=10},
 	makes_footstep_sound = false,
-	stone_pooper = true,
 	view_range = 16,
 	rotate = 270,
 	worm=true,
@@ -49,5 +48,24 @@ nssm:register_mob("nssm:stone_eater", {
 		run_end = 150,
 		punch_start = 160,
 		punch_end = 185,
-	}
+	},
+	do_custom = function(self)
+		--Remove stone around
+		local pos = self.object:getpos()
+		local c=3
+		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+			for dy=0,1 do
+				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+					local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.env:get_node(t).name
+						if (n~="default:water_source" and n~="default:water_flowing") then
+              if n=="default:stone" or n=="default:sandstone" or n=="default:cobble" then
+                  minetest.env:set_node(t, {name="air"})
+              end
+						end
+				end
+			end
+		end
+	end,
 })

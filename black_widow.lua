@@ -34,7 +34,6 @@ nssm:register_mob("nssm:black_widow", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 1,
-	webber = true,
 	lava_damage = 7,
 	light_damage = 0,
 	on_rightclick = nil,
@@ -50,5 +49,20 @@ nssm:register_mob("nssm:black_widow", {
 		run_end = 140,
 		punch_start = 150,
 		punch_end = 160,
-	}
+	},
+	do_custom = function(self)
+		--Webber: puts web around himself
+		local pos = self.object:getpos()
+		if (math.random(1,75)==1) then
+			local dx=math.random(1,3)
+			local dz=math.random(1,3)
+			local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
+			local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+			local n = minetest.env:get_node(p).name
+			local k = minetest.env:get_node(t).name
+			if ((n~="air")and(k=="air")) then
+				minetest.env:set_node(t, {name="nssm:web"})
+			end
+		end
+	end,
 })

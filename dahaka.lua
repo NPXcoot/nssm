@@ -4,7 +4,6 @@ nssm:register_mob("nssm:dahaka", {
 	hp_min = 80,
 	collisionbox = {-0.85, -0.30, -0.85, 0.85, 4.50, 0.85},
 	visual = "mesh",
-	digger = true,
 	mesh = "dahaka.x",
 	textures = {{"dahaka.png", "dahaka_sand.png"}},
 	visual_size = {x=4, y=4},
@@ -52,5 +51,23 @@ nssm:register_mob("nssm:dahaka", {
 		punch_end = 330,
 		punch1_start = 120,
 		punch1_end = 155,
-	}
+	},
+	do_custom = function (self)
+		--Digging ability
+		local v = self.object:getvelocity()
+		local pos = self.object:getpos()
+		local c=3
+			for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+				for dy=0,5 do
+					for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+						local n = minetest.env:get_node(p).name
+						if (n~="default:water_source" and n~="default:water_flowing") then
+								minetest.env:set_node(t, {name="air"})
+						end
+					end
+				end
+			end
+	end,
 })

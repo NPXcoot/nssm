@@ -1005,22 +1005,14 @@ minetest.register_entity(name, {
 	on_dist_attack = def.on_dist_attack,
 	metamorphosis = def.metamorphosis or false,
 	metatimer = 30,
-  putter = def.putter or false,
 	pump_putter = def.pump_putter or false,
-	froster = def.froster or false,
-	big_froster = def.big_froster or false,
-	digger = def.digger or false,
-	webber = def.webber or false,
 	mamma = def.mamma or false,
 	dogshoot_stop = def.dogshoot_stop or false,
 	duckking_father = def.duckking_father or false,
 	maxus = def.maxus or false,
 	inker = def.inker or false,
-	melter = def.melter or false,
 	die_anim = def.die_anim or false,
-	worm = def.worm or false,
 	hydra = def.hydra or false,
-	stone_pooper = def.stone_pooper or false,
 	mele_number = def.mele_number or 1,
 	true_dist_attack = def.true_dist_attack or false,
 	explosion_radius = def.explosion_radius or 0,
@@ -2159,137 +2151,6 @@ minetest.register_entity(name, {
 				end
 
 				return
-			end
-		end
-
-		--for the Dahaka and the lava_titan
-		if self.digger==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,5 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="default:water_source" and n~="default:water_flowing") then
-								minetest.env:set_node(t, {name="air"})
-						end
-					end
-				end
-			end
-		end
-
-		--for the spider mobs
-		if self.webber==true then
-		local pos = self.object:getpos()
-					if (math.random(1,50)==1) then
-						local dx=math.random(1,3)
-						local dz=math.random(1,3)
-						local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						local k = minetest.env:get_node(t).name
-						if ((n~="air")and(k=="air")) then
-								minetest.env:set_node(t, {name="nssm:web"})
-						end
-					end
-		end
-
-		--lava_titan
-		if self.melter==true then
-			local pos = self.object:getpos()
-			pos.y=pos.y-1
-			local n = minetest.env:get_node(pos).name
-			if n~="default:lava_source" then
-				minetest.env:set_node(pos, {name="default:lava_source"})
-			end
-		end
-
-    --for the mese-dragon
-    if self.putter==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,10 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="air" and n~="nssm:mese_meteor" and n~="fire:basic_flame") then
-								minetest.env:set_node(t, {name="default:mese_block"})
-						end
-					end
-				end
-			end
-    end
-
-		--Ice mobs
-		if self.froster==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,0 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n=="default:water_source" or n=="default:water_flowing") then
-								minetest.env:set_node(t, {name="default:ice"})
-						end
-					end
-				end
-			end
-    end
-
-		--Ice boss
-		if self.big_froster==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,3 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="air") then
-								minetest.env:set_node(t, {name="default:ice"})
-						end
-					end
-				end
-			end
-    end
-
-        --worms mod
-		if self.worm==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,2 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-				if (n~="default:water_source" and n~="default:water_flowing") then
-                                if n=="default:sand" or n=="default:desert_sand" then
-                                    minetest.env:set_node(t, {name="air"})
-                                end
-				end
-					end
-				end
-			end
-		end
-
-		if self.stone_pooper==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,1 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(t).name
-							if (n~="default:water_source" and n~="default:water_flowing") then
-                if n=="default:stone" or n=="default:sandstone" or n=="default:cobble" then
-                    minetest.env:set_node(t, {name="air"})
-                end
-							end
-					end
-				end
 			end
 		end
 

@@ -21,7 +21,6 @@ nssm:register_mob("nssm:mese_dragon", {
 	damage = 16,
 	jump = true,
 	jump_height = 10,
-  putter = true,
 	drops = {
 		{name = "nssm:rainbow_staff",
 		chance = 1,
@@ -59,5 +58,22 @@ nssm:register_mob("nssm:mese_dragon", {
 		punch1_end = 370,
     dattack_start = 120,
     dattack_end = 160,
-    }
+	},
+	do_custom = function(self)
+		--transform the blocks he touches in mese_blocks
+		local pos = self.object:getpos()
+		local c=2
+		for dx = -c*(math.abs(v.x))-2 , c*(math.abs(v.x))+2 do
+			for dy=-1,10 do
+				for dz = -c*(math.abs(v.z))-2 , c*(math.abs(v.z))+2 do
+					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.env:get_node(p).name
+					if (n~="air" and n~="nssm:mese_meteor" and n~="fire:basic_flame") then
+							minetest.env:set_node(t, {name="default:mese_block"})
+					end
+				end
+			end
+		end
+	end,
 })

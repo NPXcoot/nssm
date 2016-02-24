@@ -9,7 +9,6 @@ nssm:register_mob("nssm:icelamander", {
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
 	view_range = 35,
-  big_froster = true,
 	lifetimer = 500,
 	walk_velocity = 2,
 	run_velocity = 4,
@@ -60,5 +59,22 @@ nssm:register_mob("nssm:icelamander", {
 		punch_end = 190,
 		dattack_start = 190,
 		dattack_end = 210,
-    }
+	},
+	do_custom = function(self)
+		--Big_froster
+		local pos = self.object:getpos()
+		local c=3
+		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+			for dy=-1,3 do
+				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.env:get_node(p).name
+					if (n~="air") then
+						minetest.env:set_node(t, {name="default:ice"})
+					end
+				end
+			end
+		end
+	end,
 })
