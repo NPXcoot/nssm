@@ -1,4 +1,4 @@
-v2.2.1 (22-04-16):
+v2.2.1 (22-02-16):
  - updated the api.lua following the updates of Tenplus1's mobs (version of 17th February 2016);
  - fixed lava_titan movements;
  - tidied up the code;
