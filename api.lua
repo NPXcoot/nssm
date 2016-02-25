@@ -176,10 +176,9 @@ function line_of_sight_water(pos1, pos2, stepsize)
 		local s, posw
 		s, posw = minetest.line_of_sight(pos1, pos2, stepsize)
 		local n = minetest.env:get_node(posw).name
-			if n=="default:water_source" or n=="default:water_flowing" or n=="nssm:ink" then
+			if n=="default:water_source" or n=="default:water_flowing"  then
 				return true
 			end
-
 	else
 		return false
 	end
