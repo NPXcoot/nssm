@@ -53,6 +53,7 @@ nssm:register_mob("nssm:stone_eater", {
 		--Remove stone around
 		local pos = self.object:getpos()
 		local c=3
+		local v = self.object:getvelocity()
 		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
 			for dy=0,1 do
 				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do

@@ -17,6 +17,7 @@ nssm:register_mob("nssm:snow_biter", {
     sounds = {
 		random = "snow_biter",
 	},
+	--pathfinding = true,
 	damage = 5,
 	jump = true,
 	drops = {
@@ -58,6 +59,7 @@ nssm:register_mob("nssm:snow_biter", {
 		--Froster
 		local c=2
 		local pos = self.object:getpos()
+		local v = self.object:getvelocity()
 		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
 			for dy=-1,0 do
 				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do

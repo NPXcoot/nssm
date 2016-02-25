@@ -64,6 +64,7 @@ nssm:register_mob("nssm:icelamander", {
 		--Big_froster
 		local pos = self.object:getpos()
 		local c=3
+		local v = self.object:getvelocity()
 		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
 			for dy=-1,3 do
 				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do

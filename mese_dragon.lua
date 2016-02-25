@@ -63,6 +63,7 @@ nssm:register_mob("nssm:mese_dragon", {
 		--transform the blocks he touches in mese_blocks
 		local pos = self.object:getpos()
 		local c=2
+		local v = self.object:getvelocity()
 		for dx = -c*(math.abs(v.x))-2 , c*(math.abs(v.x))+2 do
 			for dy=-1,10 do
 				for dz = -c*(math.abs(v.z))-2 , c*(math.abs(v.z))+2 do
