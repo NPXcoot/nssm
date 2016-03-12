@@ -52,6 +52,7 @@ do_attack = function(self, player)
 end
 
 set_velocity = function(self, v)
+
 	v = v or 0
 
 	local yaw = (self.object:getyaw() + self.rotate) or 0
@@ -186,7 +187,7 @@ function line_of_sight_water(self, pos1, pos2, stepsize)
 
 	local s, pos_w = minetest.line_of_sight(pos1, pos2, stepsize)
 
-	-- normal walking mobs can see you
+	-- normal walking and flying mobs can see you through air
 	if s == true then
 		return true
 	end
@@ -257,13 +258,15 @@ end
 -- check if mob is dead or only hurt
 function check_for_death(self)
 
-	--print ("Health is", self.health)
+	-- has health actually changed?
+	if self.health == self.old_health then
+		return
+	end
 
+	self.old_health = self.health
 
 	-- still got some health? play hurt sound
 	if self.health > 0 then
-
-		self.health = hp
 
 		if self.sounds.damage then
 
@@ -411,7 +414,6 @@ local function node_ok(pos, fallback)
 
 	return minetest.registered_nodes[fallback]
 end
-
 
 -- environmental damage (water, lava, fire, light)
 do_env_damage = function(self)
@@ -946,7 +948,6 @@ function smart_mobs(self, s, p, dist, dtime)
 	end
 end
 
-
 -- register mob function
 function nssm:register_mob(name, def)
 
@@ -1255,7 +1256,6 @@ minetest.register_entity(name, {
 							min_dist = dist
 							min_player = player
 						end
-
 					end
 				end
 			end
@@ -1429,7 +1429,6 @@ minetest.register_entity(name, {
 			return
 		end
 
-
 		if self.state == "stand" then
 
 			if math.random(1, 4) == 1 then
@@ -1509,7 +1508,7 @@ minetest.register_entity(name, {
 				if vec.x ~= 0
 				and vec.z ~= 0 then
 
-					yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
+					yaw = atan(vec.z / vec.x) + 3 * pi / 2 - self.rotate
 
 					if lp.x > s.x then
 						yaw = yaw + pi
@@ -1712,7 +1711,6 @@ minetest.register_entity(name, {
 				end
 			end
 
-
 		elseif self.attack_type == "dogfight"
 		or (self.attack_type == "dogshoot" and dist <= self.reach)
 		or (self.attack_type == "dogshoot" and self.dogshoot_stop and self.direct_hit)		--NSSM addition
@@ -1838,6 +1836,7 @@ minetest.register_entity(name, {
 					set_velocity(self, 0)
 					set_animation(self, "stand")
 				else
+
 					if self.path.stuck then
 						set_velocity(self, self.walk_velocity)
 					else
@@ -2119,7 +2118,6 @@ minetest.register_entity(name, {
 			end
 		end
 
-
 		end -- END if self.state == "attack"
 
 		--NSSM additions:
@@ -2218,7 +2216,6 @@ minetest.register_entity(name, {
 		-- print ("Mob Damage is", damage)
 
 		-- add weapon wear
-
 		if tool_capabilities then
 			punch_interval = tool_capabilities.full_punch_interval or 1.4
 		end
@@ -2327,16 +2324,15 @@ minetest.register_entity(name, {
 			self.following = nil
 		end
 
-
 		-- attack puncher and call other nssm for help
 		if self.passive == false
 		and self.state ~= "flop"
 		and self.child == false
 		and hitter:get_player_name() ~= self.owner then
 
-				-- attack whoever punched mob
-				self.state = ""
-				do_attack(self, hitter)
+			-- attack whoever punched mob
+			self.state = ""
+			do_attack(self, hitter)
 
 			-- alert others to the attack
 			local obj = nil
@@ -2446,9 +2442,9 @@ minetest.register_entity(name, {
 		self.path.stuck_timer = 0 -- if stuck for too long search for path
 		-- end init
 
-		--self.object:set_hp(self.health)
 		self.object:set_armor_groups({immortal = 1, fleshy = self.armor})
 		self.old_y = self.object:getpos().y
+		self.old_health = self.health
 		self.object:setyaw((math.random(0, 360) - 180) / 180 * pi)
 		self.sounds.distance = self.sounds.distance or 10
 		self.textures = textures
@@ -2698,7 +2694,6 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 	end
 
 	entity_physics(pos, radius) --NSSM addition
-
 	pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
 
 	local vm = VoxelManip()
@@ -3186,7 +3181,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	and fields.name ~= "" then
 
 		local name = player:get_player_name()
-		local ent = mob_obj[name]
 
 		if not mob_obj[name]
 		or not mob_obj[name].object then
