@@ -1,4 +1,4 @@
--- Mobs Api (10th March 2016) with NSSM modifications
+-- Mobs Api (12th March 2016) with NSSM modifications
 nssm = {}
 nssm.mod = "redo"
 
@@ -78,6 +78,8 @@ set_animation = function(self, type)
 
 	self.animation.current = self.animation.current or ""
 
+	self.animation.speed_normal = self.animation.speed_normal or 15
+
 	if type == "stand"
 	and self.animation.current ~= "stand" then
 
@@ -118,7 +120,7 @@ set_animation = function(self, type)
 			self.object:set_animation({
 				x = self.animation.run_start,
 				y = self.animation.run_end},
-				self.animation.speed_run, 0)
+				(self.animation.speed_run or self.animation.speed_normal), 0)
 
 			self.animation.current = "run"
 		end
@@ -133,7 +135,7 @@ set_animation = function(self, type)
 			self.object:set_animation({
 				x = self.animation.punch_start,
 				y = self.animation.punch_end},
-				self.animation.speed_normal, 0)
+				(self.animation.speed_punch or self.animation.speed_normal), 0)
 
 			self.animation.current = "punch"
 		end
@@ -2251,6 +2253,15 @@ minetest.register_entity(name, {
 		if check_for_death(self) then
 			return
 		end
+
+		-- add healthy afterglow when hit
+		core.after(0.1, function()
+			self.object:settexturemod("^[colorize:#c9900070")
+
+			core.after(0.3, function()
+				self.object:settexturemod("")
+			end)
+		end)
 
 		-- blood_particles
 		if self.blood_amount > 0
