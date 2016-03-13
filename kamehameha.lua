@@ -65,14 +65,14 @@ minetest.register_entity("nssm:kamehameha", {
 			0.1, --time
 			{x=pos.x-3, y=pos.y-3, z=pos.z-3}, --minpos
 			{x=pos.x+3, y=pos.y+3, z=pos.z+3}, --maxpos
-			{x=-0, y=-0, z=-0}, --minvel
-			{x=5, y=5, z=5}, --maxvel
-			{x=-0.5,y=5,z=-0.5}, --minacc
-			{x=0.5,y=5,z=0.5}, --maxacc
+			{x=0, y=0, z=0}, --minvel
+			{x=0.1, y=0.3, z=0.1}, --maxvel
+			{x=-0.5,y=1,z=-0.5}, --minacc
+			{x=0.5,y=1,z=0.5}, --maxacc
 			0.1, --minexptime
-			1, --maxexptime
-			8, --minsize
-			15, --maxsize
+			2, --maxexptime
+			6, --minsize
+			12, --maxsize
 			false, --collisiondetection
 			"tnt_smoke.png" --texture
 		)
@@ -101,10 +101,36 @@ minetest.register_entity("nssm:kamehameha", {
 			for dy=-1,1 do
 				for dz=-1,1 do
 					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					minetest.env:remove_node(p)
+                    local n = minetest.env:get_node(p).name
+                    if n~="air" then
+					    minetest.env:remove_node(p)
+                    end
 				end
 			end
 		end
+
+
+        local i, j, k
+        local c=400
+        for i=2,exp_radius do
+            local max
+            local num =4*((i*2)^3)
+            if c/i<num then
+                max = c/i
+            else
+                max = num
+            end
+            for j=1,max do
+                local p = {x=pos.x+math.random(-i,i), y=pos.y+math.random(-i,i), z=pos.z+math.random(-i,i)}
+                local n = minetest.env:get_node(p).name
+                if n~="air" and ( math.abs(p.x-pos.x)==i ) or (math.abs(p.y-pos.y)==i) or (math.abs(p.y-pos.y)==i) then
+                --if ( math.abs(p.x-pos.x)==i ) or (math.abs(p.y-pos.y)==i) or (math.abs(p.y-pos.y)==i) then
+                    minetest.env:remove_node(p)
+                end
+            end
+        end
+
+
 
 		--[[
 		for dx=-4,4 do
