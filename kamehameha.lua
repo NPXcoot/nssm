@@ -130,8 +130,6 @@ minetest.register_entity("nssm:kamehameha", {
                 end
             end
         end
-
-
         --old explosion function:
 		--[[
 		for dx=-4,4 do
