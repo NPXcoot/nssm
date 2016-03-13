@@ -61,10 +61,10 @@ minetest.register_entity("nssm:kamehameha", {
 	hit_node = function(self, pos, node)
 		--This is the particle spawner, if it slows down your pc then comment this section
 		minetest.add_particlespawner(
-			100, --amount
+			100*exp_radius, --amount
 			0.1, --time
-			{x=pos.x-3, y=pos.y-3, z=pos.z-3}, --minpos
-			{x=pos.x+3, y=pos.y+3, z=pos.z+3}, --maxpos
+			{x=pos.x-exp_radius, y=pos.y-exp_radius, z=pos.z-exp_radius}, --minpos
+			{x=pos.x+exp_radius, y=pos.y+exp_radius, z=pos.z+exp_radius}, --maxpos
 			{x=0, y=0, z=0}, --minvel
 			{x=0.1, y=0.3, z=0.1}, --maxvel
 			{x=-0.5,y=1,z=-0.5}, --minacc
@@ -112,7 +112,7 @@ minetest.register_entity("nssm:kamehameha", {
 
 
         local i, j, k
-        local c=400
+        local c=1000
         for i=2,exp_radius do
             local max
             local num =4*((i*2)^3)
@@ -127,6 +127,8 @@ minetest.register_entity("nssm:kamehameha", {
                 if n~="air" and ( math.abs(p.x-pos.x)==i ) or (math.abs(p.y-pos.y)==i) or (math.abs(p.y-pos.y)==i) then
                 --if ( math.abs(p.x-pos.x)==i ) or (math.abs(p.y-pos.y)==i) or (math.abs(p.y-pos.y)==i) then
                     minetest.env:remove_node(p)
+                elseif math.random(1, 30)==1 then
+                    minetest.env:set_node(p, {name="fire:basic_flame"})
                 end
             end
         end
