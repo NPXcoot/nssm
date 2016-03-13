@@ -76,6 +76,7 @@ minetest.register_entity("nssm:kamehameha", {
 			false, --collisiondetection
 			"tnt_smoke.png" --texture
 		)
+        --end of the particle spawner
 
 		--Damages entities around (not the player)
 		local objects = minetest.env:get_objects_inside_radius(pos, exp_radius)
