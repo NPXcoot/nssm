@@ -2,11 +2,6 @@
 kame_velocity = 30
 exp_radius = 4
 
-local function round(n)
-    return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
-end
-
-
 minetest.register_entity("nssm:kamehameha", {
 	textures = {"kamehameha.png"},
 	on_step = function (self, pos, node, dtime)
@@ -38,9 +33,9 @@ minetest.register_entity("nssm:kamehameha", {
 				local c=3
 
 				--calculate how many blocks around the kamehameha need to be removed
-				local i = round(math.abs(math.abs(vec.x)-kame_velocity)*0.01*c)
-				local j = round(math.abs(math.abs(vec.y)-kame_velocity)*0.01*c)
-				local k = round(math.abs(math.abs(vec.z)-kame_velocity)*0.01*c)
+				local i = nssm:round(math.abs(math.abs(vec.x)-kame_velocity)*0.01*c)
+				local j = nssm:round(math.abs(math.abs(vec.y)-kame_velocity)*0.01*c)
+				local k = nssm:round(math.abs(math.abs(vec.z)-kame_velocity)*0.01*c)
 
 				for dx = -i,i do
 					for dy= -j,j do
@@ -163,7 +158,6 @@ minetest.register_tool("nssm:kamehameha_hand", {
 			obj:setvelocity(vec)
 		return itemstack
 	end,
-	light_source = 12,
 })
 
 minetest.register_craft({

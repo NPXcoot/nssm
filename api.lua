@@ -2670,6 +2670,7 @@ end
 --end of NSSM additions
 
 -- explosion (cannot break protected or unbreakable nodes)
+--[[
 function nssm:explosion(pos, radius, fire, smoke, sound)
 
 	radius = radius or 0
@@ -2767,7 +2768,7 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 					end
 
 				--NSSM modification is it really useful?
-				--[[
+
 				else if (x<3)and(y<3)and(z<3)and(x>-3)and(y>-3)and(z>-3) then
 						if (math.random(1,100))>25 then
 							minetest.remove_node(p)
@@ -2778,7 +2779,7 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 					end
 				end
 					end
-				]]--
+				--end of NSSM modification
 				end
 			end
 		end
@@ -2789,6 +2790,7 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 	end
 	end
 end
+]]
 
 -- register arrow for shoot attack
 function nssm:register_arrow(name, def)
