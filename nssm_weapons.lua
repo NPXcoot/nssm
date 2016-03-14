@@ -3,6 +3,16 @@ local default_dir = {
     y = 1,
     z = 1,
 }
+
+function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
+    local dir = placer:get_look_dir();
+    local playerpos = placer:getpos();
+    local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "nssm:"..name)
+    local vec = {x=dir.x*kame_velocity,y=dir.y*kame_velocity,z=dir.z*kame_velocity}
+    obj:setvelocity(vec)
+    return itemstack
+end
+
 function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
     local timer = 0
     minetest.register_globalstep(function(dtime)
@@ -55,30 +65,53 @@ end
 function nssm_register_weapon(name, def)
     minetest.register_entity("nssm:"..name, {
         textures = {name..".png"},
-        on_step = def.on_step or default_on_step(self, self.pos, node, name, 10, 20, default_dir, "default:stone", 30, dtime),
-        hit_node = def.hit_node or nssm:explosion(self.pos, def.exp_radius, 1),
+        on_step = def.on_step,
+        hit_node = def.hit_node,
     })
 
     minetest.register_tool("nssm:"..name.."_hand", {
         description = def.description,
         inventory_image = name.."_hand.png",
-        on_use = weapons_shot(),
+        on_use = function(itemstack, placer, pointed_thing)
+            itemstack = weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
+            return itemstack
+        end,
     })
 
+    --[[
     minetest.register_craft({
         output = "nssm:"..name.."_hand",
         recipe = {
             {
         		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
-        		{'nssm:great_energy_globe', "nssm:"..def.material, 'nssm:great_energy_globe'},
+        		{'nssm:great_energy_globe', def.material, 'nssm:great_energy_globe'},
         		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
         	}
         }
     })
+    ]]--
 end
 
 --function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
 nssm_register_weapon("kamehameha", {
+    on_step = function(self, dtime)
+        default_on_step(self, self.pos, node, name, 10, 20, default_dir, "default:stone", 30, dtime)
+    end,
+    hit_node = function(self, pos,  node)
+        nssm:explosion(self.pos, 4, 1)
+    end,
     material = "default:stick",
-    description = "Kamehameha from DragonBall"
+    description = "Kamehameha from DragonBall",
+    velocity = 30,
+})
+
+minetest.register_craft({
+    output = "nssm:kamehameha_hand",
+    recipe = {
+        {
+            {'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
+            {'nssm:great_energy_globe', "default:stick", 'nssm:great_energy_globe'},
+            {'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
+        }
+    }
 })
