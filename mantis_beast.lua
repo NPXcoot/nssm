@@ -9,6 +9,7 @@ nssm:register_mob("nssm:mantis_beast", {
 	visual_size = {x=6, y=6},
 	makes_footstep_sound = true,
 	view_range = 25,
+	fear_height = 4,
 	walk_velocity = 2.5,
 	run_velocity = 3.5,
     sounds = {

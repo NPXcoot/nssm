@@ -9,6 +9,7 @@ nssm:register_mob("nssm:black_widow", {
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
 	view_range = 15,
+	fear_height = 4,
 	walk_velocity = 1,
 	run_velocity = 2.5,
     rotate = 270,

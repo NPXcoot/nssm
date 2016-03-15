@@ -9,6 +9,7 @@ nssm:register_mob("nssm:bloco", {
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
 	view_range = 8,
+	fear_height = 4,
 	walk_velocity = 1,
 	run_velocity = 2.5,
     rotate = 270,

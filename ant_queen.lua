@@ -9,6 +9,7 @@ nssm:register_mob("nssm:ant_queen", {
 	visual_size = {x=6, y=6},
 	makes_footstep_sound = true,
 	view_range = 30,
+	fear_height = 5,
 	walk_velocity = 1.5,
 	run_velocity = 2,
 	lifetimer = 300,

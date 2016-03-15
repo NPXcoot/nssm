@@ -10,6 +10,7 @@ nssm:register_mob("nssm:uloboros", {
 	makes_footstep_sound = true,
 	view_range = 22,
 	walk_velocity = 1.5,
+	fear_height = 4,
 	run_velocity = 2.5,
   rotate = 270,
   sounds = {

@@ -10,6 +10,7 @@ nssm:register_mob("nssm:daddy_long_legs", {
 	makes_footstep_sound = true,
 	view_range = 12,
 	walk_velocity = 1.5,
+	fear_height = 4,
 	run_velocity = 3.3,
   rotate = 90,
   sounds = {

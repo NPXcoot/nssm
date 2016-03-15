@@ -9,6 +9,7 @@ nssm:register_mob("nssm:lava_titan", {
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
 	view_range = 20,
+	fear_height = 4,
 	lifetimer = 500,
 	walk_velocity = 1,
 	run_velocity = 2,

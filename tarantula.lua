@@ -11,6 +11,7 @@ nssm:register_mob("nssm:tarantula", {
 	view_range = 20,
 	lifetimer = 500,
 	walk_velocity = 1.5,
+	fear_height = 4,
 	run_velocity = 3,
     rotate = 270,
     sounds = {

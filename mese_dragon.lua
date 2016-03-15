@@ -10,7 +10,8 @@ nssm:register_mob("nssm:mese_dragon", {
 	makes_footstep_sound = true,
 	maxus = true,
 	view_range = 45,
-  rotate = 270,
+	rotate = 270,
+	fear_height = 5,
 	walk_velocity = 2,
 	run_velocity = 4,
     sounds = {

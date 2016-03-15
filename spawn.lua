@@ -13,7 +13,7 @@ nssm:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletre
 
 -- CAVES
 nssm:spawn_specific("nssm:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 500, 3, -31000, -20)
-nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 2000, 1, -31000, -50)
+nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 8000, 1, -31000, -50)
 nssm:spawn_specific("nssm:stone_eater", {"default:stone"}, {"default:stone"}, 0, 20, 40, 700, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"default:stone"}, {"default:stone"}, 0, 10, 20, 400, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5, -31000, 31000)

@@ -9,7 +9,8 @@ nssm:register_mob("nssm:icesnake", {
 	visual_size = {x=7, y=7},
 	makes_footstep_sound = false,
 	view_range = 10,
-  rotate = 270,
+	rotate = 270,
+	fear_height = 3,
 	walk_velocity = 1.2,
 	run_velocity = 3,
   sounds = {

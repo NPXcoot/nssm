@@ -11,6 +11,7 @@ nssm:register_mob("nssm:echidna", {
 	view_range = 30,
 	rotate = 270,
 	lifetimer = 500,
+	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 3.5,
 	damage = 10,

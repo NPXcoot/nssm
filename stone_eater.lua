@@ -11,6 +11,7 @@ nssm:register_mob("nssm:stone_eater", {
 	view_range = 16,
 	rotate = 270,
 	worm=true,
+	fear_height = 4,
 	jump = false,
 	jump_height =0,
 	walk_velocity = 1,

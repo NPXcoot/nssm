@@ -10,6 +10,7 @@ nssm:register_mob("nssm:masticone", {
 	makes_footstep_sound = true,
 	view_range = 15,
 	lifetimer = 500,
+	fear_height = 4,
 	rotate = 270,
 	walk_velocity = 1.5,
 	run_velocity = 2.5,

@@ -11,6 +11,7 @@ nssm:register_mob("nssm:sandworm", {
 	view_range = 17,
 	rotate = 270,
 	reach = 4,
+	fear_height = 3,
 	walk_velocity = 2,
 	run_velocity = 2,
 	damage = 4,

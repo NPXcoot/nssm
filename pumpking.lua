@@ -10,6 +10,7 @@ nssm:register_mob("nssm:pumpking", {
 	makes_footstep_sound = true,
 	lifetimer=500,
 	rotate=270,
+	fear_height = 4,
 	view_range = 35,
 	walk_velocity = 2,
 	run_velocity = 4,

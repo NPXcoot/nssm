@@ -9,6 +9,7 @@ nssm:register_mob("nssm:mantis", {
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
 	view_range = 20,
+	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 2.5,
     sounds = {

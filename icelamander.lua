@@ -10,6 +10,7 @@ nssm:register_mob("nssm:icelamander", {
 	makes_footstep_sound = true,
 	view_range = 35,
 	lifetimer = 500,
+	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 4,
     sounds = {

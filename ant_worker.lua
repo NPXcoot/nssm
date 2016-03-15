@@ -9,6 +9,7 @@ nssm:register_mob("nssm:ant_worker", {
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
 	view_range = 20,
+	fear_height = 4,
 	walk_velocity = 1.5,
 	run_velocity = 2,
   rotate = 270,

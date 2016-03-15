@@ -10,6 +10,7 @@ nssm:register_mob("nssm:signosigno", {
 	makes_footstep_sound = false,
 	view_range = 15,
 	walk_velocity = 1.5,
+	fear_height = 4,
 	run_velocity = 2.5,
   rotate = 270,
 	damage = 3,

@@ -10,6 +10,7 @@ nssm:register_mob("nssm:dahaka", {
 	lifetimer=500,
 	makes_footstep_sound = true,
 	view_range = 30,
+	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 2,
 	damage = 8,
