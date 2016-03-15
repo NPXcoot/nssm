@@ -8,21 +8,25 @@ function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     local dir = placer:get_look_dir();
     local playerpos = placer:getpos();
     local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "nssm:"..name)
-    local vec = {x=dir.x*kame_velocity,y=dir.y*kame_velocity,z=dir.z*kame_velocity}
+    local vec = {x=dir.x*velocity,y=dir.y*velocity,z=dir.z*velocity}
     obj:setvelocity(vec)
     return itemstack
 end
 
 function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
     local timer = 0
+    print ("Dentro on_step\n")
     minetest.register_globalstep(function(dtime)
         timer = timer + dtime
         if (timer>max_time) then
             self.object:remove()
         end
     end)
+
+    print ("Fin qui\n")
     --while going around it damages entities
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
+    print ("Fin qua\n")
     for _,obj in ipairs(objects) do
         if (obj:is_player()) then
         elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
@@ -35,10 +39,13 @@ function default_on_step(self, pos, node, name, max_time, damage, dir, not_trans
         end
     end
 
+    print ("Fino qui\n")
+
     local n = minetest.env:get_node(pos).name
 
     if n ~=not_transparent then
         minetest.env:set_node(pos, {name="air"})
+        print ("Fino qua\n")
         local vec = self.object:getvelocity()
         local c=3
         --calculate how many blocks around need to be removed
@@ -73,7 +80,8 @@ function nssm_register_weapon(name, def)
         description = def.description,
         inventory_image = name.."_hand.png",
         on_use = function(itemstack, placer, pointed_thing)
-            itemstack = weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
+            weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
+            minetest.chat_send_all("Description: "..def.description)
             return itemstack
         end,
     })
@@ -94,17 +102,19 @@ end
 
 --function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
 nssm_register_weapon("kamehameha", {
-    on_step = function(self, dtime)
-        default_on_step(self, self.pos, node, name, 10, 20, default_dir, "default:stone", 30, dtime)
+    on_step = function(self, pos, node, dtime)
+        print ("Prima di chiamare on_step\n")
+        default_on_step(self, pos, node, "kamehameha", 10, 20, default_dir, "default:stone", 30, dtime)
     end,
-    hit_node = function(self, pos,  node)
-        nssm:explosion(self.pos, 4, 1)
+    hit_node = function(self, pos, node)
+        nssm:explosion(self, pos, 4, 1)
     end,
     material = "default:stick",
     description = "Kamehameha from DragonBall",
     velocity = 30,
 })
 
+--[[
 minetest.register_craft({
     output = "nssm:kamehameha_hand",
     recipe = {
@@ -115,3 +125,4 @@ minetest.register_craft({
         }
     }
 })
+]]

@@ -36,7 +36,7 @@ nssm_register_noneatcraftitems ('moon_feather','Moon Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
 nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
 nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
-nssm_register_noneatcraftitems ('','')
+--nssm_register_noneatcraftitems ('','')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
