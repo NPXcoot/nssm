@@ -1,102 +1,42 @@
-minetest.register_craftitem("nssm:sky_feather", {
-	description = "Sky Feather",
-	image = "sky_feather.png",
+--non eatable craftitems
+
+function nssm_register_noneatcraftitems (name, descr)
+
+minetest.register_craftitem("nssm:"..name, {
+	description = descr,
+	image = name ..".png",
 })
 
-minetest.register_craftitem("nssm:snake_scute", {
-	description = "Snake Scute",
-	image = "snake_scute.png",
-})
+end
 
-minetest.register_craftitem("nssm:eyed_tentacle", {
-	description = "Eyed Tentacle",
-	image = "eyed_tentacle.png",
-})
-
-minetest.register_craftitem("nssm:king_duck_crown", {
-	description = "King Duck Crown",
-	image = "king_duck_crown.png",
-})
-
-minetest.register_craftitem("nssm:great_energy_globe", {
-	description = "Great Energy Globe",
-	image = "great_energy_globe.png",
-})
-
-minetest.register_craftitem("nssm:superior_energy_globe", {
-	description = "Superior Energy Globe",
-	image = "superior_energy_globe.png",
-})
-
-minetest.register_craftitem("nssm:ant_queen_abdomen", {
-	description = "Ant Queen Abdomen",
-	image = "ant_queen_abdomen.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull", {
-	description = "Masticone Skull",
-	image = "masticone_skull.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull_fragments", {
-	description = "Masticone Skull fragments",
-	image = "masticone_skull_fragments.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull_crowned", {
-	description = "Masticone Skull Crowned",
-	image = "masticone_skull_crowned.png",
-})
-
-minetest.register_craftitem("nssm:kraken_tentacle", {
-	description = "Kraken Tentacle",
-	image = "tentacle_curly.png",
-})
-
-minetest.register_craftitem("nssm:lava_titan_eye", {
-	description = "Lava Titan Eye",
-	image = "lava_titan_eye.png",
-})
-
-minetest.register_craftitem("nssm:duck_beak", {
-	description = "Duck Beak",
-	image = "duck_beak.png",
-})
-
-minetest.register_craftitem("nssm:ice_tooth", {
-	description = "Ice Tooth",
-	image = "ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:little_ice_tooth", {
-	description = "Little Ice Tooth",
-	image = "little_ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:black_sand", {
-	description = "Dahaka's black sand",
-	image = "black_sand.png",
-})
-
-minetest.register_craftitem("nssm:black_ice_tooth", {
-	description = "Black Ice Tooth",
-	image = "black_ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:tarantula_chelicerae", {
-	description = "Tarantula Chelicerae",
-	image = "tarantula_chelicerae.png",
-})
-
-minetest.register_craftitem("nssm:crab_chela", {
-	description = "Crab Chela",
-	image = "crab_chela.png",
-})
-
-minetest.register_craftitem("nssm:cursed_pumpkin_seed", {
-	description = "Cursed Pumpkin Seed",
-	image = "cursed_pumpkin_seed.png",
-})
+nssm_register_noneatcraftitems ('sky_feather','Sky Feather')
+nssm_register_noneatcraftitems ('snake_scute','Snake Scute')
+nssm_register_noneatcraftitems ('eyed_tentacle','Eyed Tentacle')
+nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
+nssm_register_noneatcraftitems ('great_energy_globe','Great Energy Globe')
+nssm_register_noneatcraftitems ('superior_energy_globe','Superior Energy Globe')
+nssm_register_noneatcraftitems ('ant_queen_abdomen','Ant Queen Abdomen')
+nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
+nssm_register_noneatcraftitems ('masticone_skull_fragments','Masticone Skull Fragments')
+nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
+nssm_register_noneatcraftitems ('kraken_tentacle','Kraken Tentacle')
+nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
+nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
+nssm_register_noneatcraftitems ('ice_tooth','Ice Tooth')
+nssm_register_noneatcraftitems ('little_ice_tooth','Little Ice Tooth')
+nssm_register_noneatcraftitems ('black_sand',"Dahaka's Black Sand")
+nssm_register_noneatcraftitems ('black_ice_tooth','Black Ice Tooth')
+nssm_register_noneatcraftitems ('tarantula_chelicerae','Tarantula Chelicerae')
+nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
+nssm_register_noneatcraftitems ('cursed_pumpkin_seed','Cursed Pumpkin Seed')
+nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
+--nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
+nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
+nssm_register_noneatcraftitems ('moon_feather','Moon Feather')
+nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
+nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
+nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
+nssm_register_noneatcraftitems ('','')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
@@ -257,31 +197,7 @@ minetest.register_craftitem("nssm:roasted_worm_flesh", {
 	groups = { meat=1, eatable=1 },
 })
 
-minetest.register_craftitem("nssm:mantis_claw", {
-	description = "Mantis Claw",
-	image = "mantis_claw.png",
-})
 
---[[minetest.register_craftitem("nssm:manticore_fur", {
-	description = "Manticore Fur",
-	image = "manticore_fur.png",
-})]]
-
-minetest.register_craftitem("nssm:manticore_spine", {
-	description = "Manticore Spine",
-	image = "manticore_spine.png",
-})
-
-minetest.register_craftitem("nssm:moon_feather", {
-	description = "Moon Feather",
-	image = "night_feather.png",
-})
-
-
-minetest.register_craftitem("nssm:sun_feather", {
-	description = "Sun Feather",
-	image = "sun_feather.png",
-})
 
 minetest.register_craftitem("nssm:amphibian_heart", {
 	description = "Amphibian Heart",
@@ -340,15 +256,6 @@ minetest.register_craftitem("nssm:surimi", {
 	groups = { meat=1, eatable=1 },
 })
 
-minetest.register_craftitem("nssm:white_wolf_fur", {
-	description = "White Wolf Fur",
-	image = "white_wolf_fur.png",
-})
-
-minetest.register_craftitem("nssm:masticone_fang", {
-	description = "Masticone Fang",
-	image = "masticone_fang.png",
-})
 
 minetest.register_tool("nssm:mantis_sword", {
 	description = "Mantis Sword",
@@ -662,7 +569,7 @@ minetest.register_tool("nssm:masticone_fang_sword", {
 		full_punch_interval =0.7 ,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=0.90, [2]=0.8, [3]=0.4}, uses=200, maxlevel=1},
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=200, maxlevel=1},
 			fleshy={times={[2]=0.8, [3]=0.4}, uses=200, maxlevel=1}
 		},
 		damage_groups = {fleshy=8},
@@ -676,7 +583,7 @@ minetest.register_tool("nssm:night_sword", {
 		full_punch_interval =0.4 ,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=0.80, [2]=0.4, [3]=0.2}, uses=300, maxlevel=1},
+			snappy={times={[1]=0.4, [2]=0.3, [3]=0.2}, uses=300, maxlevel=1},
 			fleshy={times={[2]=0.7, [3]=0.3}, uses=300, maxlevel=1}
 		},
 		damage_groups = {fleshy=12},
