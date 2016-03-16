@@ -4,6 +4,23 @@ local default_dir = {
     z = 1,
 }
 
+local function node_ok(pos, fallback)
+
+	fallback = fallback or "default:dirt"
+
+	local node = minetest.get_node_or_nil(pos)
+
+	if not node then
+		return minetest.registered_nodes[fallback]
+	end
+
+	if minetest.registered_nodes[node.name] then
+		return node
+	end
+
+	return minetest.registered_nodes[fallback]
+end
+
 function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     local dir = placer:get_look_dir();
     local playerpos = placer:getpos();
@@ -13,9 +30,9 @@ function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     return itemstack
 end
 
-function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
+function default_on_step(self, dtime, name, max_time, damage, dir, not_transparent, vel)
     local timer = 0
-    print ("Dentro on_step\n")
+    local pos = self.object:getpos()
     minetest.register_globalstep(function(dtime)
         timer = timer + dtime
         if (timer>max_time) then
@@ -23,10 +40,8 @@ function default_on_step(self, pos, node, name, max_time, damage, dir, not_trans
         end
     end)
 
-    print ("Fin qui\n")
     --while going around it damages entities
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
-    print ("Fin qua\n")
     for _,obj in ipairs(objects) do
         if (obj:is_player()) then
         elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
@@ -39,13 +54,10 @@ function default_on_step(self, pos, node, name, max_time, damage, dir, not_trans
         end
     end
 
-    print ("Fino qui\n")
-
     local n = minetest.env:get_node(pos).name
 
     if n ~=not_transparent then
         minetest.env:set_node(pos, {name="air"})
-        print ("Fino qua\n")
         local vec = self.object:getvelocity()
         local c=3
         --calculate how many blocks around need to be removed
@@ -62,6 +74,7 @@ function default_on_step(self, pos, node, name, max_time, damage, dir, not_trans
             end
         end
     else
+        local node = node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
@@ -72,8 +85,12 @@ end
 function nssm_register_weapon(name, def)
     minetest.register_entity("nssm:"..name, {
         textures = {name..".png"},
-        on_step = def.on_step,
-        hit_node = def.hit_node,
+        on_step = function(self, dtime)
+            def.on_step(self, dtime)
+        end,
+        hit_node = function(self, pos, node)
+            def.hit_node(self, pos, node)
+        end,
     })
 
     minetest.register_tool("nssm:"..name.."_hand", {
@@ -81,7 +98,6 @@ function nssm_register_weapon(name, def)
         inventory_image = name.."_hand.png",
         on_use = function(itemstack, placer, pointed_thing)
             weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
-            minetest.chat_send_all("Description: "..def.description)
             return itemstack
         end,
     })
@@ -101,13 +117,13 @@ function nssm_register_weapon(name, def)
 end
 
 --function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
+--function default_on_step(self, dtime, name, max_time, damage, dir, not_transparent, vel)
 nssm_register_weapon("kamehameha", {
-    on_step = function(self, pos, node, dtime)
-        print ("Prima di chiamare on_step\n")
-        default_on_step(self, pos, node, "kamehameha", 10, 20, default_dir, "default:stone", 30, dtime)
+    on_step = function(self, dtime)
+        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, "default:stone", 30)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(self, pos, 4, 1)
+        nssm:explosion(pos, 8, 1)
     end,
     material = "default:stick",
     description = "Kamehameha from DragonBall",

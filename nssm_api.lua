@@ -27,7 +27,7 @@ function nssm:round(n)
     return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
 end
 
-function nssm:explosion_particles(exp_radius)
+function nssm:explosion_particles(pos, exp_radius)
     minetest.add_particlespawner(
         100*exp_radius, --amount
         0.1, --time
@@ -61,7 +61,7 @@ function nssm:explosion(pos, exp_radius, fire)
     })
 
     --particles:
-    nssm:explosion_particles(exp_radius)
+    nssm:explosion_particles(pos, exp_radius)
 
     --Damages entities around (not the player)
     local objects = minetest.env:get_objects_inside_radius(pos, exp_radius)
@@ -93,11 +93,11 @@ function nssm:explosion(pos, exp_radius, fire)
     --remove everything near the center of the explosion
     for dz=-radius,radius do
         for dy=-radius,radius do
-        	local vi = a:index(pos.x + (-radius), pos.y + y, pos.z + z)
+        	local vi = a:index(pos.x + (-radius), pos.y + dy, pos.z + dz)
             for dx=-radius,radius do
                 local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 
-                if (x * x) + (y * y) + (z * z) <= (radius * radius) + pr:next(-radius, radius)
+                if (dx * dx) + (dy * dy) + (dz * dz) <= (radius * radius) + pr:next(-radius, radius)
         		and data[vi] ~= c_air
         		and data[vi] ~= c_ignore
         		and data[vi] ~= c_obsidian
@@ -140,11 +140,11 @@ function nssm:explosion(pos, exp_radius, fire)
         				-- after effects
         				if fire > 0
         				and (minetest.registered_nodes[n].groups.flammable
-        				or math.random(1, 100) <= 10) then
+        				or math.random(1, 100) <= 3) then
         					minetest.set_node(p, {name = "fire:basic_flame"})
         				else
                             local dist = nssm:round(((pos.x-p.x)^2 + (pos.y-p.y)^2 + (pos.z-p.z)^2)^1/2)
-                            local prob = 1/dist
+                            local prob = 2/dist
                             if math.random(1,100)<=prob*100 then
                                 minetest.env:remove_node(p)
                             end
