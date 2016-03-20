@@ -28,10 +28,10 @@ kienzan_ENTITY={
                 local timer = 0
                     minetest.register_globalstep(function(dtime)
                         timer = timer + dtime;
-            if timer > 10 then
-                    self.object:remove()
-                end
-            end)
+            			if timer > 10 then
+                    		self.object:remove()
+                		end
+            		end)
 				local pos = self.object:getpos()
     local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)
                 for k, obj in pairs(objs) do

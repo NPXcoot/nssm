@@ -30,18 +30,108 @@ function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     return itemstack
 end
 
-function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel)
-    local timer = 0
+function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel, timer)
+    --local timer = 0
     local pos = self.object:getpos()
+    local vel = self.object:getvelocity()
     minetest.register_globalstep(function(dtime)
         timer = timer + dtime
-        if (timer>max_time) then
+        --minetest.chat_send_all("Time: = "..timer.." Max_time: "..max_time)
+        if timer>max_time then
             self.object:remove()
         end
     end)
 
     --while going around it damages entities
-    local objects = minetest.env:get_objects_inside_radius(pos, 0)
+    local objects = minetest.env:get_objects_inside_radius(pos, 30)
+    local min_dist = 100
+    local obj_min = nil
+    local obj_p = nil
+    local vec_min = nil
+    for _,obj in ipairs(objects) do
+        if (obj:is_player()) then
+        elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= self.object:get_luaentity().name) then
+            obj_p = obj:getpos()
+            local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+            local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+            if (dist<min_dist) then
+                min_dist = dist
+                obj_min = obj
+                vec_min = vec
+            end
+        end
+    end
+
+    local new_vel = {x=0, y=0, z=0}
+
+    local dir = 0
+    local max_diff = 0
+
+    if (max_diff<math.abs(vec_min.x)) then
+        dir = 1
+        max_diff = math.abs(vec_min.x)
+    end
+    if (max_diff<math.abs(vec_min.y)) then
+        dir = 2
+        max_diff = math.abs(vec_min.y)
+    end
+    if (max_diff<math.abs(vec_min.z)) then
+        dir = 3
+        max_diff = math.abs(vec_min.z)
+    end
+
+    vec_min.x = (vec_min.x/max_diff)*4
+    vec_min.y = (vec_min.y/max_diff)*4
+    vec_min.z = (vec_min.z/max_diff)*4
+    obj_p = obj_min:getpos()
+    if obj_min ~= nil then
+        if min_dist == 0 then
+            self.object:setvelocity(new_vel)
+        else
+            self.object:setvelocity(vec_min)
+            --[[
+            dir = 0
+            max_diff = 0
+
+            if (max_diff<math.abs(vec_min.x)) then
+                dir = 1
+                max_diff = math.abs(vec_min.x)
+            end
+            if (max_diff<math.abs(vec_min.y)) then
+                dir = 2
+                max_diff = math.abs(vec_min.y)
+            end
+            if (max_diff<math.abs(vec_min.z)) then
+                dir = 3
+                max_diff = math.abs(vec_min.z)
+            end
+
+            if dir==1 then
+                new_vel.x = 1
+            elseif dir==2 then
+                new_vel.y = 1
+            elseif dir==3 then
+                new_vel.z = 1
+            end
+            self.object:setvelocity(new_vel)
+            ]]--
+        end
+    end
+end
+
+function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel, timer)
+    --local timer = 0
+    local pos = self.object:getpos()
+    minetest.register_globalstep(function(dtime)
+        timer = timer + dtime
+        --minetest.chat_send_all("Time: = "..timer.." Max_time: "..max_time)
+        if timer>max_time then
+            self.object:remove()
+        end
+    end)
+
+    --while going around it damages entities
+    local objects = minetest.env:get_objects_inside_radius(pos, 2)
     for _,obj in ipairs(objects) do
         if (obj:is_player()) then
         elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
@@ -154,7 +244,7 @@ function nssm_register_weapon(name, def)
 
     --this recipe doesn't work for a misterious reason
     minetest.register_craft({
-        output = "nssm:caccamerda",
+        output = 'nssm:'..name.."_hand",
         recipe = {
             {
         		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
@@ -171,7 +261,7 @@ end
 --function default_on_step(self, dtime, name, max_time, damage, dir, not_transparent, vel)
 nssm_register_weapon("kamehameha", {
     on_step = function(self, dtime)
-        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, 10, "group:cracky", 25)
+        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, 1, "group:cracky", 25,0)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 8, 1)
@@ -181,9 +271,9 @@ nssm_register_weapon("kamehameha", {
     velocity = 25,
 })
 
-nssm_register_weapon("kienzan", {
+--[[nssm_register_weapon("kienzan", {
     on_step = function(self, dtime)
-        default_on_step(self, dtime, "kienzan", 5, 20, {x=1, y=0, z=1}, 1, nil, 25)
+        default_on_step(self, dtime, "kienzan", 3, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
     end,
     hit_node = function(self, pos, node)
     end,
@@ -191,16 +281,15 @@ nssm_register_weapon("kienzan", {
     description = "Kienzan from DragonBall",
     velocity = 25,
 })
+]]
 
---[[
-minetest.register_craft({
-    output = 'nssm:_hand',
-    recipe = {
-        {
-            {'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
-            {'nssm:great_energy_globe', 'default:stick', 'nssm:great_energy_globe'},
-            {'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
-        }
-    }
+nssm_register_weapon("kienzan", {
+    on_step = function(self, dtime)
+        search_on_step(self, dtime, "kienzan", 5, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
+    end,
+    hit_node = function(self, pos, node)
+    end,
+    material = "",
+    description = "Kienzan from DragonBall",
+    velocity = 25,
 })
-]]--
