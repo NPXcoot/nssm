@@ -71,15 +71,17 @@ function nssm:explosion(pos, exp_radius, fire)
             local obj_p = obj:getpos()
             local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
             local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-            local damage = 21-dist*5
-            obj:set_hp(obj:get_hp()-damage)
+			local damage = -exp_radius*dist+exp_radius^2
+			obj:set_hp(obj:get_hp()-damage)
             if (obj:get_hp() <= 0) then
                 if (not obj:is_player()) and obj:get_entity_name() ~= "nssm:kamehameha" then
                     obj:remove()
                 end
             end
+			--minetest.chat_send_all("HP: "..obj:get_hp())
         end
     end
+
 
     --damages blocks around and if necessary put some fire
     pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
