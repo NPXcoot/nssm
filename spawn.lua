@@ -26,8 +26,8 @@ nssm:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_sou
 nssm:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 40000, 1, -31000, 0)
 
 -- DESERT
-nssm:spawn_specific("nssm:dahaka", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 1200, 20000, 1, -31000, 31000)
-nssm:spawn_specific("nssm:sandworm", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 20, 5000, 1, -31000, 31000)
+--nssm:spawn_specific("nssm:dahaka", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 1200, 20000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:sandworm", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 20, 3000, 1, -31000, 31000)
 
 -- DUCKS
 nssm:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 20, 200, 1, -31000, 31000)

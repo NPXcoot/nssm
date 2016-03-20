@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:dahaka", {
+--[[nssm:register_mob("nssm:dahaka", {
 	type = "monster",
 	hp_max = 80,
 	hp_min = 80,
@@ -71,4 +71,4 @@ nssm:register_mob("nssm:dahaka", {
 			end
 		end
 	end,
-})
+})]]
