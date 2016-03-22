@@ -9,8 +9,8 @@ nssm:register_mob("nssm:icesnake", {
 	visual_size = {x=7, y=7},
 	makes_footstep_sound = false,
 	view_range = 10,
-  rotate = 270,
-  froster = true,
+	rotate = 270,
+	fear_height = 3,
 	walk_velocity = 1.2,
 	run_velocity = 3,
   sounds = {
@@ -50,5 +50,23 @@ nssm:register_mob("nssm:icesnake", {
 		run_end = 120,
 		punch_start = 130,
 		punch_end = 160,
-    }
+	},
+	do_custom = function(self)
+		--Froster
+		local c=2
+		local pos = self.object:getpos()
+		local v = self.object:getvelocity()
+		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+			for dy=-1,0 do
+				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.env:get_node(p).name
+					if (n=="default:water_source" or n=="default:water_flowing") then
+							minetest.env:set_node(t, {name="default:ice"})
+					end
+				end
+			end
+		end
+	end,
 })

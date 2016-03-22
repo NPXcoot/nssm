@@ -11,6 +11,7 @@ nssm:register_mob("nssm:larva", {
 	view_range = 10,
 	rotate = 90,
 	jump = false,
+	fear_height = 4,
 	jump_height =0,
 	walk_velocity = 0.4,
 	run_velocity = 0.4,

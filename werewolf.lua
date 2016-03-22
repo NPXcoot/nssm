@@ -10,6 +10,7 @@ nssm:register_mob("nssm:werewolf", {
 	makes_footstep_sound = true,
 	view_range = 30,
 	walk_velocity = 3,
+	fear_height = 4,
 	run_velocity = 5,
     sounds = {
 		random = "werewolf",

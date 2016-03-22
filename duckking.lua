@@ -13,6 +13,7 @@ nssm:register_mob("nssm:duckking", {
 	rotate = 270,
 	duck_father = true,
 	walk_velocity = 1,
+	fear_height = 4,
 	run_velocity = 2,
 	damage = 5,
 	jump = true,

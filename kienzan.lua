@@ -28,22 +28,22 @@ kienzan_ENTITY={
                 local timer = 0
                     minetest.register_globalstep(function(dtime)
                         timer = timer + dtime;
-            if timer > 10 then
-                    self.object:remove()
-                end
-            end)
+            			if timer > 10 then
+                    		self.object:remove()
+                		end
+            		end)
 				local pos = self.object:getpos()
-    local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2) 
+    local objs = minetest.env:get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 2)
                 for k, obj in pairs(objs) do
                     if obj:is_player() then
                         return
                     else
-                    obj:set_hp(obj:get_hp()-20)					
+                    obj:set_hp(obj:get_hp()-20)
 				    if obj:get_entity_name() ~= "nssm:kienzan_entity" then
-						if obj:get_hp()<=0 then 
+						if obj:get_hp()<=0 then
 							obj:remove()
 						end
-					end						
+					end
 				end
             end
 					for dx=-1,1 do
@@ -52,12 +52,12 @@ kienzan_ENTITY={
 								local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 								local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 								local n = minetest.env:get_node(p).name
-								if n ~= "nssm:kienzan_entity"  then	
+								if n ~= "nssm:kienzan_entity"  then
 										minetest.env:set_node(t, {name="air"})
 								end
 							end
 						end
-                
+
 					end
 
 minetest.register_entity("nssm:kienzan_entity", kienzan_ENTITY)

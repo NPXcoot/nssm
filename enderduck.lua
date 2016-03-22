@@ -10,6 +10,7 @@ nssm:register_mob("nssm:enderduck", {
 	makes_footstep_sound = true,
 	view_range = 25,
 	walk_velocity = 3,
+	fear_height = 4,
 	run_velocity = 3.9,
 	rotate = 270,
   sounds = {

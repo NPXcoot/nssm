@@ -1,4 +1,4 @@
--- Mobs Api (17th February 2016) with NSSM modifications
+-- nssm Api (19th March 2016) with NSSM modifications
 nssm = {}
 nssm.mod = "redo"
 
@@ -22,6 +22,16 @@ local stuck_path_timeout = 10 -- how long will mob follow path before giving up
 
 local pi = math.pi
 local square = math.sqrt
+local atan = function(x)
+
+	if x ~= x then
+		--error("atan bassed NaN")
+		print ("atan based NaN")
+		return 0
+	else
+		return math.atan(x)
+	end
+end
 
 do_attack = function(self, player)
 
@@ -42,6 +52,7 @@ do_attack = function(self, player)
 end
 
 set_velocity = function(self, v)
+
 	v = v or 0
 
 	local yaw = (self.object:getyaw() + self.rotate) or 0
@@ -67,6 +78,8 @@ set_animation = function(self, type)
 	end
 
 	self.animation.current = self.animation.current or ""
+
+	self.animation.speed_normal = self.animation.speed_normal or 15
 
 	if type == "stand"
 	and self.animation.current ~= "stand" then
@@ -108,7 +121,7 @@ set_animation = function(self, type)
 			self.object:set_animation({
 				x = self.animation.run_start,
 				y = self.animation.run_end},
-				self.animation.speed_run, 0)
+				(self.animation.speed_run or self.animation.speed_normal), 0)
 
 			self.animation.current = "run"
 		end
@@ -123,7 +136,7 @@ set_animation = function(self, type)
 			self.object:set_animation({
 				x = self.animation.punch_start,
 				y = self.animation.punch_end},
-				self.animation.speed_normal, 0)
+				(self.animation.speed_punch or self.animation.speed_normal), 0)
 
 			self.animation.current = "punch"
 		end
@@ -169,22 +182,33 @@ set_animation = function(self, type)
 	end
 end
 
+-- check line of sight for walkers and swimmers alike
+function line_of_sight_water(self, pos1, pos2, stepsize)
 
---NSSM additions: mobs can see through water
-function line_of_sight_water(pos1, pos2, stepsize)
-	if not minetest.line_of_sight(pos1, pos2, stepsize) then
-		local s, posw
-		s, posw = minetest.line_of_sight(pos1, pos2, stepsize)
-		local n = minetest.env:get_node(posw).name
-			if n=="default:water_source" or n=="default:water_flowing" or n=="nssm:ink" then
-				return true
-			end
+	local s, pos_w = minetest.line_of_sight(pos1, pos2, stepsize)
 
-	else
-		return false
+	-- normal walking and flying nssm can see you through air
+	if s == true then
+		return true
 	end
+
+	-- swimming nssm can see you through water
+	if s == false
+	and self.fly
+	and self.fly_in == "default:water_source" then
+
+		local nod = minetest.get_node(pos_w).name
+
+		if nod == "default:water_source"
+		or nod == "default:water_flowing" then
+
+			return true
+		end
+	end
+
+	return false
+
 end
---end of NSSM additions
 
 -- particle effects
 function effect(pos, amount, texture, max_size)
@@ -234,17 +258,15 @@ end
 -- check if mob is dead or only hurt
 function check_for_death(self)
 
-	-- return if no change
-	local hp = self.object:get_hp()
-
-	if hp == self.health then
-		return false
+	-- has health actually changed?
+	if self.health == self.old_health then
+		return
 	end
 
-	-- still got some health? play hurt sound
-	if hp > 0 then
+	self.old_health = self.health
 
-		self.health = hp
+	-- still got some health? play hurt sound
+	if self.health > 0 then
 
 		if self.sounds.damage then
 
@@ -253,6 +275,11 @@ function check_for_death(self)
 				gain = 1.0,
 				max_hear_distance = self.sounds.distance
 			})
+		end
+
+		-- make sure health isn't higher than max
+		if self.health > self.hp_max then
+			self.health = self.hp_max
 		end
 
 		update_tag(self)
@@ -303,34 +330,6 @@ function check_for_death(self)
 	return true
 end
 
---NSSM addition:
---check_for_death functions customized for monsters who respawns (Masticone)
-function check_for_death_hydra(self)
-	local hp = self.object:get_hp()
-	if hp > 0 then
-		self.health = hp
-		if self.sounds.damage ~= nil then
-			minetest.sound_play(self.sounds.damage,{
-				object = self.object,
-				max_hear_distance = self.sounds.distance
-			})
-		end
-		return false
-	end
-	local pos = self.object:getpos()
-	local obj = nil
-	if self.sounds.death ~= nil then
-		minetest.sound_play(self.sounds.death,{
-			object = self.object,
-			max_hear_distance = self.sounds.distance
-		})
-	end
-		self.object:remove()
-	return true
-end
-
---end of NSSM additions
-
 -- check if within map limits (-30911 to 30927)
 function within_limits(pos, radius)
 
@@ -370,6 +369,24 @@ local function is_at_cliff(self)
 	return false
 end
 
+-- get node but use fallback for nil or unknown
+local function node_ok(pos, fallback)
+
+	fallback = fallback or "default:dirt"
+
+	local node = minetest.get_node_or_nil(pos)
+
+	if not node then
+		return minetest.registered_nodes[fallback]
+	end
+
+	if minetest.registered_nodes[node.name] then
+		return node
+	end
+
+	return minetest.registered_nodes[fallback]
+end
+
 -- environmental damage (water, lava, fire, light)
 do_env_damage = function(self)
 
@@ -395,18 +412,20 @@ do_env_damage = function(self)
 	and self.time_of_day < 0.8
 	and (minetest.get_node_light(pos) or 0) > 12 then
 
-		self.object:set_hp(self.object:get_hp() - self.light_damage)
+		self.health = self.health - self.light_damage
 
 		effect(pos, 5, "tnt_smoke.png")
 	end
 
+	-- what is mob standing in?
+	pos.y = pos.y + self.collisionbox[2] + 0.1 -- foot level
+	self.standing_in = node_ok(pos, "air").name
+	--print ("standing in " .. self.standing_in)
+
 	if self.water_damage ~= 0
 	or self.lava_damage ~= 0 then
 
-		pos.y = pos.y + self.collisionbox[2] + 0.1 -- foot level
-
-		local nod = node_ok(pos, "air") ;  --print ("standing in "..nod.name)
-		local nodef = minetest.registered_nodes[nod.name]
+		local nodef = minetest.registered_nodes[self.standing_in]
 
 		pos.y = pos.y + 1
 
@@ -414,7 +433,7 @@ do_env_damage = function(self)
 		if self.water_damage ~= 0
 		and nodef.groups.water then
 
-			self.object:set_hp(self.object:get_hp() - self.water_damage)
+			self.health = self.health - self.water_damage
 
 			effect(pos, 5, "bubble.png")
 		end
@@ -422,10 +441,10 @@ do_env_damage = function(self)
 		-- lava or fire
 		if self.lava_damage ~= 0
 		and (nodef.groups.lava
-		or nod.name == "fire:basic_flame"
-		or nod.name == "fire:permanent_flame") then
+		or self.standing_in == "fire:basic_flame"
+		or self.standing_in == "fire:permanent_flame") then
 
-			self.object:set_hp(self.object:get_hp() - self.lava_damage)
+			self.health = self.health - self.lava_damage
 
 			effect(pos, 5, "fire_basic_flame.png")
 		end
@@ -438,7 +457,7 @@ do_env_damage = function(self)
 			return
 		end
 	else
-		if check_for_death_hydra(self) then
+		if nssm:check_for_death_hydra(self) then
 			return
 		end
 	end
@@ -488,8 +507,9 @@ do_jump = function(self)
 
 --print ("in front:", nod.name, pos.y + 0.5)
 
-	if minetest.registered_items[nod.name].walkable
+	if (minetest.registered_items[nod.name].walkable
 	and not nod.name:find("fence")
+	and not nod.name:find("gate"))
 	or self.walk_chance == 0 then
 
 		local v = self.object:getvelocity()
@@ -539,26 +559,20 @@ function entity_physics(pos, radius)
 		dist = math.max(1, get_distance(pos, obj_pos))
 
 		local damage = math.floor((4 / dist) * radius)
-		obj:set_hp(obj:get_hp() - damage)
+		local ent = obj:get_luaentity()
+
+		if obj:is_player() then
+			obj:set_hp(obj:get_hp() - damage)
+
+		elseif ent.health then
+
+			obj:punch(obj, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = damage},
+			}, nil)
+
+		end
 	end
-end
-
--- get node but use fallback for nil or unknown
-function node_ok(pos, fallback)
-
-	fallback = fallback or "default:dirt"
-
-	local node = minetest.get_node_or_nil(pos)
-
-	if not node then
-		return minetest.registered_nodes[fallback]
-	end
-
-	if minetest.registered_nodes[node.name] then
-		return node
-	end
-
-	return minetest.registered_nodes[fallback]
 end
 
 -- should mob follow what I'm holding ?
@@ -763,7 +777,7 @@ function day_docile(self)
 end
 
 -- path finding and smart mob routine by rnd
-function smart_mobs(self, s, p, dist, dtime)
+function smart_nssm(self, s, p, dist, dtime)
 
 	local s1 = self.path.lastpos
 
@@ -919,7 +933,6 @@ function smart_mobs(self, s, p, dist, dtime)
 	end
 end
 
-
 -- register mob function
 function nssm:register_mob(name, def)
 
@@ -999,28 +1012,22 @@ minetest.register_entity(name, {
 	runaway = def.runaway,
 	runaway_timer = 0,
 	pathfinding = def.pathfinding,
+	immune_to = def.immune_to or {},
+	explosion_radius = def.explosion_radius,
 
 	--NSSM parameters
 
 	on_dist_attack = def.on_dist_attack,
 	metamorphosis = def.metamorphosis or false,
 	metatimer = 30,
-  putter = def.putter or false,
 	pump_putter = def.pump_putter or false,
-	froster = def.froster or false,
-	big_froster = def.big_froster or false,
-	digger = def.digger or false,
-	webber = def.webber or false,
 	mamma = def.mamma or false,
 	dogshoot_stop = def.dogshoot_stop or false,
 	duckking_father = def.duckking_father or false,
 	maxus = def.maxus or false,
 	inker = def.inker or false,
-	melter = def.melter or false,
 	die_anim = def.die_anim or false,
-	worm = def.worm or false,
 	hydra = def.hydra or false,
-	stone_pooper = def.stone_pooper or false,
 	mele_number = def.mele_number or 1,
 	true_dist_attack = def.true_dist_attack or false,
 	explosion_radius = def.explosion_radius or 0,
@@ -1110,7 +1117,8 @@ minetest.register_entity(name, {
 
 					if d > 5 then
 
-						self.object:set_hp(self.object:get_hp() - math.floor(d - 5))
+						--self.object:set_hp(self.object:get_hp() - math.floor(d - 5))
+						self.health = self.health - math.floor(d - 5)
 
 						effect(pos, 5, "tnt_smoke.png")
 
@@ -1228,21 +1236,12 @@ minetest.register_entity(name, {
 					-- field of view check goes here
 
 						-- choose closest player to attack
-						if minetest.line_of_sight(sp, p, 2) == true
+						--if minetest.line_of_sight(sp, p, 2) == true
+						if line_of_sight_water(self, sp, p, 2) == true
 						and dist < min_dist then
 							min_dist = dist
 							min_player = player
 						end
-
-						--NSSM additions
-
-						if line_of_sight_water(sp,p,2) and dist < min_dist then
-							min_dist = dist
-							min_player = player
-						end
-
-						--end of NSSM additions
-
 					end
 				end
 			end
@@ -1366,7 +1365,7 @@ minetest.register_entity(name, {
 					if vec.x ~= 0
 					and vec.z ~= 0 then
 
-						yaw = (math.atan(vec.z / vec.x) + pi / 2) - self.rotate
+						yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
 
 						if p.x > s.x then
 							yaw = yaw + pi
@@ -1403,6 +1402,19 @@ minetest.register_entity(name, {
 			end
 		end
 
+		-- water swimmers flop when on land
+		if self.fly
+		and self.fly_in == "default:water_source"
+		and self.standing_in ~= self.fly_in then
+
+			self.state = "flop"
+			self.object:setvelocity({x = 0, y = -5, z = 0})
+
+			set_animation(self, "stand")
+
+			return
+		end
+
 		if self.state == "stand" then
 
 			if math.random(1, 4) == 1 then
@@ -1435,7 +1447,7 @@ minetest.register_entity(name, {
 					if vec.x ~= 0
 					and vec.z ~= 0 then
 
-						yaw = (math.atan(vec.z / vec.x) + pi / 2) - self.rotate
+						yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
 
 						if lp.x > s.x then
 							yaw = yaw + pi
@@ -1470,22 +1482,6 @@ minetest.register_entity(name, {
 			local s = self.object:getpos()
 			local lp = minetest.find_node_near(s, 1, {"group:water"})
 
-			-- water swimmers cannot move out of water
-			if self.fly
-			and self.fly_in == "default:water_source"
-			and not lp then
-
-				--print ("out of water")
-
-				set_velocity(self, 0)
-
-				-- change to undefined state so nothing more happens
-				self.state = "flop"
-				set_animation(self, "stand")
-
-				return
-			end
-
 			-- if water nearby then turn away
 			if lp then
 
@@ -1498,7 +1494,7 @@ minetest.register_entity(name, {
 				if vec.x ~= 0
 				and vec.z ~= 0 then
 
-					yaw = math.atan(vec.z / vec.x) + 3 * pi / 2 - self.rotate
+					yaw = atan(vec.z / vec.x) + 3 * pi / 2 - self.rotate
 
 					if lp.x > s.x then
 						yaw = yaw + pi
@@ -1600,7 +1596,7 @@ minetest.register_entity(name, {
 			if vec.x ~= 0
 			and vec.z ~= 0 then
 
-				yaw = math.atan(vec.z / vec.x) + pi / 2 - self.rotate
+				yaw = atan(vec.z / vec.x) + pi / 2 - self.rotate
 
 				if p.x > s.x then
 					yaw = yaw + pi
@@ -1659,9 +1655,10 @@ minetest.register_entity(name, {
 				if self.timer > 3 then
 
 					local pos = self.object:getpos()
+					local radius = self.explosion_radius or 1
 
 					-- hurt player/nssm caught in blast area
-					--entity_physics(pos, 3)		--NSSM modification (the damage function is part of the explosion one now)
+					--entity_physics(pos, radius)		--NSSM modification (the damage function is part of the explosion one now)
 
 					-- dont damage anything if area protected or next to water
 					if minetest.find_node_near(pos, 1, {"group:water"})
@@ -1700,7 +1697,6 @@ minetest.register_entity(name, {
 					return
 				end
 			end
-
 
 		elseif self.attack_type == "dogfight"
 		or (self.attack_type == "dogshoot" and dist <= self.reach)
@@ -1793,7 +1789,7 @@ minetest.register_entity(name, {
 			if vec.x ~= 0
 			and vec.z ~= 0 then
 
-				yaw = (math.atan(vec.z / vec.x) + pi / 2) - self.rotate
+				yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
 
 				if p.x > s.x then
 					yaw = yaw + pi
@@ -1809,7 +1805,7 @@ minetest.register_entity(name, {
 				if self.pathfinding -- only if mob has pathfinding enabled
 				and enable_pathfinding then
 
-					smart_mobs(self, s, p, dist, dtime)
+					smart_nssm(self, s, p, dist, dtime)
 				end
 
 				-- jump attack
@@ -1827,6 +1823,7 @@ minetest.register_entity(name, {
 					set_velocity(self, 0)
 					set_animation(self, "stand")
 				else
+
 					if self.path.stuck then
 						set_velocity(self, self.walk_velocity)
 					else
@@ -1870,7 +1867,7 @@ minetest.register_entity(name, {
 						p2.y = p2.y + 1.5
 						s2.y = s2.y + 1.5
 
-						if minetest.line_of_sight(p2, s2) == true or line_of_sight_water(p2,s2,1) then		--NSSM modification
+						if line_of_sight_water(self,p2,s2,1) then
 
 							-- play attack sound
 							if self.sounds.attack then
@@ -1887,7 +1884,7 @@ minetest.register_entity(name, {
 								damage_groups = {fleshy = self.damage}
 							}, nil)
 
-							--NSSM Modifications for dogshoot mobs
+							--NSSM Modifications for dogshoot nssm
 							if (self.dogshoot_stop) then
 								self.num_mele_attacks=self.num_mele_attacks+1
 								--minetest.chat_send_all("num_mele_attacks= "..self.num_mele_attacks)
@@ -1897,7 +1894,7 @@ minetest.register_entity(name, {
 									self.direct_hit=false
 								end
 							end
-							--end of modifications for dogshoot mobs
+							--end of modifications for dogshoot nssm
 						end
 					end
 
@@ -1911,7 +1908,8 @@ minetest.register_entity(name, {
 								local s2 = s
 								p2.y = p2.y + 1.5
 								s2.y = s2.y + 1.5
-								if minetest.line_of_sight(p2, s2) == true then
+								--if minetest.line_of_sight(p2, s2) == true then
+								if line_of_sight_water(self, p2, s2) == true then
 									-- play attack sound
 									if self.sounds.attack then
 										minetest.sound_play(self.sounds.attack, {
@@ -2029,7 +2027,7 @@ minetest.register_entity(name, {
 			if vec.x ~= 0
 			and vec.z ~= 0 then
 
-				yaw = (math.atan(vec.z / vec.x) + pi / 2) - self.rotate
+				yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
 
 				if p.x > s.x then
 					yaw = yaw + pi
@@ -2107,7 +2105,6 @@ minetest.register_entity(name, {
 			end
 		end
 
-
 		end -- END if self.state == "attack"
 
 		--NSSM additions:
@@ -2162,137 +2159,6 @@ minetest.register_entity(name, {
 			end
 		end
 
-		--for the Dahaka and the lava_titan
-		if self.digger==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,5 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="default:water_source" and n~="default:water_flowing") then
-								minetest.env:set_node(t, {name="air"})
-						end
-					end
-				end
-			end
-		end
-
-		--for the spider mobs
-		if self.webber==true then
-		local pos = self.object:getpos()
-					if (math.random(1,50)==1) then
-						local dx=math.random(1,3)
-						local dz=math.random(1,3)
-						local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						local k = minetest.env:get_node(t).name
-						if ((n~="air")and(k=="air")) then
-								minetest.env:set_node(t, {name="nssm:web"})
-						end
-					end
-		end
-
-		--lava_titan
-		if self.melter==true then
-			local pos = self.object:getpos()
-			pos.y=pos.y-1
-			local n = minetest.env:get_node(pos).name
-			if n~="default:lava_source" then
-				minetest.env:set_node(pos, {name="default:lava_source"})
-			end
-		end
-
-    --for the mese-dragon
-    if self.putter==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,10 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="air" and n~="nssm:mese_meteor" and n~="fire:basic_flame") then
-								minetest.env:set_node(t, {name="default:mese_block"})
-						end
-					end
-				end
-			end
-    end
-
-		--Ice mobs
-		if self.froster==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,0 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n=="default:water_source" or n=="default:water_flowing") then
-								minetest.env:set_node(t, {name="default:ice"})
-						end
-					end
-				end
-			end
-    end
-
-		--Ice boss
-		if self.big_froster==true then
-        local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=-1,3 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-						if (n~="air") then
-								minetest.env:set_node(t, {name="default:ice"})
-						end
-					end
-				end
-			end
-    end
-
-        --worms mod
-		if self.worm==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,2 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(p).name
-				if (n~="default:water_source" and n~="default:water_flowing") then
-                                if n=="default:sand" or n=="default:desert_sand" then
-                                    minetest.env:set_node(t, {name="air"})
-                                end
-				end
-					end
-				end
-			end
-		end
-
-		if self.stone_pooper==true then
-		local pos = self.object:getpos()
-			for dx=-1,1 do
-				for dy=0,1 do
-					for dz=-1,1 do
-						local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-						local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-						local n = minetest.env:get_node(t).name
-							if (n~="default:water_source" and n~="default:water_flowing") then
-                if n=="default:stone" or n=="default:sandstone" or n=="default:cobble" then
-                    minetest.env:set_node(t, {name="air"})
-                end
-							end
-					end
-				end
-			end
-		end
-
 		--ens of NSSM additions
 
 	end,
@@ -2306,6 +2172,37 @@ minetest.register_entity(name, {
 		local weapon = hitter:get_wielded_item()
 		local punch_interval = 1.4
 
+		-- calculate mob damage
+		local damage = 0
+		local armor = self.object:get_armor_groups() or {}
+		local tmp
+
+		for group,_ in pairs(tool_capabilities.damage_groups) do
+
+			tmp = tflp / tool_capabilities.full_punch_interval
+
+			if tmp < 0 then
+				tmp = 0.0
+			elseif tmp > 1 then
+				tmp = 1.0
+			end
+
+			damage = damage + (tool_capabilities.damage_groups[group] or 0)
+				* tmp * ((armor[group] or 0) / 100.0)
+		end
+
+		-- check for tool immunity or special damage
+		for _, no in pairs(self.immune_to) do
+
+			if no[1] == weapon:get_name() then
+				damage = no[2] or 0
+				break
+			end
+		end
+
+		-- print ("Mob Damage is", damage)
+
+		-- add weapon wear
 		if tool_capabilities then
 			punch_interval = tool_capabilities.full_punch_interval or 1.4
 		end
@@ -2333,10 +2230,22 @@ minetest.register_entity(name, {
 			})
 		end
 
+		-- do damage
+		self.health = self.health - math.floor(damage)
+
 		-- exit here if dead
 		if check_for_death(self) then
 			return
 		end
+
+		-- add healthy afterglow when hit
+		core.after(0.1, function()
+			self.object:settexturemod("^[colorize:#c9900070")
+
+			core.after(0.3, function()
+				self.object:settexturemod("")
+			end)
+		end)
 
 		-- blood_particles
 		if self.blood_amount > 0
@@ -2349,8 +2258,9 @@ minetest.register_entity(name, {
 			effect(pos, self.blood_amount, self.blood_texture)
 		end
 
-		-- knock back effect
-		if self.knock_back > 0 then
+		-- knock back effect (only on full punch)
+		if self.knock_back > 0
+		and tflp > punch_interval then
 
 			local v = self.object:getvelocity()
 			local r = 1.4 - math.min(punch_interval, 1.4)
@@ -2358,7 +2268,8 @@ minetest.register_entity(name, {
 			local up = 2
 
 			-- if already in air then dont go up anymore when hit
-			if v.y > 0 then
+			if v.y > 0
+			or self.fly then
 				up = 0
 			end
 
@@ -2386,7 +2297,7 @@ minetest.register_entity(name, {
 			if vec.x ~= 0
 			and vec.z ~= 0 then
 
-				local yaw = math.atan(vec.z / vec.x) + 3 * pi / 2 - self.rotate
+				local yaw = atan(vec.z / vec.x) + 3 * pi / 2 - self.rotate
 
 				if lp.x > s.x then
 					yaw = yaw + pi
@@ -2400,17 +2311,15 @@ minetest.register_entity(name, {
 			self.following = nil
 		end
 
-
 		-- attack puncher and call other nssm for help
 		if self.passive == false
+		and self.state ~= "flop"
 		and self.child == false
 		and hitter:get_player_name() ~= self.owner then
 
-			--if self.state ~= "attack" then
-				-- attack whoever punched mob
-				self.state = ""
-				do_attack(self, hitter)
-			--end
+			-- attack whoever punched mob
+			self.state = ""
+			do_attack(self, hitter)
 
 			-- alert others to the attack
 			local obj = nil
@@ -2520,15 +2429,16 @@ minetest.register_entity(name, {
 		self.path.stuck_timer = 0 -- if stuck for too long search for path
 		-- end init
 
-		self.object:set_hp(self.health)
-		self.object:set_armor_groups({fleshy = self.armor})
+		self.object:set_armor_groups({immortal = 1, fleshy = self.armor})
 		self.old_y = self.object:getpos().y
+		self.old_health = self.health
 		self.object:setyaw((math.random(0, 360) - 180) / 180 * pi)
 		self.sounds.distance = self.sounds.distance or 10
 		self.textures = textures
 		self.mesh = mesh
 		self.collisionbox = colbox
 		self.visual_size = vis_size
+		self.standing_in = ""
 
 		-- set anything changed above
 		self.object:set_properties(self)
@@ -2711,40 +2621,6 @@ local c_obsidian = minetest.get_content_id("default:obsidian")
 local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
---NSSM additions:
-
---pumpbomb explosion
-function nssm:pumpbomb_explosion(pos)
-	minetest.env:remove_node(pos)
-	for dx=-3,3 do
-		for dy=-3,3 do
-			for dz=-3,3 do
-				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				local n = minetest.env:get_node(pos).name
-				if math.random(1, 50) <= 35 then
-					minetest.env:remove_node(p)
-				end
-				local objects = minetest.env:get_objects_inside_radius(pos, 3)
-				for _,obj in ipairs(objects) do
-					if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= "nssm:pumpking") then
-						local obj_p = obj:getpos()
-						local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-						local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-						local damage = (4 / dist) * 3
-						local curr_hp=obj:get_hp()
-						obj:set_hp(curr_hp-damage)
-					end
-				end
-				minetest.sound_play("boom", {
-					max_hear_distance = 20,
-				})
-			end
-		end
-	end
-end
-
---end of NSSM additions
 
 -- explosion (cannot break protected or unbreakable nodes)
 function nssm:explosion(pos, radius, fire, smoke, sound)
@@ -2769,8 +2645,6 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 			max_hear_distance = 16
 		})
 	end
-
-	entity_physics(pos, radius) --NSSM addition
 
 	pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
 
@@ -2798,6 +2672,11 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 		and data[vi] ~= c_chest then
 
 			local n = node_ok(p).name
+			local on_blast = minetest.registered_nodes[n].on_blast
+
+			if on_blast then
+				return on_blast(p)
+			end
 
 			if minetest.get_item_group(n, "unbreakable") ~= 1 then
 
@@ -2832,26 +2711,11 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 
 					minetest.set_node(p, {name = "fire:basic_flame"})
 				else
-					--if (x<2)and(y<2)and(z<2)and(x>-2)and(y>-2)and(z>-2) then --NSSM modification, is it necessary?
 					minetest.set_node(p, {name = "air"})
 
 					if smoke > 0 then
 						effect(p, 2, "tnt_smoke.png", 5)
 					end
-
-				--NSSM modification is it really useful?
-				--[[
-				else if (x<3)and(y<3)and(z<3)and(x>-3)and(y>-3)and(z>-3) then
-						if (math.random(1,100))>25 then
-							minetest.remove_node(p)
-						end
-				else
-					if (math.random(1,100))>50 then
-						minetest.remove_node(p)
-					end
-				end
-					end
-				]]--
 				end
 			end
 		end
@@ -3012,7 +2876,7 @@ function nssm:register_egg(mob, desc, background, addegg)
 	local invimg = background
 
 	if addegg == 1 then
-		invimg = invimg .. "^nssm_chicken_egg.png"
+		invimg = "nssm_chicken_egg.png^(" .. invimg .. "^[mask:nssm_chicken_egg_overlay.png)"
 	end
 
 	minetest.register_craftitem(mob, {
@@ -3254,7 +3118,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	and fields.name ~= "" then
 
 		local name = player:get_player_name()
-		local ent = mob_obj[name]
 
 		if not mob_obj[name]
 		or not mob_obj[name].object then

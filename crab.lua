@@ -13,6 +13,7 @@ nssm:register_mob("nssm:crab", {
 	makes_footstep_sound = true,
 	view_range = 7,
 	rotate = 270,
+	fear_height = 4,
 	walk_velocity = 1,
 	run_velocity = 2,
 	damage = 3,

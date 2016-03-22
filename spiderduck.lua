@@ -8,6 +8,7 @@ nssm:register_mob("nssm:spiderduck", {
 	mesh = "spiderduck.x",
 	textures = {{"spiderduck.png"}},
 	visual_size = {x=2, y=2},
+	fear_height = 4,
 	makes_footstep_sound = true,
 	view_range = 24,
 	walk_velocity = 2,

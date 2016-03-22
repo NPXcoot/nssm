@@ -1,401 +1,90 @@
-minetest.register_craftitem("nssm:sky_feather", {
-	description = "Sky Feather",
-	image = "sky_feather.png",
+--non eatable craftitems
+
+function nssm_register_noneatcraftitems (name, descr)
+
+minetest.register_craftitem("nssm:"..name, {
+	description = descr,
+	image = name ..".png",
 })
 
-minetest.register_craftitem("nssm:snake_scute", {
-	description = "Snake Scute",
-	image = "snake_scute.png",
-})
+end
 
-minetest.register_craftitem("nssm:eyed_tentacle", {
-	description = "Eyed Tentacle",
-	image = "eyed_tentacle.png",
-})
+nssm_register_noneatcraftitems ('sky_feather','Sky Feather')
+nssm_register_noneatcraftitems ('snake_scute','Snake Scute')
+nssm_register_noneatcraftitems ('eyed_tentacle','Eyed Tentacle')
+nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
+nssm_register_noneatcraftitems ('great_energy_globe','Great Energy Globe')
+nssm_register_noneatcraftitems ('superior_energy_globe','Superior Energy Globe')
+nssm_register_noneatcraftitems ('ant_queen_abdomen','Ant Queen Abdomen')
+nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
+nssm_register_noneatcraftitems ('masticone_skull_fragments','Masticone Skull Fragments')
+nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
+nssm_register_noneatcraftitems ('tentacle_curly','Kraken Tentacle')
+nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
+nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
+nssm_register_noneatcraftitems ('ice_tooth','Ice Tooth')
+nssm_register_noneatcraftitems ('little_ice_tooth','Little Ice Tooth')
+nssm_register_noneatcraftitems ('black_sand',"Dahaka's Black Sand")
+nssm_register_noneatcraftitems ('black_ice_tooth','Black Ice Tooth')
+nssm_register_noneatcraftitems ('tarantula_chelicerae','Tarantula Chelicerae')
+nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
+nssm_register_noneatcraftitems ('cursed_pumpkin_seed','Cursed Pumpkin Seed')
+nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
+--nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
+--nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
+--nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
+--nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
+--nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
+nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
+nssm_register_noneatcraftitems ('night_feather','Moon Feather')
+nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
+nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
+nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
+nssm_register_noneatcraftitems ('stoneater_mandible','Stoneater Mandible')
+nssm_register_noneatcraftitems ('ant_mandible','Ant Mandible')
+nssm_register_noneatcraftitems ('life_energy','Life Energy')
+nssm_register_noneatcraftitems ('wolf_fur','Wolf Fur')
+nssm_register_noneatcraftitems ('energy_globe','Energy Globe')
 
-minetest.register_craftitem("nssm:king_duck_crown", {
-	description = "King Duck Crown",
-	image = "king_duck_crown.png",
-})
+function nssm_register_eatcraftitems (name, descr, gnam)
 
-minetest.register_craftitem("nssm:great_energy_globe", {
-	description = "Great Energy Globe",
-	image = "great_energy_globe.png",
-})
-
-minetest.register_craftitem("nssm:superior_energy_globe", {
-	description = "Superior Energy Globe",
-	image = "superior_energy_globe.png",
-})
-
-minetest.register_craftitem("nssm:ant_queen_abdomen", {
-	description = "Ant Queen Abdomen",
-	image = "ant_queen_abdomen.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull", {
-	description = "Masticone Skull",
-	image = "masticone_skull.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull_fragments", {
-	description = "Masticone Skull fragments",
-	image = "masticone_skull_fragments.png",
-})
-
-minetest.register_craftitem("nssm:masticone_skull_crowned", {
-	description = "Masticone Skull Crowned",
-	image = "masticone_skull_crowned.png",
-})
-
-minetest.register_craftitem("nssm:kraken_tentacle", {
-	description = "Kraken Tentacle",
-	image = "tentacle_curly.png",
-})
-
-minetest.register_craftitem("nssm:lava_titan_eye", {
-	description = "Lava Titan Eye",
-	image = "lava_titan_eye.png",
-})
-
-minetest.register_craftitem("nssm:duck_beak", {
-	description = "Duck Beak",
-	image = "duck_beak.png",
-})
-
-minetest.register_craftitem("nssm:ice_tooth", {
-	description = "Ice Tooth",
-	image = "ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:little_ice_tooth", {
-	description = "Little Ice Tooth",
-	image = "little_ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:black_sand", {
-	description = "Dahaka's black sand",
-	image = "black_sand.png",
-})
-
-minetest.register_craftitem("nssm:black_ice_tooth", {
-	description = "Black Ice Tooth",
-	image = "black_ice_tooth.png",
-})
-
-minetest.register_craftitem("nssm:tarantula_chelicerae", {
-	description = "Tarantula Chelicerae",
-	image = "tarantula_chelicerae.png",
-})
-
-minetest.register_craftitem("nssm:crab_chela", {
-	description = "Crab Chela",
-	image = "crab_chela.png",
-})
-
-minetest.register_craftitem("nssm:cursed_pumpkin_seed", {
-	description = "Cursed Pumpkin Seed",
-	image = "cursed_pumpkin_seed.png",
-})
-
-minetest.register_craftitem("nssm:mese_egg", {
-	description = "Mese Egg",
-	image = "mese_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
-		pos1.y=pos1.y+1.5
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 0.2,
-			minpos = {x=pos1.x-1, y=pos1.y-1, z=pos1.z-1},
-			maxpos = {x=pos1.x+1, y=pos1.y+4, z=pos1.z+1},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=5, z=1},
-			minacc = {x=-0.5,y=5,z=-0.5},
-			maxacc = {x=0.5,y=5,z=0.5},
-			minexptime = 1,
-			maxexptime = 3,
-			minsize = 2,
-			maxsize = 4,
-			collisiondetection = false,
-			vertical = false,
-			texture = "tnt_smoke.png",
-		})
-		core.after(0.4, function()
-			minetest.add_entity(pos1, "nssm:mese_dragon")
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
-minetest.register_craftitem("nssm:werewolf_leg", {
-	description = "Werewolf Leg",
-	image = "werewolf_leg.png",
-	on_use = minetest.item_eat(3),
+minetest.register_craftitem("nssm:"..name, {
+	description = descr,
+	image = name..".png",
+	on_use = minetest.item_eat(gnam),
 	groups = { meat=1, eatable=1 },
 })
 
-minetest.register_craftitem("nssm:heron_leg", {
-	description = "Moonheron Leg",
-	image = "heron_leg.png",
-	on_use = minetest.item_eat(2),
-	groups = { meat=1, eatable=1 },
-})
+end
 
-minetest.register_craftitem("nssm:chichibios_heron_leg", {
-	description = "Chichibio's Moonheron Leg",
-	image = "chichibios_heron_leg.png",
-	on_use = minetest.item_eat(4),
-	groups = { meat=1, eatable=1 },
-})
+nssm_register_eatcraftitems ('werewolf_leg','Werewolf Leg',3)
+nssm_register_eatcraftitems ('heron_leg','Moonheron Leg',2)
+nssm_register_eatcraftitems ('chichibios_heron_leg',"Chichibio's Moonheron Leg",4)
+nssm_register_eatcraftitems ('crocodile_tail','Crocodile Tail',3)
+nssm_register_eatcraftitems ('roasted_crocodile_tail','Roasted Crocodile Tail',6)
+nssm_register_eatcraftitems ('roasted_werewolf_leg','Roasted_Werewolf Leg',6)
+nssm_register_eatcraftitems ('duck_legs','Duck Legs',1)
+nssm_register_eatcraftitems ('roasted_duck_legs','Roasted Duck Leg',3)
+nssm_register_eatcraftitems ('ant_leg','Ant Leg',1)
+nssm_register_eatcraftitems ('roasted_ant_leg','Roasted Ant Leg',4)
+nssm_register_eatcraftitems ('spider_leg','Spider Leg',1)
+nssm_register_eatcraftitems ('roasted_spider_leg','Roasted Spider Leg',4)
+--nssm_register_eatcraftitems ('brain','Brain',3)
+--nssm_register_eatcraftitems ('roasted_brain','Roasted Brain',8)
+nssm_register_eatcraftitems ('tentacle','Tentacle',2)
+nssm_register_eatcraftitems ('roasted_tentacle','Roasted Tentacle',5)
+nssm_register_eatcraftitems ('worm_flesh','Worm Flesh',-1)
+nssm_register_eatcraftitems ('roasted_worm_flesh','Roasted Worm Flesh',3)
+nssm_register_eatcraftitems ('amphibian_heart','Amphibian Heart',1)
+nssm_register_eatcraftitems ('roasted_amphibian_heart','Roasted Amphibian Heart',8)
+nssm_register_eatcraftitems ('raw_scrausics_wing','Raw Scrausics Wing',1)
+nssm_register_eatcraftitems ('spicy_scrausics_wing','Spicy Scrausics Wing',6)
+nssm_register_eatcraftitems ('phoenix_nuggets','Phoenix Nuggets',20)
+nssm_register_eatcraftitems ('phoenix_tear','Phoenix Tear',20)
+nssm_register_eatcraftitems ('frosted_amphibian_heart','Frosted Amphibian Heart',-1)
+nssm_register_eatcraftitems ('surimi','Surimi',4)
 
-minetest.register_craftitem("nssm:croco_tail", {
-	description = "Crocodile Tail",
-	image = "crocodile_tail.png",
-	on_use = minetest.item_eat(3),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_croco_tail", {
-	description = "Roasted Crocodile Tail",
-	image = "roasted_crocodile_tail.png",
-	on_use = minetest.item_eat(10),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_werewolf_leg", {
-	description = "Roasted_Werewolf Leg",
-	image = "roasted_werewolf_leg.png",
-	on_use = minetest.item_eat(6),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:duck_legs", {
-	description = "Duck Legs",
-	image = "duck_legs.png",
-	on_use = minetest.item_eat(1),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_duck_legs", {
-	description = "Roasted Duck Leg",
-	image = "roasted_duck_legs.png",
-	on_use = minetest.item_eat(3),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:ant_leg", {
-	description = "Ant Leg",
-	image = "ant_leg.png",
-	on_use = minetest.item_eat(2),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_ant_leg", {
-	description = "Roasted Ant Leg",
-	image = "roasted_ant_leg.png",
-	on_use = minetest.item_eat(4),
-	groups = { meat=1, eatable=1 },
-})
-
-
-minetest.register_craftitem("nssm:spider_leg", {
-	description = "Spider Leg",
-	image = "spider_leg.png",
-	on_use = minetest.item_eat(2),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_spider_leg", {
-	description = "Roasted Spider Leg",
-	image = "roasted_spider_leg.png",
-	on_use = minetest.item_eat(4),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:brain", {
-	description = "Brain",
-	image = "brain.png",
-	on_use = minetest.item_eat(3),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_brain", {
-	description = "Roasted Brain",
-	image = "roasted_brain.png",
-	on_use = minetest.item_eat(8),
-	groups = { meat=1, eatable=1 },
-})
-
-
-minetest.register_craftitem("nssm:tentacle", {
-	description = "Tentacle",
-	image = "tentacle.png",
-	on_use = minetest.item_eat(2),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_tentacle", {
-	description = "Roasted Tentacle",
-	image = "roasted_tentacle.png",
-	on_use = minetest.item_eat(5),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:worm_flesh", {
-	description = "Worm Flesh",
-	image = "worm_flesh.png",
-	on_use = minetest.item_eat(-1),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:roasted_worm_flesh", {
-	description = "Roasted Worm Flesh",
-	image = "roasted_worm_flesh.png",
-	on_use = minetest.item_eat(3),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:mantis_claw", {
-	description = "Mantis Claw",
-	image = "mantis_claw.png",
-})
-
---[[minetest.register_craftitem("nssm:manticore_fur", {
-	description = "Manticore Fur",
-	image = "manticore_fur.png",
-})]]
-
-minetest.register_craftitem("nssm:manticore_spine", {
-	description = "Manticore Spine",
-	image = "manticore_spine.png",
-})
-
-minetest.register_craftitem("nssm:moon_feather", {
-	description = "Moon Feather",
-	image = "night_feather.png",
-})
-
-
-minetest.register_craftitem("nssm:sun_feather", {
-	description = "Sun Feather",
-	image = "sun_feather.png",
-})
-
-minetest.register_craftitem("nssm:amphibian_heart", {
-	description = "Amphibian Heart",
-	image = "amphibian_heart.png",
-	on_use = minetest.item_eat(1),
-	groups = { meat=1, eatable=1 },
-})
-
-
-minetest.register_craftitem("nssm:roasted_amphibian_heart", {
-	description = "Roasted Amphibian Heart",
-	image = "roasted_amphibian_heart.png",
-	on_use = minetest.item_eat(8),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:raw_scrausics_wing", {
-	description = "Raw Scrausics Wing",
-	image = "raw_scrausics_wing.png",
-	on_use = minetest.item_eat(1),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:spicy_scrausics_wing", {
-	description = "Spicy Scrausics Wing",
-	image = "spicy_scrausics_wing.png",
-	on_use = minetest.item_eat(6),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:phoenix_nuggets", {
-	description = "Phoenix Nuggets",
-	image = "phoenix_nuggets.png",
-	on_use = minetest.item_eat(20),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:phoenix_tear", {
-	description = "Phoenix Tear",
-	image = "phoenix_tear.png",
-	on_use = minetest.item_eat(20),
-	groups = {eatable=1 },
-})
-
-minetest.register_craftitem("nssm:frosted_amphibian_heart", {
-	description = "Frosted Amphibian Heart",
-	image = "frosted_amphibian_heart.png",
-	on_use = minetest.item_eat(-1),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:surimi", {
-	description = "Surimi",
-	image = "surimi.png",
-	on_use = minetest.item_eat(4),
-	groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craftitem("nssm:white_wolf_fur", {
-	description = "White Wolf Fur",
-	image = "white_wolf_fur.png",
-})
-
-minetest.register_craftitem("nssm:masticone_fang", {
-	description = "Masticone Fang",
-	image = "masticone_fang.png",
-})
-
-minetest.register_tool("nssm:mantis_sword", {
-	description = "Mantis Sword",
-	inventory_image = "mantis_sword.png",
-	tool_capabilities = {
-		full_punch_interval =0.7 ,
-		max_drop_level=1,
-		groupcaps={
-			fleshy={times={[2]=1.0, [3]=0.4}, uses=50, maxlevel=1},
-			snappy={times={[2]=0.80, [3]=0.3}, uses=100, maxlevel=1},
-		},
-		damage_groups = {fleshy=6},
-	},
-})
-
-minetest.register_node("nssm:venomous_gas", {
-	description = "Venomous Gas",
-	inventory_image = minetest.inventorycube("venomous_gas.png"),
-	drawtype = "airlike",
-	tiles = {
-		{name="venomous_gas_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
-	},
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	drop = "",
-	drowning = 1,
-	damage_per_second = 1,
-	post_effect_color = {a=100, r=1, g=100, b=1},
-	groups = {flammable = 2},
-})
-
-minetest.register_node("nssm:ant_dirt", {
-	description = "Ant Dirt",
-	tiles = {"ant_dirt.png"},
-	groups = {crumbly=3},
-})
-
-minetest.register_node("nssm:modders_block", {
-	description = "Modders Block",
-	tiles = {"modders_block.png"},
-	is_ground_content = true,
-	groups = {crumbly=3, not_in_creative_inventory =1},
-})
+--ore generation
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -463,19 +152,62 @@ minetest.register_ore({
 		height_max     = 40,
 			})
 
-minetest.register_craftitem("nssm:life_energy", {
-	description = "Life Energy",
-	inventory_image = "life_energy.png",
+minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "nssm:web",
+		wherein        = "default:junglegrass",
+		clust_scarcity = 2*2*2,
+		clust_num_ores = 2,
+		clust_size     = 2,
+		height_min     = -20,
+		height_max     = 200,
+			})
+
+minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "nssm:web",
+		wherein        = "default:jungleleaves",
+		clust_scarcity = 4*4*4,
+		clust_num_ores = 5,
+		clust_size     = 5,
+		height_min     = -20,
+		height_max     = 200,
+			}
+)
+
+--nodes
+
+minetest.register_node("nssm:ant_dirt", {
+	description = "Ant Dirt",
+	tiles = {"ant_dirt.png"},
+	groups = {crumbly=3},
 })
 
-minetest.register_craftitem("nssm:wolf_fur", {
-	description = "Wolf Fur",
-	inventory_image = "wolf_fur.png",
+minetest.register_node("nssm:venomous_gas", {
+	description = "Venomous Gas",
+	inventory_image = minetest.inventorycube("venomous_gas.png"),
+	drawtype = "airlike",
+	tiles = {
+		{name="venomous_gas_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
+	},
+	paramtype = "light",
+	walkable = false,
+	sunlight_propagates = true,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	drop = "",
+	drowning = 1,
+	damage_per_second = 1,
+	post_effect_color = {a=100, r=1, g=100, b=1},
+	groups = {flammable = 2},
 })
 
-minetest.register_craftitem("nssm:energy_globe", {
-	description = "Energy Globe",
-	inventory_image = "energy_globe.png",
+minetest.register_node("nssm:modders_block", {
+	description = "Modders Block",
+	tiles = {"modders_block.png"},
+	is_ground_content = true,
+	groups = {crumbly=3, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:web", {
@@ -498,7 +230,6 @@ minetest.register_node("nssm:web", {
 	liquid_viscosity = 20,
 	groups = {flammable=2, snappy=1, liquid=1},
 })
-
 
 minetest.register_node("nssm:ink", {
 	description = "Ink",
@@ -548,9 +279,11 @@ minetest.register_node("nssm:pumpbomb", {
 	groups = {not_in_creative_inventory =1},
 	drop = "",
 	on_timer = function(pos, elapsed)
-		nssm:pumpbomb_explosion(pos)
+		nssm:explosion(pos, 3, 1)
 	end,
 })
+
+--abms
 
 minetest.register_abm({
 	nodenames = {"nssm:mese_meteor"},
@@ -610,29 +343,9 @@ minetest.register_abm({
 	end
 })
 
-minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "nssm:web",
-		wherein        = "default:junglegrass",
-		clust_scarcity = 2*2*2,
-		clust_num_ores = 2,
-		clust_size     = 2,
-		height_min     = -20,
-		height_max     = 200,
-			})
 
-minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "nssm:web",
-		wherein        = "default:jungleleaves",
-		clust_scarcity = 4*4*4,
-		clust_num_ores = 5,
-		clust_size     = 5,
-		height_min     = -20,
-		height_max     = 200,
-			}
-)
 
+--tools
 
 minetest.register_tool('nssm:sun_sword', {
 	description = 'Sun Sword',
@@ -662,7 +375,7 @@ minetest.register_tool("nssm:masticone_fang_sword", {
 		full_punch_interval =0.7 ,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=0.90, [2]=0.8, [3]=0.4}, uses=200, maxlevel=1},
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=200, maxlevel=1},
 			fleshy={times={[2]=0.8, [3]=0.4}, uses=200, maxlevel=1}
 		},
 		damage_groups = {fleshy=8},
@@ -676,7 +389,7 @@ minetest.register_tool("nssm:night_sword", {
 		full_punch_interval =0.4 ,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=0.80, [2]=0.4, [3]=0.2}, uses=300, maxlevel=1},
+			snappy={times={[1]=0.4, [2]=0.3, [3]=0.2}, uses=300, maxlevel=1},
 			fleshy={times={[2]=0.7, [3]=0.3}, uses=300, maxlevel=1}
 		},
 		damage_groups = {fleshy=12},
@@ -721,7 +434,6 @@ minetest.register_node("nssm:rope", {
     groups = {snappy=1},
     })
 
-
 minetest.register_tool("nssm:stoneater_pick", {
 	description = "Stoneater Pickaxe",
 	inventory_image = "stoneater_pick.png",
@@ -735,6 +447,19 @@ minetest.register_tool("nssm:stoneater_pick", {
 	},
 })
 
+minetest.register_tool("nssm:mantis_sword", {
+	description = "Mantis Sword",
+	inventory_image = "mantis_sword.png",
+	tool_capabilities = {
+		full_punch_interval =0.7 ,
+		max_drop_level=1,
+		groupcaps={
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=50, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=100, maxlevel=1},
+		},
+		damage_groups = {fleshy=6},
+	},
+})
 
 minetest.register_tool("nssm:ant_sword", {
 	description = "Ant Sword",
@@ -749,17 +474,7 @@ minetest.register_tool("nssm:ant_sword", {
 	},
 })
 
-minetest.register_craftitem("nssm:stoneater_mandible", {
-	description = "Stoneater Mandible",
-	image = "stoneater_mandible.png",
-})
-
-minetest.register_craftitem("nssm:ant_mandible", {
-	description = "Ant Mandible",
-	image = "ant_mandible.png",
-})
-
---ricette
+--recipes
 
 minetest.register_craft({
 	output = 'nssm:mantis_sword',
@@ -832,7 +547,6 @@ minetest.register_craft({
 		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
 	}
 })
-
 
 minetest.register_craft({
 	output = 'nssm:mese_egg',
@@ -1019,9 +733,6 @@ minetest.register_craft({
 	}
 })
 
-
-
-
 --Eggs
 
 function nssm_register_egg (name, descr)
@@ -1047,6 +758,7 @@ nssm_register_egg ('flying_duck', 'Flying Duck')
 nssm_register_egg ('stone_eater', 'Stoneater')
 nssm_register_egg ('signosigno', 'Signosigno')
 nssm_register_egg ('bloco', 'Bloco')
+nssm_register_egg ('sand_bloco', 'Sand Bloco')
 nssm_register_egg ('swimming_duck', 'Swimming Duck')
 nssm_register_egg ('duck', 'Duck')
 nssm_register_egg ('duckking', 'Duckking')
@@ -1069,6 +781,7 @@ nssm_register_egg ('scrausics', 'Scrausics')
 nssm_register_egg ('moonheron', 'Moonheron')
 nssm_register_egg ('dahaka', 'Dahaka')
 nssm_register_egg ('sandworm', 'Sandworm')
+nssm_register_egg ('giant_sandworm', 'Giant Sandworm')
 nssm_register_egg ('ant_queen', 'Ant Queen')
 nssm_register_egg ('ant_soldier', 'Ant Soldier')
 nssm_register_egg ('ant_worker', 'Ant Worker')
@@ -1076,6 +789,7 @@ nssm_register_egg ('crocodile', 'Crocodile')
 nssm_register_egg ('dolidrosaurus', 'Dolidrosaurus')
 nssm_register_egg ('crab', 'Crab')
 nssm_register_egg ('octopus', 'Octopus')
+nssm_register_egg ('xgaloctopus', 'Xgaloctopus')
 nssm_register_egg ('black_widow', 'Black Widow')
 nssm_register_egg ('uloboros', 'Uloboros')
 nssm_register_egg ('tarantula', 'Tarantula')
@@ -1086,3 +800,35 @@ nssm_register_egg ('manticore', 'Manticore')
 nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
 nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
 nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
+
+
+minetest.register_craftitem("nssm:mese_egg", {
+	description = "Mese Egg",
+	image = "mese_egg.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
+		pos1.y=pos1.y+1.5
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 0.2,
+			minpos = {x=pos1.x-1, y=pos1.y-1, z=pos1.z-1},
+			maxpos = {x=pos1.x+1, y=pos1.y+4, z=pos1.z+1},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=5, z=1},
+			minacc = {x=-0.5,y=5,z=-0.5},
+			maxacc = {x=0.5,y=5,z=0.5},
+			minexptime = 1,
+			maxexptime = 3,
+			minsize = 2,
+			maxsize = 4,
+			collisiondetection = false,
+			vertical = false,
+			texture = "tnt_smoke.png",
+		})
+		core.after(0.4, function()
+			minetest.add_entity(pos1, "nssm:mese_dragon")
+		end)
+		itemstack:take_item()
+		return itemstack
+	end,
+})

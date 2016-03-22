@@ -13,7 +13,7 @@ nssm:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletre
 
 -- CAVES
 nssm:spawn_specific("nssm:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 500, 3, -31000, -20)
-nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 2000, 1, -31000, -50)
+nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 8000, 1, -31000, -50)
 nssm:spawn_specific("nssm:stone_eater", {"default:stone"}, {"default:stone"}, 0, 20, 40, 700, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"default:stone"}, {"default:stone"}, 0, 10, 20, 400, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5, -31000, 31000)
@@ -26,8 +26,10 @@ nssm:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_sou
 nssm:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 40000, 1, -31000, 0)
 
 -- DESERT
-nssm:spawn_specific("nssm:dahaka", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 1200, 20000, 1, -31000, 31000)
-nssm:spawn_specific("nssm:sandworm", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 20, 5000, 1, -31000, 31000)
+--nssm:spawn_specific("nssm:dahaka", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 1200, 20000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:sandworm", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 20, 3000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:giant_sandworm", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 1200, 40000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:sand_bloco", {"default:desert_sand", "default:desert_stone"}, {"default:sand"}, 0, 20, 20, 1000, 1, -31000, 31000)
 
 -- DUCKS
 nssm:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 20, 200, 1, -31000, 31000)
@@ -64,3 +66,8 @@ nssm:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:
 nssm:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 400, 1, -31000, 31000)
 nssm:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 500, 1, -31000, 31000)
 nssm:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 10000, 1, -31000, 31000)
+
+-- NSSB SPECIAL
+if minetest.get_modpath("nssb") then
+nssm:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
+end
