@@ -240,9 +240,9 @@ nssm_register_weapon("kamehameha", {
         default_on_step(self, dtime, 10, 20, default_dir, 1, "stone", 25,0)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 4, 1)
+        nssm:explosion(pos, 6, 1)
     end,
-    material = "default:stick",
+    material = "default:diamondblock",
     description = "Kamehameha from DragonBall",
 
 })
@@ -254,7 +254,7 @@ nssm_register_weapon("kienzan", {
     end,
     hit_node = function(self, pos, node)
     end,
-    material = "",
+    material = "nssm:king_duck_crown",
     description = "Kienzan from DragonBall",
 })
 

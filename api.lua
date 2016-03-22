@@ -1,4 +1,4 @@
--- Mobs Api (19th March 2016) with NSSM modifications
+-- nssm Api (19th March 2016) with NSSM modifications
 nssm = {}
 nssm.mod = "redo"
 
@@ -187,12 +187,12 @@ function line_of_sight_water(self, pos1, pos2, stepsize)
 
 	local s, pos_w = minetest.line_of_sight(pos1, pos2, stepsize)
 
-	-- normal walking and flying mobs can see you through air
+	-- normal walking and flying nssm can see you through air
 	if s == true then
 		return true
 	end
 
-	-- swimming mobs can see you through water
+	-- swimming nssm can see you through water
 	if s == false
 	and self.fly
 	and self.fly_in == "default:water_source" then
@@ -777,7 +777,7 @@ function day_docile(self)
 end
 
 -- path finding and smart mob routine by rnd
-function smart_mobs(self, s, p, dist, dtime)
+function smart_nssm(self, s, p, dist, dtime)
 
 	local s1 = self.path.lastpos
 
@@ -1805,7 +1805,7 @@ minetest.register_entity(name, {
 				if self.pathfinding -- only if mob has pathfinding enabled
 				and enable_pathfinding then
 
-					smart_mobs(self, s, p, dist, dtime)
+					smart_nssm(self, s, p, dist, dtime)
 				end
 
 				-- jump attack
@@ -1884,7 +1884,7 @@ minetest.register_entity(name, {
 								damage_groups = {fleshy = self.damage}
 							}, nil)
 
-							--NSSM Modifications for dogshoot mobs
+							--NSSM Modifications for dogshoot nssm
 							if (self.dogshoot_stop) then
 								self.num_mele_attacks=self.num_mele_attacks+1
 								--minetest.chat_send_all("num_mele_attacks= "..self.num_mele_attacks)
@@ -1894,7 +1894,7 @@ minetest.register_entity(name, {
 									self.direct_hit=false
 								end
 							end
-							--end of modifications for dogshoot mobs
+							--end of modifications for dogshoot nssm
 						end
 					end
 
@@ -2623,7 +2623,7 @@ local c_chest = minetest.get_content_id("default:chest_locked")
 
 
 -- explosion (cannot break protected or unbreakable nodes)
-function mobs:explosion(pos, radius, fire, smoke, sound)
+function nssm:explosion(pos, radius, fire, smoke, sound)
 
 	radius = radius or 0
 	fire = fire or 0
@@ -2876,7 +2876,7 @@ function nssm:register_egg(mob, desc, background, addegg)
 	local invimg = background
 
 	if addegg == 1 then
-		invimg = "mobs_chicken_egg.png^(" .. invimg .. "^[mask:mobs_chicken_egg_overlay.png)"
+		invimg = "nssm_chicken_egg.png^(" .. invimg .. "^[mask:nssm_chicken_egg_overlay.png)"
 	end
 
 	minetest.register_craftitem(mob, {

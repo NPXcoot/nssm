@@ -50,7 +50,7 @@ end
 
 function nssm:explosion_particles(pos, exp_radius)
     minetest.add_particlespawner(
-        100*exp_radius, --amount
+        100*exp_radius/2, --amount
         0.1, --time
         {x=pos.x-exp_radius, y=pos.y-exp_radius, z=pos.z-exp_radius}, --minpos
         {x=pos.x+exp_radius, y=pos.y+exp_radius, z=pos.z+exp_radius}, --maxpos
@@ -59,7 +59,7 @@ function nssm:explosion_particles(pos, exp_radius)
         {x=-0.5,y=1,z=-0.5}, --minacc
         {x=0.5,y=1,z=0.5}, --maxacc
         0.1, --minexptime
-        2, --maxexptime
+        4, --maxexptime
         6, --minsize
         12, --maxsize
         false, --collisiondetection
