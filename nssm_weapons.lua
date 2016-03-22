@@ -132,7 +132,7 @@ local function default_on_step(
     end
 
     local n = minetest.env:get_node(pos).name
-    if n ==not_transparent or (not_transparent==nil) or minetest.get_item_group(n, not_transparent)==1 then
+    if n ==not_transparent or minetest.get_item_group(n, not_transparent)==1 then
         local node = nssm:node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()

@@ -18,6 +18,32 @@ function nssm:node_ok(pos, fallback)
 	return minetest.registered_nodes[fallback]
 end
 
+--check_for_death functions customized for monsters who respawns (Masticone)
+function nssm:check_for_death_hydra(self)
+	local hp = self.object:get_hp()
+	if hp > 0 then
+		self.health = hp
+		if self.sounds.damage ~= nil then
+			minetest.sound_play(self.sounds.damage,{
+				object = self.object,
+				max_hear_distance = self.sounds.distance
+			})
+		end
+		return false
+	end
+	local pos = self.object:getpos()
+	local obj = nil
+	if self.sounds.death ~= nil then
+		minetest.sound_play(self.sounds.death,{
+			object = self.object,
+			max_hear_distance = self.sounds.distance
+		})
+	end
+		self.object:remove()
+	return true
+end
+
+
 function nssm:round(n)
     return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
 end

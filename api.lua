@@ -1,4 +1,4 @@
--- Mobs Api (12th March 2016) with NSSM modifications
+-- Mobs Api (19th March 2016) with NSSM modifications
 nssm = {}
 nssm.mod = "redo"
 
@@ -330,34 +330,6 @@ function check_for_death(self)
 	return true
 end
 
---NSSM addition:
---check_for_death functions customized for monsters who respawns (Masticone)
-function check_for_death_hydra(self)
-	local hp = self.object:get_hp()
-	if hp > 0 then
-		self.health = hp
-		if self.sounds.damage ~= nil then
-			minetest.sound_play(self.sounds.damage,{
-				object = self.object,
-				max_hear_distance = self.sounds.distance
-			})
-		end
-		return false
-	end
-	local pos = self.object:getpos()
-	local obj = nil
-	if self.sounds.death ~= nil then
-		minetest.sound_play(self.sounds.death,{
-			object = self.object,
-			max_hear_distance = self.sounds.distance
-		})
-	end
-		self.object:remove()
-	return true
-end
-
---end of NSSM additions
-
 -- check if within map limits (-30911 to 30927)
 function within_limits(pos, radius)
 
@@ -485,7 +457,7 @@ do_env_damage = function(self)
 			return
 		end
 	else
-		if check_for_death_hydra(self) then
+		if nssm:check_for_death_hydra(self) then
 			return
 		end
 	end
@@ -535,8 +507,9 @@ do_jump = function(self)
 
 --print ("in front:", nod.name, pos.y + 0.5)
 
-	if minetest.registered_items[nod.name].walkable
+	if (minetest.registered_items[nod.name].walkable
 	and not nod.name:find("fence")
+	and not nod.name:find("gate"))
 	or self.walk_chance == 0 then
 
 		local v = self.object:getvelocity()
@@ -586,7 +559,19 @@ function entity_physics(pos, radius)
 		dist = math.max(1, get_distance(pos, obj_pos))
 
 		local damage = math.floor((4 / dist) * radius)
-		obj:set_hp(obj:get_hp() - damage)
+		local ent = obj:get_luaentity()
+
+		if obj:is_player() then
+			obj:set_hp(obj:get_hp() - damage)
+
+		elseif ent.health then
+
+			obj:punch(obj, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = damage},
+			}, nil)
+
+		end
 	end
 end
 
@@ -1028,6 +1013,7 @@ minetest.register_entity(name, {
 	runaway_timer = 0,
 	pathfinding = def.pathfinding,
 	immune_to = def.immune_to or {},
+	explosion_radius = def.explosion_radius,
 
 	--NSSM parameters
 
@@ -1669,9 +1655,10 @@ minetest.register_entity(name, {
 				if self.timer > 3 then
 
 					local pos = self.object:getpos()
+					local radius = self.explosion_radius or 1
 
 					-- hurt player/nssm caught in blast area
-					--entity_physics(pos, 3)		--NSSM modification (the damage function is part of the explosion one now)
+					--entity_physics(pos, radius)		--NSSM modification (the damage function is part of the explosion one now)
 
 					-- dont damage anything if area protected or next to water
 					if minetest.find_node_near(pos, 1, {"group:water"})
