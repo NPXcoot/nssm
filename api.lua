@@ -2621,44 +2621,9 @@ local c_obsidian = minetest.get_content_id("default:obsidian")
 local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
---NSSM additions:
-
---pumpbomb explosion
-function nssm:pumpbomb_explosion(pos)
-	minetest.env:remove_node(pos)
-	for dx=-3,3 do
-		for dy=-3,3 do
-			for dz=-3,3 do
-				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				local n = minetest.env:get_node(pos).name
-				if math.random(1, 50) <= 35 then
-					minetest.env:remove_node(p)
-				end
-				local objects = minetest.env:get_objects_inside_radius(pos, 3)
-				for _,obj in ipairs(objects) do
-					if obj:is_player() or (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= "nssm:pumpking") then
-						local obj_p = obj:getpos()
-						local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-						local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-						local damage = (4 / dist) * 3
-						local curr_hp=obj:get_hp()
-						obj:set_hp(curr_hp-damage)
-					end
-				end
-				minetest.sound_play("boom", {
-					max_hear_distance = 20,
-				})
-			end
-		end
-	end
-end
-
---end of NSSM additions
 
 -- explosion (cannot break protected or unbreakable nodes)
---[[
-function nssm:explosion(pos, radius, fire, smoke, sound)
+function mobs:explosion(pos, radius, fire, smoke, sound)
 
 	radius = radius or 0
 	fire = fire or 0
@@ -2681,7 +2646,6 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 		})
 	end
 
-	entity_physics(pos, radius) --NSSM addition
 	pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
 
 	local vm = VoxelManip()
@@ -2747,26 +2711,11 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 
 					minetest.set_node(p, {name = "fire:basic_flame"})
 				else
-					--if (x<2)and(y<2)and(z<2)and(x>-2)and(y>-2)and(z>-2) then --NSSM modification, is it necessary?
 					minetest.set_node(p, {name = "air"})
 
 					if smoke > 0 then
 						effect(p, 2, "tnt_smoke.png", 5)
 					end
-
-				--NSSM modification is it really useful?
-
-				else if (x<3)and(y<3)and(z<3)and(x>-3)and(y>-3)and(z>-3) then
-						if (math.random(1,100))>25 then
-							minetest.remove_node(p)
-						end
-				else
-					if (math.random(1,100))>50 then
-						minetest.remove_node(p)
-					end
-				end
-					end
-				--end of NSSM modification
 				end
 			end
 		end
@@ -2777,7 +2726,6 @@ function nssm:explosion(pos, radius, fire, smoke, sound)
 	end
 	end
 end
-]]
 
 -- register arrow for shoot attack
 function nssm:register_arrow(name, def)

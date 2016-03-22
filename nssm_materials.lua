@@ -279,7 +279,7 @@ minetest.register_node("nssm:pumpbomb", {
 	groups = {not_in_creative_inventory =1},
 	drop = "",
 	on_timer = function(pos, elapsed)
-		nssm:pumpbomb_explosion(pos)
+		nssm:explosion(pos, 3, 1)
 	end,
 })
 
