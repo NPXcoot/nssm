@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:giant_sandworm", {
 	type = "monster",
-	hp_max = 120,
-	hp_min = 130,
+	hp_max = 130,
+	hp_min = 120,
 	collisionbox = {-1.2, 0, -1.2, 1.2, 4.5, 1.2},
 	visual = "mesh",
 	mesh = "giant_sandworm.x",
@@ -48,5 +48,5 @@ nssm:register_mob("nssm:giant_sandworm", {
 		punch_start = 150,
 		punch_end = 180,
 	},
-	
+
 })

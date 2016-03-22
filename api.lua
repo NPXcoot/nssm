@@ -2417,7 +2417,7 @@ minetest.register_entity(name, {
 		end
 
 		if self.health == 0 then
-			self.health = math.random (self.hp_min, self.hp_max)
+			self.health = math.random(self.hp_min, self.hp_max)
 		end
 
 		-- rnd: pathfinding init

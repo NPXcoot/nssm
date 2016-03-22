@@ -51,7 +51,7 @@ nssm:register_mob("nssm:sandworm", {
 		local pos = self.object:getpos()
 		local v = self.object:getvelocity()
 		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
-			for dy=0,2 do
+			for dy=0,4 do
 				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
 					local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
 					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}

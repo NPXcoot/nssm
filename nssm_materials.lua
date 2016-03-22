@@ -742,7 +742,7 @@ minetest.register_craftitem("nssm:".. name .."_egg", {
 	description = descr .. " Egg",
 	image = name .. "_egg.png",
 	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
+		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
 		pos1.y=pos1.y+1.5
 		core.after(0.1, function()
 			minetest.add_entity(pos1, "nssm:".. name)
@@ -806,7 +806,7 @@ minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
 	image = "mese_egg.png",
 	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, above)
+		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
 		pos1.y=pos1.y+1.5
 		minetest.add_particlespawner({
 			amount = 1000,
