@@ -250,7 +250,7 @@ nssm_register_weapon("kamehameha", {
 nssm_register_weapon("kienzan", {
     velocity = 25,
     on_step = function(self, dtime)
-        default_on_step(self, dtime, 3, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
+        default_on_step(self, dtime, 5, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
     end,
     hit_node = function(self, pos, node)
     end,
