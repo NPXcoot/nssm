@@ -1,27 +1,12 @@
+--Parameters used by some weapons
 local default_dir = {
     x = 1,
     y = 1,
     z = 1,
 }
 
-local function node_ok(pos, fallback)
-
-	fallback = fallback or "default:dirt"
-
-	local node = minetest.get_node_or_nil(pos)
-
-	if not node then
-		return minetest.registered_nodes[fallback]
-	end
-
-	if minetest.registered_nodes[node.name] then
-		return node
-	end
-
-	return minetest.registered_nodes[fallback]
-end
-
-function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
+--Function used to shoot:
+local function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     local dir = placer:get_look_dir();
     local playerpos = placer:getpos();
     local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "nssm:"..name)
@@ -30,20 +15,28 @@ function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     return itemstack
 end
 
-function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel, timer)
-    --local timer = 0
+--on_step function able to follow the mobs
+local function search_on_step(
+    self,
+    dtime,      --used to count time
+    max_time,   --after this amount of time the entity is removec
+    radius,     --radius in which look for entities to follow
+    vel,        --velocity of the projectile
+    timer)
+
+
     local pos = self.object:getpos()
-    local vel = self.object:getvelocity()
+
+    --Disappear after a certain time
     minetest.register_globalstep(function(dtime)
         timer = timer + dtime
-        --minetest.chat_send_all("Time: = "..timer.." Max_time: "..max_time)
         if timer>max_time then
             self.object:remove()
         end
     end)
 
-    --while going around it damages entities
-    local objects = minetest.env:get_objects_inside_radius(pos, 30)
+    --Look for an entity to follow
+    local objects = minetest.env:get_objects_inside_radius(pos, radius)
     local min_dist = 100
     local obj_min = nil
     local obj_p = nil
@@ -62,7 +55,7 @@ function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_tr
         end
     end
 
-
+    --Found an entity to follow:
     if obj_min ~= nil then
         local new_vel = {x=0, y=0, z=0}
 
@@ -82,60 +75,43 @@ function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_tr
             max_diff = math.abs(vec_min.z)
         end
 
-        vec_min.x = (vec_min.x/max_diff)*4
-        vec_min.y = (vec_min.y/max_diff)*4
-        vec_min.z = (vec_min.z/max_diff)*4
+        vec_min.x = (vec_min.x/max_diff)*vel
+        vec_min.y = (vec_min.y/max_diff)*vel
+        vec_min.z = (vec_min.z/max_diff)*vel
         obj_p = obj_min:getpos()
         if min_dist < 1 then
-            local node = node_ok(pos).name
+            local node = nssm:node_ok(pos).name
             self.hit_node(self, pos, node)
             self.object:remove()
             return
         else
             self.object:setvelocity(vec_min)
-            --[[
-            dir = 0
-            max_diff = 0
-
-            if (max_diff<math.abs(vec_min.x)) then
-                dir = 1
-                max_diff = math.abs(vec_min.x)
-            end
-            if (max_diff<math.abs(vec_min.y)) then
-                dir = 2
-                max_diff = math.abs(vec_min.y)
-            end
-            if (max_diff<math.abs(vec_min.z)) then
-                dir = 3
-                max_diff = math.abs(vec_min.z)
-            end
-
-            if dir==1 then
-                new_vel.x = 1
-            elseif dir==2 then
-                new_vel.y = 1
-            elseif dir==3 then
-                new_vel.z = 1
-            end
-            self.object:setvelocity(new_vel)
-            ]]--
         end
     end
     local n = minetest.env:get_node(pos).name
-    if n ~= "air" then
-        local node = node_ok(pos).name
+    if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
+        local node = nssm:node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
     end
 end
 
-function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel, timer)
-    --local timer = 0
+local function default_on_step(
+    self,
+    dtime,              --used to count time
+    max_time,           --after this amount of time the entity is removec
+    damage,             --damage dealt to the entity around
+    dir,                --vector to specify directions in which remove blocks
+    radius,             --radius of blocks removed aroind the projectile
+    not_transparent,    --name of a block or of a group: when the projectile hit one of these blocks the function hit_node is called
+    vel,                --velocity of the projectile
+    timer)
+
     local pos = self.object:getpos()
+
     minetest.register_globalstep(function(dtime)
         timer = timer + dtime
-        --minetest.chat_send_all("Time: = "..timer.." Max_time: "..max_time)
         if timer>max_time then
             self.object:remove()
         end
@@ -148,7 +124,7 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
         elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
             obj:set_hp(obj:get_hp()-damage)
             if (obj:get_hp() <= 0) then
-                if (not obj:is_player()) and obj:get_entity_name() ~= "nssm:"..name then
+                if (not obj:is_player()) and obj:get_entity_name() ~= self.object:get_luaentity().name then
                     obj:remove()
                 end
             end
@@ -156,23 +132,26 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
     end
 
     local n = minetest.env:get_node(pos).name
-    --minetest.get_item_group(n, not_transparent)==0
-    if n ~=not_transparent or (not_transparent==nil) then
-        --minetest.env:set_node(pos, {name="air"})
+    if n ==not_transparent or (not_transparent==nil) or minetest.get_item_group(n, not_transparent)==1 then
+        local node = nssm:node_ok(pos).name
+        self.hit_node(self, pos, node)
+        self.object:remove()
+        return
+    else
         local vec = self.object:getvelocity()
         local c=vel/10
         --calculate how many blocks around need to be removed
         local max = 0
         local posmax = 0
-        if max<vec.x then
+        if max<math.abs(vec.x) then
             max = math.abs(vec.x)
             posmax = 1
         end
-        if max<vec.y then
+        if max<math.abs(vec.y) then
             max = math.abs(vec.y)
             posmax = 2
         end
-        if max<vec.z then
+        if max<math.abs(vec.z) then
             max = math.abs(vec.z)
             posmax = 3
         end
@@ -180,6 +159,7 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
         local i = radius
         local j = radius
         local k = radius
+
         if dir.x == 0 then
             i = 0
         end
@@ -202,10 +182,6 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
             k = 0
         end
 
-        --local i = nssm:round(math.abs(math.abs(vec.x)-vel)*0.01*c*dir.x)*radius
-        --local j = nssm:round(math.abs(math.abs(vec.y)-vel)*0.01*c*dir.y)*radius
-        --local k = nssm:round(math.abs(math.abs(vec.z)-vel)*0.01*c*dir.z)*radius
-
         for dx = -i,i do
             for dy= -j,j do
                 for dz = -k,k do
@@ -214,16 +190,19 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
                 end
             end
         end
-    else
-        local node = node_ok(pos).name
-        self.hit_node(self, pos, node)
-        self.object:remove()
-        return
     end
 end
 
---function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
-function nssm_register_weapon(name, def)
+--[[
+Function to register new weapons: parameters:
+    - name of the weapon
+    - on_step function (written by you or taken from the standard one above)
+    - hit_node function
+    - description of the weapon
+    - the velocity of the projectile
+    - one material to be used in the receipt
+]]
+local function nssm_register_weapon(name, def)
     minetest.register_entity("nssm:"..name, {
         textures = {name..".png"},
         on_step = function(self, dtime)
@@ -251,57 +230,42 @@ function nssm_register_weapon(name, def)
             {'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'}
 		}
 	})
-    --[[
-
-    --this recipe doesn't work for a misterious reason
-    minetest.register_craft({
-        output = 'nssm:'..name.."_hand",
-        recipe = {
-            {
-        		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
-        		{'nssm:great_energy_globe', def.material, 'nssm:great_energy_globe'},
-        		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
-        	}
-        }
-    })
-    ]]
 
 end
 
---function default_on_step(self, pos, node, name, max_time, damage, dir, not_transparent, vel, dtime)
---function default_on_step(self, dtime, name, max_time, damage, dir, not_transparent, vel)
+--Registered weapons:
 nssm_register_weapon("kamehameha", {
+    velocity = 25,
     on_step = function(self, dtime)
-        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, 1, "default:stone", 25,0)
+        default_on_step(self, dtime, 10, 20, default_dir, 1, "stone", 25,0)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 8, 1)
+        nssm:explosion(pos, 4, 1)
     end,
     material = "default:stick",
     description = "Kamehameha from DragonBall",
-    velocity = 25,
-})
 
---[[nssm_register_weapon("kienzan", {
-    on_step = function(self, dtime)
-        default_on_step(self, dtime, "kienzan", 3, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
-    end,
-    hit_node = function(self, pos, node)
-    end,
-    material = "",
-    description = "Kienzan from DragonBall",
-    velocity = 25,
 })
-]]
 
 nssm_register_weapon("kienzan", {
+    velocity = 25,
     on_step = function(self, dtime)
-        search_on_step(self, dtime, "kienzan", 5, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
+        default_on_step(self, dtime, 3, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 8, 1)
     end,
     material = "",
     description = "Kienzan from DragonBall",
+})
+
+nssm_register_weapon("spirit_ball", {
     velocity = 25,
+    on_step = function(self, dtime)
+        search_on_step(self, dtime, 5, 30, 25, 0)
+    end,
+    hit_node = function(self, pos, node)
+        nssm:explosion(pos, 4, 0)
+    end,
+    material = "nssm:cursed_pumpkin_seed",
+    description = "Spirit Ball from DragonBall",
 })

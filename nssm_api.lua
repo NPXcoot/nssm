@@ -6,20 +6,15 @@ local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
 -- get node but use fallback for nil or unknown
-local function node_ok(pos, fallback)
-
+function nssm:node_ok(pos, fallback)
 	fallback = fallback or "default:dirt"
-
 	local node = minetest.get_node_or_nil(pos)
-
 	if not node then
 		return minetest.registered_nodes[fallback]
 	end
-
 	if minetest.registered_nodes[node.name] then
 		return node
 	end
-
 	return minetest.registered_nodes[fallback]
 end
 
@@ -106,7 +101,7 @@ function nssm:explosion(pos, exp_radius, fire)
         		and data[vi] ~= c_brick
         		and data[vi] ~= c_chest then
 
-                    local n = node_ok(p).name
+                    local n = nssm:node_ok(p).name
         			local on_blast = minetest.registered_nodes[n].on_blast
 
         			if on_blast then
