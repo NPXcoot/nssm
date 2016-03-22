@@ -62,31 +62,35 @@ function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_tr
         end
     end
 
-    local new_vel = {x=0, y=0, z=0}
 
-    local dir = 0
-    local max_diff = 0
-
-    if (max_diff<math.abs(vec_min.x)) then
-        dir = 1
-        max_diff = math.abs(vec_min.x)
-    end
-    if (max_diff<math.abs(vec_min.y)) then
-        dir = 2
-        max_diff = math.abs(vec_min.y)
-    end
-    if (max_diff<math.abs(vec_min.z)) then
-        dir = 3
-        max_diff = math.abs(vec_min.z)
-    end
-
-    vec_min.x = (vec_min.x/max_diff)*4
-    vec_min.y = (vec_min.y/max_diff)*4
-    vec_min.z = (vec_min.z/max_diff)*4
-    obj_p = obj_min:getpos()
     if obj_min ~= nil then
-        if min_dist == 0 then
-            self.object:setvelocity(new_vel)
+        local new_vel = {x=0, y=0, z=0}
+
+        local dir = 0
+        local max_diff = 0
+
+        if (max_diff<math.abs(vec_min.x)) then
+            dir = 1
+            max_diff = math.abs(vec_min.x)
+        end
+        if (max_diff<math.abs(vec_min.y)) then
+            dir = 2
+            max_diff = math.abs(vec_min.y)
+        end
+        if (max_diff<math.abs(vec_min.z)) then
+            dir = 3
+            max_diff = math.abs(vec_min.z)
+        end
+
+        vec_min.x = (vec_min.x/max_diff)*4
+        vec_min.y = (vec_min.y/max_diff)*4
+        vec_min.z = (vec_min.z/max_diff)*4
+        obj_p = obj_min:getpos()
+        if min_dist < 1 then
+            local node = node_ok(pos).name
+            self.hit_node(self, pos, node)
+            self.object:remove()
+            return
         else
             self.object:setvelocity(vec_min)
             --[[
@@ -117,6 +121,13 @@ function search_on_step(self, dtime, name, max_time, damage, dir, radius, not_tr
             ]]--
         end
     end
+    local n = minetest.env:get_node(pos).name
+    if n ~= "air" then
+        local node = node_ok(pos).name
+        self.hit_node(self, pos, node)
+        self.object:remove()
+        return
+    end
 end
 
 function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_transparent, vel, timer)
@@ -145,8 +156,8 @@ function default_on_step(self, dtime, name, max_time, damage, dir, radius, not_t
     end
 
     local n = minetest.env:get_node(pos).name
-
-    if n ~=not_transparent or not_transparent==nil then
+    --minetest.get_item_group(n, not_transparent)==0
+    if n ~=not_transparent or (not_transparent==nil) then
         --minetest.env:set_node(pos, {name="air"})
         local vec = self.object:getvelocity()
         local c=vel/10
@@ -261,7 +272,7 @@ end
 --function default_on_step(self, dtime, name, max_time, damage, dir, not_transparent, vel)
 nssm_register_weapon("kamehameha", {
     on_step = function(self, dtime)
-        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, 1, "group:cracky", 25,0)
+        default_on_step(self, dtime, "kamehameha", 10, 20, default_dir, 1, "default:stone", 25,0)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 8, 1)
@@ -288,6 +299,7 @@ nssm_register_weapon("kienzan", {
         search_on_step(self, dtime, "kienzan", 5, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
     end,
     hit_node = function(self, pos, node)
+        nssm:explosion(pos, 8, 1)
     end,
     material = "",
     description = "Kienzan from DragonBall",
