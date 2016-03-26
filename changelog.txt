@@ -1,3 +1,10 @@
+v2.3 (22-03-16):
+ - new mobs (Desert Boss: giant sandworm (removed the dahaka), changed sandworm model and added sand_bloco and xgaloctopus)
+ - new special weapons (added the spirit_ball which look for enemies around it and follow them and updated kamehameha and kienzan)
+ - api updated to 19-03 version (thanks to Tenplus1 for his hard work on it)
+ - fixed some bugs
+ - tidied up the code (nssm_materials, nssm_weapons, nssm_api...)
+
 v2.2.1 (22-02-16):
  - updated the api.lua following the updates of Tenplus1's mobs (version of 17th February 2016);
  - fixed lava_titan movements;
