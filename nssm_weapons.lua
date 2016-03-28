@@ -15,6 +15,104 @@ local function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
     return itemstack
 end
 
+local function hit(pos, self)
+    local node = nssm:node_ok(pos).name
+    self.hit_node(self, pos, node)
+    self.object:remove()
+    return
+end
+
+local function activate_balls(pos)
+
+    local radius = 50
+
+    local objects = minetest.env:get_objects_inside_radius(pos, radius)
+    for _,obj in ipairs(objects) do
+        if (obj:get_luaentity() and obj:get_luaentity().name == "nssm:spirit_ball") then
+            obj:get_luaentity().move = 1
+        end
+    end
+end
+
+local function search_on_step2(
+    self,
+    dtime,      --used to count time
+    max_time,   --after this amount of time the entity is removec
+    radius,     --radius in which look for entities to follow
+    vel,        --velocity of the projectile
+    timer)
+
+    local pos = self.object:getpos()
+
+    --Disappear after a certain time
+    minetest.register_globalstep(function(dtime)
+        timer = timer + dtime
+        if timer>max_time then
+            self.object:remove()
+        end
+    end)
+
+    --Look for an entity to follow
+    local objects = minetest.env:get_objects_inside_radius(pos, radius)
+    local min_dist = 100
+    local obj_min = nil
+    local obj_p = nil
+    local vec_min = nil
+    for _,obj in ipairs(objects) do
+        if (obj:is_player()) then
+        elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= self.object:get_luaentity().name) then
+            obj_p = obj:getpos()
+            local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+            local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+            if (dist<min_dist) then
+                min_dist = dist
+                obj_min = obj
+                vec_min = vec
+            end
+        end
+    end
+
+    --Found an entity to follow:
+    if obj_min ~= nil then
+        local new_vel = {x=0, y=0, z=0}
+
+        local dir = 0
+        local max_diff = 0
+
+        if (max_diff<math.abs(vec_min.x)) then
+            dir = 1
+            max_diff = math.abs(vec_min.x)
+        end
+        if (max_diff<math.abs(vec_min.y)) then
+            dir = 2
+            max_diff = math.abs(vec_min.y)
+        end
+        if (max_diff<math.abs(vec_min.z)) then
+            dir = 3
+            max_diff = math.abs(vec_min.z)
+        end
+
+        vec_min.x = (vec_min.x/max_diff)*vel
+        vec_min.y = (vec_min.y/max_diff)*vel
+        vec_min.z = (vec_min.z/max_diff)*vel
+        obj_p = obj_min:getpos()
+        if min_dist <=8 and self.move==0 then
+            self.object:setvelocity({x=0, y=0, z=0})
+
+            --hit(pos,self)
+        elseif min_dist<=1 and self.move==1 then
+            hit(pos,self)
+        else
+            self.object:setvelocity(vec_min)
+        end
+    end
+
+    local n = minetest.env:get_node(pos).name
+    if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
+        hit(pos,self)
+    end
+end
+
 --on_step function able to follow the mobs
 local function search_on_step(
     self,
@@ -211,6 +309,7 @@ local function nssm_register_weapon(name, def)
         hit_node = function(self, pos, node)
             def.hit_node(self, pos, node)
         end,
+        move = def.move
     })
 
     minetest.register_tool("nssm:"..name.."_hand", {
@@ -220,6 +319,9 @@ local function nssm_register_weapon(name, def)
             weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
             return itemstack
         end,
+        on_drop = function(itemstack, user, pointed_thing)
+			def.on_drop(itemstack, user, pointed_thing)
+		end,
     })
 
     minetest.register_craft({
@@ -260,11 +362,17 @@ nssm_register_weapon("kienzan", {
 
 nssm_register_weapon("spirit_ball", {
     velocity = 25,
+    move = 0,
     on_step = function(self, dtime)
-        search_on_step(self, dtime, 5, 30, 25, 0)
+        search_on_step2(self, dtime, 25, 30, 25, 0)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 4, 0)
+    end,
+
+    on_drop = function(itemstack, user, pointed_thing)
+        local pos = user:getpos()
+        activate_balls(pos)
     end,
     material = "nssm:cursed_pumpkin_seed",
     description = "Spirit Ball from DragonBall",
