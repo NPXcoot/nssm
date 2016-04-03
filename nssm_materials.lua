@@ -607,7 +607,7 @@ minetest.register_craft({
 	output = 'nssm:sky_feather',
 	recipe = {
 		{'', '', ''},
-		{'nssm:sun_feather', '', 'nssm:moon_feather'},
+		{'nssm:sun_feather', '', 'nssm:night_feather'},
 		{'', '', ''},
 	}
 })
