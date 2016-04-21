@@ -81,6 +81,7 @@ nssm:register_mob("nssm:lava_titan", {
 	do_custom = function (self)
 
 		--Digging ability:
+		--[[
 		local v = self.object:getvelocity()
 		local pos = self.object:getpos()
 		local c=3
@@ -96,13 +97,16 @@ nssm:register_mob("nssm:lava_titan", {
 					end
 				end
 			end
+		]]--
+		nssm:digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})
 
 		--Melting ability (puts lava where he passes)
-		pos.y=pos.y-1
+		--[[pos.y=pos.y-1
 		local n = minetest.env:get_node(pos).name
 		if n~="default:lava_source" then
 			minetest.env:set_node(pos, {name="default:lava_source"})
 		end
+		]]
 
 	end,
 })

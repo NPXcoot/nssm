@@ -45,7 +45,13 @@ end
 
 
 function nssm:round(n)
-    return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+	if (n>0) then
+		return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+	else
+		n=-n
+		local t = n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+		return -t
+	end
 end
 
 function nssm:explosion_particles(pos, exp_radius)
@@ -178,5 +184,113 @@ function nssm:explosion(pos, exp_radius, fire)
             end
         end
     end
+end
+
+--			SPECIAL ABILITIES OF SOME MOBS
+function nssm:digging_ability(
+	self,		--the entity of the mob
+	group,		--group of the blocks the mob can dig: nil=everything
+	max_vel,	--max velocity of the mob
+	dim 		--vector representing the dimensions of the mob
+	)
+
+	local v = self.object:getvelocity()
+	local pos = self.object:getpos()
+
+	if minetest.is_protected(pos, "") then
+		return
+	end
+
+	local h = dim.y
+
+	local max = 0
+	--local posmax = 0 --			1 = x, -1=-x, 2 = z, -2 = -z
+	local yaw = (self.object:getyaw() + self.rotate) or 0
+	local x = math.sin(yaw)*-1
+	local z = math.cos(yaw)
+
+
+	local i = 1
+	local i1 = -1
+	local k = 1
+	local k1 = -1
+
+	local multiplier = 2
+
+	if x>0 then
+		--minetest.chat_send_all("X positivo")
+		i = nssm:round(x*max_vel)*multiplier
+	else
+		--minetest.chat_send_all("X negativo")
+		i1 = nssm:round(x*max_vel)*multiplier
+	end
+
+	if z>0 then
+		--minetest.chat_send_all("Z positivo")
+		k = nssm:round(z*max_vel)*multiplier
+	else
+		--minetest.chat_send_all("Z negativo")
+		k1 = nssm:round(z*max_vel)*multiplier
+	end
+
+
+	--[[
+	if math.abs(v.x)>math.abs(v.z) then
+		max = math.abs(v.x)
+	 	if v.x>0 then
+			i = max*multiplier
+		else
+			i1 = max*multiplier
+		end
+	else
+		max = math.abs(v.z)
+		if v.z>0 then
+			k = max*multiplier
+		else
+			k1 = max*multiplier
+		end
+	end
+	]]--
+
+
+
+	for dx = i1, i do
+		for dy = 0, h do
+			for dz = k1, k do
+				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				if minetest.is_protected(p, singleplayer) then
+					minetest.chat_send_all("Protetto")
+				end
+
+				local n = minetest.env:get_node(p).name
+				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				if group == nil then
+					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") then
+					else
+						minetest.env:set_node(p, {name="air"})
+					end
+				else
+					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and not (minetest.is_protected(p, "")) then
+						minetest.env:set_node(p, {name="air"})
+					end
+				end
+			end
+		end
+	end
+
+--[[
+	for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
+		for dy=0,h do
+			for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
+				local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+				local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				local n = minetest.env:get_node(p).name
+				if (n~="default:water_source" and n~="default:water_flowing") then
+						minetest.env:set_node(t, {name="air"})
+				end
+			end
+		end
+	end
+]]
 
 end
