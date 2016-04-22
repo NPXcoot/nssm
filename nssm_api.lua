@@ -258,7 +258,7 @@ function nssm:digging_ability(
 		for dy = 0, h do
 			for dz = k1, k do
 				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				if minetest.is_protected(p, singleplayer) then
+				if minetest.is_protected(p, "") then
 					minetest.chat_send_all("Protetto")
 				end
 
