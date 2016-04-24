@@ -209,7 +209,6 @@ function nssm:digging_ability(
 	local x = math.sin(yaw)*-1
 	local z = math.cos(yaw)
 
-
 	local i = 1
 	local i1 = -1
 	local k = 1
@@ -218,49 +217,21 @@ function nssm:digging_ability(
 	local multiplier = 2
 
 	if x>0 then
-		--minetest.chat_send_all("X positivo")
 		i = nssm:round(x*max_vel)*multiplier
 	else
-		--minetest.chat_send_all("X negativo")
 		i1 = nssm:round(x*max_vel)*multiplier
 	end
 
 	if z>0 then
-		--minetest.chat_send_all("Z positivo")
 		k = nssm:round(z*max_vel)*multiplier
 	else
-		--minetest.chat_send_all("Z negativo")
 		k1 = nssm:round(z*max_vel)*multiplier
 	end
-
-
-	--[[
-	if math.abs(v.x)>math.abs(v.z) then
-		max = math.abs(v.x)
-	 	if v.x>0 then
-			i = max*multiplier
-		else
-			i1 = max*multiplier
-		end
-	else
-		max = math.abs(v.z)
-		if v.z>0 then
-			k = max*multiplier
-		else
-			k1 = max*multiplier
-		end
-	end
-	]]--
-
-
 
 	for dx = i1, i do
 		for dy = 0, h do
 			for dz = k1, k do
 				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				if minetest.is_protected(p, "") then
-					minetest.chat_send_all("Protetto")
-				end
 
 				local n = minetest.env:get_node(p).name
 				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
@@ -277,20 +248,65 @@ function nssm:digging_ability(
 			end
 		end
 	end
+end
 
---[[
-	for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
-		for dy=0,h do
-			for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
-				local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-				local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-				local n = minetest.env:get_node(p).name
-				if (n~="default:water_source" and n~="default:water_flowing") then
-						minetest.env:set_node(t, {name="air"})
-				end
-			end
+
+function nssm:putting_ability(		--puts under the mob the block defined as 'p_block'
+	self,		--the entity of the mob
+	p_block, 	--definition of the block to use
+	max_vel	--max velocity of the mob
+	)
+
+	local v = self.object:getvelocity()
+
+	local dx = 0
+	local dz = 0
+
+	if (math.abs(v.x)>math.abs(v.z)) then
+		if (v.x)>0 then
+			dx = 1
+		else
+			dx = -1
+		end
+	else
+		if (v.z)>0 then
+			dz = 1
+		else
+			dz = -1
 		end
 	end
-]]
 
+	local pos = self.object:getpos()
+	local pos1
+	pos.y=pos.y-1
+	pos1 = {x = pos.x+dx, y = pos.y, z = pos.z+dz}
+	local n = minetest.env:get_node(pos).name
+	local n1 = minetest.env:get_node(pos1).name
+	if n~=p_block and not minetest.is_protected(pos, "") then
+		minetest.env:set_node(pos, {name=p_block})
+	end
+	if n1~=p_block and not minetest.is_protected(pos1, "") then
+		minetest.env:set_node(pos1, {name=p_block})
+	end
+end
+
+
+function nssm:webber_ability(		--puts randomly around the block defined as w_block
+	self,		--the entity of the mob
+	w_block, 	--definition of the block to use
+	radius		--max distance the block can be put
+	)
+
+	local pos = self.object:getpos()
+	if (math.random(1,5)==1) then
+		local dx=math.random(1,radius)
+		local dz=math.random(1,radius)
+		local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
+		local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+		local n = minetest.env:get_node(p).name
+		local k = minetest.env:get_node(t).name
+		if ((n~="air")and(k=="air")) and not minetest.is_protected(t, "") then
+			minetest.env:set_node(t, {name=w_block})
+		end
+	end
 end
