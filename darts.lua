@@ -191,7 +191,10 @@ nssm:register_arrow("nssm:phoenix_arrow", {
 			dy = math.random(-1,1)
 			dz = math.random(-1,1)
 			local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-			minetest.env:set_node(p, {name="fire:basic_flame"})
+			local n = minetest.env:get_node(p).name
+			if n=="air" then
+				minetest.env:set_node(p, {name="fire:basic_flame"})
+			end
 		end
 
 	end,
