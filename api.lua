@@ -2747,7 +2747,7 @@ function nssm:register_arrow(name, def)
 		timer = 0,
 		switch = 0,
 
-		on_step = def.on_step or function(self, dtime)
+		on_step = def.on_step or function(self, dtime)		--nssm_modification
 
 			self.timer = self.timer + 1
 
