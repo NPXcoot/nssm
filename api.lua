@@ -2747,13 +2747,7 @@ function nssm:register_arrow(name, def)
 		timer = 0,
 		switch = 0,
 
-		--NSSM parameters:
-		remover = def.remover or false,
-		phoenix_fire = def.phoenix_fire or false,
-
-		--end of NSSM parameters
-
-		on_step = function(self, dtime)
+		on_step = def.on_step or function(self, dtime)
 
 			self.timer = self.timer + 1
 
@@ -2767,48 +2761,6 @@ function nssm:register_arrow(name, def)
 
 				return
 			end
-
-			--NSSM additions:
-			if self.phoenix_fire then
-				if self.timer > 50 then
-				self.object:remove()
-				end
-			end
-
-			if self.remover then
-				if self.timer > 35 then
-					self.object:remove()
-				end
-				for dx=-1,1 do
-					for dy=-1,1 do
-						for dz=-1,1 do
-							local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-							local n = minetest.env:get_node(p).name
-							if n ~= "air" then
-									minetest.env:set_node(p, {name="air"})
-							end
-						end
-					end
-				end
-			end
-
-
-			if self.phoenix_fire then
-				for dx=-1,1 do
-					for dy=-1,1 do
-						for dz=-1,1 do
-							local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-							local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-							local n = minetest.env:get_node(p).name
-								if minetest.registered_nodes[n].groups.flammable or (n=="air" and math.random(1, 500) <= 5) then
-									minetest.env:set_node(t, {name="fire:basic_flame"})
-								end
-						end
-					end
-				end
-			end
-
-			--end of NSSM additions
 
 			if self.hit_node then
 
