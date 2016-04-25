@@ -31,7 +31,6 @@ nssm:register_mob("nssm:pumpking", {
 	water_damage = 2,
 	lava_damage = 5,
 	light_damage = 0,
-	pump_putter = true,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -44,5 +43,26 @@ nssm:register_mob("nssm:pumpking", {
 	},
 	on_die=function(self,pos)
 		nssm:explosion(pos, 3, 0, 1, self.sounds.explode)
+	end,
+	custom_attack = function(self)
+		if self.timer >3 then
+			self.timer = 0
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+			p.y = p.y + 1.5
+			s.y = s.y + 1.5
+			if minetest.line_of_sight(p, s) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+					object = self.object,
+					max_hear_distance = self.sounds.distance
+					})
+				end
+				local pos1 = {x=s.x+math.random(-1,1), y=s.y-1.5, z=s.z+math.random(-1,1)}
+				minetest.set_node(pos1, {name="nssm:pumpbomb"})
+				minetest.get_node_timer(pos1):start(2)
+			end
+		end
 	end
 })
