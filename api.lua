@@ -1005,7 +1005,6 @@ minetest.register_entity(name, {
 	metamorphosis = def.metamorphosis or false,
 	metatimer = 30,
 	dogshoot_stop = def.dogshoot_stop or false,
-	duckking_father = def.duckking_father or false,
 	hydra = def.hydra or false,
 	mele_number = def.mele_number or 1,
 	true_dist_attack = def.true_dist_attack or false,
