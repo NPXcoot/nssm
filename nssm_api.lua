@@ -310,3 +310,57 @@ function nssm:webber_ability(		--puts randomly around the block defined as w_blo
 		end
 	end
 end
+
+function nssm:midas_ability(		--ability to transform every blocks it touches in the m_block block
+	self,		--the entity of the mob
+	m_block,
+	max_vel,	--max velocity of the mob
+	mult, 		--multiplier of the dimensions of the area around that need the transformation
+	height 		--height of the mob
+	)
+
+	local v = self.object:getvelocity()
+	local pos = self.object:getpos()
+
+	if minetest.is_protected(pos, "") then
+		return
+	end
+
+	local max = 0
+	local yaw = (self.object:getyaw() + self.rotate) or 0
+	local x = math.sin(yaw)*-1
+	local z = math.cos(yaw)
+
+	local i = 1
+	local i1 = -1
+	local k = 1
+	local k1 = -1
+
+	local multiplier = mult
+
+	if x>0 then
+		i = nssm:round(x*max_vel)*multiplier
+	else
+		i1 = nssm:round(x*max_vel)*multiplier
+	end
+
+	if z>0 then
+		k = nssm:round(z*max_vel)*multiplier
+	else
+		k1 = nssm:round(z*max_vel)*multiplier
+	end
+
+	for dx = i1, i do
+		for dy = -1, height do
+			for dz = k1, k do
+				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				local n = minetest.env:get_node(p).name
+
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" then
+				else
+					minetest.env:set_node(p, {name=m_block})
+				end
+			end
+		end
+	end
+end
