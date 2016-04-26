@@ -280,6 +280,7 @@ minetest.register_node("nssm:pumpbomb", {
 	drop = "",
 	on_timer = function(pos, elapsed)
 		nssm:explosion(pos, 3, 1)
+		minetest.env:set_node(pos, {name="air"})
 	end,
 })
 
