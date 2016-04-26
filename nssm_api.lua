@@ -93,22 +93,17 @@ function nssm:explosion(pos, exp_radius, fire)
     --Damages entities around (not the player)
     local objects = minetest.env:get_objects_inside_radius(pos, exp_radius)
     for _,obj in ipairs(objects) do
-        if (obj:is_player()) then
-        elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-            local obj_p = obj:getpos()
-            local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-            local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-			local damage = -exp_radius*dist+exp_radius^2
-			obj:set_hp(obj:get_hp()-damage)
-            if (obj:get_hp() <= 0) then
-                if (not obj:is_player()) and obj:get_entity_name() ~= "nssm:kamehameha" then
-                    obj:remove()
-                end
+        local obj_p = obj:getpos()
+        local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+        local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+		local damage = (-exp_radius*dist+exp_radius^2)*2
+		obj:set_hp(obj:get_hp()-damage)
+        if (obj:get_hp() <= 0) then
+            if (not obj:is_player()) then
+                obj:remove()
             end
-			--minetest.chat_send_all("HP: "..obj:get_hp())
         end
     end
-
 
     --damages blocks around and if necessary put some fire
     pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
