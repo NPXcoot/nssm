@@ -23,12 +23,10 @@ local function hit(pos, self)
 end
 
 local function activate_balls(pos)
-
     local radius = 50
-
     local objects = minetest.env:get_objects_inside_radius(pos, radius)
     for _,obj in ipairs(objects) do
-        if (obj:get_luaentity() and obj:get_luaentity().name == "nssm:spirit_ball") then
+        if (obj:get_luaentity() and obj:get_luaentity().name == "nssm:hellzone_grenade") then
             obj:get_luaentity().move = 1
         end
     end
@@ -208,18 +206,18 @@ local function default_on_step(
 
     local pos = self.object:getpos()
 
-    minetest.register_globalstep(function(dtime)
-        timer = timer + dtime
-        if timer>max_time then
-            self.object:remove()
-        end
-    end)
+    self.timer = self.timer + dtime
+    if self.timer > max_time then
+        local node = nssm:node_ok(pos).name
+        self.hit_node(self, pos, node)
+        self.object:remove()
+        return
+    end
 
     --while going around it damages entities
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
-    for _,obj in ipairs(objects) do
-        if (obj:is_player()) then
-        elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
+    if self.timer > 1 then
+        for _,obj in ipairs(objects) do
             obj:set_hp(obj:get_hp()-damage)
             if (obj:get_hp() <= 0) then
                 if (not obj:is_player()) and obj:get_entity_name() ~= self.object:get_luaentity().name then
@@ -230,7 +228,7 @@ local function default_on_step(
     end
 
     local n = minetest.env:get_node(pos).name
-    if n ==not_transparent or minetest.get_item_group(n, not_transparent)==1 then
+    if n==not_transparent or minetest.get_item_group(n, not_transparent)==1 then
         local node = nssm:node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
@@ -284,7 +282,9 @@ local function default_on_step(
             for dy= -j,j do
                 for dz = -k,k do
                     local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-                    minetest.env:remove_node(p)
+                    if not minetest.is_protected(p, "") or not minetest.get_item_group(n, "unbreakable") == 1 then
+                        minetest.env:remove_node(p)
+                    end
                 end
             end
         end
@@ -309,7 +309,8 @@ local function nssm_register_weapon(name, def)
         hit_node = function(self, pos, node)
             def.hit_node(self, pos, node)
         end,
-        move = def.move
+        move = def.move,
+        timer = 0
     })
 
     minetest.register_tool("nssm:"..name.."_hand", {
@@ -319,8 +320,7 @@ local function nssm_register_weapon(name, def)
             weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
             return itemstack
         end,
-        on_drop = function(itemstack, user, pointed_thing)
-			def.on_drop(itemstack, user, pointed_thing)
+        on_drop = def.on_drop or function(itemstack, user, pointed_thing)
 		end,
     })
 
@@ -339,7 +339,7 @@ end
 nssm_register_weapon("kamehameha", {
     velocity = 25,
     on_step = function(self, dtime)
-        default_on_step(self, dtime, 10, 20, default_dir, 1, "stone", 25,0)
+        default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25,0)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 6, 1)
@@ -364,6 +364,20 @@ nssm_register_weapon("spirit_ball", {
     velocity = 25,
     move = 0,
     on_step = function(self, dtime)
+        search_on_step(self, dtime, 25, 30, 25, 0)
+    end,
+    hit_node = function(self, pos, node)
+        nssm:explosion(pos, 4, 0)
+    end,
+
+    material = "nssm:cursed_pumpkin_seed",
+    description = "Spirit Ball from DragonBall",
+})
+
+nssm_register_weapon("hellzone_grenade", {
+    velocity = 25,
+    move = 0,
+    on_step = function(self, dtime)
         search_on_step2(self, dtime, 25, 30, 25, 0)
     end,
     hit_node = function(self, pos, node)
@@ -374,6 +388,6 @@ nssm_register_weapon("spirit_ball", {
         local pos = user:getpos()
         activate_balls(pos)
     end,
-    material = "nssm:cursed_pumpkin_seed",
-    description = "Spirit Ball from DragonBall",
+    material = "nssm:snake_scute",
+    description = "Hellzone grenade (Press q to activate)",
 })
