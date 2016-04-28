@@ -481,7 +481,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:mantis_claw', ''},
 		{'', 'nssm:mantis_claw', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -490,7 +490,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:masticone_fang', 'nssm:masticone_fang'},
 		{'', 'nssm:masticone_fang', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -507,8 +507,8 @@ minetest.register_craft({
 	output = 'nssm:crab_light_mace',
 	recipe = {
 		{'', 'nssm:crab_chela', ''},
-		{'', 'default:stick', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -517,7 +517,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:crab_chela', ''},
 		{'nssm:crab_chela', 'nssm:crab_chela', 'nssm:crab_chela'},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -570,7 +570,7 @@ minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
 	recipe = {
 		{'', 'nssm:lava_titan_eye', ''},
-		{'', 'nssm:kraken_tentacle', ''},
+		{'', 'nssm:tentacle_curly', ''},
 		{'', '', ''},
 	}
 })
