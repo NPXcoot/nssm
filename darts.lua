@@ -146,17 +146,20 @@ function nssm:explosion_web(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
+	pos.y = nssm:round(pos.y)
     for i=pos.x-1, pos.x+1, 1 do
-		for j=pos.y-1, pos.y+1, 1 do
+		for j=pos.y-3, pos.y, 1 do
 			for k=pos.z-1, pos.z+1, 1 do
-				local current = minetest.get_node({x=i,y=j,z=k})
-				local ontop  = minetest.get_node({x=i,y=j+1,z=k})
-				if (current.name ~= "air") and
-					(current.name ~= "nssm:web") and
-					(ontop.name == "air") and not
-					minetest.is_protected(current,"") and not
-					minetest.is_protected(ontop,"") then
-						minetest.set_node(ontop, {name="nssm:web"})
+				local p = {x=i,y=j,z=k}
+				local k = {x=i,y=j+1,z=k}
+				local current = minetest.env:get_node(p).name
+				local ontop  = minetest.env:get_node(k).name
+				if 	(current ~= "air") and
+					(current ~= "nssm:web") and
+					(ontop == "air") and not
+					minetest.is_protected(p,"") and not
+					minetest.is_protected(k,"") then
+						minetest.set_node(k, {name="nssm:web"})
 				end
 			end
 		end
@@ -181,7 +184,7 @@ nssm:register_arrow("nssm:phoenix_arrow", {
 
 		local n = minetest.env:get_node(pos).name
 
-	    if self.timer > 100 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
+	    if self.timer > 10 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
 	        self.object:remove()
 	    end
 
@@ -252,7 +255,7 @@ nssm:register_arrow("nssm:roar_of_the_dragon", {
 
 		local n = minetest.env:get_node(pos).name
 
-	    if self.timer > 75 or minetest.is_protected(pos, "") then
+	    if self.timer > 40 or minetest.is_protected(pos, "") then
 	        self.object:remove()
 	    end
 

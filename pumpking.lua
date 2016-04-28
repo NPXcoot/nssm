@@ -37,8 +37,7 @@ nssm:register_mob("nssm:pumpking", {
 		stand_start = 165,		stand_end = 210,
 		walk_start = 220,		walk_end = 260,
 		run_start = 220,		run_end = 260,
-		punch_start = 1,		punch_end = 30,
-		punch1_start = 270,	punch1_end = 295,
+		punch_start = 300,		punch_end = 330,
 		speed_normal = 15,		speed_run = 15,
 	},
 	on_die=function(self,pos)

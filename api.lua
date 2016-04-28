@@ -987,7 +987,7 @@ minetest.register_entity(name, {
 	child = false,
 	gotten = false,
 	health = 0,
-	reach = def.reach or 3,
+	reach = def.reach or 2,
 	htimer = 0,
 	child_texture = def.child_texture,
 	docile_by_day = def.docile_by_day or false,
@@ -1003,7 +1003,7 @@ minetest.register_entity(name, {
 
 	on_dist_attack = def.on_dist_attack,
 	metamorphosis = def.metamorphosis or false,
-	metatimer = 30,
+	metatimer = 0,
 	dogshoot_stop = def.dogshoot_stop or false,
 	hydra = def.hydra or false,
 	mele_number = def.mele_number or 1,
@@ -1021,6 +1021,10 @@ minetest.register_entity(name, {
 
 		local pos = self.object:getpos()
 		local yaw = self.object:getyaw() or 0
+
+		if self.metatimer == 0 then
+			self.metatimer = os.time()
+		end
 
 		-- when lifetimer expires remove mob (except npc and tamed)
 		if self.type ~= "npc"
@@ -1613,7 +1617,7 @@ minetest.register_entity(name, {
 				set_velocity(self, 0)
 
 				--NSSM additions:
-				set_animation("punch")
+				set_animation(self, "punch")
 				--end of NSSM additions
 
 				self.timer = self.timer + dtime
@@ -1923,7 +1927,8 @@ minetest.register_entity(name, {
 			and math.random(1, 100) <= 60 then
 
 				self.timer = 0
-				set_animation("dattack")					--NSSM modification
+				minetest.chat_send_all("Sparo!")
+				set_animation(self, "dattack")					--NSSM modification
 
 				-- play shoot attack sound
 				if self.sounds.shoot_attack then
@@ -1991,8 +1996,7 @@ minetest.register_entity(name, {
 
 		--larva and mantis
 		if self.metamorphosis == true then
-			self.metatimer = self.metatimer - dtime
-			if self.metatimer <= 0 then
+			if os.time() - self.metatimer >20 then
 				minetest.log("action",
 					"metatimer expired, metamorphosis! ")
 				local pos=self.object:getpos()

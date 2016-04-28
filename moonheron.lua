@@ -34,9 +34,8 @@ nssm:register_mob("nssm:moonheron", {
 	drawtype = "front",
 	water_damage = 5,
 	lava_damage = 5,
-	light_damage = 5,
 	on_rightclick = nil,
-  fly = true,
+  	fly = true,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 25,

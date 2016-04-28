@@ -37,18 +37,16 @@ local function search_on_step2(
     dtime,      --used to count time
     max_time,   --after this amount of time the entity is removec
     radius,     --radius in which look for entities to follow
-    vel,        --velocity of the projectile
-    timer)
+    vel)        --velocity of the projectile
 
     local pos = self.object:getpos()
 
     --Disappear after a certain time
-    minetest.register_globalstep(function(dtime)
-        timer = timer + dtime
-        if timer>max_time then
-            self.object:remove()
-        end
-    end)
+    self.timer = self.timer + dtime
+    if self.timer > max_time then
+        self.object:remove()
+        return
+    end
 
     --Look for an entity to follow
     local objects = minetest.env:get_objects_inside_radius(pos, radius)
@@ -117,19 +115,17 @@ local function search_on_step(
     dtime,      --used to count time
     max_time,   --after this amount of time the entity is removec
     radius,     --radius in which look for entities to follow
-    vel,        --velocity of the projectile
-    timer)
+    vel)        --velocity of the projectile
 
 
     local pos = self.object:getpos()
 
     --Disappear after a certain time
-    minetest.register_globalstep(function(dtime)
-        timer = timer + dtime
-        if timer>max_time then
-            self.object:remove()
-        end
-    end)
+    self.timer = self.timer + dtime
+    if self.timer > max_time then
+        self.object:remove()
+        return
+    end
 
     --Look for an entity to follow
     local objects = minetest.env:get_objects_inside_radius(pos, radius)
@@ -201,10 +197,12 @@ local function default_on_step(
     dir,                --vector to specify directions in which remove blocks
     radius,             --radius of blocks removed aroind the projectile
     not_transparent,    --name of a block or of a group: when the projectile hit one of these blocks the function hit_node is called
-    vel,                --velocity of the projectile
-    timer)
+    vel)                --velocity of the projectile
+
 
     local pos = self.object:getpos()
+    local t = os.time()
+    minetest.chat_send_all("Tempo: "..t)
 
     self.timer = self.timer + dtime
     if self.timer > max_time then
@@ -216,7 +214,7 @@ local function default_on_step(
 
     --while going around it damages entities
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
-    if self.timer > 1 then
+    if self.timer > 0.3 then
         for _,obj in ipairs(objects) do
             obj:set_hp(obj:get_hp()-damage)
             if (obj:get_hp() <= 0) then
@@ -339,7 +337,7 @@ end
 nssm_register_weapon("kamehameha", {
     velocity = 25,
     on_step = function(self, dtime)
-        default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25,0)
+        default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 6, 1)
@@ -352,7 +350,7 @@ nssm_register_weapon("kamehameha", {
 nssm_register_weapon("kienzan", {
     velocity = 25,
     on_step = function(self, dtime)
-        default_on_step(self, dtime, 5, 20, {x=1, y=0, z=1}, 1, nil, 25,0)
+        default_on_step(self, dtime, 5, 20, {x=1, y=0, z=1}, 1, nil, 25)
     end,
     hit_node = function(self, pos, node)
     end,
@@ -364,7 +362,7 @@ nssm_register_weapon("spirit_ball", {
     velocity = 25,
     move = 0,
     on_step = function(self, dtime)
-        search_on_step(self, dtime, 25, 30, 25, 0)
+        search_on_step(self, dtime, 5, 30, 25)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 4, 0)
@@ -378,7 +376,7 @@ nssm_register_weapon("hellzone_grenade", {
     velocity = 25,
     move = 0,
     on_step = function(self, dtime)
-        search_on_step2(self, dtime, 25, 30, 25, 0)
+        search_on_step2(self, dtime, 30, 30, 25)
     end,
     hit_node = function(self, pos, node)
         nssm:explosion(pos, 4, 0)

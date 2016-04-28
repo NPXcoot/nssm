@@ -51,6 +51,7 @@ nssm:register_mob("nssm:duckking", {
 	arrow = "nssm:duck_father";
 		reach = 3,
 		shoot_interval=3,
+		shoot_offset =-1,
 	animation = {
 		speed_normal = 15,
 		speed_run = 25,
