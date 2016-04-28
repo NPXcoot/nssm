@@ -36,7 +36,7 @@ nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
 --nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
 --nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
 nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
-nssm_register_noneatcraftitems ('moon_feather','Moon Feather')
+nssm_register_noneatcraftitems ('night_feather','Night Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
 nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
 nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
@@ -607,7 +607,7 @@ minetest.register_craft({
 	output = 'nssm:sky_feather',
 	recipe = {
 		{'', '', ''},
-		{'nssm:sun_feather', '', 'nssm:moon_feather'},
+		{'nssm:sun_feather', '', 'nssm:night_feather'},
 		{'', '', ''},
 	}
 })
@@ -625,7 +625,7 @@ minetest.register_craft({
 	output = 'nssm:night_sword',
 	recipe = {
 		{'', 'default:diamond', ''},
-		{'', 'nssm:moon_feather', ''},
+		{'', 'nssm:night_feather', ''},
 		{'', 'group:stick', ''},
 	}
 })
