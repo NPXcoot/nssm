@@ -160,7 +160,7 @@ nssm:register_mob("nssm:night_master_1", {
 		chance = 1,
 		min = 1,
 		max = 1,},
-		{name = "nssm:moon_feather",
+		{name = "nssm:night_feather",
 		chance = 1,
 		min = 1,
 		max = 1,},
