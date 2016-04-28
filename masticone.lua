@@ -37,6 +37,7 @@ nssm:register_mob("nssm:masticone", {
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 5,
+	floats=0,
 	hydra = true,
 	light_damage = 0,
 	on_rightclick = nil,
@@ -44,15 +45,15 @@ nssm:register_mob("nssm:masticone", {
 	reach =1.5,
 	animation = {
 		speed_normal = 20,
-		speed_run = 30,
+		speed_run = 25,
 		stand_start = 80,
 		stand_end = 140,
 		walk_start = 20,
 		walk_end = 40,
 		run_start = 20,
 		run_end = 40,
-		punch_start = 50,
-		punch_end = 75,
+		punch_start = 150,
+		punch_end = 180,
 	},
 	on_die = function(self, pos)
 			core.after(2, function()

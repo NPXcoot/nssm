@@ -570,7 +570,7 @@ minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
 	recipe = {
 		{'', 'nssm:lava_titan_eye', ''},
-		{'', 'nssm:kraken_tentacle', ''},
+		{'', 'nssm:tentacle_curly', ''},
 		{'', '', ''},
 	}
 })
