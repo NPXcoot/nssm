@@ -709,8 +709,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "nssm:roasted_croco_tail",
-	recipe = "nssm:croco_tail",
+	output = "nssm:roasted_crocodile_tail",
+	recipe = "nssm:crocodile_tail",
 	cooktime = 16,
 })
 
