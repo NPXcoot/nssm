@@ -42,8 +42,10 @@ local function search_on_step2(
     local pos = self.object:getpos()
 
     --Disappear after a certain time
-    self.timer = self.timer + dtime
-    if self.timer > max_time then
+    if self.life_time == 0 then
+        self.life_time = os.time()
+    end
+    if os.time() - self.life_time > max_time then
         self.object:remove()
         return
     end
@@ -121,11 +123,14 @@ local function search_on_step(
     local pos = self.object:getpos()
 
     --Disappear after a certain time
-    self.timer = self.timer + dtime
-    if self.timer > max_time then
+    if self.life_time == 0 then
+        self.life_time = os.time()
+    end
+    if os.time() - self.life_time > max_time then
         self.object:remove()
         return
     end
+
 
     --Look for an entity to follow
     local objects = minetest.env:get_objects_inside_radius(pos, radius)
@@ -201,16 +206,20 @@ local function default_on_step(
 
 
     local pos = self.object:getpos()
-    local t = os.time()
-    minetest.chat_send_all("Tempo: "..t)
 
-    self.timer = self.timer + dtime
-    if self.timer > max_time then
+    if self.life_time == 0 then
+        self.life_time = os.time()
+    end
+
+
+    if os.time() - self.life_time > max_time then
         local node = nssm:node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
     end
+
+    self.timer = self.timer + dtime
 
     --while going around it damages entities
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
@@ -308,6 +317,7 @@ local function nssm_register_weapon(name, def)
             def.hit_node(self, pos, node)
         end,
         move = def.move,
+        life_time = 0,
         timer = 0
     })
 
