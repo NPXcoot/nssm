@@ -178,15 +178,17 @@ nssm:register_arrow("nssm:phoenix_arrow", {
 
 	on_step = function(self, dtime)
 
-	    self.timer = self.timer + 1
-
-	    local pos = self.object:getpos()
+		local pos = self.object:getpos()
 
 		local n = minetest.env:get_node(pos).name
 
-	    if self.timer > 10 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
-	        self.object:remove()
-	    end
+		if self.timer == 0 then
+			self.timer = os.time()
+		end
+
+		if os.time() - self.timer > 7 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
+			self.object:remove()
+		end
 
 		minetest.env:set_node(pos, {name="fire:basic_flame"})
 		if math.random(1,3)==1 then
@@ -249,69 +251,38 @@ nssm:register_arrow("nssm:roar_of_the_dragon", {
 
 	on_step = function(self, dtime)
 
-	    self.timer = self.timer + 1
-
-	    local pos = self.object:getpos()
+		local pos = self.object:getpos()
 
 		local n = minetest.env:get_node(pos).name
 
-	    if self.timer > 40 or minetest.is_protected(pos, "") then
-	        self.object:remove()
+		if self.timer == 0 then
+			self.timer = os.time()
+		end
+
+		if os.time() - self.timer > 8 or minetest.is_protected(pos, "") then
+			self.object:remove()
+		end
+
+		local objects = minetest.env:get_objects_inside_radius(pos, 1)
+	    for _,obj in ipairs(objects) do
+			local name = obj:get_entity_name()
+			if name~="nssm:roar_of_the_dragon" and name ~= "nssm:mese_dragon" then
+		        obj:set_hp(obj:get_hp()-0.05)
+		        if (obj:get_hp() <= 0) then
+		            if (not obj:is_player()) and name ~= self.object:get_luaentity().name then
+		                obj:remove()
+		            end
+		        end
+			end
 	    end
 
 		minetest.env:set_node(pos, {name="air"})
-		if math.random(1,3)==1 then
+		if math.random(1,2)==1 then
 			dx = math.random(-1,1)
 			dy = math.random(-1,1)
 			dz = math.random(-1,1)
 			local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 			minetest.env:set_node(p, {name="air"})
 		end
-
-		if (self.hit_player or self.hit_mob)
-		-- clear mob entity before arrow becomes active
-		and self.timer > (10 - (self.velocity / 2)) then
-
-			for _,player in pairs(minetest.get_objects_inside_radius(pos, 1.0)) do
-
-				if self.hit_player
-				and player:is_player() then
-
-					self.hit_player(self, player)
-					self.object:remove() ; -- print ("hit player")
-					return
-				end
-
-				if self.hit_mob
-				and player:get_luaentity()
-				and player:get_luaentity().name ~= self.object:get_luaentity().name
-				and player:get_luaentity().name ~= "__builtin:item"
-				and player:get_luaentity().name ~= "gauges:hp_bar"
-				and player:get_luaentity().name ~= "signs:text"
-				and player:get_luaentity().name ~= "itemframes:item" then
-
-					self.hit_mob(self, player)
-
-					self.object:remove() ; -- print ("hit mob")
-
-					return
-				end
-			end
-		end
-	end,
-
-	-- direct hit
-	hit_player = function(self, player)
-		player:punch(self.object, 1.0, {
-			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 3},
-		}, nil)
-	end,
-
-	hit_mob = function(self, player)
-		player:punch(self.object, 1.0, {
-			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 3},
-		}, nil)
-	end,
+	end
 })
