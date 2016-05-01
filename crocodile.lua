@@ -22,7 +22,7 @@ nssm:register_mob("nssm:crocodile", {
 		chance = 1,
 		min = 1,
 		max = 2,},
-		{name = "nssm:croco_tail",
+		{name = "nssm:crocodile_tail",
 	chance = 2,
 	min = 1,
 	max = 1,},

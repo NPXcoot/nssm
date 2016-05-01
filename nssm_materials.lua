@@ -36,7 +36,7 @@ nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
 --nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
 --nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
 nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
-nssm_register_noneatcraftitems ('night_feather','Moon Feather')
+nssm_register_noneatcraftitems ('night_feather','Night Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
 nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
 nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
@@ -481,7 +481,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:mantis_claw', ''},
 		{'', 'nssm:mantis_claw', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -490,7 +490,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:masticone_fang', 'nssm:masticone_fang'},
 		{'', 'nssm:masticone_fang', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -507,8 +507,8 @@ minetest.register_craft({
 	output = 'nssm:crab_light_mace',
 	recipe = {
 		{'', 'nssm:crab_chela', ''},
-		{'', 'default:stick', ''},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -517,7 +517,7 @@ minetest.register_craft({
 	recipe = {
 		{'', 'nssm:crab_chela', ''},
 		{'nssm:crab_chela', 'nssm:crab_chela', 'nssm:crab_chela'},
-		{'', 'default:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 
@@ -625,7 +625,7 @@ minetest.register_craft({
 	output = 'nssm:night_sword',
 	recipe = {
 		{'', 'default:diamond', ''},
-		{'', 'nssm:moon_feather', ''},
+		{'', 'nssm:night_feather', ''},
 		{'', 'group:stick', ''},
 	}
 })
@@ -709,8 +709,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "nssm:roasted_croco_tail",
-	recipe = "nssm:croco_tail",
+	output = "nssm:roasted_crocodile_tail",
+	recipe = "nssm:crocodile_tail",
 	cooktime = 16,
 })
 
