@@ -1,3 +1,13 @@
+v2.4 (01-05-16):
+ - new energy weapon: hellzone_grenade (It follows the target: you can shoot some of them and then activate them by pressing q);
+ - the mobs now honors the protected blocks and areas (Thanks to TenPlus1 for his suggestion);
+ - fixed the Irrlicht problem with png textures;
+ - fixed various bugs with materials and recipes also thanks to Amianthoidal and Telesight;
+ - the counters now use os.time() instead of minetest globalstep to count time;
+ - added the custom_attack function to the api.lua;
+ - added custom on_step function for some projectiles of the mobs and fixed various related bugs;
+ - updated api and fixed bugs.
+
 v2.3 (22-03-16):
  - new mobs (Desert Boss: giant sandworm (removed the dahaka), changed sandworm model and added sand_bloco and xgaloctopus)
  - new special weapons (added the spirit_ball which look for enemies around it and follow them and updated kamehameha and kienzan)
