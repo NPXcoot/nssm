@@ -45,7 +45,13 @@ end
 
 
 function nssm:round(n)
-    return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+	if (n>0) then
+		return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+	else
+		n=-n
+		local t = n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
+		return -t
+	end
 end
 
 function nssm:explosion_particles(pos, exp_radius)
@@ -87,22 +93,17 @@ function nssm:explosion(pos, exp_radius, fire)
     --Damages entities around (not the player)
     local objects = minetest.env:get_objects_inside_radius(pos, exp_radius)
     for _,obj in ipairs(objects) do
-        if (obj:is_player()) then
-        elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item") then
-            local obj_p = obj:getpos()
-            local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
-            local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
-			local damage = -exp_radius*dist+exp_radius^2
-			obj:set_hp(obj:get_hp()-damage)
-            if (obj:get_hp() <= 0) then
-                if (not obj:is_player()) and obj:get_entity_name() ~= "nssm:kamehameha" then
-                    obj:remove()
-                end
+        local obj_p = obj:getpos()
+        local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+        local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+		local damage = (-exp_radius*dist+exp_radius^2)*2
+		obj:set_hp(obj:get_hp()-damage)
+        if (obj:get_hp() <= 0) then
+            if (not obj:is_player()) then
+                obj:remove()
             end
-			--minetest.chat_send_all("HP: "..obj:get_hp())
         end
     end
-
 
     --damages blocks around and if necessary put some fire
     pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
@@ -178,5 +179,183 @@ function nssm:explosion(pos, exp_radius, fire)
             end
         end
     end
+end
 
+--			SPECIAL ABILITIES OF SOME MOBS
+function nssm:digging_ability(
+	self,		--the entity of the mob
+	group,		--group of the blocks the mob can dig: nil=everything
+	max_vel,	--max velocity of the mob
+	dim 		--vector representing the dimensions of the mob
+	)
+
+	local v = self.object:getvelocity()
+	local pos = self.object:getpos()
+
+	if minetest.is_protected(pos, "") then
+		return
+	end
+
+	local h = dim.y
+
+	local max = 0
+	--local posmax = 0 --			1 = x, -1=-x, 2 = z, -2 = -z
+	local yaw = (self.object:getyaw() + self.rotate) or 0
+	local x = math.sin(yaw)*-1
+	local z = math.cos(yaw)
+
+	local i = 1
+	local i1 = -1
+	local k = 1
+	local k1 = -1
+
+	local multiplier = 2
+
+	if x>0 then
+		i = nssm:round(x*max_vel)*multiplier
+	else
+		i1 = nssm:round(x*max_vel)*multiplier
+	end
+
+	if z>0 then
+		k = nssm:round(z*max_vel)*multiplier
+	else
+		k1 = nssm:round(z*max_vel)*multiplier
+	end
+
+	for dx = i1, i do
+		for dy = 0, h do
+			for dz = k1, k do
+				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+
+				local n = minetest.env:get_node(p).name
+				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				if group == nil then
+					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") then
+					else
+						minetest.env:set_node(p, {name="air"})
+					end
+				else
+					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and not (minetest.is_protected(p, "")) then
+						minetest.env:set_node(p, {name="air"})
+					end
+				end
+			end
+		end
+	end
+end
+
+
+function nssm:putting_ability(		--puts under the mob the block defined as 'p_block'
+	self,		--the entity of the mob
+	p_block, 	--definition of the block to use
+	max_vel	--max velocity of the mob
+	)
+
+	local v = self.object:getvelocity()
+
+	local dx = 0
+	local dz = 0
+
+	if (math.abs(v.x)>math.abs(v.z)) then
+		if (v.x)>0 then
+			dx = 1
+		else
+			dx = -1
+		end
+	else
+		if (v.z)>0 then
+			dz = 1
+		else
+			dz = -1
+		end
+	end
+
+	local pos = self.object:getpos()
+	local pos1
+	pos.y=pos.y-1
+	pos1 = {x = pos.x+dx, y = pos.y, z = pos.z+dz}
+	local n = minetest.env:get_node(pos).name
+	local n1 = minetest.env:get_node(pos1).name
+	if n~=p_block and not minetest.is_protected(pos, "") then
+		minetest.env:set_node(pos, {name=p_block})
+	end
+	if n1~=p_block and not minetest.is_protected(pos1, "") then
+		minetest.env:set_node(pos1, {name=p_block})
+	end
+end
+
+
+function nssm:webber_ability(		--puts randomly around the block defined as w_block
+	self,		--the entity of the mob
+	w_block, 	--definition of the block to use
+	radius		--max distance the block can be put
+	)
+
+	local pos = self.object:getpos()
+	if (math.random(1,5)==1) then
+		local dx=math.random(1,radius)
+		local dz=math.random(1,radius)
+		local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
+		local t = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
+		local n = minetest.env:get_node(p).name
+		local k = minetest.env:get_node(t).name
+		if ((n~="air")and(k=="air")) and not minetest.is_protected(t, "") then
+			minetest.env:set_node(t, {name=w_block})
+		end
+	end
+end
+
+function nssm:midas_ability(		--ability to transform every blocks it touches in the m_block block
+	self,		--the entity of the mob
+	m_block,
+	max_vel,	--max velocity of the mob
+	mult, 		--multiplier of the dimensions of the area around that need the transformation
+	height 		--height of the mob
+	)
+
+	local v = self.object:getvelocity()
+	local pos = self.object:getpos()
+
+	if minetest.is_protected(pos, "") then
+		return
+	end
+
+	local max = 0
+	local yaw = (self.object:getyaw() + self.rotate) or 0
+	local x = math.sin(yaw)*-1
+	local z = math.cos(yaw)
+
+	local i = 1
+	local i1 = -1
+	local k = 1
+	local k1 = -1
+
+	local multiplier = mult
+
+	if x>0 then
+		i = nssm:round(x*max_vel)*multiplier
+	else
+		i1 = nssm:round(x*max_vel)*multiplier
+	end
+
+	if z>0 then
+		k = nssm:round(z*max_vel)*multiplier
+	else
+		k1 = nssm:round(z*max_vel)*multiplier
+	end
+
+	for dx = i1, i do
+		for dy = -1, height do
+			for dz = k1, k do
+				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				local n = minetest.env:get_node(p).name
+
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" then
+				else
+					minetest.env:set_node(p, {name=m_block})
+				end
+			end
+		end
+	end
 end

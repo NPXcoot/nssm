@@ -10,8 +10,6 @@ local creative = minetest.setting_getbool("creative_mode")
 local spawn_protected = tonumber(minetest.setting_get("nssm_spawn_protected")) or 1
 local remove_far = minetest.setting_getbool("remove_far_nssm")
 
-local mese_rip=0		--NSSM addition
-
 -- pathfinding settings
 local enable_pathfinding = true
 local enable_pathfind_digging = false
@@ -165,20 +163,6 @@ set_animation = function(self, type)
 					self.animation.speed_normal, 0)
 				self.animation.current = "dattack"
 			end
-		elseif type == "die"
-		and self.animation.current ~= "die"  then
-			if self.animation.die_start
-			and self.animation.die_end
-			and self.animation.speed_normal then
-				self.object:set_animation({
-					x = self.animation.die_start,
-					y = self.animation.die_end},
-					self.animation.speed_normal, 0)
-				self.animation.current = "die"
-			end
-
-			--end of NSSM additions
-
 	end
 end
 
@@ -1003,7 +987,7 @@ minetest.register_entity(name, {
 	child = false,
 	gotten = false,
 	health = 0,
-	reach = def.reach or 3,
+	reach = def.reach or 2,
 	htimer = 0,
 	child_texture = def.child_texture,
 	docile_by_day = def.docile_by_day or false,
@@ -1019,14 +1003,8 @@ minetest.register_entity(name, {
 
 	on_dist_attack = def.on_dist_attack,
 	metamorphosis = def.metamorphosis or false,
-	metatimer = 30,
-	pump_putter = def.pump_putter or false,
-	mamma = def.mamma or false,
+	metatimer = 0,
 	dogshoot_stop = def.dogshoot_stop or false,
-	duckking_father = def.duckking_father or false,
-	maxus = def.maxus or false,
-	inker = def.inker or false,
-	die_anim = def.die_anim or false,
 	hydra = def.hydra or false,
 	mele_number = def.mele_number or 1,
 	true_dist_attack = def.true_dist_attack or false,
@@ -1034,6 +1012,8 @@ minetest.register_entity(name, {
 	direct_hit = false,
 	num_sons = 0,
 	num_mele_attacks = 0,
+	custom_attack = def.custom_attack or false,
+	attack_rip = 0,
 
 	--End of NSSM parameters
 
@@ -1041,6 +1021,10 @@ minetest.register_entity(name, {
 
 		local pos = self.object:getpos()
 		local yaw = self.object:getyaw() or 0
+
+		if self.metatimer == 0 then
+			self.metatimer = os.time()
+		end
 
 		-- when lifetimer expires remove mob (except npc and tamed)
 		if self.type ~= "npc"
@@ -1633,7 +1617,7 @@ minetest.register_entity(name, {
 				set_velocity(self, 0)
 
 				--NSSM additions:
-				set_animation("punch")
+				set_animation(self, "punch")
 				--end of NSSM additions
 
 				self.timer = self.timer + dtime
@@ -1843,19 +1827,20 @@ minetest.register_entity(name, {
 
 				--NSSM modifications:
 				--modifications to add multiple melee attack animations
+				--ATTACK ANIMATIONS:
 				if self.mele_number>1 then
-        	if randattack==1 then
+        			if randattack==1 then
 						set_animation(self, "punch")
 					else
 						local attack = "punch"..(randattack-1)
-            set_animation(self, attack)
-          end
+            			set_animation(self, attack)
+          			end
 				else
 					set_animation(self, "punch")
 				end
 
 				--modifications to add special attacks to some monster:
-				if not self.mamma and not self.maxus and not self.pump_putter then
+				if not def.custom_attack then
 
 					if self.timer > 1 then
 
@@ -1900,109 +1885,8 @@ minetest.register_entity(name, {
 
 					--some additions: special melee attacks
 				else
-					--Ant Queen: spawn other ants
-					if self.mamma then
-							if self.timer >4 then
-								self.timer = 0
-								local p2 = p
-								local s2 = s
-								p2.y = p2.y + 1.5
-								s2.y = s2.y + 1.5
-								--if minetest.line_of_sight(p2, s2) == true then
-								if line_of_sight_water(self, p2, s2) == true then
-									-- play attack sound
-									if self.sounds.attack then
-										minetest.sound_play(self.sounds.attack, {
-										object = self.object,
-										max_hear_distance = self.sounds.distance
-										})
-									end
-									local posme = self.object:getpos()
-									local pos1 = {x=posme.x+math.random(-3,3), y=posme.y+0.5, z=posme.z+math.random(-3,3)}
-									--local pos2 = {x=posme.x+math.random(-1,1), y=posme.y+0.5, z=posme.z+math.random(-1,1)}
-									minetest.add_particlespawner(
-										100, --amount
-										0.1, --time
-										{x=pos1.x-1, y=pos1.y-1, z=pos1.z-1}, --minpos
-										{x=pos1.x+1, y=pos1.y+1, z=pos1.z+1}, --maxpos
-										{x=-0, y=-0, z=-0}, --minvel
-										{x=1, y=1, z=1}, --maxvel
-										{x=-0.5,y=5,z=-0.5}, --minacc
-										{x=0.5,y=5,z=0.5}, --maxacc
-										0.1, --minexptime
-										1, --maxexptime
-										3, --minsize
-										3, --maxsize
-										false, --collisiondetection
-										"tnt_smoke.png" --texture
-									)
-									minetest.add_entity(pos1, "nssm:ant_soldier")
-								end
-							end
-					end
-
-					--Pumpking: puts around some bombs
-					if self.pump_putter then
-						if self.timer >3 then
-							self.timer = 0
-							local p2 = p
-							local s2 = s
-							p2.y = p2.y + 1.5
-							s2.y = s2.y + 1.5
-							if minetest.line_of_sight(p2, s2) == true then
-								-- play attack sound
-								if self.sounds.attack then
-									minetest.sound_play(self.sounds.attack, {
-									object = self.object,
-									max_hear_distance = self.sounds.distance
-									})
-								end
-								local posme = self.object:getpos()
-								local pos1 = {x=posme.x+math.random(-1,1), y=posme.y+0.5, z=posme.z+math.random(-1,1)}
-								minetest.set_node(pos1, {name="nssm:pumpbomb"})
-								minetest.get_node_timer(pos1):start(2)
-							end
-						end
-					end
-					--maxus (mese_dragon)
-					if self.maxus then
-						if self.timer > 1 then
-							self.timer = 0
-							mese_rip = mese_rip+1
-							local p2 = p
-							local s2 = s
-							p2.y = p2.y + 1.5
-							s2.y = s2.y + 1.5
-							if minetest.line_of_sight(p2, s2) == true then
-								-- play attack sound
-								if self.sounds.attack then
-									minetest.sound_play(self.sounds.attack, {
-										object = self.object,
-										max_hear_distance = self.sounds.distance
-									})
-								end
-								-- punch player
-								self.attack:punch(self.object, 1.0,  {
-									full_punch_interval=1.0,
-									damage_groups = {fleshy=self.damage}
-								}, nil)
-							end
-							if mese_rip>=8 then
-								mese_rip =0
-								set_animation("punch1")
-								local posme = self.object:getpos()
-								for dx = -17,17 do
-									for dz= -17,17 do
-										local k = {x = posme.x+dx, y=posme.y+20, z=posme.z+dz}
-										local n = minetest.env:get_node(k).name
-										if n=="air" and math.random(1,23)==1 then
-											minetest.env:set_node(k, {name="nssm:mese_meteor"})
-											nodeupdate(k)
-										end
-									end
-								end
-							end
-						end
+					if def.custom_attack then
+						def.custom_attack(self)
 					end
 				end
 			end
@@ -2043,7 +1927,8 @@ minetest.register_entity(name, {
 			and math.random(1, 100) <= 60 then
 
 				self.timer = 0
-				set_animation("dattack")					--NSSM modification
+				minetest.chat_send_all("Sparo!")
+				set_animation(self, "dattack")					--NSSM modification
 
 				-- play shoot attack sound
 				if self.sounds.shoot_attack then
@@ -2109,26 +1994,9 @@ minetest.register_entity(name, {
 
 		--NSSM additions:
 
-		--kraken
-		if self.inker and self.state == "attack" then
-			local pos = self.object:getpos()
-				for dx=-4,4 do
-					for dy=-4,4 do
-						for dz=-4,4 do
-							local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-							local n = minetest.env:get_node(p).name
-							if (n=="default:water_source" or n=="default:water_flowing"and math.random(1,5)==1) then
-									minetest.env:set_node(p, {name="nssm:ink"})
-							end
-						end
-					end
-				end
-		end
-
 		--larva and mantis
 		if self.metamorphosis == true then
-			self.metatimer = self.metatimer - dtime
-			if self.metatimer <= 0 then
+			if os.time() - self.metatimer >20 then
 				minetest.log("action",
 					"metatimer expired, metamorphosis! ")
 				local pos=self.object:getpos()
@@ -2621,7 +2489,6 @@ local c_obsidian = minetest.get_content_id("default:obsidian")
 local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
-
 -- explosion (cannot break protected or unbreakable nodes)
 function nssm:explosion(pos, radius, fire, smoke, sound)
 
@@ -2747,13 +2614,7 @@ function nssm:register_arrow(name, def)
 		timer = 0,
 		switch = 0,
 
-		--NSSM parameters:
-		remover = def.remover or false,
-		phoenix_fire = def.phoenix_fire or false,
-
-		--end of NSSM parameters
-
-		on_step = function(self, dtime)
+		on_step = def.on_step or function(self, dtime)		--nssm_modification
 
 			self.timer = self.timer + 1
 
@@ -2767,48 +2628,6 @@ function nssm:register_arrow(name, def)
 
 				return
 			end
-
-			--NSSM additions:
-			if self.phoenix_fire then
-				if self.timer > 50 then
-				self.object:remove()
-				end
-			end
-
-			if self.remover then
-				if self.timer > 35 then
-					self.object:remove()
-				end
-				for dx=-1,1 do
-					for dy=-1,1 do
-						for dz=-1,1 do
-							local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-							local n = minetest.env:get_node(p).name
-							if n ~= "air" then
-									minetest.env:set_node(p, {name="air"})
-							end
-						end
-					end
-				end
-			end
-
-
-			if self.phoenix_fire then
-				for dx=-1,1 do
-					for dy=-1,1 do
-						for dz=-1,1 do
-							local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-							local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-							local n = minetest.env:get_node(p).name
-								if minetest.registered_nodes[n].groups.flammable or (n=="air" and math.random(1, 500) <= 5) then
-									minetest.env:set_node(t, {name="fire:basic_flame"})
-								end
-						end
-					end
-				end
-			end
-
-			--end of NSSM additions
 
 			if self.hit_node then
 

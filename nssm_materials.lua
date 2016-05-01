@@ -24,7 +24,7 @@ nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
 nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
 nssm_register_noneatcraftitems ('ice_tooth','Ice Tooth')
 nssm_register_noneatcraftitems ('little_ice_tooth','Little Ice Tooth')
-nssm_register_noneatcraftitems ('black_sand',"Dahaka's Black Sand")
+nssm_register_noneatcraftitems ('black_sand',"Black Sand")
 nssm_register_noneatcraftitems ('black_ice_tooth','Black Ice Tooth')
 nssm_register_noneatcraftitems ('tarantula_chelicerae','Tarantula Chelicerae')
 nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
@@ -280,6 +280,7 @@ minetest.register_node("nssm:pumpbomb", {
 	drop = "",
 	on_timer = function(pos, elapsed)
 		nssm:explosion(pos, 3, 1)
+		minetest.env:set_node(pos, {name="air"})
 	end,
 })
 
@@ -294,12 +295,11 @@ minetest.register_abm({
 		--local under = {x=pos.x, y=pos.y-1, z=pos.z}
 		--local n = minetest.env:get_node(under).name
 		--if n~= "air" then
-						minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name = "fire:basic_flame"})
-						minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name = "fire:basic_flame"})
-						minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name = "fire:basic_flame"})
-						minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name = "fire:basic_flame"})
-
-						minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "fire:basic_flame"})
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name = "fire:basic_flame"})
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name = "fire:basic_flame"})
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name = "fire:basic_flame"})
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name = "fire:basic_flame"})
+		minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z}, {name = "fire:basic_flame"})
 
 	end
 })
@@ -570,7 +570,7 @@ minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
 	recipe = {
 		{'', 'nssm:lava_titan_eye', ''},
-		{'', 'nssm:kraken_tentacle', ''},
+		{'', 'nssm:tentacle_curly', ''},
 		{'', '', ''},
 	}
 })
@@ -607,7 +607,7 @@ minetest.register_craft({
 	output = 'nssm:sky_feather',
 	recipe = {
 		{'', '', ''},
-		{'nssm:sun_feather', '', 'nssm:moon_feather'},
+		{'nssm:sun_feather', '', 'nssm:night_feather'},
 		{'', '', ''},
 	}
 })
@@ -779,7 +779,6 @@ nssm_register_egg ('phoenix', 'Phoenix')
 nssm_register_egg ('night_master', 'Night Master')
 nssm_register_egg ('scrausics', 'Scrausics')
 nssm_register_egg ('moonheron', 'Moonheron')
-nssm_register_egg ('dahaka', 'Dahaka')
 nssm_register_egg ('sandworm', 'Sandworm')
 nssm_register_egg ('giant_sandworm', 'Giant Sandworm')
 nssm_register_egg ('ant_queen', 'Ant Queen')

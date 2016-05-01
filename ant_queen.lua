@@ -13,8 +13,7 @@ nssm:register_mob("nssm:ant_queen", {
 	walk_velocity = 1.5,
 	run_velocity = 2,
 	lifetimer = 300,
-	mamma = true,
-  rotate = 270,
+  	rotate = 270,
     sounds = {
 		random = "ant",
 		attack = "ant",
@@ -39,7 +38,7 @@ nssm:register_mob("nssm:ant_queen", {
 		min = 1,
 		max = 2,},
 	},
-	reach = 4,
+	reach = 8,
 	armor = 70,
 	drawtype = "front",
 	water_damage = 2,
@@ -58,6 +57,33 @@ nssm:register_mob("nssm:ant_queen", {
 		run_end = 160,
 		punch_start = 170,
 		punch_end = 190,
-	}
+	},
+
+	custom_attack = function(self)
+		if self.timer >4 then
+			self.timer = 0
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			p.y = p.y + 1.5
+			s.y = s.y + 1.5
+			if line_of_sight_water(self, p, s) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+					object = self.object,
+					max_hear_distance = self.sounds.distance
+					})
+				end
+				local pos1 = {x=s.x+math.random(-3,3), y=s.y-1, z=s.z+math.random(-3,3)}
+
+				if pos1.x~=s.x and pos1.z~=s.z then
+					nssm:explosion_particles(pos1, 1)
+					minetest.add_entity(pos1, "nssm:ant_soldier")
+				end
+			end
+		end
+	end
 
 })

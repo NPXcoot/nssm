@@ -8,7 +8,6 @@ nssm:register_mob("nssm:mese_dragon", {
 	textures = {{"mese_dragon.png"}},
 	visual_size = {x=12, y=12},
 	makes_footstep_sound = true,
-	maxus = true,
 	view_range = 45,
 	rotate = 270,
 	fear_height = 5,
@@ -61,21 +60,48 @@ nssm:register_mob("nssm:mese_dragon", {
     dattack_end = 160,
 	},
 	do_custom = function(self)
-		--transform the blocks he touches in mese_blocks
-		local pos = self.object:getpos()
-		local c=2
-		local v = self.object:getvelocity()
-		for dx = -c*(math.abs(v.x))-2 , c*(math.abs(v.x))+2 do
-			for dy=-1,10 do
-				for dz = -c*(math.abs(v.z))-2 , c*(math.abs(v.z))+2 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(p).name
-					if (n~="air" and n~="nssm:mese_meteor" and n~="fire:basic_flame") then
-							minetest.env:set_node(t, {name="default:mese_block"})
+		nssm:midas_ability(self, "default:mese_block", self.run_velocity,2, 3)
+	end,
+
+	custom_attack = function(self)
+		if self.timer > 1 then
+			self.timer = 0
+			self.attack_rip = self.attack_rip+1
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			p.y = p.y + 1.5
+			s.y = s.y + 1.5
+
+			if minetest.line_of_sight(p, s) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+						object = self.object,
+						max_hear_distance = self.sounds.distance
+					})
+				end
+				-- punch player
+				self.attack:punch(self.object, 1.0,  {
+					full_punch_interval=1.0,
+					damage_groups = {fleshy=self.damage}
+				}, nil)
+			end
+			if self.attack_rip>=8 then
+				self.attack_rip =0
+				set_animation("punch1")
+				for dx = -17,17 do
+					for dz= -17,17 do
+						local k = {x = s.x+dx, y=s.y+20, z=s.z+dz}
+						local n = minetest.env:get_node(k).name
+						if n=="air" and math.random(1,23)==1 then
+							minetest.env:set_node(k, {name="nssm:mese_meteor"})
+							nodeupdate(k)
+						end
 					end
 				end
 			end
 		end
-	end,
+	end
 })

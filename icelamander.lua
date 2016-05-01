@@ -62,21 +62,6 @@ nssm:register_mob("nssm:icelamander", {
 		dattack_end = 210,
 	},
 	do_custom = function(self)
-		--Big_froster
-		local pos = self.object:getpos()
-		local c=3
-		local v = self.object:getvelocity()
-		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
-			for dy=-1,3 do
-				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(p).name
-					if (n~="air") then
-						minetest.env:set_node(t, {name="default:ice"})
-					end
-				end
-			end
-		end
+		nssm:midas_ability(self, "default:ice", self.run_velocity,1, 3)
 	end,
 })

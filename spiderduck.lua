@@ -47,7 +47,7 @@ nssm:register_mob("nssm:spiderduck", {
     arrow = "nssm:webball",
     reach = 2,
     shoot_interval = 2,
-    shoot_offset = 1,
+    shoot_offset = 2,
 	animation = {
 		speed_normal = 25,
 		speed_run = 35,

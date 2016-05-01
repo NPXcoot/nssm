@@ -51,23 +51,6 @@ nssm:register_mob("nssm:stone_eater", {
 		punch_end = 185,
 	},
 	do_custom = function(self)
-		--Remove stone around
-		local pos = self.object:getpos()
-		local c=3
-		local v = self.object:getvelocity()
-		for dx = -c*(math.abs(v.x))-1 , c*(math.abs(v.x))+1 do
-			for dy=0,1 do
-				for dz = -c*(math.abs(v.z))-1 , c*(math.abs(v.z))+1 do
-					local p = {x=pos.x+dx, y=pos.y, z=pos.z+dz}
-					local t = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.env:get_node(t).name
-						if (n~="default:water_source" and n~="default:water_flowing") then
-              if n=="default:stone" or n=="default:sandstone" or n=="default:cobble" then
-                  minetest.env:set_node(t, {name="air"})
-              end
-						end
-				end
-			end
-		end
+		nssm:digging_ability(self, "stone", self.run_velocity, {x=0, y=2, z=0})
 	end,
 })
