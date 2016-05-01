@@ -1927,7 +1927,6 @@ minetest.register_entity(name, {
 			and math.random(1, 100) <= 60 then
 
 				self.timer = 0
-				minetest.chat_send_all("Sparo!")
 				set_animation(self, "dattack")					--NSSM modification
 
 				-- play shoot attack sound

@@ -186,12 +186,15 @@ nssm:register_arrow("nssm:phoenix_arrow", {
 			self.timer = os.time()
 		end
 
-		if os.time() - self.timer > 7 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
+		if os.time() - self.timer > 5 or minetest.is_protected(pos, "") or ((n~="air") and (n~="fire:basic_flame")) then
 			self.object:remove()
 		end
 
-		minetest.env:set_node(pos, {name="fire:basic_flame"})
-		if math.random(1,3)==1 then
+		if math.random(1,2)==2 then
+			minetest.env:set_node(pos, {name="fire:basic_flame"})
+		end
+
+		if math.random(1,6)==1 then
 			dx = math.random(-1,1)
 			dy = math.random(-1,1)
 			dz = math.random(-1,1)
