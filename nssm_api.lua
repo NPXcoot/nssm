@@ -18,6 +18,12 @@ function nssm:node_ok(pos, fallback)
 	return minetest.registered_nodes[fallback]
 end
 
+function nssm:dist_pos(p, s)
+	local v = {x = math.abs(s.x-p.x), y = math.abs(s.y-p.y), z = math.abs(s.z-p.z)}
+	local r = math.sqrt(v.x^2+v.y^2+v.z^2)
+	return r
+end
+
 --check_for_death functions customized for monsters who respawns (Masticone)
 function nssm:check_for_death_hydra(self)
 	local hp = self.object:get_hp()
