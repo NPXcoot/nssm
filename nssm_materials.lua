@@ -799,6 +799,7 @@ nssm_register_egg ('manticore', 'Manticore')
 nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
 nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
 nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
+nssm_register_egg ('mordain', 'Mordain')
 
 
 minetest.register_craftitem("nssm:mese_egg", {
