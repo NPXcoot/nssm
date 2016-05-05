@@ -432,7 +432,23 @@ minetest.register_node("nssm:rope", {
     drops = "nssm:rope",
     tile_images = { "rope.png" },
     groups = {snappy=1},
-    })
+})
+
+minetest.register_node("nssm:invisible_light", {
+	description = "Invisible light source",
+	tiles = {"transparent.png"},
+	paramtype = "light",
+	drawtype = "airlike",
+	walkable = false,
+	sunlight_propagates = true,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	groups = {unbreakable=1},
+	drop = "",
+	light_source = 15,
+})
 
 minetest.register_tool("nssm:stoneater_pick", {
 	description = "Stoneater Pickaxe",
