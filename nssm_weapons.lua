@@ -399,3 +399,118 @@ nssm_register_weapon("hellzone_grenade", {
     material = "nssm:snake_scute",
     description = "Hellzone grenade (Press q to activate)",
 })
+
+nssm_register_weapon("particles_ball", {
+    velocity = 25,
+    move = 0,
+
+    on_step = function(self, dtime)
+        local pos = self.object:getpos()
+        local vel = 1
+
+        minetest.add_particlespawner({
+        	amount = 2,
+        	time = 0.01,
+        	minpos = pos,
+        	maxpos = pos,
+        	minvel = {x=3, y=3, z=3},
+        	maxvel = {x=-3, y=-3, z=-3},
+        	minacc = {x=0, y=0, z=0},
+        	maxacc = {x=0, y=0, z=0},
+        	minexptime = 0.5,
+        	maxexptime = 0.5,
+        	minsize = 3,
+        	maxsize = 3,
+        	collisiondetection = false,
+        	vertical = false,
+        	texture = "morparticle.png"
+        })
+
+        --Disappear after a certain time
+        if self.life_time == 0 then
+            self.life_time = os.time()
+        end
+        if os.time() - self.life_time > 60 then
+            self.object:remove()
+            return
+        end
+
+        --Look for an entity to follow
+        local objects = minetest.env:get_objects_inside_radius(pos, 20)
+        local min_dist = 100
+        local obj_min = nil
+        local obj_p = nil
+        local vec_min = nil
+        for _,obj in ipairs(objects) do
+            if (obj:is_player()) then
+            elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= self.object:get_luaentity().name) then
+                obj_p = obj:getpos()
+                local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
+                local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
+                if (dist<min_dist) then
+                    min_dist = dist
+                    obj_min = obj
+                    vec_min = vec
+                end
+            end
+        end
+
+        --Found an entity to follow:
+        if obj_min ~= nil then
+            local new_vel = {x=0, y=0, z=0}
+
+            local dir = 0
+            local max_diff = 0
+
+            if (max_diff<math.abs(vec_min.x)) then
+                dir = 1
+                max_diff = math.abs(vec_min.x)
+            end
+            if (max_diff<math.abs(vec_min.y)) then
+                dir = 2
+                max_diff = math.abs(vec_min.y)
+            end
+            if (max_diff<math.abs(vec_min.z)) then
+                dir = 3
+                max_diff = math.abs(vec_min.z)
+            end
+
+            vec_min.x = (vec_min.x/max_diff)*vel
+            vec_min.y = (vec_min.y/max_diff)*vel
+            vec_min.z = (vec_min.z/max_diff)*vel
+            obj_p = obj_min:getpos()
+
+            self.object:setvelocity(vec_min)
+            --[[if min_dist < 1 then
+
+                local node = nssm:node_ok(pos).name
+                self.hit_node(self, pos, node)
+                self.object:remove()
+                return
+            else
+                self.object:setvelocity(vec_min)
+            end
+            ]]
+        end
+        local n = minetest.env:get_node(pos).name
+
+        --[[if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
+            local node = nssm:node_ok(pos).name
+            self.hit_node(self, pos, node)
+            self.object:remove()
+            return
+        end
+        ]]
+    end,
+
+    hit_node = function(self, pos, node)
+        --nssm:explosion(pos, 4, 0)
+    end,
+
+    on_drop = function(itemstack, user, pointed_thing)
+        local pos = user:getpos()
+        --activate_balls(pos)
+    end,
+    material = "group:wood",
+    description = "Particles ball",
+})
