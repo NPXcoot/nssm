@@ -33,7 +33,7 @@ nssm:register_mob("nssm:mantis", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-	mele_number =2,
+	double_melee_attack = true,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 25,
