@@ -1001,6 +1001,8 @@ minetest.register_entity(name, {
 
 	--NSSM parameters
 
+	double_melee_attack = def.double_melee_attack or false,
+
 	on_dist_attack = def.on_dist_attack,
 	metamorphosis = def.metamorphosis or false,
 	metatimer = 0,
@@ -1825,26 +1827,21 @@ minetest.register_entity(name, {
 
 				set_velocity(self, 0)
 
-				--NSSM modifications:
-				--modifications to add multiple melee attack animations
-				--ATTACK ANIMATIONS:
-				if self.mele_number>1 then
-        			if randattack==1 then
-						set_animation(self, "punch")
-					else
-						local attack = "punch"..(randattack-1)
-            			set_animation(self, attack)
-          			end
-				else
-					set_animation(self, "punch")
-				end
-
 				--modifications to add special attacks to some monster:
-				if not def.custom_attack then
+				if not self.custom_attack then
 
 					if self.timer > 1 then
 
 						self.timer = 0
+
+						--NSSM modifications:
+						--modifications to add multiple melee attack animations
+
+						if self.double_melee_attack and math.random(1,2)==1 then
+							set_animation(self, "punch1")
+						else
+							set_animation(self, "punch")
+						end
 
 						local p2 = p
 						local s2 = s
