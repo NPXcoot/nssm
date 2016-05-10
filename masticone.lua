@@ -77,7 +77,8 @@ nssm:register_mob("nssm:masticone", {
 				local pos = {x=pos.x+math.random(-1,1), y=pos.y+0.5, z=pos.z+math.random(-1,1)}
 				local n = minetest.env:get_node(pos).name
 				if n == "air" then
-				minetest.add_entity(pos, "nssm:masticone")
+					minetest.add_entity(pos, "nssm:masticone")
+				end
 			end
 		end)
 	end,
