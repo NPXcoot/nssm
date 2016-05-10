@@ -541,6 +541,9 @@ nssm_register_weapon("light_ball", {
 
         if last_pos == nil or (last_pos ~= nil and last_pos ~= pos) then
             minetest.set_node(pos, {name="nssm:invisible_light"})
+            if last_pos ~= nil then
+                minetest.set_node(last_pos, {name="air"})
+            end
             last_pos = pos
         end
 
