@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:ant_queen", {
+mobs:register_mob("nssm:ant_queen", {
 	type = "monster",
 	hp_max = 120,
 	hp_min = 120,
@@ -60,8 +60,10 @@ nssm:register_mob("nssm:ant_queen", {
 	},
 
 	custom_attack = function(self)
-		if self.timer >4 then
-			self.timer = 0
+		self.ant_queen_counter = (self.ant_queen_counter or 0) + 1
+		if self.ant_queen_counter == 4 then
+			self.ant_queen_counter = 0
+			local counter = 0
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -78,12 +80,21 @@ nssm:register_mob("nssm:ant_queen", {
 				end
 				local pos1 = {x=s.x+math.random(-3,3), y=s.y-1, z=s.z+math.random(-3,3)}
 
-				if pos1.x~=s.x and pos1.z~=s.z then
+				local objects = minetest.env:get_objects_inside_radius(s, 10)
+			    for _,obj in ipairs(objects) do
+			        if (obj:get_luaentity() and obj:get_luaentity().name == "nssm:ant_soldier") then
+			        	counter = counter + 1
+					end
+			    end
+
+				if 	((pos1.x~=s.x) and (pos1.z~=s.z))
+				and (minetest.env:get_node(pos1).name == "air")
+				and (counter < 4)
+				then
 					nssm:explosion_particles(pos1, 1)
 					minetest.add_entity(pos1, "nssm:ant_soldier")
 				end
 			end
 		end
 	end
-
 })

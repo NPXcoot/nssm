@@ -41,7 +41,7 @@ function nssm:duck_explosion(pos)
 		texture = "duck_egg_fragments.png",
 	})
 	core.after(0.4, function()
-		for dx = -2,2 do
+		for dx = -1,1 do
 			pos = {x = pos.x+dx, y=pos.y; z=pos.z+dx}
 			minetest.add_particlespawner({
 				amount = 100,

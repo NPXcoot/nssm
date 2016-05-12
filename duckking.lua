@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:duckking", {
+mobs:register_mob("nssm:duckking", {
 	type = "monster",
 	hp_max = 80,
 	hp_min = 77,
@@ -47,11 +47,12 @@ nssm:register_mob("nssm:duckking", {
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
-	dogshoot_stop = true,
+	dogshoot_switch = true,
+	dogshoot_count_max = 9,
 	arrow = "nssm:duck_father";
-		reach = 3,
-		shoot_interval=3,
-		shoot_offset =-1,
+	reach = 3,
+	shoot_interval=3,
+	shoot_offset =-1,
 	animation = {
 		speed_normal = 15,
 		speed_run = 25,
@@ -63,7 +64,7 @@ nssm:register_mob("nssm:duckking", {
 		run_end = 40,
 		punch_start = 190,
 		punch_end = 220,
-		dattack_start = 160,
-		dattack_end = 180,
+		shoot_start = 160,
+		shoot_end = 180,
 	}
 })
