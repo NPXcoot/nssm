@@ -818,8 +818,11 @@ nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
 nssm_register_egg ('mordain', 'Mordain')
 nssm_register_egg ('pupumolle', 'PupuMolle')
 nssm_register_egg ('morgre', 'Morgre')
-
-
+nssm_register_egg ('morvy', 'Morvy')
+nssm_register_egg ('morgut', 'Morgut')
+nssm_register_egg ('morde', 'Morde')
+nssm_register_egg ('morlu', 'Morlu')
+nssm_register_egg ('morwa', 'Morwa')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
