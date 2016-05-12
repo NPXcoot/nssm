@@ -435,6 +435,7 @@ do_env_damage = function(self)
 	end
 
 	--NSSM modifications:
+	--[[
 
 	if not self.hydra then
 		if check_for_death(self) then
@@ -445,6 +446,7 @@ do_env_damage = function(self)
 			return
 		end
 	end
+	]]--
 
 	--end of NSSM modifications
 

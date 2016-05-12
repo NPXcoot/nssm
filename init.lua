@@ -1,6 +1,6 @@
 local path = minetest.get_modpath("nssm")
 dofile(path.."/api.lua")
-dofile(path.."/spawn.lua")
+--dofile(path.."/spawn.lua")
 
 --Mobs
 dofile(path.."/ant_queen.lua")
@@ -8,6 +8,7 @@ dofile(path.."/ant_soldier.lua")
 dofile(path.."/ant_worker.lua")
 dofile(path.."/black_widow.lua")
 dofile(path.."/bloco.lua")
+dofile(path.."/pupumolle.lua")
 dofile(path.."/crab.lua")
 dofile(path.."/crocodile.lua")
 dofile(path.."/daddy_long_legs.lua")
