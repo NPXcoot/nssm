@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:scrausics", {
+mobs:register_mob("nssm:scrausics", {
 	type = "monster",
 	hp_max = 23,
 	hp_min = 22,
@@ -11,10 +11,10 @@ nssm:register_mob("nssm:scrausics", {
 	rotate = 270,
 	walk_velocity = 2,
 	run_velocity = 3,
-  fall_speed = 0,
-  stepheight = 3,
+	fall_speed = 0,
+	 stepheight = 3,
 	floats=1,
-  sounds = {
+	sounds = {
 		random = "scrausic",
 		distance = 40,
 	},
@@ -36,7 +36,7 @@ nssm:register_mob("nssm:scrausics", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+	fly = true,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 25,

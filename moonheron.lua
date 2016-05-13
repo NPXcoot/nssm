@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:moonheron", {
+mobs:register_mob("nssm:moonheron", {
 	type = "monster",
 	hp_max = 23,
 	hp_min = 22,
@@ -11,9 +11,9 @@ nssm:register_mob("nssm:moonheron", {
 	rotate = 270,
 	walk_velocity = 2,
 	run_velocity = 3,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
+	fall_speed = 0,
+	stepheight = 3,
+	sounds = {
 		random = "moonheron",
 		distance =40,
 	},

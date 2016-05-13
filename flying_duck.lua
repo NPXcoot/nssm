@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:flying_duck", {
+mobs:register_mob("nssm:flying_duck", {
 	type = "monster",
 	hp_max = 15,
 	hp_min = 14,
@@ -10,12 +10,13 @@ nssm:register_mob("nssm:flying_duck", {
 	view_range = 30,
 	walk_velocity = 2,
 	run_velocity = 2.5,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
+  	fall_speed = 0,
+  	stepheight = 3,
+	sounds = {
 		random = "duck",
 	},
 	damage = 2,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -37,7 +38,7 @@ nssm:register_mob("nssm:flying_duck", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+  	fly = true,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 25,

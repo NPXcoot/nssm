@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:ant_worker", {
+mobs:register_mob("nssm:ant_worker", {
 	type = "animal",
 	hp_max = 13,
 	hp_min = 13,
@@ -12,11 +12,12 @@ nssm:register_mob("nssm:ant_worker", {
 	fear_height = 4,
 	walk_velocity = 1.5,
 	run_velocity = 2,
-  rotate = 270,
+  	rotate = 270,
 	sounds = {
 		random = "ant",
 	},
 	damage = 2,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

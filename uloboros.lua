@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:uloboros", {
+mobs:register_mob("nssm:uloboros", {
 	type = "monster",
 	hp_max = 18,
 	hp_min = 17,
@@ -12,11 +12,12 @@ nssm:register_mob("nssm:uloboros", {
 	walk_velocity = 1.5,
 	fear_height = 4,
 	run_velocity = 2.5,
-  rotate = 270,
-  sounds = {
+	rotate = 270,
+	sounds = {
 		random = "uloboros",
 	},
 	damage = 3,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -52,6 +53,6 @@ nssm:register_mob("nssm:uloboros", {
 		punch_end = 110,
 	},
 	do_custom = function(self)
-		nssm:webber_ability(self, "nssm:web", 3)
+		nssm:webber_ability(self, "nssm:web", 2)
 	end,
 })

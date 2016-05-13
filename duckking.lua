@@ -49,8 +49,7 @@ mobs:register_mob("nssm:duckking", {
 	attack_type = "dogshoot",
 	dogshoot_switch = true,
 	dogshoot_count_max = 9,
-	arrow = "nssm:duck_father";
-	reach = 3,
+	arrow = "nssm:duck_father",
 	shoot_interval=3,
 	shoot_offset =-1,
 	animation = {

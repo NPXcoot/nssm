@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:night_master", {
+mobs:register_mob("nssm:night_master", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 30,
@@ -13,11 +13,11 @@ nssm:register_mob("nssm:night_master", {
 	floats=1,
 	walk_velocity = 3,
 	run_velocity = 4,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
-	random = "night_master",
-	distance = 45,
+	fall_speed = 0,
+	stepheight = 3,
+	sounds = {
+		random = "night_master",
+		distance = 45,
 	},
 	damage = 8,
 	jump = false,
@@ -27,9 +27,8 @@ nssm:register_mob("nssm:night_master", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+	fly = true,
 	attack_type = "dogfight",
-  reach = 3,
 	animation = {
 		speed_normal = 25,
 		speed_run = 35,
@@ -63,7 +62,7 @@ nssm:register_mob("nssm:night_master", {
 	end,
 })
 
-nssm:register_mob("nssm:night_master_2", {
+mobs:register_mob("nssm:night_master_2", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 30,
@@ -78,11 +77,11 @@ nssm:register_mob("nssm:night_master_2", {
 	floats=1,
 	walk_velocity = 3,
 	run_velocity = 4,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
-	random = "night_master",
-	distance = 45,
+	fall_speed = 0,
+	stepheight = 3,
+	sounds = {
+		random = "night_master",
+		distance = 45,
 	},
 	damage = 8,
 	jump = false,
@@ -92,9 +91,8 @@ nssm:register_mob("nssm:night_master_2", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+  	fly = true,
 	attack_type = "dogfight",
-  reach = 3,
 	animation = {
 		speed_normal = 25,
 		speed_run = 35,
@@ -128,7 +126,7 @@ nssm:register_mob("nssm:night_master_2", {
 	end,
 })
 
-nssm:register_mob("nssm:night_master_1", {
+mobs:register_mob("nssm:night_master_1", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 30,
@@ -143,11 +141,11 @@ nssm:register_mob("nssm:night_master_1", {
 	floats=1,
 	walk_velocity = 3,
 	run_velocity = 4,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
-	random = "night_master",
-	distance = 45,
+	fall_speed = 0,
+	stepheight = 3,
+	sounds = {
+		random = "night_master",
+		distance = 45,
 	},
 	damage = 8,
 	jump = false,
@@ -171,9 +169,8 @@ nssm:register_mob("nssm:night_master_1", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+	fly = true,
 	attack_type = "dogfight",
-  reach = 3,
 	animation = {
 		speed_normal = 25,
 		speed_run = 35,

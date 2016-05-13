@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:dolidrosaurus", {
+mobs:register_mob("nssm:dolidrosaurus", {
 	type = "monster",
 	hp_max = 26,
 	hp_min = 23,
@@ -20,10 +20,10 @@ nssm:register_mob("nssm:dolidrosaurus", {
 	jump_chance = 0,
 	jump_height = 0,
     sounds = {
-		random = "quo",
+		random = "crocod",
 	},
 	drops = {
-			{name = "nssm:life_energy",
+		{name = "nssm:life_energy",
 		chance = 1,
 		min = 1,
 		max = 3,},

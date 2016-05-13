@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:white_werewolf", {
+mobs:register_mob("nssm:white_werewolf", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 25,

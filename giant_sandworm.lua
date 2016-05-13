@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:giant_sandworm", {
+mobs:register_mob("nssm:giant_sandworm", {
 	type = "monster",
 	hp_max = 130,
 	hp_min = 120,
@@ -48,5 +48,4 @@ nssm:register_mob("nssm:giant_sandworm", {
 		punch_start = 150,
 		punch_end = 180,
 	},
-
 })

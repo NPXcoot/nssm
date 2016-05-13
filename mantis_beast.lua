@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:mantis_beast", {
+mobs:register_mob("nssm:mantis_beast", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 17,
@@ -16,6 +16,7 @@ nssm:register_mob("nssm:mantis_beast", {
 		random = "manti",
 	},
 	damage = 3,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:mantis_claw",

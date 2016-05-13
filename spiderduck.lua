@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:spiderduck", {
+mobs:register_mob("nssm:spiderduck", {
 	type = "monster",
 	hp_max = 25,
 	hp_min = 24,
@@ -42,7 +42,7 @@ nssm:register_mob("nssm:spiderduck", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
-	dogshoot_stop = true,
+	dogshoot_switch = true,
 	attack_type = "dogshoot",
     arrow = "nssm:webball",
     reach = 2,
@@ -59,7 +59,7 @@ nssm:register_mob("nssm:spiderduck", {
 		run_end = 260,
 		punch_start = 20,
 		punch_end = 46,
-		dattack_start = 150,
-		dattack_end = 200,
+		shoot_start = 150,
+		shoot_end = 200,
 	}
 })

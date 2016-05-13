@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:morgre", {
+mobs:register_mob("nssm:morgre", {
 	type = "monster",
 	hp_max = 15,
 	hp_min = 14,

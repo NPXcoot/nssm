@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:sandworm", {
+mobs:register_mob("nssm:sandworm", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 25,
@@ -10,7 +10,7 @@ nssm:register_mob("nssm:sandworm", {
 	makes_footstep_sound = false,
 	view_range = 17,
 	rotate = 270,
-	reach = 4,
+	reach = 2,
 	fear_height = 3,
 	walk_velocity = 2,
 	run_velocity = 2,

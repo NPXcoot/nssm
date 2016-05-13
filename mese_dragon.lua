@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:mese_dragon", {
+mobs:register_mob("nssm:mese_dragon", {
 	type = "monster",
 	hp_max = 333,
 	hp_min = 333,
@@ -38,7 +38,8 @@ nssm:register_mob("nssm:mese_dragon", {
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
-	dogshoot_stop = true,
+	dogshoot_switch = true,
+	dogshoot_count_max = 9,
 	arrow = "nssm:roar_of_the_dragon",
 	reach = 5,
 	shoot_interval = 3,
@@ -54,10 +55,10 @@ nssm:register_mob("nssm:mese_dragon", {
 		run_end = 242,
 		punch_start = 242,
 		punch_end = 275,
-		punch1_start = 330,
-		punch1_end = 370,
-    dattack_start = 120,
-    dattack_end = 160,
+		punch2_start = 330,
+		punch2_end = 370,
+    	dattack_start = 120,
+    	dattack_end = 160,
 	},
 	do_custom = function(self)
 		nssm:midas_ability(self, "default:mese_block", self.run_velocity,2, 3)

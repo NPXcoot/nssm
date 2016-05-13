@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:daddy_long_legs", {
+mobs:register_mob("nssm:daddy_long_legs", {
 	type = "monster",
 	hp_max = 19,
 	hp_min = 16,

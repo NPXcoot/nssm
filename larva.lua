@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:larva", {
+mobs:register_mob("nssm:larva", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 8,
@@ -19,13 +19,13 @@ nssm:register_mob("nssm:larva", {
 		random = "sand",
 	},
 	damage = 1,
+	reach = 1,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 3,
 		min = 1,
 		max = 1,},
 	},
-	metamorphosis = true,
 	armor = 100,
 	drawtype = "front",
 	water_damage = 2,
@@ -44,5 +44,36 @@ nssm:register_mob("nssm:larva", {
 		run_end = 160,
 		punch_start = 180,
 		punch_end = 230,
-	}
+	},
+	do_custom = function (self)
+		self.metatimer = (self.metatimer) or os.time()
+		if os.time() - self.metatimer >20 then
+			minetest.log("action",
+				"metatimer expired, metamorphosis! ")
+			local pos=self.object:getpos()
+			self.object:remove()
+			minetest.add_particlespawner(
+				200, --amount
+				0.1, --time
+				{x=pos.x-1, y=pos.y-1, z=pos.z-1}, --minpos
+				{x=pos.x+1, y=pos.y+1, z=pos.z+1}, --maxpos
+				{x=-0, y=-0, z=-0}, --minvel
+				{x=1, y=1, z=1}, --maxvel
+				{x=-0.5,y=5,z=-0.5}, --minacc
+				{x=0.5,y=5,z=0.5}, --maxacc
+				0.1, --minexptime
+				1, --maxexptime
+				3, --minsize
+				4, --maxsize
+				false, --collisiondetection
+				"tnt_smoke.png" --texture
+			)
+			if math.random(1,2)==1 then
+				minetest.add_entity(pos, "nssm:mantis")
+			else
+				minetest.add_entity(pos, "nssm:mantis_beast")
+			end
+			return
+		end
+	end
 })

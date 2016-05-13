@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:crocodile", {
+mobs:register_mob("nssm:crocodile", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 15,
@@ -6,7 +6,7 @@ nssm:register_mob("nssm:crocodile", {
 	visual = "mesh",
 	mesh = "crocodile.x",
 	textures = {{"croco.png"}},
-  sounds = {
+  	sounds = {
 		random = "crocod",
 	},
 	visual_size = {x=4, y=4},
@@ -18,14 +18,14 @@ nssm:register_mob("nssm:crocodile", {
 	floats = 1,
 	jump = true,
 	drops = {
-			{name = "nssm:life_energy",
+		{name = "nssm:life_energy",
 		chance = 1,
 		min = 1,
 		max = 2,},
 		{name = "nssm:crocodile_tail",
-	chance = 2,
-	min = 1,
-	max = 1,},
+		chance = 2,
+		min = 1,
+		max = 1,},
 	},
 	armor = 90,
 	drawtype = "front",

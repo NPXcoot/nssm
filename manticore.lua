@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:manticore", {
+mobs:register_mob("nssm:manticore", {
 	type = "monster",
 	hp_max = 25,
 	hp_min = 24,
@@ -12,7 +12,7 @@ nssm:register_mob("nssm:manticore", {
 	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 4,
-  sounds = {
+	sounds = {
 		random = "manticore",
 	},
 	damage = 4,
@@ -30,14 +30,13 @@ nssm:register_mob("nssm:manticore", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 2,
-  rotate = 270,
+	rotate = 270,
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
 	dogshoot_stop = true,
     arrow = "nssm:spine",
-    reach = 3,
     shoot_interval = 2,
     shoot_offset = 1,
 	animation = {
@@ -51,7 +50,7 @@ nssm:register_mob("nssm:manticore", {
 		run_end = 108,
 		punch_start = 110,
 		punch_end = 143,
-    dattack_start =180,
-    dattack_end=230,
+    	shoot_start =180,
+    	shoot_end=230,
 	}
 })

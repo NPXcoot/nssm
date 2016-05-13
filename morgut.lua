@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:morgut", {
+mobs:register_mob("nssm:morgut", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 17,

@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:enderduck", {
+mobs:register_mob("nssm:enderduck", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 18,
@@ -13,10 +13,11 @@ nssm:register_mob("nssm:enderduck", {
 	fear_height = 4,
 	run_velocity = 3.9,
 	rotate = 270,
-  sounds = {
+  	sounds = {
 		random = "duck",
 	},
 	damage = 3,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

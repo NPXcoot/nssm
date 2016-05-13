@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:sand_bloco", {
+mobs:register_mob("nssm:sand_bloco", {
 	type = "monster",
 	hp_max = 23,
 	hp_min = 17,
@@ -17,6 +17,7 @@ nssm:register_mob("nssm:sand_bloco", {
 		random = "bloco",
 	},
 	damage = 1,
+	reach = 1.5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

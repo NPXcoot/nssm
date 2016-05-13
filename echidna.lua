@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:echidna", {
+mobs:register_mob("nssm:echidna", {
 	type = "monster",
 	hp_max = 90,
 	hp_min = 90,
@@ -52,7 +52,7 @@ nssm:register_mob("nssm:echidna", {
 		run_end = 40,
 		punch_start = 160,
 		punch_end = 190,
-		dattack_start = 200,
-		dattack_end = 240,
+		shoot_start = 200,
+		shoot_end = 240,
 	}
 })

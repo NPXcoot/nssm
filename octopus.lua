@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:octopus", {
+mobs:register_mob("nssm:octopus", {
 	type = "monster",
 	hp_max = 22,
 	hp_min = 15,
@@ -14,11 +14,12 @@ nssm:register_mob("nssm:octopus", {
 	walk_velocity = 1.5,
 	run_velocity = 3,
 	damage = 3,
+	reach = 2,
 	rotate = 270,
 	jump = false,
 	jump_chance = 0,
 	jump_height = 0,
-  sounds = {
+  	sounds = {
 		random = "octopus",
 	},
 	drops = {
@@ -52,7 +53,7 @@ nssm:register_mob("nssm:octopus", {
 	}
 })
 
-nssm:register_mob("nssm:xgaloctopus", {
+mobs:register_mob("nssm:xgaloctopus", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 27,
@@ -73,7 +74,7 @@ nssm:register_mob("nssm:xgaloctopus", {
 	jump = false,
 	jump_chance = 0,
 	jump_height = 0,
-  sounds = {
+	sounds = {
 		random = "octopus",
 	},
 	drops = {

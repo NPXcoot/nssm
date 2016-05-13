@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:swimming_duck", {
+mobs:register_mob("nssm:swimming_duck", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 15,
@@ -12,6 +12,7 @@ nssm:register_mob("nssm:swimming_duck", {
 	walk_velocity = 1,
 	run_velocity = 1,
 	damage = 2,
+	reach = 1.5,
 	jump = false,
 	jump_chance = 0,
 	jump_height = 0,

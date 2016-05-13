@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:icesnake", {
+mobs:register_mob("nssm:icesnake", {
 	type = "monster",
 	hp_max = 17,
 	hp_min = 13,
@@ -13,10 +13,11 @@ nssm:register_mob("nssm:icesnake", {
 	fear_height = 3,
 	walk_velocity = 1.2,
 	run_velocity = 3,
-  sounds = {
+  	sounds = {
 		random = "icesnake",
 	},
 	damage = 3,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

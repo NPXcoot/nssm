@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:stone_eater", {
+mobs:register_mob("nssm:stone_eater", {
 	type = "monster",
 	hp_max = 17,
 	hp_min = 15,
@@ -10,13 +10,13 @@ nssm:register_mob("nssm:stone_eater", {
 	makes_footstep_sound = false,
 	view_range = 16,
 	rotate = 270,
-	worm=true,
 	fear_height = 4,
 	jump = false,
 	jump_height =0,
 	walk_velocity = 1,
 	run_velocity = 1.5,
 	damage = 3,
+	reach = 1.5,
 	drops = {
         {name = "default:stone",
 		chance = 2,

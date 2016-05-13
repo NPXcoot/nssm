@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:tarantula", {
+mobs:register_mob("nssm:tarantula", {
 	type = "monster",
 	hp_max = 30,
 	hp_min = 30,
@@ -61,7 +61,7 @@ nssm:register_mob("nssm:tarantula", {
 })
 
 
-nssm:register_mob("nssm:tarantula_propower", {
+mobs:register_mob("nssm:tarantula_propower", {
 	type = "monster",
 	hp_max = 70,
 	hp_min = 70,
@@ -115,5 +115,4 @@ nssm:register_mob("nssm:tarantula_propower", {
 		punch_start = 180,
 		punch_end = 200,
 	}
-
 })

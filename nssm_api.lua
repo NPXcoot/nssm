@@ -299,7 +299,7 @@ function nssm:webber_ability(		--puts randomly around the block defined as w_blo
 	)
 
 	local pos = self.object:getpos()
-	if (math.random(1,5)==1) then
+	if (math.random(1,55)==1) then
 		local dx=math.random(1,radius)
 		local dz=math.random(1,radius)
 		local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}

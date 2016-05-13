@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:pumpboom_small", {
+mobs:register_mob("nssm:pumpboom_small", {
 	type = "monster",
 	hp_max = 15,
 	hp_min = 14,
@@ -46,7 +46,7 @@ nssm:register_mob("nssm:pumpboom_small", {
 	}
 })
 
-nssm:register_mob("nssm:pumpboom_medium", {
+mobs:register_mob("nssm:pumpboom_medium", {
 	type = "monster",
 	hp_max = 18,
 	hp_min = 17,
@@ -93,7 +93,7 @@ nssm:register_mob("nssm:pumpboom_medium", {
 	}
 })
 
-nssm:register_mob("nssm:pumpboom_large", {
+mobs:register_mob("nssm:pumpboom_large", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 19,
@@ -127,7 +127,7 @@ nssm:register_mob("nssm:pumpboom_large", {
 	on_rightclick = nil,
 	attack_type = "explode",
 	animation = {
-speed_normal = 25,
+		speed_normal = 25,
 		speed_run = 25,
 		stand_start = 1,
 		stand_end = 30,

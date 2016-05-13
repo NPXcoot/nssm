@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:phoenix", {
+mobs:register_mob("nssm:phoenix", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 60,
@@ -13,9 +13,9 @@ nssm:register_mob("nssm:phoenix", {
 	rotate = 270,
 	walk_velocity = 2,
 	run_velocity = 2.5,
-  fall_speed = 0,
-  stepheight = 3,
-  sounds = {
+	fall_speed = 0,
+	stepheight = 3,
+	sounds = {
 		random = "phoenix",
 		distance = 45,
 	},
@@ -45,11 +45,11 @@ nssm:register_mob("nssm:phoenix", {
 	lava_damage = 0,
 	light_damage = 0,
 	on_rightclick = nil,
-  fly = true,
+	fly = true,
 	attack_type = "shoot",
-		arrow = "nssm:phoenix_arrow",
-		reach = 1,
-		shoot_interval = 4,
+	arrow = "nssm:phoenix_arrow",
+	reach = 1,
+	shoot_interval = 4,
 	animation = {
 		speed_normal = 25,
 		speed_run = 25,
@@ -61,7 +61,7 @@ nssm:register_mob("nssm:phoenix", {
 		run_end = 210,
 		punch_start = 80,
 		punch_end = 110,
-		dattack_start = 80,
-		dattack_end = 110,
+		shoot_start = 80,
+		shoot_end = 110,
 	}
 })

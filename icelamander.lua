@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:icelamander", {
+mobs:register_mob("nssm:icelamander", {
 	type = "monster",
 	hp_max = 90,
 	hp_min = 90,
@@ -42,10 +42,10 @@ nssm:register_mob("nssm:icelamander", {
 	lava_damage = 30,
 	light_damage = 0,
 	on_rightclick = nil,
-	dogshoot_stop = true,
 	attack_type = "dogshoot",
+	dogshoot_switch = true,
+	dogshoot_count_max = 7,
 	arrow = "nssm:snow_arrow",
-	reach = 3,
 	shoot_interval = 2,
 	animation = {
 		speed_normal = 15,
@@ -58,8 +58,8 @@ nssm:register_mob("nssm:icelamander", {
 		run_end = 80,
 		punch_start = 160,
 		punch_end = 190,
-		dattack_start = 190,
-		dattack_end = 210,
+		shoot_start = 190,
+		shoot_end = 210,
 	},
 	do_custom = function(self)
 		nssm:midas_ability(self, "default:ice", self.run_velocity,1, 3)

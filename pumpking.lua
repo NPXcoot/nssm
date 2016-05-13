@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:pumpking", {
+mobs:register_mob("nssm:pumpking", {
 	type = "monster",
 	hp_max = 100,
 	hp_min = 100,

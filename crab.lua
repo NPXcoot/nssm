@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:crab", {
+mobs:register_mob("nssm:crab", {
 	type = "monster",
 	hp_max = 17,
 	hp_min = 15,
@@ -6,7 +6,7 @@ nssm:register_mob("nssm:crab", {
 	visual = "mesh",
 	mesh = "crab.x",
 	textures = {{"crab1.png"},{"crab2.png"}},
-  sounds = {
+  	sounds = {
 		random = "crab",
 	},
 	visual_size = {x=3, y=3},
@@ -17,6 +17,7 @@ nssm:register_mob("nssm:crab", {
 	walk_velocity = 1,
 	run_velocity = 2,
 	damage = 3,
+	reach = 2,
 	floats = 0,
 	jump = true,
 	drops = {

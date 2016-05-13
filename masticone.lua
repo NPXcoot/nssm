@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:masticone", {
+mobs:register_mob("nssm:masticone", {
 	type = "monster",
 	hp_max = 15,
 	hp_min = 14,
@@ -38,7 +38,6 @@ nssm:register_mob("nssm:masticone", {
 	water_damage = 0,
 	lava_damage = 0,
 	floats=0,
-	--hydra = true,
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogfight",

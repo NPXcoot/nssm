@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:mordain", {
+mobs:register_mob("nssm:mordain", {
 	type = "monster",
 	hp_max = 23,
 	hp_min = 17,

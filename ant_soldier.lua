@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:ant_soldier", {
+mobs:register_mob("nssm:ant_soldier", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 20,
@@ -12,7 +12,7 @@ nssm:register_mob("nssm:ant_soldier", {
 	fear_height = 4,
 	walk_velocity = 1.5,
 	run_velocity = 3,
-  rotate = 270,
+  	rotate = 270,
     sounds = {
 		random = "ant",
 	},

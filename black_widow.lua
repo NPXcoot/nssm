@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:black_widow", {
+mobs:register_mob("nssm:black_widow", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 19,
@@ -13,10 +13,11 @@ nssm:register_mob("nssm:black_widow", {
 	walk_velocity = 1,
 	run_velocity = 2.5,
     rotate = 270,
-  sounds = {
+  	sounds = {
 		random = "black_widow",
 	},
 	damage = 3,
+	reach = 2,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -52,6 +53,6 @@ nssm:register_mob("nssm:black_widow", {
 		punch_end = 160,
 	},
 	do_custom = function(self)
-		nssm:webber_ability(self, "nssm:web", 3)
+		nssm:webber_ability(self, "nssm:web", 2)
 	end,
 })

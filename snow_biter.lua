@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:snow_biter", {
+mobs:register_mob("nssm:snow_biter", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 15,
@@ -42,6 +42,7 @@ nssm:register_mob("nssm:snow_biter", {
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	double_melee_attack = true,
 	animation = {
 		speed_normal = 20,
 		speed_run = 25,
@@ -53,8 +54,8 @@ nssm:register_mob("nssm:snow_biter", {
 		run_end = 100,
 		punch_start = 175,
 		punch_end = 190,
-		punch1_start = 200,
-		punch1_end = 215
+		punch2_start = 200,
+		punch2_end = 215
 	},
 	do_custom = function(self)
 		nssm:putting_ability(self, "default:ice", self.run_velocity)

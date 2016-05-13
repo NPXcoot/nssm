@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:lava_titan", {
+mobs:register_mob("nssm:lava_titan", {
 	type = "monster",
 	hp_max = 80,
 	hp_min = 80,
@@ -14,7 +14,7 @@ nssm:register_mob("nssm:lava_titan", {
 	walk_velocity = 1,
 	run_velocity = 2,
 	floats = 1,
-  	sounds = {
+	sounds = {
 		random = "lava_titan",
 	},
 	damage = 7,
@@ -46,10 +46,10 @@ nssm:register_mob("nssm:lava_titan", {
 	attack_type = "dogshoot",
 	dogshoot_stop = true,
   	arrow = "nssm:lava_arrow",
-  	reach = 3,
   	shoot_interval = 2,
   	shoot_offset = -1,
 	true_dist_attack = true,
+	--[[
 	on_dist_attack = function(self, player)
 		local pos = player:getpos()
 		for dy=-1, 6, 1 do
@@ -64,6 +64,7 @@ nssm:register_mob("nssm:lava_titan", {
 			end
 		end
 	end,
+	]]
 	animation = {
 		speed_normal = 25,
 		speed_run = 25,
@@ -75,8 +76,8 @@ nssm:register_mob("nssm:lava_titan", {
 		run_end = 110,
 		punch_start = 301,
 		punch_end = 340,
-    	dattack_start =340,
-    	dattack_end=400,
+    	shoot_start =340,
+    	shoot_end=400,
 	},
 	do_custom = function (self)
 		nssm:digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})

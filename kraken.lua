@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:kraken", {
+mobs:register_mob("nssm:kraken", {
 	type = "monster",
 	hp_max = 150,
 	hp_min = 150,
@@ -20,7 +20,7 @@ nssm:register_mob("nssm:kraken", {
 	jump = false,
 	jump_chance = 0,
 	jump_height = 0,
-  sounds = {
+  	sounds = {
 		random = "kraken",
 	},
 	drops = {

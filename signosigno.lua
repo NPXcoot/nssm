@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:signosigno", {
+mobs:register_mob("nssm:signosigno", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 8,
@@ -12,8 +12,9 @@ nssm:register_mob("nssm:signosigno", {
 	walk_velocity = 1.5,
 	fear_height = 4,
 	run_velocity = 2.5,
-  rotate = 270,
+	rotate = 270,
 	damage = 3,
+	reach = 1.5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -40,5 +41,4 @@ nssm:register_mob("nssm:signosigno", {
 		punch_start = 160,
 		punch_end = 190,
 	}
-
 })
