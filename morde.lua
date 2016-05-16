@@ -44,5 +44,51 @@ mobs:register_mob("nssm:morde", {
 		run_end = 120,
 		punch_start = 130,
 		punch_end = 160,
-	}
+	},
+	custom_attack = function (self)
+		self.morde_timer = (self.morde_timer or os.time())
+		if (os.time() - self.morde_timer) > 1 then
+			self.morde_timer = os.time()
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			set_animation(self, "punch")
+
+			self.health = self.health + self.damage
+			local m = 3
+
+			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+						object = self.object,
+						max_hear_distance = self.sounds.distance
+					})
+				end
+				-- punch player
+				self.attack:punch(self.object, 1.0,  {
+					full_punch_interval=1.0,
+					damage_groups = {fleshy=self.damage}
+				}, nil)
+
+				minetest.add_particlespawner(
+			        6, --amount
+			        1, --time
+			        {x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
+			        {x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
+			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --minvel
+			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --maxvel
+			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --minacc
+			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --maxacc
+			        0.2, --minexptime
+			        0.3, --maxexptime
+			        2, --minsize
+			        3, --maxsize
+			        false, --collisiondetection
+			        "morparticle.png" --texture
+			    )
+			end
+		end
+	end
 })

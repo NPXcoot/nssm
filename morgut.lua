@@ -14,6 +14,7 @@ mobs:register_mob("nssm:morgut", {
 	reach =2,
 	run_velocity = 3.5,
 	damage = 4,
+	runaway = true,
 	jump = true,
     --[[sounds = {
 		random = "",
@@ -44,5 +45,37 @@ mobs:register_mob("nssm:morgut", {
 		run_end = 120,
 		punch_start = 130,
 		punch_end = 160,
-	}
+	},
+
+	do_custom = function (self)
+		self.flag = (self.flag or 0)
+
+		--[[if self.flag == 1 then
+			local pyaw = self.curr_attack:get_look_yaw()
+			self.object:setyaw(pyaw + self.rotate)
+			set_velocity(self, run_velocity)
+		end
+		]]
+	end,
+	custom_attack = function (self)
+		self.curr_attack = (self.curr_attack or self.attack)
+		self.morgut_timer = (self.morgut_timer or os.time())
+		if (os.time() - self.morgut_timer) > 1 then
+			self.morgut_timer = os.time()
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			set_animation(self, "punch")
+
+			self.flag = 1
+			self.curr_attack = self.attack
+			self.state = "runaway"
+			local pyaw = self.curr_attack: get_look_yaw()
+			self.object:setyaw(pyaw)
+			set_velocity(self, self.run_velocity)
+
+			minetest.chat_send_all("Stato = "..self.state)
+		end
+	end,
 })

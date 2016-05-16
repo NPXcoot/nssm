@@ -32,7 +32,7 @@ mobs:register_mob("nssm:mordain", {
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
-		speed_normal = 20,
+		speed_normal = 15,
 		speed_run = 20,
 		stand_start = 10,
 		stand_end = 90,
@@ -44,10 +44,13 @@ mobs:register_mob("nssm:mordain", {
 		punch_end = 225,
 	},
 	custom_attack = function(self)
-		if self.timer > 1 then
-			self.timer = 0
+		self.mordain_timer = (self.mordain_timer or os.time())
+		if (os.time() - self.mordain_timer) > 1 then
+			self.mordain_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
+
+			set_animation(self, "punch")
 
 			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
 				-- play attack sound
