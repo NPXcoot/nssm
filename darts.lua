@@ -120,7 +120,7 @@ nssm:register_arrow("nssm:spine", {
 
 --morbat arrow
 nssm:register_arrow("nssm:morarrow", {
-	visual = "sprite"
+	visual = "sprite",
 	visual_size = {x=0.5, y=0.5},
 	textures = {"morarrow.png"},
 	velocity= 13,

@@ -61,7 +61,7 @@ mobs:register_mob("nssm:morvy", {
 					max_hear_distance = self.sounds.distance
 					})
 				end]]
-				local pos1 = {x=s.x, y=s.y+0.5, z=s.z}
+				local pos1 = {x=s.x+math.random(-0.5,0.5), y=s.y+0.2, z=s.z+math.random(-0.5,0.5)}
 
 				local objects = minetest.env:get_objects_inside_radius(s, 10)
 			    for _,obj in ipairs(objects) do
@@ -73,12 +73,11 @@ mobs:register_mob("nssm:morvy", {
 				if (minetest.env:get_node(pos1).name == "air")
 				and (counter < 5)
 				then
-
-					--[[minetest.add_particlespawner(
+					minetest.add_particlespawner(
 						20, --amount
 						0.1, --time
-						{x=pos.x-exp_radius, y=pos.y-exp_radius, z=pos.z-exp_radius}, --minpos
-						{x=pos.x+exp_radius, y=pos.y+exp_radius, z=pos.z+exp_radius}, --maxpos
+						{x=pos1.x-0.2, y=pos1.y-0.2, z=pos1.z-0.2}, --minpos
+						{x=pos1.x+0.2, y=pos1.y+0.2, z=pos1.z+0.2}, --maxpos
 						{x=0, y=0, z=0}, --minvel
 						{x=0.1, y=0.3, z=0.1}, --maxvel
 						{x=-0.5,y=1,z=-0.5}, --minacc
@@ -90,14 +89,9 @@ mobs:register_mob("nssm:morvy", {
 						false, --collisiondetection
 						"morparticle.png" --texture
 						)
-<<<<<<< HEAD
-						]]
+						
 					local bat
 					local which = math.random(1,3)
-=======
-					local bat = {"nssm:morbat1"}
-					local which = math.random (1,3)
->>>>>>> 06bfd09fbe104baaddabeef8e9c50297d266859d
 					if which == 1 then
 						bat = "nssm:morbat1"
 					elseif which == 2 then
@@ -119,11 +113,11 @@ mobs:register_mob("nssm:morbat1", {
 	type = "monster",
 	hp_max = 13,
 	hp_min = 10,
-	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
+	collisionbox = {-0.1, 0.2, -0.1, 0.1, 0.4, 0.1},
 	visual = "mesh",
 	mesh = "morbat.x",
 	textures = {{"morbat1.png"}},
-	visual_size = {x=1, y=1},
+	visual_size = {x=2, y=2},
 	view_range = 40,
 	walk_velocity = 0.5,
 	run_velocity = 3,
@@ -168,11 +162,11 @@ mobs:register_mob("nssm:morbat2", {
 	type = "monster",
 	hp_max = 13,
 	hp_min = 10,
-	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
+	collisionbox = {-0.1, 0.2, -0.1, 0.1, 0.4, 0.1},
 	visual = "mesh",
 	mesh = "morbat.x",
 	textures = {{"morbat2.png"}},
-	visual_size = {x=1, y=1},
+	visual_size = {x=2, y=2},
 	view_range = 40,
 	walk_velocity = 0.5,
 	run_velocity = 3,
@@ -198,7 +192,7 @@ mobs:register_mob("nssm:morbat2", {
 	light_damage = 0,
 	on_rightclick = nil,
   	fly = true,
-	attack_type = "explosion",
+	attack_type = "explode",
 	explosion_radius = 3,
 	animation = {
 		speed_normal = 25,
@@ -219,11 +213,11 @@ mobs:register_mob("nssm:morbat3", {
 	type = "monster",
 	hp_max = 13,
 	hp_min = 10,
-	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
+	collisionbox = {-0.1, 0.2, -0.1, 0.1, 0.4, 0.1},
 	visual = "mesh",
 	mesh = "morbat.x",
 	textures = {{"morbat3.png"}},
-	visual_size = {x=1, y=1},
+	visual_size = {x=2, y=2},
 	view_range = 40,
 	walk_velocity = 0.5,
 	run_velocity = 3,
@@ -250,8 +244,8 @@ mobs:register_mob("nssm:morbat3", {
 	on_rightclick = nil,
   	fly = true,
 	attack_type = "shoot",
-	arrow = "nssm:spine",
-	shoot_interval = 1,
+	arrow = "nssm:morarrow",
+	shoot_interval = 2,
 	animation = {
 		speed_normal = 25,
 		speed_run = 35,
