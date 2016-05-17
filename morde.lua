@@ -90,5 +90,31 @@ mobs:register_mob("nssm:morde", {
 			    )
 			end
 		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		minetest.add_entity(pos, "nssm:mortick")
+	end,
+})
+
+minetest.register_entity("nssm:mortick", {
+	textures = {"mortick.png"},
+	visual = "mesh",
+	mesh = "mortick.x",
+	visual_size = {x=3, y=3},
+	on_step = function(self, dtime)
+		self.attack = (self.attack or 0)
+		local s = self.object:getpos()
+		local objects = minetest.env:get_objects_inside_radius(s, 8)
+		for _,obj in ipairs(objects) do
+	        if (obj:is_player()) then
+				self.attack = obj
+	        end
+	    end
+		local p = self.attack:getpos()
+		p.y = p.y + 1.3
+		local m = 10
+		local v = {x=-(s.x-p.x)*m, y=-(s.y-p.y)*m, z=-(s.z-p.z)*m}
+		self.object:setvelocity(v)
 	end
 })
