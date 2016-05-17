@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:morvy", {
 	type = "monster",
-	hp_max = 12,
-	hp_min = 18,
+	hp_max = 18,
+	hp_min = 12,
 	collisionbox = {-0.3, 0.00, -0.3, 0.3, 2.3, 0.3},
 	visual = "mesh",
 	mesh = "morvy.x",
@@ -61,20 +61,20 @@ mobs:register_mob("nssm:morvy", {
 					max_hear_distance = self.sounds.distance
 					})
 				end]]
-				local pos1 = {x=s.x, y=s.y+2, z=s.z}
+				local pos1 = {x=s.x, y=s.y+0.5, z=s.z}
 
 				local objects = minetest.env:get_objects_inside_radius(s, 10)
 			    for _,obj in ipairs(objects) do
-			        if (obj:get_luaentity() and obj:get_luaentity().name == "nssm:morbat1" or obj:get_luaentity() and obj:get_luaentity().name == "nssm:morbat2" or obj:get_luaentity() and obj:get_luaentity().name == "nssm:morbat3") then
+			        if (obj:get_luaentity() and ((obj:get_luaentity().name == "nssm:morbat1") or (obj:get_luaentity().name == "nssm:morbat2") or (obj:get_luaentity().name == "nssm:morbat3"))) then
 			        	counter = counter + 1
 					end
 			    end
 
-				if 	((pos1.x~=s.x) and (pos1.z~=s.z))
-				and (minetest.env:get_node(pos1).name == "air")
-				and (counter < 4)
+				if (minetest.env:get_node(pos1).name == "air")
+				and (counter < 5)
 				then
-					minetest.add_particlespawner(
+
+					--[[minetest.add_particlespawner(
 						20, --amount
 						0.1, --time
 						{x=pos.x-exp_radius, y=pos.y-exp_radius, z=pos.z-exp_radius}, --minpos
@@ -89,14 +89,16 @@ mobs:register_mob("nssm:morvy", {
 						6, --maxsize
 						false, --collisiondetection
 						"morparticle.png" --texture
-					local bat = {"nssm:morbat1"}
-					local which = math.random (1,3)
+						)
+						]]
+					local bat
+					local which = math.random(1,3)
 					if which == 1 then
-						bat = {"nssm:morbat1"}
+						bat = "nssm:morbat1"
 					elseif which == 2 then
-						bat = {"nssm:morbat2"}
+						bat = "nssm:morbat2"
 					elseif which == 3 then
-						bat = {"nssm:morbat3"}
+						bat = "nssm:morbat3"
 					end
 					minetest.add_entity(pos1, bat)
 				end
@@ -110,8 +112,8 @@ mobs:register_mob("nssm:morvy", {
 
 mobs:register_mob("nssm:morbat1", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 13,
+	hp_max = 13,
+	hp_min = 10,
 	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
 	visual = "mesh",
 	mesh = "morbat.x",
@@ -128,6 +130,7 @@ mobs:register_mob("nssm:morbat1", {
 	damage = 4,
 	reach = 2,
 	jump = true,
+	rotate = 270,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
@@ -158,8 +161,8 @@ mobs:register_mob("nssm:morbat1", {
 
 mobs:register_mob("nssm:morbat2", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 13,
+	hp_max = 13,
+	hp_min = 10,
 	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
 	visual = "mesh",
 	mesh = "morbat.x",
@@ -176,6 +179,7 @@ mobs:register_mob("nssm:morbat2", {
 	damage = 4,
 	reach = 1,
 	jump = true,
+	rotate = 270,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
@@ -208,8 +212,8 @@ mobs:register_mob("nssm:morbat2", {
 
 mobs:register_mob("nssm:morbat3", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 13,
+	hp_max = 13,
+	hp_min = 10,
 	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
 	visual = "mesh",
 	mesh = "morbat.x",
@@ -226,6 +230,7 @@ mobs:register_mob("nssm:morbat3", {
 	damage = 4,
 	reach = 1,
 	jump = true,
+	rotate = 270,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
