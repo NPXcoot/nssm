@@ -118,6 +118,21 @@ nssm:register_arrow("nssm:spine", {
 	end,
 })
 
+--morbat arrow
+nssm:register_arrow("nssm:morarrow", {
+	visual = "sprite"
+	visual_size = {x=0.5, y=0.5},
+	textures = {"morarrow.png"},
+	velocity= 13,
+	
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 3},
+		}, nil)
+	end,
+})
+
 -- web arrow
 nssm:register_arrow("nssm:webball", {
 	visual = "sprite",

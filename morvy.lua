@@ -89,6 +89,7 @@ mobs:register_mob("nssm:morvy", {
 						6, --maxsize
 						false, --collisiondetection
 						"morparticle.png" --texture
+						)
 					local bat = {"nssm:morbat1"}
 					local which = math.random (1,3)
 					if which == 1 then
