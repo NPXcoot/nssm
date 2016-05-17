@@ -90,9 +90,14 @@ mobs:register_mob("nssm:morvy", {
 						false, --collisiondetection
 						"morparticle.png" --texture
 						)
+<<<<<<< HEAD
 						]]
 					local bat
 					local which = math.random(1,3)
+=======
+					local bat = {"nssm:morbat1"}
+					local which = math.random (1,3)
+>>>>>>> 06bfd09fbe104baaddabeef8e9c50297d266859d
 					if which == 1 then
 						bat = "nssm:morbat1"
 					elseif which == 2 then
