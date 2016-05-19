@@ -62,6 +62,6 @@ mobs:register_mob("nssm:icelamander", {
 		shoot_end = 210,
 	},
 	do_custom = function(self)
-		nssm:midas_ability(self, "default:ice", self.run_velocity,1, 3)
+		midas_ability(self, "default:ice", self.run_velocity,1, 3)
 	end,
 })

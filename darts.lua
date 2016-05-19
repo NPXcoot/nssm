@@ -1,5 +1,5 @@
 -- arrow (duck_arrow)
-nssm:register_arrow("nssm:duck_father", {
+mobs:register_arrow("nssm:duck_father", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"duck_egg.png"},
@@ -7,21 +7,21 @@ nssm:register_arrow("nssm:duck_father", {
 	-- direct hit
 	hit_player = function(self, player)
 		local pos = self.object:getpos()
-		nssm:duck_explosion(pos)
+		duck_explosion(pos)
 	end,
 
 	hit_mob = function(self, player)
 		local pos = self.object:getpos()
-		nssm:duck_explosion(pos)
+		duck_explosion(pos)
 	end,
 
 	hit_node = function(self, pos, node)
-		nssm:duck_explosion(pos)
+		duck_explosion(pos)
 	end,
 
 })
 
-function nssm:duck_explosion(pos)
+function duck_explosion(pos)
 	pos.y = pos.y+1;
 	minetest.add_particlespawner({
 		amount = 10,
@@ -66,7 +66,7 @@ function nssm:duck_explosion(pos)
 end
 
 -- snow_arrow
-nssm:register_arrow("nssm:snow_arrow", {
+mobs:register_arrow("nssm:snow_arrow", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"transparent.png"},
@@ -74,19 +74,19 @@ nssm:register_arrow("nssm:snow_arrow", {
 	-- direct hit
 	hit_player = function(self, player)
 		local pos = self.object:getpos()
-		nssm:ice_explosion(pos)
+		ice_explosion(pos)
 	end,
 
 	hit_mob = function(self, player)
 		local pos = self.object:getpos()
-		nssm:ice_explosion(pos)
+		ice_explosion(pos)
 	end,
 	hit_node = function(self, pos, node)
-		nssm:ice_explosion(pos)
+		ice_explosion(pos)
 	end,
 })
 
-function nssm:ice_explosion(pos)
+function ice_explosion(pos)
 	for i=pos.x-math.random(0, 1), pos.x+math.random(0, 1), 1 do
 		for j=pos.y-1, pos.y+4, 1 do
 			for k=pos.z-math.random(0, 1), pos.z+math.random(0, 1), 1 do
@@ -97,7 +97,7 @@ function nssm:ice_explosion(pos)
 end
 
 -- arrow manticore
-nssm:register_arrow("nssm:spine", {
+mobs:register_arrow("nssm:spine", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"manticore_spine_flying.png"},
@@ -119,12 +119,12 @@ nssm:register_arrow("nssm:spine", {
 })
 
 --morbat arrow
-nssm:register_arrow("nssm:morarrow", {
+mobs:register_arrow("nssm:morarrow", {
 	visual = "sprite",
 	visual_size = {x=0.5, y=0.5},
 	textures = {"morarrow.png"},
 	velocity= 13,
-	
+
 	hit_player = function(self, player)
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 1.0,
@@ -134,7 +134,7 @@ nssm:register_arrow("nssm:morarrow", {
 })
 
 -- web arrow
-nssm:register_arrow("nssm:webball", {
+mobs:register_arrow("nssm:webball", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"web_ball.png"},
@@ -142,7 +142,7 @@ nssm:register_arrow("nssm:webball", {
 	-- direct hit
 	hit_player = function(self, player)
 		local p = player:getpos()
-		nssm:explosion_web(p)
+		explosion_web(p)
 	end,
 
 	hit_mob = function(self, player)
@@ -153,11 +153,11 @@ nssm:register_arrow("nssm:webball", {
 	end,
 
 	hit_node = function(self, pos, node)
-		nssm:explosion_web(pos)
+		explosion_web(pos)
 	end
 })
 
-function nssm:explosion_web(pos)
+function explosion_web(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
@@ -182,7 +182,7 @@ function nssm:explosion_web(pos)
 end
 
 -- arrow=>phoenix arrow
-nssm:register_arrow("nssm:phoenix_arrow", {
+mobs:register_arrow("nssm:phoenix_arrow", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"transparent.png"},
@@ -223,7 +223,7 @@ nssm:register_arrow("nssm:phoenix_arrow", {
 	end,
 })
 
-nssm:register_arrow("nssm:super_gas", {
+mobs:register_arrow("nssm:super_gas", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"transparent.png"},
@@ -231,16 +231,16 @@ nssm:register_arrow("nssm:super_gas", {
 	-- direct hit
 	hit_player = function(self, player)
 		local p = player:getpos()
-		nssm:gas_explosion(p)
+		gas_explosion(p)
 	end,
 
 	hit_node = function(self, pos, node)
-		nssm:gas_explosion(pos)
+		gas_explosion(pos)
 	end
 })
 
 
-function nssm:gas_explosion(pos)
+function gas_explosion(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
@@ -261,7 +261,7 @@ function nssm:gas_explosion(pos)
 end
 
 --
-nssm:register_arrow("nssm:roar_of_the_dragon", {
+mobs:register_arrow("nssm:roar_of_the_dragon", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"transparent.png"},

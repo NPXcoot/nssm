@@ -1,4 +1,4 @@
-nssm:register_mob("nssm:pupumolle", {
+mobs:register_mob("nssm:pupumolle", {
 	type = "animal",
 	hp_max = 15,
 	hp_min = 14,

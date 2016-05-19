@@ -92,7 +92,7 @@ mobs:register_mob("nssm:mordain", {
 					d.x = p.x + math.random(-m,m)
 					d.z = p.z + math.random(-m,m)
 					d.y = p.y
-					local dist = nssm:dist_pos(d, p)
+					local dist = dist_pos(d, p)
 					if dist>=2 then
 						for j = -3,3 do
 							ty = d.y + j

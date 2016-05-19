@@ -16,7 +16,7 @@ local function weapons_shot(itemstack, placer, pointed_thing, velocity, name)
 end
 
 local function hit(pos, self)
-    local node = nssm:node_ok(pos).name
+    local node = node_ok(pos).name
     self.hit_node(self, pos, node)
     self.object:remove()
     return
@@ -177,7 +177,7 @@ local function search_on_step(
         vec_min.z = (vec_min.z/max_diff)*vel
         obj_p = obj_min:getpos()
         if min_dist < 1 then
-            local node = nssm:node_ok(pos).name
+            local node = node_ok(pos).name
             self.hit_node(self, pos, node)
             self.object:remove()
             return
@@ -187,7 +187,7 @@ local function search_on_step(
     end
     local n = minetest.env:get_node(pos).name
     if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
-        local node = nssm:node_ok(pos).name
+        local node = node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
@@ -213,7 +213,7 @@ local function default_on_step(
 
 
     if os.time() - self.life_time > max_time then
-        local node = nssm:node_ok(pos).name
+        local node = node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
@@ -236,7 +236,7 @@ local function default_on_step(
 
     local n = minetest.env:get_node(pos).name
     if n==not_transparent or minetest.get_item_group(n, not_transparent)==1 then
-        local node = nssm:node_ok(pos).name
+        local node = node_ok(pos).name
         self.hit_node(self, pos, node)
         self.object:remove()
         return
@@ -351,7 +351,7 @@ nssm_register_weapon("kamehameha", {
         default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 6, 1)
+        explosion(pos, 6, 1)
     end,
     material = "default:diamondblock",
     description = "Kamehameha from DragonBall",
@@ -376,7 +376,7 @@ nssm_register_weapon("spirit_ball", {
         search_on_step(self, dtime, 5, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 4, 0)
+        explosion(pos, 4, 0)
     end,
 
     material = "nssm:cursed_pumpkin_seed",
@@ -390,7 +390,7 @@ nssm_register_weapon("hellzone_grenade", {
         search_on_step2(self, dtime, 30, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        nssm:explosion(pos, 4, 0)
+        explosion(pos, 4, 0)
     end,
 
     on_drop = function(itemstack, user, pointed_thing)

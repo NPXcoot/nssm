@@ -53,6 +53,6 @@ mobs:register_mob("nssm:black_widow", {
 		punch_end = 160,
 	},
 	do_custom = function(self)
-		nssm:webber_ability(self, "nssm:web", 2)
+		webber_ability(self, "nssm:web", 2)
 	end,
 })
