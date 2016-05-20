@@ -854,3 +854,41 @@ minetest.register_craftitem("nssm:mese_egg", {
 		return itemstack
 	end,
 })
+
+
+--experimental morwa statue
+minetest.register_node("nssm:morwa_statue", {
+   description = 'Morwa Statue',
+   drawtype = 'mesh',
+   mesh = 'morwa_statue.b3d',
+   tiles = {'morwa_statue.png'},
+   inventory_image = 'morwa_statue.png',
+   groups = {oddly_breakable_by_hand=2, --[[not_in_creative_inventory=1]]},
+   paramtype = 'light',
+   paramtype2 = 'facedir',
+   selection_box = {
+      type = 'fixed',
+      fixed = {-1, -0.5, -1, 1, 3, 1}, -- Right, Bottom, Back, Left, Top, Front
+      },
+   collision_box = {
+      type = 'fixed',
+      fixed = {-1, -0.5, -1, 1, 3, 1}, -- Right, Bottom, Back, Left, Top, Front
+      },
+})
+--Not working abm to make the conversion between statue and the entity
+
+--[[
+minetest.register_abm({
+	nodenames = {"nssm:morwa_statue"},
+	interval = 1,
+	chance = 1,
+	action = function (pos, node)
+		if (minetest.get_node_light(pos, 0.5) == 15)
+		and ((minetest.get_timeofday() < 0.2) or (minetest.get_timeofday() > 0.8)) 
+		then
+			minetest.remove_node(pos)
+			minetest.add_entity(pos, {name= "nssm:morvy"})
+		end
+	end
+})
+]]
