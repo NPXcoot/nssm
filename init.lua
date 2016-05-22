@@ -29,11 +29,6 @@ dofile(path.."/mantis_beast.lua")
 dofile(path.."/mantis.lua")
 dofile(path.."/masticone.lua")
 dofile(path.."/moonheron.lua")
-dofile(path.."/mordain.lua")
-dofile(path.."/morgre.lua")
-dofile(path.."/morde.lua")
-dofile(path.."/morgut.lua")
-dofile(path.."/morvy.lua")
 dofile(path.."/night_master.lua")
 dofile(path.."/octopus.lua")
 dofile(path.."/phoenix.lua")
@@ -54,6 +49,15 @@ dofile(path.."/white_werewolf.lua")
 
 --Final Boss
 dofile(path.."/mese_dragon.lua")
+
+--Morlavala Mobs
+dofile(path.."/mordain.lua")
+dofile(path.."/morgre.lua")
+dofile(path.."/morde.lua")
+dofile(path.."/morgut.lua")
+dofile(path.."/morvy.lua")
+dofile(path.."/morwa.lua")
+--dofile(path.."/morlu.lua")
 
 --Others
 dofile(path.."/rainbow_staff.lua")
