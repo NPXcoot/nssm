@@ -37,7 +37,7 @@ mobs:register_mob("nssm:echidna", {
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
-	dogshoot_stop = true,
+	dogshoot_switch = true,
 	arrow = "nssm:super_gas";
 	reach = 5,
 	shoot_interval=3,

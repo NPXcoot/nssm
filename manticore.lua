@@ -35,7 +35,7 @@ mobs:register_mob("nssm:manticore", {
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
-	dogshoot_stop = true,
+	dogshoot_switch = true,
     arrow = "nssm:spine",
     shoot_interval = 2,
     shoot_offset = 1,
