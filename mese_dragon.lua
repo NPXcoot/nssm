@@ -22,14 +22,14 @@ nssm:register_mob("nssm:mese_dragon", {
 	jump = true,
 	jump_height = 10,
 	drops = {
-		{name = "nssm:rainbow_staff",
+		{name = "default:mese_crystal",
+		chance = 1,
+		min = 3,
+		max = 7},
+		{name = "default:sword_mese",
 		chance = 1,
 		min = 1,
-		max = 1},
-		{name = "nssm:energy_globe",
-		chance = 1,
-		min = 99,
-		max = 99},
+		max = 2},
     },
 	armor = 60,
 	drawtype = "front",
@@ -60,7 +60,7 @@ nssm:register_mob("nssm:mese_dragon", {
     dattack_end = 160,
 	},
 	do_custom = function(self)
-		nssm:midas_ability(self, "default:mese_block", self.run_velocity,2, 3)
+		nssm:midas_ability(self, "default:coal_block", self.run_velocity,2, 3)
 	end,
 
 	custom_attack = function(self)
