@@ -80,6 +80,6 @@ nssm:register_mob("nssm:lava_titan", {
 	},
 	do_custom = function (self)
 		nssm:digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})
-		nssm:putting_ability(self, "default:lava_source", self.run_velocity)
+		nssm:midas_ability(self, "default:lava_source", self.run_velocity,1,3)
 	end,
 })
