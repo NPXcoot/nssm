@@ -1022,3 +1022,34 @@ minetest.register_craftitem("nssm:mese_egg", {
 		return itemstack
 	end,
 })
+
+minetest.register_craftitem("nssm:mese_egg_tame", {
+	description = "Mese Companion",
+	image = "mese_egg.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
+		pos1.y=pos1.y+1.5
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 0.2,
+			minpos = {x=pos1.x-1, y=pos1.y-1, z=pos1.z-1},
+			maxpos = {x=pos1.x+1, y=pos1.y+4, z=pos1.z+1},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=5, z=1},
+			minacc = {x=-0.5,y=5,z=-0.5},
+			maxacc = {x=0.5,y=5,z=0.5},
+			minexptime = 1,
+			maxexptime = 3,
+			minsize = 2,
+			maxsize = 4,
+			collisiondetection = false,
+			vertical = false,
+			texture = "tnt_smoke.png",
+		})
+		core.after(0.4, function()
+			minetest.add_entity(pos1, "nssm:mese_dragon_tame")
+		end)
+		itemstack:take_item()
+		return itemstack
+	end,
+})

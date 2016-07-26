@@ -48,6 +48,7 @@ dofile(path.."/white_werewolf.lua")
 
 --Final Boss
 dofile(path.."/mese_dragon.lua")
+dofile(path.."/mese_dragon_tame.lua")
 
 --Others
 dofile(path.."/rainbow_staff.lua")
