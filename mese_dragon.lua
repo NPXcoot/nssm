@@ -60,7 +60,7 @@ nssm:register_mob("nssm:mese_dragon", {
     dattack_end = 160,
 	},
 	do_custom = function(self)
-		nssm:midas_ability(self, "default:coal_block", self.run_velocity,2, 3)
+		nssm:midas_ability(self, "fake_fire:embers", self.run_velocity,2, 3)
 	end,
 
 	custom_attack = function(self)
