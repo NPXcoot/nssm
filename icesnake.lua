@@ -52,6 +52,6 @@ nssm:register_mob("nssm:icesnake", {
 		punch_end = 160,
 	},
 	do_custom = function(self)
-		nssm:putting_ability(self, "default:ice", self.run_velocity)
+		nssm:midas_ability(self, "default:ice", self.run_velocity,1,1)
 	end,
 })
