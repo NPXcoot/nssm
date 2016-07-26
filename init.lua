@@ -55,4 +55,4 @@ dofile(path.."/darts.lua")
 dofile(path.."/nssm_materials.lua")
 dofile(path.."/nssm_spears.lua")
 dofile(path.."/nssm_api.lua")
-dofile(path.."/nssm_weapons.lua")
+-- dofile(path.."/nssm_weapons.lua") -- comment out to turn off dragonballs

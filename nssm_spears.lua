@@ -1,3 +1,6 @@
+taismod = {
+	spears_on = false,
+}
 
 --function
 function spears_shot (itemstack, player)
@@ -81,6 +84,9 @@ end
 --Tools
 
 function spears_register_spear(kind, desc, eq, toughness, material)
+	if not taismod.spears_on then
+		return
+	end
 
 	minetest.register_tool("nssm:spear_" .. kind, {
 		description = desc .. " spear",

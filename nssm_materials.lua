@@ -1,12 +1,24 @@
+
+taismod = {
+	items_on = false,
+	edibles_on = false,
+	toolrecipes_on = false,
+	foodrecipes_on = false,
+	ores_on = true,
+	tools_on = false,
+	abms_on = true,
+}
 --non eatable craftitems
 
 function nssm_register_noneatcraftitems (name, descr)
+	if not taismod.items_on then
+		return
+	end
 
-minetest.register_craftitem("nssm:"..name, {
-	description = descr,
-	image = name ..".png",
-})
-
+	minetest.register_craftitem("nssm:"..name, {
+		description = descr,
+		image = name ..".png",
+	})
 end
 
 nssm_register_noneatcraftitems ('sky_feather','Sky Feather')
@@ -47,13 +59,15 @@ nssm_register_noneatcraftitems ('wolf_fur','Wolf Fur')
 nssm_register_noneatcraftitems ('energy_globe','Energy Globe')
 
 function nssm_register_eatcraftitems (name, descr, gnam)
-
-minetest.register_craftitem("nssm:"..name, {
-	description = descr,
-	image = name..".png",
-	on_use = minetest.item_eat(gnam),
-	groups = { meat=1, eatable=1 },
-})
+	if not taismod.edibles_on then
+		return
+	end
+	minetest.register_craftitem("nssm:"..name, {
+		description = descr,
+		image = name..".png",
+		on_use = minetest.item_eat(gnam),
+		groups = { meat=1, eatable=1 },
+	})
 
 end
 
@@ -84,7 +98,10 @@ nssm_register_eatcraftitems ('phoenix_tear','Phoenix Tear',20)
 nssm_register_eatcraftitems ('frosted_amphibian_heart','Frosted Amphibian Heart',-1)
 nssm_register_eatcraftitems ('surimi','Surimi',4)
 
+
 --ore generation
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -96,6 +113,9 @@ minetest.register_ore({
 		height_min     = -115,
 		height_max     = -95,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -107,6 +127,9 @@ minetest.register_ore({
 		height_min     = -1,
 		height_max     = 40,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -118,6 +141,9 @@ minetest.register_ore({
 		height_min     = -1000,
 		height_max     = 40,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -129,6 +155,9 @@ minetest.register_ore({
 		height_min     = -1000,
 		height_max     = 40,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -140,6 +169,9 @@ minetest.register_ore({
 		height_min     = -1000,
 		height_max     = 40,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -151,6 +183,9 @@ minetest.register_ore({
 		height_min     = -1000,
 		height_max     = 40,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -162,6 +197,9 @@ minetest.register_ore({
 		height_min     = -20,
 		height_max     = 200,
 			})
+end
+
+if taismod.ores_on then
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -174,14 +212,19 @@ minetest.register_ore({
 		height_max     = 200,
 			}
 )
+end
 
 --nodes
 
+if taismod.nodes_on then
 minetest.register_node("nssm:ant_dirt", {
 	description = "Ant Dirt",
 	tiles = {"ant_dirt.png"},
 	groups = {crumbly=3},
 })
+end
+
+if taismod.ores_on then
 
 minetest.register_node("nssm:venomous_gas", {
 	description = "Venomous Gas",
@@ -202,6 +245,9 @@ minetest.register_node("nssm:venomous_gas", {
 	post_effect_color = {a=100, r=1, g=100, b=1},
 	groups = {flammable = 2},
 })
+end
+
+if taismod.nodes_on then
 
 minetest.register_node("nssm:modders_block", {
 	description = "Modders Block",
@@ -209,6 +255,9 @@ minetest.register_node("nssm:modders_block", {
 	is_ground_content = true,
 	groups = {crumbly=3, not_in_creative_inventory =1},
 })
+end
+
+if taismod.nodes_on then
 
 minetest.register_node("nssm:web", {
 	description = "Web",
@@ -230,6 +279,9 @@ minetest.register_node("nssm:web", {
 	liquid_viscosity = 20,
 	groups = {flammable=2, snappy=1, liquid=1},
 })
+end
+
+if taismod.nodes_on then
 
 minetest.register_node("nssm:ink", {
 	description = "Ink",
@@ -264,6 +316,9 @@ minetest.register_node("nssm:ink", {
 	post_effect_color = {a=2000, r=30, g=30, b=30},
 	groups = {water=3, liquid=3, puts_out_fire=1},
 })
+end
+
+if taismod.nodes_on then
 
 minetest.register_node("nssm:mese_meteor", {
 	description = "Mese Meteor",
@@ -272,6 +327,9 @@ minetest.register_node("nssm:mese_meteor", {
 	drop = "",
 	groups = {crumbly=1, falling_node=1, flammable = 2},
 })
+end
+
+if taismod.nodes_on then
 
 minetest.register_node("nssm:pumpbomb", {
 	tiles = {"pumpbomb_top.png","pumpbomb_bottom.png", "pumpbomb_side.png", "pumpbomb_side.png", "pumpbomb_side.png", "pumpbomb_front.png"},
@@ -283,8 +341,11 @@ minetest.register_node("nssm:pumpbomb", {
 		minetest.env:set_node(pos, {name="air"})
 	end,
 })
+end
+
 
 --abms
+if taismod.abms_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:mese_meteor"},
@@ -303,6 +364,9 @@ minetest.register_abm({
 
 	end
 })
+end
+
+if taismod.abms_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:web"},
@@ -316,6 +380,9 @@ minetest.register_abm({
 		end
 	end
 })
+end
+
+if taismod.abm_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:web"},
@@ -329,6 +396,9 @@ minetest.register_abm({
 		end
 	end
 })
+end
+
+if taismod.abm_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:web"},
@@ -342,10 +412,13 @@ minetest.register_abm({
 		end
 	end
 })
+end
 
 
 
 --tools
+
+if taismod.tools_on then
 
 minetest.register_tool('nssm:sun_sword', {
 	description = 'Sun Sword',
@@ -367,6 +440,9 @@ minetest.register_tool('nssm:sun_sword', {
 		end
 	end)
 })
+end
+
+if taismod.tools_on then
 
 minetest.register_tool("nssm:masticone_fang_sword", {
 	description = "Masticone Fang Sword",
@@ -381,6 +457,9 @@ minetest.register_tool("nssm:masticone_fang_sword", {
 		damage_groups = {fleshy=8},
 	},
 })
+end
+
+if taismod.tools_on then
 
 minetest.register_tool("nssm:night_sword", {
 	description = "Night Sword",
@@ -395,6 +474,9 @@ minetest.register_tool("nssm:night_sword", {
 		damage_groups = {fleshy=12},
 	},
 })
+end
+
+if taismod.tools_on then
 
 minetest.register_tool("nssm:crab_light_mace", {
 	description = "Light Crab Mace",
@@ -408,6 +490,9 @@ minetest.register_tool("nssm:crab_light_mace", {
 		damage_groups = {fleshy=8},
 	},
 })
+end
+
+if taismod.tools_on then
 
 minetest.register_tool("nssm:crab_heavy_mace", {
 	description = "Heavy Crab Mace",
@@ -421,6 +506,9 @@ minetest.register_tool("nssm:crab_heavy_mace", {
 		damage_groups = {fleshy=12},
 	},
 })
+end
+
+if taismod.tools_on then
 
 minetest.register_node("nssm:rope", {
     description = "Rope",
@@ -434,6 +522,9 @@ minetest.register_node("nssm:rope", {
     groups = {snappy=1},
     })
 
+end
+
+if taismod.tools_on then
 minetest.register_tool("nssm:stoneater_pick", {
 	description = "Stoneater Pickaxe",
 	inventory_image = "stoneater_pick.png",
@@ -447,6 +538,9 @@ minetest.register_tool("nssm:stoneater_pick", {
 	},
 })
 
+end
+
+if taismod.tools_on then
 minetest.register_tool("nssm:mantis_sword", {
 	description = "Mantis Sword",
 	inventory_image = "mantis_sword.png",
@@ -461,6 +555,9 @@ minetest.register_tool("nssm:mantis_sword", {
 	},
 })
 
+end
+
+if taismod.tools_on then
 minetest.register_tool("nssm:ant_sword", {
 	description = "Ant Sword",
 	inventory_image = "ant_sword.png",
@@ -476,6 +573,9 @@ minetest.register_tool("nssm:ant_sword", {
 
 --recipes
 
+end
+
+if taismod.toolrecipes_on then
 minetest.register_craft({
 	output = 'nssm:mantis_sword',
 	recipe = {
@@ -484,6 +584,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:masticone_fang_sword',
@@ -494,6 +597,9 @@ minetest.register_craft({
 	}
 })
 
+end
+
+if taismod.toolrecipes_on then
 minetest.register_craft({
 	output = 'nssm:black_ice_tooth',
 	recipe = {
@@ -502,6 +608,9 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:crab_light_mace',
@@ -511,6 +620,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:crab_heavy_mace',
@@ -520,6 +632,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:energy_globe',
@@ -529,6 +644,9 @@ minetest.register_craft({
 		{'nssm:life_energy', 'nssm:life_energy', 'nssm:life_energy'},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:great_energy_globe',
@@ -538,6 +656,9 @@ minetest.register_craft({
 		{'nssm:energy_globe', 'nssm:energy_globe', 'nssm:energy_globe'},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:superior_energy_globe',
@@ -547,6 +668,9 @@ minetest.register_craft({
 		{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:mese_egg',
@@ -556,6 +680,9 @@ minetest.register_craft({
 		{'nssm:cursed_pumpkin_seed', 'nssm:ant_queen_abdomen', 'nssm:snake_scute'},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:masticone_skull_crowned',
@@ -565,6 +692,9 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
@@ -574,6 +704,9 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:masticone_skull',
@@ -583,6 +716,9 @@ minetest.register_craft({
 		{'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments'},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:rope 16',
@@ -592,6 +728,9 @@ minetest.register_craft({
 		{'', 'nssm:wolf_fur', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 
 minetest.register_craft({
@@ -602,8 +741,11 @@ minetest.register_craft({
 		{'', 'nssm:white_wolf_fur', ''},
 	}
 })
+end
 
-minetest.register_craft({
+if taismod.recipes_on then
+
+minetest.toolregister_craft({
 	output = 'nssm:sky_feather',
 	recipe = {
 		{'', '', ''},
@@ -611,6 +753,9 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:sun_sword',
@@ -620,6 +765,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:night_sword',
@@ -629,6 +777,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -636,6 +787,9 @@ minetest.register_craft({
 	recipe = "nssm:worm_flesh",
 	cooktime = 12,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -643,6 +797,9 @@ minetest.register_craft({
 	recipe = "nssm:duck_legs",
 	cooktime = 6,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -650,6 +807,9 @@ minetest.register_craft({
 	recipe = "nssm:spider_leg",
 	cooktime = 6,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -657,6 +817,9 @@ minetest.register_craft({
 	recipe = "nssm:werewolf_leg",
 	cooktime = 10,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -664,6 +827,9 @@ minetest.register_craft({
 	recipe = "nssm:brain",
 	cooktime = 6,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -671,6 +837,9 @@ minetest.register_craft({
 	recipe = "nssm:amphibian_heart",
 	cooktime = 5,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -678,6 +847,9 @@ minetest.register_craft({
 	recipe = "nssm:tentacle",
 	cooktime = 5,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -685,6 +857,9 @@ minetest.register_craft({
 	recipe = "nssm:frosted_amphibian_heart",
 	cooktime = 8,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -692,6 +867,9 @@ minetest.register_craft({
 	recipe = "nssm:heron_leg",
 	cooktime = 20,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -699,6 +877,9 @@ minetest.register_craft({
 	recipe = "nssm:raw_scrausics_wing",
 	cooktime = 12,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -706,6 +887,9 @@ minetest.register_craft({
 	recipe = "nssm:ant_leg",
 	cooktime = 10,
 })
+end
+
+if taismod.foodrecipes_on then
 
 minetest.register_craft({
 	type = "cooking",
@@ -713,6 +897,9 @@ minetest.register_craft({
 	recipe = "nssm:crocodile_tail",
 	cooktime = 16,
 })
+end
+
+if taismod.toolrecipes_on then
 
 
 minetest.register_craft({
@@ -723,6 +910,9 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
+
+if taismod.toolrecipes_on then
 
 minetest.register_craft({
 	output = 'nssm:stoneater_pick',
@@ -732,6 +922,7 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
 
 --Eggs
 
