@@ -1,10 +1,11 @@
 
 taismod = {
 	items_on = false,
-	edibles_on = false,
+	edibles_on = true,
 	toolrecipes_on = false,
-	foodrecipes_on = false,
+	foodrecipes_on = true,
 	ores_on = true,
+	nodes_on = true,
 	tools_on = false,
 	abms_on = true,
 }
@@ -382,7 +383,7 @@ minetest.register_abm({
 })
 end
 
-if taismod.abm_on then
+if taismod.abms_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:web"},
@@ -398,7 +399,7 @@ minetest.register_abm({
 })
 end
 
-if taismod.abm_on then
+if taismod.abms_on then
 
 minetest.register_abm({
 	nodenames = {"nssm:web"},

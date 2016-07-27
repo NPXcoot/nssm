@@ -19,10 +19,10 @@ nssm:register_mob("nssm:sand_bloco", {
 	damage = 3,
 	jump = true,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
+		{name = "homedecor:coin",
+		chance = 6,
 		min = 1,
-		max = 1,},
+		max = 5,},
 		{name = "default:sandstone",
 		chance = 1,
 		min = 2,

@@ -44,8 +44,8 @@ nssm:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:wa
 -- nssm:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 10, 30, 20000, 1, 20, 31000)
 -- 
 -- -- ICE
-nssm:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 10000, 1, -31000, 31000)
-nssm:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 31000)
+nssm:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 10000, 1, -31000, 50) -- changed max height from 31000 so the spawn area does not get mobbed
+nssm:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 50) -- changed max height from 31000 so the spawn area does not get mobbed
 -- nssm:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 20000, 1, -31000, 31000)
 -- nssm:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 5000, 1, -31000, 31000)
 -- 

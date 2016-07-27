@@ -51,9 +51,11 @@ dofile(path.."/mese_dragon.lua")
 dofile(path.."/mese_dragon_tame.lua")
 
 --Others
-dofile(path.."/rainbow_staff.lua")
+-- dofile(path.."/rainbow_staff.lua")
 dofile(path.."/darts.lua")
 dofile(path.."/nssm_materials.lua")
 dofile(path.."/nssm_spears.lua")
 dofile(path.."/nssm_api.lua")
 -- dofile(path.."/nssm_weapons.lua") -- comment out to turn off dragonballs
+
+minetest.debug("NSSM loaded")

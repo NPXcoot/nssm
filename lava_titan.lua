@@ -21,18 +21,26 @@ nssm:register_mob("nssm:lava_titan", {
 	jump = false,
 	jump_height=0,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 7,
-		max = 9,},
-		{name = "nssm:lava_titan_eye",
-		chance = 1,
-		min = 1,
-		max = 1,},
+                {name = "homedecor:coin",
+                chance = 1,
+                min = 5,
+                max = 9,},
 		{name = "bucket:bucket_lava",
 		chance = 2,
 		min = 1,
 		max = 3,},
+		{name = "default:mese_block",
+		chance = 3,
+		min = 1,
+		max = 3,},
+		{name = "default:diamond_block",
+		chance = 3,
+		min = 1,
+		max = 3,},
+		{name = "default:nyancat",
+		chance = 3,
+		min = 5,
+		max = 9,},
 	},
 	armor = 40,
 	drawtype = "front",
@@ -80,6 +88,6 @@ nssm:register_mob("nssm:lava_titan", {
 	},
 	do_custom = function (self)
 		nssm:digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})
-		nssm:putting_ability(self, "default:lava_source", self.run_velocity)
+		nssm:midas_ability(self, "default:lava_source", self.run_velocity,1,3)
 	end,
 })

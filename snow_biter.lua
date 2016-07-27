@@ -22,18 +22,14 @@ nssm:register_mob("nssm:snow_biter", {
 	damage = 5,
 	jump = true,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 2,
-		max = 3},
+                {name = "homedecor:coin",
+                chance = 10,
+                min = 1,
+                max = 1,},
 		{name = "nssm:frosted_amphibian_heart",
 		chance = 1,
 		min = 1,
 		max = 1},
-		{name = "nssm:little_ice_tooth",
-		chance = 2,
-		min = 0,
-		max = 4},
     },
 	armor = 100,
 	drawtype = "front",
@@ -57,6 +53,6 @@ nssm:register_mob("nssm:snow_biter", {
 		punch1_end = 215
 	},
 	do_custom = function(self)
-		nssm:putting_ability(self, "default:ice", self.run_velocity)
+		nssm:midas_ability(self, "default:ice", self.run_velocity,1,2)
 	end,
 })
