@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:icelamander", {
 	type = "monster",
-	hp_max = 90,
-	hp_min = 90,
+	hp_max = 180,
+	hp_min = 180,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 2.3, 0.5},
 	visual = "mesh",
 	mesh = "icelamander.x",
@@ -40,7 +40,7 @@ nssm:register_mob("nssm:icelamander", {
 		min = 5,
 		max = 9,},
     },
-	armor = 60,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 30,

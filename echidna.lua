@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:echidna", {
 	type = "monster",
-	hp_max = 90,
-	hp_min = 90,
+	hp_max = 180,
+	hp_min = 180,
 	collisionbox = {-0.6, 0.00, -0.6, 0.6, 2, 0.6},
 	visual = "mesh",
 	mesh = "echidna.x",
@@ -37,7 +37,7 @@ nssm:register_mob("nssm:echidna", {
 		min = 5,
 		max = 9,},
 	},
-	armor = 60,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	floats = 1,

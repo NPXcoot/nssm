@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:pumpking", {
 	type = "monster",
-	hp_max = 100,
-	hp_min = 100,
+	hp_max = 200,
+	hp_min = 200,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 3.2, 0.4},
 	visual = "mesh",
 	mesh = "pumpking.x",
@@ -38,7 +38,7 @@ nssm:register_mob("nssm:pumpking", {
 		min = 5,
 		max = 9,},
 	},
-	armor =50,
+	armor = 25,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,

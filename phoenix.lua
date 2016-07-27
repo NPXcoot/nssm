@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:phoenix", {
 	type = "monster",
-	hp_max = 60,
-	hp_min = 60,
+	hp_max = 120,
+	hp_min = 120,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "phoenix.x",
@@ -43,7 +43,7 @@ nssm:register_mob("nssm:phoenix", {
 		min = 10,
 		max = 20,},
 	},
-	armor = 60,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 5,
 	lava_damage = 0,

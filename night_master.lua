@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:night_master", {
 	type = "monster",
-	hp_max = 30,
-	hp_min = 30,
+	hp_max = 60,
+	hp_min = 60,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "moonherontrio.x",
@@ -21,7 +21,7 @@ nssm:register_mob("nssm:night_master", {
 	},
 	damage = 8,
 	jump = false,
-	armor = 70,
+	armor = 45,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 5,
@@ -65,8 +65,8 @@ nssm:register_mob("nssm:night_master", {
 
 nssm:register_mob("nssm:night_master_2", {
 	type = "monster",
-	hp_max = 30,
-	hp_min = 30,
+	hp_max = 60,
+	hp_min = 60,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "night_master_2.x",
@@ -86,7 +86,7 @@ nssm:register_mob("nssm:night_master_2", {
 	},
 	damage = 8,
 	jump = false,
-	armor = 70,
+	armor = 45,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 5,
@@ -130,8 +130,8 @@ nssm:register_mob("nssm:night_master_2", {
 
 nssm:register_mob("nssm:night_master_1", {
 	type = "monster",
-	hp_max = 30,
-	hp_min = 30,
+	hp_max = 60,
+	hp_min = 60,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "night_master_1.x",
@@ -173,7 +173,7 @@ nssm:register_mob("nssm:night_master_1", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 70,
+	armor = 45,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 5,

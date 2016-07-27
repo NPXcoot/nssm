@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:lava_titan", {
 	type = "monster",
-	hp_max = 80,
-	hp_min = 80,
+	hp_max = 160,
+	hp_min = 160,
 	collisionbox = {-0.6, -0.05, -0.6, 0.6, 4.0, 0.6},
 	visual = "mesh",
 	mesh = "lava_titan.x",
@@ -42,7 +42,7 @@ nssm:register_mob("nssm:lava_titan", {
 		min = 5,
 		max = 9,},
 	},
-	armor = 40,
+	armor = 20,
 	drawtype = "front",
 	water_damage = 4,
   	rotate = 270,

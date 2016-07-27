@@ -22,7 +22,7 @@ nssm:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5,
 nssm:spawn_specific("nssm:crab", {"default:sand"}, {"default:water_source"}, 0, 20, 20, 3000, 1, -31000, 31000)
 -- nssm:spawn_specific("nssm:crocodile", {"default:sand","default:water_source"}, {"default:water_source"}, 0, 20, 60, 35000, 1, -31000, 31000)
 nssm:spawn_specific("nssm:dolidrosaurus", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 35000, 1, -31000, -1)
-nssm:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_source"}, 0, 20, 120, 90000, 1, -31000, 0)
+-- nssm:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_source"}, 0, 20, 120, 90000, 1, -31000, 0)
 nssm:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 40000, 1, -31000, 0)
 -- 
 -- -- DESERT

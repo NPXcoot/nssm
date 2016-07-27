@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:duckking", {
 	type = "monster",
-	hp_max = 80,
-	hp_min = 77,
+	hp_max = 160,
+	hp_min = 160,
 	collisionbox = {-1.5, -0.25, -1.5, 1.5, 4.95, 1.5},
 	visual = "mesh",
 	mesh = "king_duck.x",
@@ -43,7 +43,7 @@ nssm:register_mob("nssm:duckking", {
 		min = 5,
 		max = 9,},
 	},
-	armor = 80,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 0,
 	floats = 1,

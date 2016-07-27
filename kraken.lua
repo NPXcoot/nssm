@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:kraken", {
 	type = "monster",
-	hp_max = 150,
-	hp_min = 150,
+	hp_max = 300,
+	hp_min = 300,
 	collisionbox = {-2, 0, -2, 2, 4, 2},
 	visual = "mesh",
 	mesh = "kraken.x",
@@ -45,7 +45,7 @@ nssm:register_mob("nssm:kraken", {
 		min = 5,
 		max = 9,},
 	},
-	armor = 70,
+	armor = 45,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 10,

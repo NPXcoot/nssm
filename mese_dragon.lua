@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:mese_dragon", {
 	type = "monster",
-	hp_max = 333,
-	hp_min = 333,
+	hp_max = 666,
+	hp_min = 666,
 	collisionbox = {-1, 0, -1, 1, 5, 1},
 	visual = "mesh",
 	mesh = "mese_dragon.x",
@@ -35,7 +35,7 @@ nssm:register_mob("nssm:mese_dragon", {
                 min = 4,
                 max = 6,},
     },
-	armor = 60,
+	armor = 20,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 0,

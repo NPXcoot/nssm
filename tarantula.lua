@@ -1,7 +1,7 @@
 nssm:register_mob("nssm:tarantula", {
 	type = "monster",
-	hp_max = 30,
-	hp_min = 30,
+	hp_max = 60,
+	hp_min = 60,
 	collisionbox = {-0.5, 0.00, -0.5, 0.5, 0.9, 0.5},
 	visual = "mesh",
 	mesh = "tarantula.x",
@@ -19,7 +19,7 @@ nssm:register_mob("nssm:tarantula", {
 	},
 	damage = 5,
 	jump = true,
-	armor = 80,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 7,
@@ -63,8 +63,8 @@ nssm:register_mob("nssm:tarantula", {
 
 nssm:register_mob("nssm:tarantula_propower", {
 	type = "monster",
-	hp_max = 70,
-	hp_min = 70,
+	hp_max = 140,
+	hp_min = 140,
 	collisionbox = {-0.5, 0.00, -0.5, 0.5, 1, 0.5},
 	visual = "mesh",
 	mesh = "tarantula_propower.x",
@@ -103,7 +103,7 @@ nssm:register_mob("nssm:tarantula_propower", {
 		min = 1,
 		max = 8,},
 	},
-	armor = 60,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 3,
