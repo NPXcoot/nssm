@@ -1,5 +1,5 @@
 nssm:register_mob("nssm:mese_dragon_tame", {
-	type = "animal",
+	type = "npc",
 	hp_max = 333,
 	hp_min = 333,
 	collisionbox = {-1, 0, -1, 1, 5, 1},
