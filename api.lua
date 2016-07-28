@@ -1029,7 +1029,9 @@ minetest.register_entity(name, {
 		-- when lifetimer expires remove mob (except npc and tamed)
 		if self.type ~= "npc"
 		and not self.tamed
-		and self.state ~= "attack" then
+		and self.state ~= "attack"
+		and not self.monsterfed -- prevent despawning
+		then
 
 			self.lifetimer = self.lifetimer - dtime
 
