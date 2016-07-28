@@ -67,8 +67,18 @@ nssm:register_mob("nssm:masticone", {
 				)
 				local pos1 = {x=pos.x+math.random(-1,1), y=pos.y+0.5, z=pos.z+math.random(-1,1)}
 				local pos2 = {x=pos.x+math.random(-1,1), y=pos.y+0.5, z=pos.z+math.random(-1,1)}
-				minetest.add_entity(pos1, "nssm:masticone")
-				minetest.add_entity(pos2, "nssm:masticone")
+				if math.random(1,4) > 3 then -- too many of them crash the server. Give us a 1/4 chance of actually defeating one permanently...??
+					minetest.add_entity(pos1, "nssm:masticone")
+					minetest.add_entity(pos2, "nssm:masticone")
+				end
     end)
+	end,
+	on_rightclick = function(self, clicker)
+		capchance = math.random(1,100)
+		if capchance < 20 then -- 20% chance to actually execute capture
+			mobs:capture_mob(self, clicker, 50, 80, 100, false, nil) -- they don't drop enough to be worth it, captuing is the best solution	
+		else -- the rest is for actual demise
+			self.object:remove()
+		end
 	end,
 })
