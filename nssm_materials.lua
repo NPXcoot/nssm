@@ -61,8 +61,10 @@ nssm_register_noneatcraftitems ('energy_globe','Energy Globe')
 
 function nssm_register_eatcraftitems (name, descr, gnam)
 	if not taismod.edibles_on then
+		minetest.debug("Not registering NSSM food "..name)
 		return
 	end
+	minetest.debug("Registering NSSM food "..name.." with eat value "..gnam)
 	minetest.register_craftitem("nssm:"..name, {
 		description = descr,
 		image = name..".png",
