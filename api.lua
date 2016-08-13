@@ -266,6 +266,15 @@ function check_for_death(self)
 			self.health = self.hp_max
 		end
 
+                -- backup nametag so we can show health stats
+                if not self.nametag2 then
+                        self.nametag2 = self.nametag or ""
+                end
+
+                self.htimer = 2
+
+                self.nametag = "health: " .. self.health .. " of " .. self.hp_max
+
 		update_tag(self)
 
 		return false
@@ -378,6 +387,16 @@ do_env_damage = function(self)
 	if self.htimer > 0 then
 		self.htimer = self.htimer - 1
 	end
+
+        -- reset nametag after showing health stats
+        if self.htimer < 1 and self.nametag2 then
+
+                self.nametag = self.nametag2
+                self.nametag2 = nil
+
+                update_tag(self)
+        end
+
 
 	local pos = self.object:getpos()
 
@@ -2933,7 +2952,7 @@ end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 	-- right-clicked with nametag and name entered?
-	if formname == "nssm_nametag"
+	if formname == "mobs_nametag"
 	and fields.name
 	and fields.name ~= "" then
 
