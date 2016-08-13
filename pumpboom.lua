@@ -20,10 +20,10 @@ nssm:register_mob("nssm:pumpboom_small", {
 	damage = 1.5,
 	jump = true,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 2,}
+                {name = "homedecor:coin",
+                chance = 14,
+                min = 1,
+                max = 1,},
 	},
 	armor = 100,
 	drawtype = "front",
@@ -67,10 +67,10 @@ nssm:register_mob("nssm:pumpboom_medium", {
 	damage = 1.5,
 	jump = true,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 2,
-		max = 3,}
+                {name = "homedecor:coin",
+                chance = 12,
+                min = 1,
+                max = 1,},
 	},
 	armor = 100,
 	drawtype = "front",
@@ -114,10 +114,10 @@ nssm:register_mob("nssm:pumpboom_large", {
 	damage = 1.5,
 	jump = true,
 	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 3,
-		max = 4,}
+                {name = "homedecor:coin",
+                chance = 10,
+                min = 1,
+                max = 1,},
 	},
 	armor = 100,
 	drawtype = "front",

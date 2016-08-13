@@ -12,15 +12,15 @@ nssm:register_mob("nssm:signosigno", {
 	walk_velocity = 1.5,
 	fear_height = 4,
 	run_velocity = 2.5,
+	drops = {
+                {name = "homedecor:coin",
+                chance = 14,
+                min = 1,
+                max = 1,}
+	},
   rotate = 270,
 	damage = 3,
 	jump = true,
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 2,},
-	},
 	armor = 70,
 	drawtype = "front",
 	water_damage = 1,

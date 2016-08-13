@@ -1,4 +1,10 @@
-Not so simple mobs by NPX team
+# Tai's Modified Not So Simple Mobs
+
+I wanted to have some NSSM monsters in a controlled environment
+
+These changes add toggles for edibles, raw materials, recipes, tools and weapons.
+
+## Not so simple mobs by NPX team
 
 We would like to thank:
  - PilzAdam, for his wonderful simple-mobs mod;

@@ -1,7 +1,7 @@
-nssm:register_mob("nssm:mese_dragon", {
-	type = "monster",
-	hp_max = 666,
-	hp_min = 666,
+nssm:register_mob("nssm:mese_dragon_tame", {
+	type = "npc",
+	hp_max = 333,
+	hp_min = 333,
 	collisionbox = {-1, 0, -1, 1, 5, 1},
 	visual = "mesh",
 	mesh = "mese_dragon.x",
@@ -22,26 +22,20 @@ nssm:register_mob("nssm:mese_dragon", {
 	jump = true,
 	jump_height = 10,
 	drops = {
-                {name = "default:mese_block",
-                chance = 1,
-                min = 20,
-                max = 30,},
-                {name = "homedecor:coin",
-                chance = 1,
-                min = 60,
-                max = 90,},
-                {name = "default:diamond_block",
-                chance = 4,
-                min = 4,
-                max = 6,},
+		{name = "nssm:mese_egg_tame",
+		chance = 1,
+		min = 1,
+		max = 1},
     },
-	armor = 20,
+	armor = 60,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 0,
 	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
+	attacks_monsters = true,
+	order = "follow",
 	dogshoot_stop = true,
 	arrow = "nssm:roar_of_the_dragon",
 	reach = 5,
@@ -64,7 +58,7 @@ nssm:register_mob("nssm:mese_dragon", {
     dattack_end = 160,
 	},
 	do_custom = function(self)
-		nssm:midas_ability(self, "fake_fire:embers", self.run_velocity,2, 3)
+		nssm:midas_ability(self, "stairs:slab_goldblock", self.run_velocity,2, 3)
 	end,
 
 	custom_attack = function(self)
