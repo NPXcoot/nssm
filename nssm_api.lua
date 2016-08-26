@@ -12,9 +12,7 @@ function nssm:virulence(mobe)
 	if not nssm.lessvirulent then
 		return 0
 	end
-	local chance = 100 - mobe.hp_max
-	--minetest.debug("Got virulence dampening "..chance.." for "..self.name)
-	if chance < 1 then return 1 else return chance end
+	local chance = math.ceil(100 / mobe.hp_max)
 end
 
 function nssm:affectbones(mobe) -- as function for adaptable heuristic
