@@ -12,7 +12,7 @@ function nssm:virulence(mobe)
 	if not nssm.lessvirulent then
 		return 0
 	end
-	local chance = math.ceil(100 / mobe.hp_max)
+	return math.ceil(100 / mobe.hp_max)
 end
 
 function nssm:affectbones(mobe) -- as function for adaptable heuristic
