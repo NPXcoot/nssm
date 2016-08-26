@@ -5,6 +5,22 @@ local c_obsidian = minetest.get_content_id("default:obsidian")
 local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
+nssm.lessvirulent = minetest.setting_getbool("nssm.lessvirulent") or false
+nssm.safebones = minetest.setting_getbool("nssm.safebones") or false
+
+function nssm:virulence(mobe)
+	if not nssm.lessvirulent then
+		return 0
+	end
+	local chance = 100 - mobe.hp_max
+	--minetest.debug("Got virulence dampening "..chance.." for "..self.name)
+	if chance < 1 then return 1 else return chance end
+end
+
+function nssm:affectbones(mobe) -- as function for adaptable heuristic
+	return not nssm.safebones
+end
+
 -- get node but use fallback for nil or unknown
 function node_ok(pos, fallback)
 	fallback = fallback or "default:dirt"
@@ -194,6 +210,7 @@ function digging_ability(
 	max_vel,	--max velocity of the mob
 	dim 		--vector representing the dimensions of the mob
 	)
+	if math.random(1,100) < nssm:virulence(self) then return end
 
 	local v = self.object:getvelocity()
 	local pos = self.object:getpos()
@@ -237,7 +254,7 @@ function digging_ability(
 				local n = minetest.env:get_node(p).name
 				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 				if group == nil then
-					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") then
+					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or not nssm:affectbones(self) then
 					else
 						minetest.env:set_node(p, {name="air"})
 					end
@@ -257,6 +274,7 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 	p_block, 	--definition of the block to use
 	max_vel	--max velocity of the mob
 	)
+	if math.random(1,100) < nssm:virulence(self) then return end
 
 	local v = self.object:getvelocity()
 
@@ -283,10 +301,10 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 	pos1 = {x = pos.x+dx, y = pos.y, z = pos.z+dz}
 	local n = minetest.env:get_node(pos).name
 	local n1 = minetest.env:get_node(pos1).name
-	if n~=p_block and not minetest.is_protected(pos, "") then
+	if n~=p_block and not minetest.is_protected(pos, "") and nssm:affectbones(self) then
 		minetest.env:set_node(pos, {name=p_block})
 	end
-	if n1~=p_block and not minetest.is_protected(pos1, "") then
+	if n1~=p_block and not minetest.is_protected(pos1, "") and nssm:affectbones(self) then
 		minetest.env:set_node(pos1, {name=p_block})
 	end
 end
@@ -297,6 +315,7 @@ function webber_ability(		--puts randomly around the block defined as w_block
 	w_block, 	--definition of the block to use
 	radius		--max distance the block can be put
 	)
+	if math.random(1,100) < nssm:virulence(self) then return end
 
 	local pos = self.object:getpos()
 	if (math.random(1,55)==1) then
@@ -357,7 +376,7 @@ function midas_ability(		--ability to transform every blocks it touches in the m
 				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 				local n = minetest.env:get_node(p).name
 
-				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" then
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" or not nssm:affectbones(self) then
 				else
 					minetest.env:set_node(p, {name=m_block})
 				end
