@@ -102,7 +102,18 @@ minetest.register_entity("nssm:mortick", {
 	visual = "mesh",
 	mesh = "mortick.x",
 	visual_size = {x=3, y=3},
+	lifetime = 10,
+	damage = 1,
 	on_step = function(self, dtime)
+		self.mortick_timer = self.mortick_timer or os.time()
+		self.timer = self.timer or 0
+		self.timer = self.timer+dtime
+
+		if (os.time()-self.mortick_timer > self.lifetime) then
+			self.object:remove()
+		end
+
+		--Find player to attack:
 		self.attack = (self.attack or 0)
 		local s = self.object:getpos()
 		local objects = minetest.env:get_objects_inside_radius(s, 8)
@@ -111,6 +122,8 @@ minetest.register_entity("nssm:mortick", {
 				self.attack = obj
 	        end
 	    end
+
+		--If found a player follow him
 		if self.attack ~= 0 then
 			local p = self.attack:getpos()
 			local yawp = self.attack:get_look_yaw()
@@ -123,9 +136,15 @@ minetest.register_entity("nssm:mortick", {
 			local v = {x=-(s.x-p.x)*m, y=-(s.y-p.y)*m, z=-(s.z-p.z)*m}
 			local yaws = yawp +pi
 
+			--stay attached to players back:
 			self.object:setvelocity(v)
-			--self.object:setpos(p)
 			self.object:setyaw(yaws)
+
+			--damage player every second:
+			if (self.timer>1) then
+				self.timer = 0
+				self.attack:set_hp(self.attack:get_hp() - self.damage)
+			end
 		end
 	end
 })

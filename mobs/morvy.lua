@@ -43,8 +43,10 @@ mobs:register_mob("nssm:morvy", {
 	},
 
 	custom_attack = function(self)
+		set_animation(self, "stand")
 		self.morvy_counter = (self.morvy_counter or 0) + 1
 		if self.morvy_counter == 4 then
+			set_animation(self, "punch")
 			self.morvy_counter = 0
 			local counter = 0
 
@@ -73,6 +75,19 @@ mobs:register_mob("nssm:morvy", {
 				if (minetest.env:get_node(pos1).name == "air")
 				and (counter < 5)
 				then
+					local bat
+					local which = math.random(1,3)
+					if which == 1 then
+						bat = "nssm:morbat1"
+					elseif which == 2 then
+						bat = "nssm:morbat2"
+					elseif which == 3 then
+						bat = "nssm:morbat3"
+					end
+					if (bat=="nssm:morbat3") then
+						pos1.y=pos1.y+1.5
+					end
+					minetest.add_entity(pos1, bat)
 					minetest.add_particlespawner(
 						20, --amount
 						0.1, --time
@@ -89,17 +104,6 @@ mobs:register_mob("nssm:morvy", {
 						false, --collisiondetection
 						"morparticle.png" --texture
 						)
-						
-					local bat
-					local which = math.random(1,3)
-					if which == 1 then
-						bat = "nssm:morbat1"
-					elseif which == 2 then
-						bat = "nssm:morbat2"
-					elseif which == 3 then
-						bat = "nssm:morbat3"
-					end
-					minetest.add_entity(pos1, bat)
 				end
 			end
 		end
