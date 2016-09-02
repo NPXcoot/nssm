@@ -111,10 +111,21 @@ minetest.register_entity("nssm:mortick", {
 				self.attack = obj
 	        end
 	    end
-		local p = self.attack:getpos()
-		p.y = p.y + 1.3
-		local m = 10
-		local v = {x=-(s.x-p.x)*m, y=-(s.y-p.y)*m, z=-(s.z-p.z)*m}
-		self.object:setvelocity(v)
+		if self.attack ~= 0 then
+			local p = self.attack:getpos()
+			local yawp = self.attack:get_look_yaw()
+			local pi = math.pi
+
+			p.y = p.y + 1
+			p.x = p.x-math.cos(yawp)/2.5
+			p.z = p.z-math.sin(yawp)/2.5
+			local m = 30
+			local v = {x=-(s.x-p.x)*m, y=-(s.y-p.y)*m, z=-(s.z-p.z)*m}
+			local yaws = yawp +pi
+
+			self.object:setvelocity(v)
+			--self.object:setpos(p)
+			self.object:setyaw(yaws)
+		end
 	end
 })

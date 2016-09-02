@@ -107,7 +107,6 @@ mobs:register_mob("nssm:mordain", {
 					end
 				end
 				self.object:setpos(d)
-				self.timer = 2
 			end)
 		end
 	end
