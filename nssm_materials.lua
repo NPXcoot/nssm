@@ -754,7 +754,7 @@ minetest.register_craft({
 function nssm_register_egg (name, descr)
 
 
-minetest.register_craftitem("nssm:".. name .."_egg", {
+minetest.register_craftitem("nssm:".. name , {
 	description = descr .. " Egg",
 	image = name .. "_egg.png",
 	on_place = function(itemstack, placer, pointed_thing)
