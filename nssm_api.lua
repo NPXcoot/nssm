@@ -7,6 +7,7 @@ local c_chest = minetest.get_content_id("default:chest_locked")
 
 nssm.lessvirulent = minetest.setting_getbool("nssm.lessvirulent") or false
 nssm.safebones = minetest.setting_getbool("nssm.safebones") or false
+nssm.cryosave = minetest.setting_getbool("nssm.cryosave") or false
 
 function nssm:virulence(mobe)
 	if not nssm.lessvirulent then
@@ -300,11 +301,22 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 	pos1 = {x = pos.x+dx, y = pos.y, z = pos.z+dz}
 	local n = minetest.env:get_node(pos).name
 	local n1 = minetest.env:get_node(pos1).name
+	local oldmetainf = {minetest.get_meta(pos):to_table(),minetest.get_meta(pos1):to_table() }
 	if n~=p_block and not minetest.is_protected(pos, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
 		minetest.env:set_node(pos, {name=p_block})
+		if nssm.cryosave then
+			local metai = minetest.get_meta(pos)
+			metai:from_table(oldmetainf[1]) -- this is enough to save the meta
+			metai:set_string("nssm",n)
+		end
 	end
 	if n1~=p_block and not minetest.is_protected(pos1, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
 		minetest.env:set_node(pos1, {name=p_block})
+		if nssm.cryosave then
+			local metai = minetest.get_meta(pos1)
+			metai:from_table(oldmetainf[2]) -- this is enough to save the meta
+			metai:set_string("nssm",n1)
+		end
 	end
 end
 
