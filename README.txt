@@ -9,7 +9,7 @@ We would like to thank:
  - Denise and Ponzi_Duro for the revision of the guide
  - Double P and Ponzi_Duro for the beta testing
 
-License GPL v3
+License LGPL
 
 The mod makes the game really hard, please read the Guide before playing:
 https://dl.orangedox.com/a9tDekhYmWRkJt0J0a
