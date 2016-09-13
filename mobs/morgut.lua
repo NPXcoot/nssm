@@ -118,9 +118,11 @@ mobs:register_mob("nssm:morgut", {
 								for j = 1,32 do
 									if found == 0 then
 										if self.inventory[j].num == 0 then
+											--found an empty place
 											found = 2
 											index = j
 										else
+											--found a corrsponding itemstack
 											if self.inventory[j].name == n then
 												self.inventory[j].num = self.inventory[j].num +1
 												found = 1

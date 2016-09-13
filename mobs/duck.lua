@@ -52,4 +52,5 @@ mobs:register_mob("nssm:duck", {
 		punch_start = 40,
 		punch_end = 60,
 	}
+	--pathfinding = 1,
 })

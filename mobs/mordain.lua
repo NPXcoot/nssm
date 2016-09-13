@@ -43,6 +43,7 @@ mobs:register_mob("nssm:mordain", {
 		punch_start = 210,
 		punch_end = 225,
 	},
+	--pathfinding = 1,
 	custom_attack = function(self)
 		self.mordain_timer = (self.mordain_timer or os.time())
 		if (os.time() - self.mordain_timer) > 1 then
