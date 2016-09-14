@@ -2,7 +2,7 @@ mobs:register_mob("nssm:morlu", {
 	type = "monster",
 	hp_max = 20,
 	hp_min = 17,
-	collisionbox = {-0.3, 0.00, -0.3, 0.3, 1.8, 0.3},
+	collisionbox = {-0.3, 0.00, -0.3, 0.3, 0.6, 0.3},
 	visual = "mesh",
 	rotate= 270,
 	mesh = "morlu.x",
@@ -81,33 +81,56 @@ mobs:register_mob("nssm:morlu", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 			set_animation(self, "punch")
-			local m = 2
+			local m = 1
 
-			minetest.after(1, function (self)
-				if self.attack:is_player() then
-                    local pname, player_inv, armor_inv, ppos = armor:get_valid_player(self.attack, "[set_player_armor]")
-					local pname = self.attack:get_player_name()
-					local player_inv = minetest.get_inventory({type='player', name = pname})
-                    if player_inv:is_empty('armor') then
-                    else
-                        local armor_elements = {}
-                        local armor_num = 0
+			if self.attack:is_player() then
+				local pname, player_inv, armor_inv, ppos = armor:get_valid_player(self.attack, "[set_player_armor]")
+				local pname = self.attack:get_player_name()
+				local player_inv = minetest.get_inventory({type='player', name = pname})
+				if player_inv:is_empty('armor') then
+				else
+					local armor_elements = {}
+					local armor_num = 0
 
-                        for i=1,6 do
-                            local armor_stack = player_inv:get_stack("armor", i)
-                            local armor_item = armor_stack:get_name()
-                            if armor_stack:get_count() > 0 then
-                                armor_elements[armor_num]={name=armor_item, pos=i}
-                                armor_num = armor_num + 1
-                            end
-                        end
-                        if armor_num ~= 0 then
-							local steal_pos
-							if armor_num > 1 then
-	                            steal_pos = math.random(1,armor_num-1)
-							else
-								steal_pos = 1
-							end
+					for i=1,6 do
+						local armor_stack = player_inv:get_stack("armor", i)
+						local armor_item = armor_stack:get_name()
+						if armor_stack:get_count() > 0 then
+							armor_elements[armor_num]={name=armor_item, pos=i}
+							armor_num = armor_num + 1
+						end
+					end
+					if armor_num > 0 then
+						steal_pos = math.random(1,armor_num)
+						steal_pos = steal_pos-1
+
+						--minetest.chat_send_all("Stringa -> "..armor_elements[steal_pos].name)
+						local cpos = string.find(armor_elements[steal_pos].name, ":")
+						--minetest.chat_send_all("Posizione dei due punti: "..cpos)
+
+						local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
+						nname = "3d_armor_inv_"..nname..".png"
+						--minetest.chat_send_all("Nuovo nome: "..nname)
+
+						minetest.add_particlespawner(
+							1, --amount
+							1, --time
+							{x=p.x, y=p.y+1, z=p.z}, --minpos
+							{x=p.x, y=p.y+1, z=p.z}, --maxpos
+							{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+							{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+							{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --minacc
+							{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --maxacc
+							0.5, --minexptime
+							0.5, --maxexptime
+							10, --minsize
+							10, --maxsize
+							false, --collisiondetection
+							nname --texture
+						)
+
+						minetest.after(1, function (self)
+
                             local armor_stack = player_inv:get_stack("armor", armor_elements[steal_pos].pos)
                             armor_stack:take_item()
                             player_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
@@ -121,47 +144,26 @@ mobs:register_mob("nssm:morlu", {
                             armor:update_inventory(self.attack)
                             armor:update_player_visuals(self.attack)
 
-							--minetest.chat_send_all("Stringa -> "..armor_elements[steal_pos].name)
-							local cpos = string.find(armor_elements[steal_pos].name, ":")
-							--minetest.chat_send_all("Posizione dei due punti: "..cpos)
 
-							local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
-							nname = "3d_armor_"..nname..".png"
-							--minetest.chat_send_all("Nuovo nome: "..nname)
 
-							minetest.add_particlespawner(
-								6, --amount
-								1, --time
-								{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
-								{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
-								{x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --minvel
-								{x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --maxvel
-								{x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --minacc
-								{x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --maxacc
-								0.2, --minexptime
-								0.3, --maxexptime
-								2, --minsize
-								3, --maxsize
-								false, --collisiondetection
-								nname --texture
-							)
 
-                        end
-                    end
+							set_animation(self, "run")
+							self.flag = 1
+							self.morlu_timer = os.time()
+							self.curr_attack = self.attack
+							self.state = ""
+							local pyaw = self.curr_attack: get_look_yaw()
+							self.dir = pyaw
+							self.object:setyaw(pyaw)
+							set_velocity(self, 4)
 
-					set_animation(self, "run")
-					self.flag = 1
-					self.morlu_timer = os.time()
-					self.curr_attack = self.attack
-					self.state = ""
-					local pyaw = self.curr_attack: get_look_yaw()
-					self.dir = pyaw
-					self.object:setyaw(pyaw)
-					set_velocity(self, 4)
+						end,self)
+					end
 				end
-			end,self)
+			end
 		end
 	end,
+	--[[
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if (self.inventory ~= nil) then
@@ -179,4 +181,5 @@ mobs:register_mob("nssm:morlu", {
 			end
 		end
 	end,
+	]]
 })

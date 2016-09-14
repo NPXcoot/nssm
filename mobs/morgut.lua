@@ -88,10 +88,10 @@ mobs:register_mob("nssm:morgut", {
 				1, --time
 				{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
 				{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
-				{x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --minvel
-				{x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --maxvel
-				{x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --minacc
-				{x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --maxacc
+				{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+				{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+				{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --minacc
+				{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --maxacc
 				0.2, --minexptime
 				0.3, --maxexptime
 				2, --minsize
