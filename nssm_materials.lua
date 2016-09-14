@@ -12,13 +12,13 @@ end
 nssm_register_noneatcraftitems ('sky_feather','Sky Feather')
 nssm_register_noneatcraftitems ('snake_scute','Snake Scute')
 nssm_register_noneatcraftitems ('eyed_tentacle','Eyed Tentacle')
-nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
+--nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
 nssm_register_noneatcraftitems ('great_energy_globe','Great Energy Globe')
 nssm_register_noneatcraftitems ('superior_energy_globe','Superior Energy Globe')
 nssm_register_noneatcraftitems ('ant_queen_abdomen','Ant Queen Abdomen')
-nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
+--nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
 nssm_register_noneatcraftitems ('masticone_skull_fragments','Masticone Skull Fragments')
-nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
+--nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
 nssm_register_noneatcraftitems ('tentacle_curly','Kraken Tentacle')
 nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
 nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
@@ -31,10 +31,10 @@ nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
 nssm_register_noneatcraftitems ('cursed_pumpkin_seed','Cursed Pumpkin Seed')
 nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
 --nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
---nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
---nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
---nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
---nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
+nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
+nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
+nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
+nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
 nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
 nssm_register_noneatcraftitems ('night_feather','Night Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
@@ -567,20 +567,20 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:mese_egg',
 	recipe = {
-		{'nssm:tarantula_chelicerae', 'nssm:masticone_skull_crowned', 'nssm:eyed_tentacle'},
+		{'nssm:tarantula_chelicerae', 'nssm:helmet_masticone_crowned', 'nssm:eyed_tentacle'},
 		{'nssm:black_ice_tooth', 'nssm:superior_energy_globe', 'nssm:sky_feather'},
 		{'nssm:cursed_pumpkin_seed', 'nssm:ant_queen_abdomen', 'nssm:snake_scute'},
 	}
 })
 
-minetest.register_craft({
+--[[minetest.register_craft({
 	output = 'nssm:masticone_skull_crowned',
 	recipe = {
 		{'', 'nssm:king_duck_crown', ''},
 		{'', 'nssm:masticone_skull', ''},
 		{'', '', ''},
 	}
-})
+})]]
 
 minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
@@ -590,7 +590,7 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'nssm:masticone_skull',
 	recipe = {
@@ -598,26 +598,17 @@ minetest.register_craft({
 		{'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments'},
 		{'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments'},
 	}
-})
+})]]
 
 minetest.register_craft({
 	output = 'nssm:rope 16',
 	recipe = {
-		{'', 'nssm:wolf_fur', ''},
-		{'', 'nssm:wolf_fur', ''},
-		{'', 'nssm:wolf_fur', ''},
+		{'', 'nssm:web', ''},
+		{'', 'nssm:web', ''},
+		{'', 'nssm:web', ''},
 	}
 })
 
-
-minetest.register_craft({
-	output = 'nssm:rope 16',
-	recipe = {
-		{'', 'nssm:white_wolf_fur', ''},
-		{'', 'nssm:white_wolf_fur', ''},
-		{'', 'nssm:white_wolf_fur', ''},
-	}
-})
 
 minetest.register_craft({
 	output = 'nssm:sky_feather',
