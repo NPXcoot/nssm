@@ -38,6 +38,8 @@ nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
 nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
 nssm_register_noneatcraftitems ('night_feather','Night Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
+nssm_register_noneatcraftitems ('duck_feather','Duck Feather')
+nssm_register_noneatcraftitems ('black_duck_feather','Black Duck Feather')
 nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
 nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
 nssm_register_noneatcraftitems ('stoneater_mandible','Stoneater Mandible')
@@ -886,4 +888,50 @@ minetest.register_abm({
 		minetest.remove_node(pos)
 		end
 	end
+})
+--Eggs recipes
+
+minetest.register_craft({
+	output = 'nssm:duck_egg',
+	recipe = {
+		{'', 'nssm_duck_beak', ''},
+		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:flying_duck_egg',
+	recipe = {
+		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:enderduck_egg',
+	recipe = {
+		{'nssm:black_duck_feather', 'nssm_duck_beak', 'nssm:black_duck_feather'},
+		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
+		{'nssm:duck_legs', '', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:swimming_duck_egg',
+	recipe = {
+		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
+		{'nssm:duck_feather', 'nssm:duck_feather', 'nssm:duck_feather'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:spiderduck_egg',
+	recipe = {
+		{'nssm:duck_legs', 'nssm_duck_beak', 'nssm:duck_legs'},
+		{'nssm:black_duck_feather', 'nssm:energy_globe', 'nssm:black_duck_feather'},
+		{'nssm:duck_legs', 'nssm:black_duck_feather', 'nssm:duck_legs'},
+	}
 })
