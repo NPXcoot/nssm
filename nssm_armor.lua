@@ -7,6 +7,10 @@ if minetest.get_modpath("3d_armor") then
 			croco = {name="Crocodile", armor=1, heal=0, use=10},
 			ant = {name="Ant", armor=1, heal=0},
 			ice = {name="Ice Teeth", armor=1, heal=0, use=10},
+			felucco = {name="Felucco", armor=1, heal=0, use=10},
+			manticore = {name="Manticore", armor=1, heal=0, use=10},
+			duck = {name="Duck", armor=1, heal=0, use=10},
+			black_duck = {name="Black Duck", armor=1, heal=0, use=10},
 		}
 		local mats = {
 			wolf="nssm:wolf_fur",
@@ -15,6 +19,10 @@ if minetest.get_modpath("3d_armor") then
 			croco="nssm:crocodile_skin",
 			ant="nssm:ant_hard_skin",
 			ice="nssm:little_ice_tooth",
+			felucco="nssm:felucco_fur",
+			manticore="nssm:manticore_fur",
+			duck="nssm:duck_feather",
+			black_duck="nssm:black_duck_feather",
 		}
 		
 		for k, v in pairs(stats) do
