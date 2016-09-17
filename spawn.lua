@@ -51,8 +51,8 @@ nssm:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "def
 
 
 -- FOREST
-nssm:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree"}, 0, 20, 40, 200, 1, -31000, 22)
-nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tree"}, 0, 20, 120, 4000, 2, -31000, 22)
+nssm:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 40, 200, 1, -31000, 22)
+nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 120, 4000, 2, -31000, 22)
 
 -- SKY
 nssm:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 100, 750000, 1, 10, 40)
