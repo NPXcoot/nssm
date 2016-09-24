@@ -1,8 +1,8 @@
 mobs:register_mob("nssm:morwa", {
 	type = "monster",
-	hp_max = 25,
-	hp_min = 24,
-	collisionbox = {-1, 0, -1, 1, 3, 1},
+	hp_max = 46,
+	hp_min = 39,
+	collisionbox = {-1, -0.1, -1, 1, 3, 1},
 	visual = "mesh",
 	mesh = "morwa.x",
 	textures = {{"morwa.png"}},
@@ -15,7 +15,7 @@ mobs:register_mob("nssm:morwa", {
 	--sounds = {
 	--	random = "morwa",
 	--},
-	damage = 4,
+	damage = 6,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

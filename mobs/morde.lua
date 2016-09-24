@@ -1,8 +1,8 @@
 mobs:register_mob("nssm:morde", {
 	type = "monster",
-	hp_max = 20,
-	hp_min = 17,
-	collisionbox = {-0.4, 0.00, -0.4, 0.4, 1.6, 0.4},
+	hp_max = 41,
+	hp_min = 31,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.6, 0.4},
 	visual = "mesh",
 	rotate= 270,
 	mesh = "morde.x",
@@ -24,7 +24,7 @@ mobs:register_mob("nssm:morde", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 70,
+	armor = 60,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
@@ -55,7 +55,7 @@ mobs:register_mob("nssm:morde", {
 
 			set_animation(self, "punch")
 
-			self.health = self.health + self.damage
+			self.health = self.health + (self.damage*2)
 			local m = 3
 
 			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then

@@ -887,7 +887,7 @@ minetest.register_abm({
 		if n ~= "air" then
 			return
 		end
-		if (minetest.get_node_light(pos1, 0.5) > 12)
+		if (minetest.get_node_light(pos1, 0.5) > 8)
 		then
 		minetest.add_entity(pos1, "nssm:morwa")
 		minetest.remove_node(pos)

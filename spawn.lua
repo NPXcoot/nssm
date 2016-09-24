@@ -72,4 +72,12 @@ nssm:spawn_specific("nssm:felucco", {"default:dirt_with_dry_grass"}, {"default:d
 -- NSSB SPECIAL
 if minetest.get_modpath("nssb") then
 nssm:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat1", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat2", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat3", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morvy", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 120, 1200, 1, -31000, -93)
+nssm:spawn_specific("nssm:morlu", {"nssb:morentir"}, {"nssb:mornen"}, 0, 20, 80, 700, 1, -31000, -93)
+nssm:spawn_specific("nssm:morde", {"nssb:morenrir"}, {"nssb:mornar"}, 0, 20, 50, 500, 1, -31000, -93)
+nssm:spawn_specific("nssm:mordain", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 90, 900, 1, -31000, .93)
+nssm:spawn_specific("nssm:morgut", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 50, 500, 1, -31000, -93)
 end
