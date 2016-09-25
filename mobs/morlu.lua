@@ -91,6 +91,7 @@ mobs:register_mob("nssm:morlu", {
 				else
 					local armor_elements = {}
 					local armor_num = 0
+					local steal_pos
 
 					for i=1,6 do
 						local armor_stack = player_inv:get_stack("armor", i)
@@ -101,16 +102,29 @@ mobs:register_mob("nssm:morlu", {
 						end
 					end
 					if armor_num > 0 then
+						minetest.chat_send_all("Numero di pezzi: "..armor_num)
 						steal_pos = math.random(1,armor_num)
 						steal_pos = steal_pos-1
+						for i=0,armor_num-1 do
+							minetest.chat_send_all("Posizione: "..armor_elements[i].pos.." Oggetto: "..armor_elements[i].name)
+						end
 
-						--minetest.chat_send_all("Stringa -> "..armor_elements[steal_pos].name)
+						minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
 						local cpos = string.find(armor_elements[steal_pos].name, ":")
 						--minetest.chat_send_all("Posizione dei due punti: "..cpos)
 
+						local mod_name = string.sub(armor_elements[steal_pos].name, 0, cpos-1)
 						local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
-						nname = "3d_armor_inv_"..nname..".png"
-						--minetest.chat_send_all("Nuovo nome: "..nname)
+						--minetest.chat_send_all("Armor Mod name: "..mod_name)
+
+						if mod_name == "3d_armor" then
+							nname = "3d_armor_inv_"..nname..".png"
+						elseif mod_name == "nssm" then
+							nname = "inv_"..nname..".png"
+						else
+							nname = "3d_armor_inv_chestplate_diamond.png"
+						end
+						--minetest.chat_send_all("Nome della texture: "..nname)
 
 						minetest.add_particlespawner(
 							1, --amount
@@ -142,10 +156,7 @@ mobs:register_mob("nssm:morlu", {
                             armor:set_player_armor(self.attack, self.attack)
                             --armor:update_armor(self.attack)
                             armor:update_inventory(self.attack)
-                            armor:update_player_visuals(self.attack)
-
-
-
+                            --armor:update_player_visuals(self.attack)
 
 							set_animation(self, "run")
 							self.flag = 1
@@ -158,6 +169,9 @@ mobs:register_mob("nssm:morlu", {
 							set_velocity(self, 4)
 
 						end,self)
+					else
+						--Aggiungere qui cosa fa se non indossi armatura
+
 					end
 				end
 			end

@@ -12,7 +12,7 @@ if minetest.get_modpath("3d_armor") then
 			duck = {name="Duck", armor=1, heal=0, use=10},
 			black_duck = {name="Black Duck", armor=1, heal=0, use=10},
 		}
-		local mats = {
+		local materials = {
 			wolf="nssm:wolf_fur",
 			whitewolf="nssm:white_wolf_fur",
 			bloco="nssm:bloco_skin",
@@ -24,7 +24,7 @@ if minetest.get_modpath("3d_armor") then
 			duck="nssm:duck_feather",
 			black_duck="nssm:black_duck_feather",
 		}
-		
+
 		for k, v in pairs(stats) do
 			minetest.register_tool("nssm:helmet_"..k, {
 				description = v.name.." Helmet",
@@ -51,8 +51,8 @@ if minetest.get_modpath("3d_armor") then
 				wear = 0,
 			})
 		end
-		
-		for k, v in pairs(mats) do
+
+		for k, v in pairs(materials) do
 			minetest.register_craft({
 				output = "nssm:helmet_"..k,
 				recipe = {
@@ -91,7 +91,7 @@ if minetest.get_modpath("3d_armor") then
 			crab = {name="Crab", armor=1, heal=0, use=10},
 			ice ={name="Ice Teeth", armor=1, heal=0, use=10}
 		}
-		local mats = {
+		local materials = {
 			crab="nssm:crab_carapace_fragment",
 			ice="nssm:little_ice_tooth",
 		}
@@ -102,8 +102,8 @@ if minetest.get_modpath("3d_armor") then
 					groups = {armor_head=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 					wear = 0,
 				})
-				
-				local m = mats[k]
+
+				local m = materials[k]
 				minetest.register_craft({
 					output = "nssm:shield_"..k,
 					recipe = {
@@ -127,7 +127,7 @@ local stats = {
 			masticone_crowned ={name="Masticone Crowned Head", armor=1, heal=0, use=10},
 			snake ={name="", armor=1, heal=0, use=10},
 		}
-		--[[local mats = {
+		--[[local materials = {
 			crab="nssm:crab_carapace_fragment",
 			ice="nssm:little_ice_tooth",
 		}]]
@@ -138,7 +138,7 @@ local stats = {
 					groups = {armor_shield=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 					wear = 0,
 				})
-				
+
 				minetest.register_tool("nssm:chestplate_snake", {
 				description = "Snake Scute Chestplate",
 				inventory_image ="inv_chestplate_snake.png",
@@ -146,9 +146,9 @@ local stats = {
 				wear = 0,
 				})
 			end
-			
-			
-			
+
+
+
 		minetest.register_craft({
 					output = "nssm:chestplate_snake",
 					recipe = {
