@@ -1,16 +1,16 @@
 if minetest.get_modpath("3d_armor") then
 --Armors
 		local stats = {
-			wolf = {name="Werewolf", armor=1, heal=0, use=10},
-			whitewolf = {name="White Werewolf", armor=1, heal=0, use=10},
-			bloco = {name="Bloco", armor=1, heal=0, use=10},
-			croco = {name="Crocodile", armor=1, heal=0, use=10},
-			ant = {name="Ant", armor=1, heal=0},
-			ice = {name="Ice Teeth", armor=1, heal=0, use=10},
-			felucco = {name="Felucco", armor=1, heal=0, use=10},
-			manticore = {name="Manticore", armor=1, heal=0, use=10},
-			duck = {name="Duck", armor=1, heal=0, use=10},
-			black_duck = {name="Black Duck", armor=1, heal=0, use=10},
+			wolf = {name="Werewolf", armor=1.7, heal=0, use=1100},
+			whitewolf = {name="White Werewolf", armor=1.7, heal=0, use=1100},
+			bloco = {name="Bloco", armor=2.5, heal=0, use=800},
+			croco = {name="Crocodile", armor=1.6, heal=0, use=600},
+			ant = {name="Ant", armor=2, heal=0, use=500},
+			ice = {name="Ice Teeth", armor=2.2, heal=0, use=600},
+			felucco = {name="Felucco", armor=1.7, heal=0, use=1000},
+			manticore = {name="Manticore", armor=2.2, heal=0, use=900},
+			duck = {name="Duck", armor=1, heal=0, use=2000},
+			black_duck = {name="Black Duck", armor=1, heal=0, use=1800},
 		}
 		local materials = {
 			wolf="nssm:wolf_fur",
@@ -29,25 +29,25 @@ if minetest.get_modpath("3d_armor") then
 			minetest.register_tool("nssm:helmet_"..k, {
 				description = v.name.." Helmet",
 				inventory_image ="inv_helmet_"..k..".png",
-				groups = {armor_head=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
+				groups = {armor_head=math.floor(4*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:chestplate_"..k, {
 				description = v.name.." Chestplate",
 				inventory_image ="inv_chestplate_"..k..".png",
-				groups = {armor_torso=math.floor(8*v.armor), armor_heal=v.heal, armor_use=v.use},
+				groups = {armor_torso=math.floor(6*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:leggings_"..k, {
 				description = v.name.." Leggings",
 				inventory_image = "inv_leggings_"..k..".png",
-				groups = {armor_legs=math.floor(7*v.armor), armor_heal=v.heal, armor_use=v.use},
+				groups = {armor_legs=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:boots_"..k, {
 				description = v.name.." Boots",
 				inventory_image ="inv_boots_"..k..".png",
-				groups = {armor_feet=math.floor(4*v.armor), armor_heal=v.heal, armor_use=v.use},
+				groups = {armor_feet=math.floor(3*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 		end
@@ -88,8 +88,8 @@ if minetest.get_modpath("3d_armor") then
 --shields
 		if minetest.get_modpath("shields") then
 		local stats = {
-			crab = {name="Crab", armor=1, heal=0, use=10},
-			ice ={name="Ice Teeth", armor=1, heal=0, use=10}
+			crab = {name="Crab", armor=4, heal=0, use=500},
+			ice ={name="Ice Teeth", armor=3, heal=0, use=600}
 		}
 		local materials = {
 			crab="nssm:crab_carapace_fragment",
@@ -121,16 +121,12 @@ if minetest.get_modpath("3d_armor") then
 
 
 local stats = {
-			pumpking = {name="Pumpking Head", armor=1, heal=0, use=10},
-			masticone ={name="Masticone Head", armor=1, heal=0, use=10},
-			crown ={name="Dukking Crown", armor=1, heal=0, use=10},
-			masticone_crowned ={name="Masticone Crowned Head", armor=1, heal=0, use=10},
-			snake ={name="", armor=1, heal=0, use=10},
+			pumpking = {name="Pumpking Head", armor=3, heal=0, use=100},
+			masticone ={name="Masticone Head", armor=4, heal=0, use=100},
+			crown ={name="Dukking Crown", armor=2, heal=0, use=50},
+			masticone_crowned ={name="Masticone Crowned Head", armor=6, heal=0, use=20},
 		}
-		--[[local materials = {
-			crab="nssm:crab_carapace_fragment",
-			ice="nssm:little_ice_tooth",
-		}]]
+		
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:helmet_"..k, {
 					description = v.name.." ",
@@ -142,7 +138,7 @@ local stats = {
 				minetest.register_tool("nssm:chestplate_snake", {
 				description = "Snake Scute Chestplate",
 				inventory_image ="inv_chestplate_snake.png",
-				groups = {armor_torso=math.floor(8*v.armor), armor_heal=v.heal, armor_use=v.use},
+				groups = {armor_torso=40, armor_heal=0, armor_use=100},
 				wear = 0,
 				})
 			end

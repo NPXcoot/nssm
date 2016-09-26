@@ -349,8 +349,33 @@ minetest.register_abm({
 	end
 })
 
+minetest.register_node("nssm:phoenix_fire", {
+	description = "Phoenix Fire",
+	drawtype = "firelike",
+	tiles = {{
+		name = "phoenix_fire_animated.png",
+		animation = {type = "vertical_frames",
+			aspect_w = 16, aspect_h = 16, length = 1},
+	}},
+	inventory_image = "phoenix_fire.png",
+	light_source = 15,
+	groups = {igniter = 1, snappy=1},
+	drop = '',
+	walkable = false,
+	buildable_to = false,
+	damage_per_second = 4,
+	})
 
-
+minetest.register_abm({
+	nodenames = {"nssm:phoenix_fire"},
+	neighbors = {"air"},
+	interval = 3,
+	chance = 2,
+	action = function(pos, node)
+			minetest.set_node({x = pos.x, y = pos.y , z = pos.z}, {name = "air"})
+		end
+})
+	
 --tools
 
 minetest.register_tool('nssm:sun_sword', {
