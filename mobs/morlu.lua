@@ -105,11 +105,12 @@ mobs:register_mob("nssm:morlu", {
 						minetest.chat_send_all("Numero di pezzi: "..armor_num)
 						steal_pos = math.random(1,armor_num)
 						steal_pos = steal_pos-1
-						for i=0,armor_num-1 do
+						--[[for i=0,armor_num-1 do
 							minetest.chat_send_all("Posizione: "..armor_elements[i].pos.." Oggetto: "..armor_elements[i].name)
 						end
+						]]
 
-						minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
+						--minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
 						local cpos = string.find(armor_elements[steal_pos].name, ":")
 						--minetest.chat_send_all("Posizione dei due punti: "..cpos)
 
