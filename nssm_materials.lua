@@ -102,14 +102,14 @@ minetest.register_ore({
 		height_min     = -115,
 		height_max     = -95,
 			})
-
+for i=1,9 do
 minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:cobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1,
 		height_max     = 40,
 			})
@@ -119,8 +119,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:mossycobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -130,8 +130,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:sandstonebrick",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -141,8 +141,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "stairs:stair_sandstonebrick",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -152,12 +152,13 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "stairs:stair_cobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
-
+end
+			
 minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "nssm:web",
