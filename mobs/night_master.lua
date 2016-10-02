@@ -58,6 +58,7 @@ mobs:register_mob("nssm:night_master", {
 			false, --collisiondetection
 			"tnt_smoke.png" --texture
 		)
+		self.object:remove()
 		minetest.add_entity(pos, "nssm:night_master_2")
 	end,
 })
@@ -122,6 +123,7 @@ mobs:register_mob("nssm:night_master_2", {
 			false, --collisiondetection
 			"tnt_smoke.png" --texture
 		)
+		self.object:remove()
 		minetest.add_entity(pos, "nssm:night_master_1")
 	end,
 })

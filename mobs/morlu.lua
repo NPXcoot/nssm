@@ -89,6 +89,11 @@ mobs:register_mob("nssm:morlu", {
 				local pname = self.attack:get_player_name()
 				local player_inv = minetest.get_inventory({type='player', name = pname})
 				if player_inv:is_empty('armor') then
+					-- punch player if he doesn't own an armor
+					self.attack:punch(self.object, 1.0, {
+						full_punch_interval = 1.0,
+						damage_groups = {fleshy = self.damage}
+					}, nil)
 				else
 					local armor_elements = {}
 					local armor_num = 0
@@ -103,7 +108,6 @@ mobs:register_mob("nssm:morlu", {
 						end
 					end
 					if armor_num > 0 then
-						--minetest.chat_send_all("Numero di pezzi: "..armor_num)
 						steal_pos = math.random(1,armor_num)
 						steal_pos = steal_pos-1
 						--[[for i=0,armor_num-1 do
@@ -162,8 +166,8 @@ mobs:register_mob("nssm:morlu", {
 
 							--Update personal inventory of armors:
 							if (self.invnum ~= nil) and (self.invnum <= 5) then
-								minetest.chat_send_all("Invnum: "..self.invnum)
-								minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
+								--minetest.chat_send_all("Invnum: "..self.invnum)
+								--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
 								self.invnum = self.invnum + 1
 								self.inventory[self.invnum].name = armor_elements[steal_pos].name
 							end
@@ -179,9 +183,6 @@ mobs:register_mob("nssm:morlu", {
 							set_velocity(self, 4)
 
 						end,self)
-					else
-						--Aggiungere qui cosa fa se non indossi armatura
-
 					end
 				end
 			end
@@ -202,5 +203,6 @@ mobs:register_mob("nssm:morlu", {
 				end
 			end
 		end
+		self.object:remove()
 	end,
 })

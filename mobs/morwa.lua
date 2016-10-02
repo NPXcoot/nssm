@@ -49,5 +49,14 @@ mobs:register_mob("nssm:morwa", {
 		punch_end = 160,
     	shoot_start =176,
     	shoot_end=226,
-	}
+	},
+	do_custom = function (self)
+		local pos = self.object:getpos()
+		local light = minetest.get_node_light(pos)
+		--minetest.chat_send_all("Luce: "..light)
+		if (light < 8) then
+			self.object:remove()
+			minetest.env:set_node(pos, {name="nssm:morwa_statue"})
+		end
+	end,
 })

@@ -93,6 +93,7 @@ mobs:register_mob("nssm:morde", {
 	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
+		self.object:remove()
 		minetest.add_entity(pos, "nssm:mortick")
 	end,
 })

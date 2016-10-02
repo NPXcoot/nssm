@@ -158,7 +158,7 @@ minetest.register_ore({
 		height_max     = 40,
 			})
 end
-			
+
 minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "nssm:web",
@@ -376,7 +376,7 @@ minetest.register_abm({
 			minetest.set_node({x = pos.x, y = pos.y , z = pos.z}, {name = "air"})
 		end
 })
-	
+
 --tools
 
 minetest.register_tool('nssm:sun_sword', {
@@ -906,14 +906,14 @@ minetest.register_abm({
 	neighbors = {"air"},
 	interval = 1,
 	chance = 1,
-	action = 
+	action =
 	function(pos, node)
 		local pos1 = {x=pos.x, y=pos.y+1, z=pos.z}
 		local n = minetest.env:get_node(pos1).name
 		if n ~= "air" then
 			return
 		end
-		if (minetest.get_node_light(pos1, 0.5) > 8)
+		if (minetest.get_node_light(pos1) > 8)
 		then
 		minetest.add_entity(pos1, "nssm:morwa")
 		minetest.remove_node(pos)

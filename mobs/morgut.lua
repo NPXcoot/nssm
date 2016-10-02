@@ -168,5 +168,6 @@ mobs:register_mob("nssm:morgut", {
 				end
 			end
 		end
+		self.object:remove()
 	end,
 })

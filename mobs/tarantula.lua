@@ -40,6 +40,7 @@ mobs:register_mob("nssm:tarantula", {
 		punch_end = 200,
 	},
 	on_die = function(self, pos)
+		self.object:remove()
 		minetest.add_particlespawner(
 			200, --amount
 			0.1, --time

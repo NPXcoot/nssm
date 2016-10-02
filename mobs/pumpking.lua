@@ -46,6 +46,7 @@ mobs:register_mob("nssm:pumpking", {
 	},
 	on_die=function(self,pos)
 		explosion(pos, 3, 0, 1, self.sounds.explode)
+		self.object:remove()
 	end,
 	custom_attack = function(self)
 		if self.timer >3 then
