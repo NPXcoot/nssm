@@ -52,8 +52,9 @@ mobs:register_mob("nssm:morlu", {
 
 		if self.inv_flag ~= 1 then
 			self.inventory = {}
-			for i=1,32 do
-				self.inventory[i]={name = '', num = 0}
+			self.invnum = 0
+			for i=1,6 do
+				self.inventory[i]={name = ''}
 			end
 		end
 		self.inv_flag = (self.inv_flag or 1)
@@ -102,7 +103,7 @@ mobs:register_mob("nssm:morlu", {
 						end
 					end
 					if armor_num > 0 then
-						minetest.chat_send_all("Numero di pezzi: "..armor_num)
+						--minetest.chat_send_all("Numero di pezzi: "..armor_num)
 						steal_pos = math.random(1,armor_num)
 						steal_pos = steal_pos-1
 						--[[for i=0,armor_num-1 do
@@ -159,6 +160,14 @@ mobs:register_mob("nssm:morlu", {
                             armor:update_inventory(self.attack)
                             --armor:update_player_visuals(self.attack)
 
+							--Update personal inventory of armors:
+							if (self.invnum ~= nil) and (self.invnum <= 5) then
+								minetest.chat_send_all("Invnum: "..self.invnum)
+								minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
+								self.invnum = self.invnum + 1
+								self.inventory[self.invnum].name = armor_elements[steal_pos].name
+							end
+
 							set_animation(self, "run")
 							self.flag = 1
 							self.morlu_timer = os.time()
@@ -178,14 +187,12 @@ mobs:register_mob("nssm:morlu", {
 			end
 		end
 	end,
-	--[[
 	on_die = function(self)
 		local pos = self.object:getpos()
 		if (self.inventory ~= nil) then
-			local elem
-			for i = 1,32 do
-				if self.inventory[i].num~=0 then
-					local items = ItemStack(self.inventory[i].name.." "..self.inventory[i].num)
+			if self.invnum > 0 then
+				for i=1,self.invnum do
+					local items = ItemStack(self.inventory[i].name.." 1")
 					local obj = minetest.add_item(pos, items)
 						obj:setvelocity({
 							x = math.random(-1, 1),
@@ -196,5 +203,4 @@ mobs:register_mob("nssm:morlu", {
 			end
 		end
 	end,
-	]]
 })

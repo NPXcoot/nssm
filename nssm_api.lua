@@ -326,7 +326,8 @@ function webber_ability(		--puts randomly around the block defined as w_block
 	w_block, 	--definition of the block to use
 	radius		--max distance the block can be put
 	)
-	if math.random(1,nssm:virulence(self)) ~= 1 then return end
+
+	if (nssm:virulence(self)~=0) and (math.random(1,nssm:virulence(self)) ~= 1) then return end
 
 	local pos = self.object:getpos()
 	if (math.random(1,55)==1) then
