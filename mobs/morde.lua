@@ -103,20 +103,29 @@ minetest.register_entity("nssm:mortick", {
 	visual = "mesh",
 	mesh = "mortick.x",
 	visual_size = {x=3, y=3},
-	lifetime = 10,
+	--lifetime = 10,
 	damage = 1,
 	on_step = function(self, dtime)
 		self.mortick_timer = self.mortick_timer or os.time()
 		self.timer = self.timer or 0
 		self.timer = self.timer+dtime
+		local s = self.object:getpos()
+		local s1 = {x=s.x, y = s.y-1, z = s.z}
 
+		--[[
 		if (os.time()-self.mortick_timer > self.lifetime) then
+			self.object:remove()
+		end
+		]]
+		--The mortick dies when he finds himself in the fire
+		local name = minetest.env:get_node(s1).name
+		if name == "fire:basic_flame" then
 			self.object:remove()
 		end
 
 		--Find player to attack:
 		self.attack = (self.attack or 0)
-		local s = self.object:getpos()
+
 		local objects = minetest.env:get_objects_inside_radius(s, 8)
 		for _,obj in ipairs(objects) do
 	        if (obj:is_player()) then
@@ -142,7 +151,7 @@ minetest.register_entity("nssm:mortick", {
 			self.object:setyaw(yaws)
 
 			--damage player every second:
-			if (self.timer>1) then
+			if (self.timer>10) then
 				self.timer = 0
 				self.attack:set_hp(self.attack:get_hp() - self.damage)
 			end
