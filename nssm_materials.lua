@@ -12,13 +12,13 @@ end
 nssm_register_noneatcraftitems ('sky_feather','Sky Feather')
 nssm_register_noneatcraftitems ('snake_scute','Snake Scute')
 nssm_register_noneatcraftitems ('eyed_tentacle','Eyed Tentacle')
-nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
+--nssm_register_noneatcraftitems ('king_duck_crown','King Duck Crown')
 nssm_register_noneatcraftitems ('great_energy_globe','Great Energy Globe')
 nssm_register_noneatcraftitems ('superior_energy_globe','Superior Energy Globe')
 nssm_register_noneatcraftitems ('ant_queen_abdomen','Ant Queen Abdomen')
-nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
+--nssm_register_noneatcraftitems ('masticone_skull','Masticone Skull')
 nssm_register_noneatcraftitems ('masticone_skull_fragments','Masticone Skull Fragments')
-nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
+--nssm_register_noneatcraftitems ('masticone_skull_crowned','Masticone Skull Crowned')
 nssm_register_noneatcraftitems ('tentacle_curly','Kraken Tentacle')
 nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
 nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
@@ -31,19 +31,23 @@ nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
 nssm_register_noneatcraftitems ('cursed_pumpkin_seed','Cursed Pumpkin Seed')
 nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
 --nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
---nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
---nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
---nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
---nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
+nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
+nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
+nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
+nssm_register_noneatcraftitems ('crocodile_skin','Crocodile Skin')
 nssm_register_noneatcraftitems ('manticore_spine','Manticore Spine')
 nssm_register_noneatcraftitems ('night_feather','Night Feather')
 nssm_register_noneatcraftitems ('sun_feather','Sun Feather')
+nssm_register_noneatcraftitems ('duck_feather','Duck Feather')
+nssm_register_noneatcraftitems ('black_duck_feather','Black Duck Feather')
 nssm_register_noneatcraftitems ('masticone_fang','Masticone Fang')
 nssm_register_noneatcraftitems ('white_wolf_fur','White Wolf Fur')
 nssm_register_noneatcraftitems ('stoneater_mandible','Stoneater Mandible')
 nssm_register_noneatcraftitems ('ant_mandible','Ant Mandible')
 nssm_register_noneatcraftitems ('life_energy','Life Energy')
 nssm_register_noneatcraftitems ('wolf_fur','Wolf Fur')
+nssm_register_noneatcraftitems ('felucco_fur','Felucco Fur')
+nssm_register_noneatcraftitems ('felucco_horn','Felucco Horn')
 nssm_register_noneatcraftitems ('energy_globe','Energy Globe')
 
 function nssm_register_eatcraftitems (name, descr, gnam)
@@ -58,6 +62,8 @@ minetest.register_craftitem("nssm:"..name, {
 end
 
 nssm_register_eatcraftitems ('werewolf_leg','Werewolf Leg',3)
+nssm_register_eatcraftitems ('felucco_steak','Felucco Steak',3)
+nssm_register_eatcraftitems ('roasted_felucco_steak','Roasted Felucco Steak',3)
 nssm_register_eatcraftitems ('heron_leg','Moonheron Leg',2)
 nssm_register_eatcraftitems ('chichibios_heron_leg',"Chichibio's Moonheron Leg",4)
 nssm_register_eatcraftitems ('crocodile_tail','Crocodile Tail',3)
@@ -96,14 +102,14 @@ minetest.register_ore({
 		height_min     = -115,
 		height_max     = -95,
 			})
-
+for i=1,9 do
 minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:cobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1,
 		height_max     = 40,
 			})
@@ -113,8 +119,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:mossycobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -124,8 +130,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "default:sandstonebrick",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -135,8 +141,8 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "stairs:stair_sandstonebrick",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
@@ -146,11 +152,12 @@ minetest.register_ore({
 		ore            = "nssm:ant_dirt",
 		wherein        = "stairs:stair_cobble",
 		clust_scarcity = 1,
-		clust_num_ores = 27,
-		clust_size     = 3,
+		clust_num_ores = 1,
+		clust_size     = 1,
 		height_min     = -1000,
 		height_max     = 40,
 			})
+end
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -279,7 +286,7 @@ minetest.register_node("nssm:pumpbomb", {
 	groups = {not_in_creative_inventory =1},
 	drop = "",
 	on_timer = function(pos, elapsed)
-		nssm:explosion(pos, 3, 1)
+		explosion(pos, 3, 1)
 		minetest.env:set_node(pos, {name="air"})
 	end,
 })
@@ -343,7 +350,32 @@ minetest.register_abm({
 	end
 })
 
+minetest.register_node("nssm:phoenix_fire", {
+	description = "Phoenix Fire",
+	drawtype = "firelike",
+	tiles = {{
+		name = "phoenix_fire_animated.png",
+		animation = {type = "vertical_frames",
+			aspect_w = 16, aspect_h = 16, length = 1},
+	}},
+	inventory_image = "phoenix_fire.png",
+	light_source = 15,
+	groups = {igniter = 1, snappy=1},
+	drop = '',
+	walkable = false,
+	buildable_to = false,
+	damage_per_second = 4,
+	})
 
+minetest.register_abm({
+	nodenames = {"nssm:phoenix_fire"},
+	neighbors = {"air"},
+	interval = 3,
+	chance = 2,
+	action = function(pos, node)
+			minetest.set_node({x = pos.x, y = pos.y , z = pos.z}, {name = "air"})
+		end
+})
 
 --tools
 
@@ -432,7 +464,23 @@ minetest.register_node("nssm:rope", {
     drops = "nssm:rope",
     tile_images = { "rope.png" },
     groups = {snappy=1},
-    })
+})
+
+minetest.register_node("nssm:invisible_light", {
+	description = "Invisible light source",
+	tiles = {"transparent.png"},
+	paramtype = "light",
+	drawtype = "airlike",
+	walkable = false,
+	sunlight_propagates = true,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	groups = {unbreakable=1},
+	drop = "",
+	light_source = 15,
+})
 
 minetest.register_tool("nssm:stoneater_pick", {
 	description = "Stoneater Pickaxe",
@@ -551,20 +599,20 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:mese_egg',
 	recipe = {
-		{'nssm:tarantula_chelicerae', 'nssm:masticone_skull_crowned', 'nssm:eyed_tentacle'},
+		{'nssm:tarantula_chelicerae', 'nssm:helmet_masticone_crowned', 'nssm:eyed_tentacle'},
 		{'nssm:black_ice_tooth', 'nssm:superior_energy_globe', 'nssm:sky_feather'},
 		{'nssm:cursed_pumpkin_seed', 'nssm:ant_queen_abdomen', 'nssm:snake_scute'},
 	}
 })
 
-minetest.register_craft({
+--[[minetest.register_craft({
 	output = 'nssm:masticone_skull_crowned',
 	recipe = {
 		{'', 'nssm:king_duck_crown', ''},
 		{'', 'nssm:masticone_skull', ''},
 		{'', '', ''},
 	}
-})
+})]]
 
 minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
@@ -574,7 +622,7 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'nssm:masticone_skull',
 	recipe = {
@@ -582,26 +630,17 @@ minetest.register_craft({
 		{'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments'},
 		{'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments', 'nssm:masticone_skull_fragments'},
 	}
-})
+})]]
 
 minetest.register_craft({
 	output = 'nssm:rope 16',
 	recipe = {
-		{'', 'nssm:wolf_fur', ''},
-		{'', 'nssm:wolf_fur', ''},
-		{'', 'nssm:wolf_fur', ''},
+		{'', 'nssm:web', ''},
+		{'', 'nssm:web', ''},
+		{'', 'nssm:web', ''},
 	}
 })
 
-
-minetest.register_craft({
-	output = 'nssm:rope 16',
-	recipe = {
-		{'', 'nssm:white_wolf_fur', ''},
-		{'', 'nssm:white_wolf_fur', ''},
-		{'', 'nssm:white_wolf_fur', ''},
-	}
-})
 
 minetest.register_craft({
 	output = 'nssm:sky_feather',
@@ -796,10 +835,18 @@ nssm_register_egg ('daddy_long_legs', 'Daddy Long Legs')
 nssm_register_egg ('kraken', 'Kraken')
 nssm_register_egg ('pumpking', 'Pumpking')
 nssm_register_egg ('manticore', 'Manticore')
+nssm_register_egg ('felucco', 'Felucco')
 nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
 nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
 nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
-
+nssm_register_egg ('mordain', 'Mordain')
+nssm_register_egg ('pupumolle', 'PupuMolle')
+nssm_register_egg ('morgre', 'Morgre')
+nssm_register_egg ('morvy', 'Morvy')
+nssm_register_egg ('morgut', 'Morgut')
+nssm_register_egg ('morde', 'Morde')
+nssm_register_egg ('morlu', 'Morlu')
+nssm_register_egg ('morwa', 'Morwa')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
@@ -830,4 +877,92 @@ minetest.register_craftitem("nssm:mese_egg", {
 		itemstack:take_item()
 		return itemstack
 	end,
+})
+
+
+--experimental morwa statue
+minetest.register_node("nssm:morwa_statue", {
+   description = 'Morwa Statue',
+   drawtype = 'mesh',
+   mesh = 'morwa_statue.b3d',
+   tiles = {'morwa_statue.png'},
+   inventory_image = 'morwa_statue.png',
+   groups = {oddly_breakable_by_hand=2, --[[not_in_creative_inventory=1]]},
+   paramtype = 'light',
+   paramtype2 = 'facedir',
+   selection_box = {
+      type = 'fixed',
+      fixed = {-1, -0.5, -1, 1, 3, 1}, -- Right, Bottom, Back, Left, Top, Front
+      },
+   collision_box = {
+      type = 'fixed',
+      fixed = {-1, -0.5, -1, 1, 3, 1}, -- Right, Bottom, Back, Left, Top, Front
+      },
+})
+--Abm to make the conversion between statue and the entity, caused by light
+
+minetest.register_abm({
+	nodenames = {"nssm:morwa_statue"},
+	neighbors = {"air"},
+	interval = 1,
+	chance = 1,
+	action =
+	function(pos, node)
+		local pos1 = {x=pos.x, y=pos.y+1, z=pos.z}
+		local n = minetest.env:get_node(pos1).name
+		if n ~= "air" then
+			return
+		end
+		if (minetest.get_node_light(pos1) > 8)
+		then
+		minetest.add_entity(pos1, "nssm:morwa")
+		minetest.remove_node(pos)
+		end
+	end
+})
+--Eggs recipes
+
+minetest.register_craft({
+	output = 'nssm:duck_egg',
+	recipe = {
+		{'', 'nssm_duck_beak', ''},
+		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:flying_duck_egg',
+	recipe = {
+		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:enderduck_egg',
+	recipe = {
+		{'nssm:black_duck_feather', 'nssm_duck_beak', 'nssm:black_duck_feather'},
+		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
+		{'nssm:duck_legs', '', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:swimming_duck_egg',
+	recipe = {
+		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
+		{'nssm:duck_feather', 'nssm:duck_feather', 'nssm:duck_feather'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:spiderduck_egg',
+	recipe = {
+		{'nssm:duck_legs', 'nssm_duck_beak', 'nssm:duck_legs'},
+		{'nssm:black_duck_feather', 'nssm:energy_globe', 'nssm:black_duck_feather'},
+		{'nssm:duck_legs', 'nssm:black_duck_feather', 'nssm:duck_legs'},
+	}
 })

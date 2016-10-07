@@ -51,8 +51,8 @@ nssm:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "def
 
 
 -- FOREST
-nssm:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree"}, 0, 20, 40, 200, 1, -31000, 22)
-nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tree"}, 0, 20, 120, 4000, 2, -31000, 22)
+nssm:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 40, 200, 1, -31000, 22)
+nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 120, 4000, 2, -31000, 22)
 
 -- SKY
 nssm:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 100, 750000, 1, 10, 40)
@@ -66,7 +66,18 @@ nssm:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default
 nssm:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 500, 1, -31000, 31000)
 nssm:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 10000, 1, -31000, 31000)
 
+-- SAVANNA
+nssm:spawn_specific("nssm:felucco", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 30, 15000, 1, -200, 31000)
+
 -- NSSB SPECIAL
 if minetest.get_modpath("nssb") then
 nssm:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat1", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat2", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morbat3", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+nssm:spawn_specific("nssm:morvy", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 120, 1200, 1, -31000, -93)
+nssm:spawn_specific("nssm:morlu", {"nssb:morentir"}, {"nssb:mornen"}, 0, 20, 80, 700, 1, -31000, -93)
+nssm:spawn_specific("nssm:morde", {"nssb:morenrir"}, {"nssb:mornar"}, 0, 20, 50, 500, 1, -31000, -93)
+nssm:spawn_specific("nssm:mordain", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 90, 900, 1, -31000, .93)
+nssm:spawn_specific("nssm:morgut", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 50, 500, 1, -31000, -93)
 end

@@ -83,7 +83,7 @@ end
 function spears_register_spear(kind, desc, eq, toughness, material)
 
 	minetest.register_tool("nssm:spear_" .. kind, {
-		description = desc .. " spear",
+		description = desc .. " Spear",
                 wield_image = "spear_" .. kind .. ".png",
 		inventory_image = "spear_" .. kind .. ".png^[transform4",
 		wield_scale= {x=2,y=1,z=1},
@@ -142,3 +142,5 @@ spears_register_spear('ice_tooth', 'Ice Tooth', 16, 200, 'nssm:ice_tooth')
 spears_register_spear('little_ice_tooth', 'Little Ice Tooth', 7, 10, 'nssm:little_ice_tooth')
 
 spears_register_spear('duck_beak', 'Duck Beak', 5, 6, 'nssm:duck_beak')
+
+spears_register_spear('felucco_horn', 'Felucco Horn', 7, 9, 'nssm:felucco_horn')

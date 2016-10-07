@@ -5,8 +5,23 @@ local c_obsidian = minetest.get_content_id("default:obsidian")
 local c_brick = minetest.get_content_id("default:obsidianbrick")
 local c_chest = minetest.get_content_id("default:chest_locked")
 
+nssm.lessvirulent = minetest.setting_getbool("nssm.lessvirulent") or false
+nssm.safebones = minetest.setting_getbool("nssm.safebones") or false
+nssm.cryosave = minetest.setting_getbool("nssm.cryosave") or false
+
+function nssm:virulence(mobe)
+	if not nssm.lessvirulent then
+		return 0
+	end
+	return math.ceil(100 / mobe.hp_max)
+end
+
+function nssm:affectbones(mobe) -- as function for adaptable heuristic
+	return not nssm.safebones
+end
+
 -- get node but use fallback for nil or unknown
-function nssm:node_ok(pos, fallback)
+function node_ok(pos, fallback)
 	fallback = fallback or "default:dirt"
 	local node = minetest.get_node_or_nil(pos)
 	if not node then
@@ -18,8 +33,14 @@ function nssm:node_ok(pos, fallback)
 	return minetest.registered_nodes[fallback]
 end
 
+function dist_pos(p, s)
+	local v = {x = math.abs(s.x-p.x), y = math.abs(s.y-p.y), z = math.abs(s.z-p.z)}
+	local r = math.sqrt(v.x^2+v.y^2+v.z^2)
+	return r
+end
+
 --check_for_death functions customized for monsters who respawns (Masticone)
-function nssm:check_for_death_hydra(self)
+function check_for_death_hydra(self)
 	local hp = self.object:get_hp()
 	if hp > 0 then
 		self.health = hp
@@ -44,7 +65,7 @@ function nssm:check_for_death_hydra(self)
 end
 
 
-function nssm:round(n)
+function round(n)
 	if (n>0) then
 		return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
 	else
@@ -54,7 +75,7 @@ function nssm:round(n)
 	end
 end
 
-function nssm:explosion_particles(pos, exp_radius)
+function explosion_particles(pos, exp_radius)
     minetest.add_particlespawner(
         100*exp_radius/2, --amount
         0.1, --time
@@ -73,7 +94,7 @@ function nssm:explosion_particles(pos, exp_radius)
     )
 end
 
-function nssm:explosion(pos, exp_radius, fire)
+function explosion(pos, exp_radius, fire)
     local radius = exp_radius
     -- if area protected or near map limits then no blast damage
 	if minetest.is_protected(pos, "")
@@ -88,7 +109,7 @@ function nssm:explosion(pos, exp_radius, fire)
     })
 
     --particles:
-    nssm:explosion_particles(pos, exp_radius)
+    explosion_particles(pos, exp_radius)
 
     --Damages entities around (not the player)
     local objects = minetest.env:get_objects_inside_radius(pos, exp_radius)
@@ -128,7 +149,7 @@ function nssm:explosion(pos, exp_radius, fire)
         		and data[vi] ~= c_brick
         		and data[vi] ~= c_chest then
 
-                    local n = nssm:node_ok(p).name
+                    local n = node_ok(p).name
         			local on_blast = minetest.registered_nodes[n].on_blast
 
         			if on_blast then
@@ -167,7 +188,7 @@ function nssm:explosion(pos, exp_radius, fire)
         				or math.random(1, 100) <= 3) then
         					minetest.set_node(p, {name = "fire:basic_flame"})
         				else
-                            local dist = nssm:round(((pos.x-p.x)^2 + (pos.y-p.y)^2 + (pos.z-p.z)^2)^1/2)
+                            local dist = round(((pos.x-p.x)^2 + (pos.y-p.y)^2 + (pos.z-p.z)^2)^1/2)
                             local prob = 2/dist
                             if math.random(1,100)<=prob*100 then
                                 minetest.env:remove_node(p)
@@ -182,12 +203,14 @@ function nssm:explosion(pos, exp_radius, fire)
 end
 
 --			SPECIAL ABILITIES OF SOME MOBS
-function nssm:digging_ability(
+function digging_ability(
 	self,		--the entity of the mob
 	group,		--group of the blocks the mob can dig: nil=everything
 	max_vel,	--max velocity of the mob
 	dim 		--vector representing the dimensions of the mob
 	)
+
+	if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 	local pos = self.object:getpos()
@@ -212,15 +235,15 @@ function nssm:digging_ability(
 	local multiplier = 2
 
 	if x>0 then
-		i = nssm:round(x*max_vel)*multiplier
+		i = round(x*max_vel)*multiplier
 	else
-		i1 = nssm:round(x*max_vel)*multiplier
+		i1 = round(x*max_vel)*multiplier
 	end
 
 	if z>0 then
-		k = nssm:round(z*max_vel)*multiplier
+		k = round(z*max_vel)*multiplier
 	else
-		k1 = nssm:round(z*max_vel)*multiplier
+		k1 = round(z*max_vel)*multiplier
 	end
 
 	for dx = i1, i do
@@ -231,12 +254,12 @@ function nssm:digging_ability(
 				local n = minetest.env:get_node(p).name
 				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 				if group == nil then
-					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") then
+					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or (n == "bones:bones" and not nssm:affectbones(self) ) then
 					else
 						minetest.env:set_node(p, {name="air"})
 					end
 				else
-					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and not (minetest.is_protected(p, "")) then
+					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(p, "")) ) then
 						minetest.env:set_node(p, {name="air"})
 					end
 				end
@@ -246,11 +269,12 @@ function nssm:digging_ability(
 end
 
 
-function nssm:putting_ability(		--puts under the mob the block defined as 'p_block'
+function putting_ability(		--puts under the mob the block defined as 'p_block'
 	self,		--the entity of the mob
 	p_block, 	--definition of the block to use
 	max_vel	--max velocity of the mob
 	)
+	if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 
@@ -277,23 +301,36 @@ function nssm:putting_ability(		--puts under the mob the block defined as 'p_blo
 	pos1 = {x = pos.x+dx, y = pos.y, z = pos.z+dz}
 	local n = minetest.env:get_node(pos).name
 	local n1 = minetest.env:get_node(pos1).name
-	if n~=p_block and not minetest.is_protected(pos, "") then
+	local oldmetainf = {minetest.get_meta(pos):to_table(),minetest.get_meta(pos1):to_table() }
+	if n~=p_block and not minetest.is_protected(pos, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
 		minetest.env:set_node(pos, {name=p_block})
+		if nssm.cryosave then
+			local metai = minetest.get_meta(pos)
+			metai:from_table(oldmetainf[1]) -- this is enough to save the meta
+			metai:set_string("nssm",n)
+		end
 	end
-	if n1~=p_block and not minetest.is_protected(pos1, "") then
+	if n1~=p_block and not minetest.is_protected(pos1, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
 		minetest.env:set_node(pos1, {name=p_block})
+		if nssm.cryosave then
+			local metai = minetest.get_meta(pos1)
+			metai:from_table(oldmetainf[2]) -- this is enough to save the meta
+			metai:set_string("nssm",n1)
+		end
 	end
 end
 
 
-function nssm:webber_ability(		--puts randomly around the block defined as w_block
+function webber_ability(		--puts randomly around the block defined as w_block
 	self,		--the entity of the mob
 	w_block, 	--definition of the block to use
 	radius		--max distance the block can be put
 	)
 
+	if (nssm:virulence(self)~=0) and (math.random(1,nssm:virulence(self)) ~= 1) then return end
+
 	local pos = self.object:getpos()
-	if (math.random(1,5)==1) then
+	if (math.random(1,55)==1) then
 		local dx=math.random(1,radius)
 		local dz=math.random(1,radius)
 		local p = {x=pos.x+dx, y=pos.y-1, z=pos.z+dz}
@@ -306,13 +343,14 @@ function nssm:webber_ability(		--puts randomly around the block defined as w_blo
 	end
 end
 
-function nssm:midas_ability(		--ability to transform every blocks it touches in the m_block block
+function midas_ability(		--ability to transform every blocks it touches in the m_block block
 	self,		--the entity of the mob
 	m_block,
 	max_vel,	--max velocity of the mob
 	mult, 		--multiplier of the dimensions of the area around that need the transformation
 	height 		--height of the mob
 	)
+	if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 	local pos = self.object:getpos()
@@ -334,15 +372,15 @@ function nssm:midas_ability(		--ability to transform every blocks it touches in 
 	local multiplier = mult
 
 	if x>0 then
-		i = nssm:round(x*max_vel)*multiplier
+		i = round(x*max_vel)*multiplier
 	else
-		i1 = nssm:round(x*max_vel)*multiplier
+		i1 = round(x*max_vel)*multiplier
 	end
 
 	if z>0 then
-		k = nssm:round(z*max_vel)*multiplier
+		k = round(z*max_vel)*multiplier
 	else
-		k1 = nssm:round(z*max_vel)*multiplier
+		k1 = round(z*max_vel)*multiplier
 	end
 
 	for dx = i1, i do
@@ -351,7 +389,7 @@ function nssm:midas_ability(		--ability to transform every blocks it touches in 
 				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 				local n = minetest.env:get_node(p).name
 
-				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" then
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or n=="air" or (n == "bones:bones" and not nssm:affectbones(self)) then
 				else
 					minetest.env:set_node(p, {name=m_block})
 				end
