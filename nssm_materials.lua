@@ -49,6 +49,21 @@ nssm_register_noneatcraftitems ('wolf_fur','Wolf Fur')
 nssm_register_noneatcraftitems ('felucco_fur','Felucco Fur')
 nssm_register_noneatcraftitems ('felucco_horn','Felucco Horn')
 nssm_register_noneatcraftitems ('energy_globe','Energy Globe')
+nssm_register_noneatcraftitems ('greedy_soul_fragment','Greedy Soul Fragment')
+nssm_register_noneatcraftitems ('lustful_soul_fragment','Lustful Soul Fragment')
+nssm_register_noneatcraftitems ('wrathful_soul_fragment','Wrathful Soul Fragment')
+nssm_register_noneatcraftitems ('proud_soul_fragment','Proud Soul Fragment')
+nssm_register_noneatcraftitems ('slothful_soul_fragment','Slothful Soul Fragment')
+nssm_register_noneatcraftitems ('envious_soul_fragment','Envious Soul Fragment')
+nssm_register_noneatcraftitems ('gluttonous_soul_fragment','Gluttonous Soul Fragment')
+nssm_register_noneatcraftitems ('gluttonous_moranga','Gluttonous Moranga')
+nssm_register_noneatcraftitems ('envious_moranga','Envious Moranga')
+nssm_register_noneatcraftitems ('proud_moranga','Proud Moranga')
+nssm_register_noneatcraftitems ('slothful_moranga','Slothful Moranga')
+nssm_register_noneatcraftitems ('lustful_moranga','Lustful Moranga')
+nssm_register_noneatcraftitems ('wrathful_moranga','Wrathful Moranga')
+nssm_register_noneatcraftitems ('greedy_moranga','Greedy Moranga')
+
 
 function nssm_register_eatcraftitems (name, descr, gnam)
 
@@ -188,6 +203,22 @@ minetest.register_node("nssm:ant_dirt", {
 	description = "Ant Dirt",
 	tiles = {"ant_dirt.png"},
 	groups = {crumbly=3},
+})
+
+minetest.register_node("nssm:invisible_light", {
+	description = "Invisible light source",
+	tiles = {"transparent.png"},
+	paramtype = "light",
+	drawtype = "airlike",
+	walkable = false,
+	sunlight_propagates = true,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	groups = {unbreakable=1},
+	drop = "",
+	light_source = 15,
 })
 
 minetest.register_node("nssm:venomous_gas", {
@@ -466,22 +497,6 @@ minetest.register_node("nssm:rope", {
     groups = {snappy=1},
 })
 
-minetest.register_node("nssm:invisible_light", {
-	description = "Invisible light source",
-	tiles = {"transparent.png"},
-	paramtype = "light",
-	drawtype = "airlike",
-	walkable = false,
-	sunlight_propagates = true,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	groups = {unbreakable=1},
-	drop = "",
-	light_source = 15,
-})
-
 minetest.register_tool("nssm:stoneater_pick", {
 	description = "Stoneater Pickaxe",
 	inventory_image = "stoneater_pick.png",
@@ -519,6 +534,96 @@ minetest.register_tool("nssm:ant_sword", {
 			snappy={times={[1]=1.30, [2]=0.90, [3]=0.40}, uses=40, maxlevel=3},
 		},
 		damage_groups = {fleshy=8},
+	},
+})
+
+minetest.register_tool("nssm:axe_of_pride", {
+	description = "Axe of Pride",
+	inventory_image = "axe_of_pride.png",
+	wield_scale= {x=2,y=2,z=1.5},
+	tool_capabilities = {
+		full_punch_interval =1.3 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.8, [3]=0.4}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=16},
+	},
+})
+
+minetest.register_tool("nssm:gratuitousness_battleaxe", {
+	description = "Gratuittousness Battleaxe",
+	inventory_image = "gratuitousness_battleaxe.png",
+	wield_scale= {x=2.2,y=2.2,z=1.5},
+	tool_capabilities = {
+		full_punch_interval =1.6 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.8, [3]=0.4}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=18},
+	},
+})
+
+minetest.register_tool("nssm:sword_of_eagerness", {
+	description = "Sword of Eagerness",
+	inventory_image = "sword_of_eagerness.png",
+	wield_scale= {x=2,y=2,z=1},
+	tool_capabilities = {
+		full_punch_interval =0.7 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.8, [3]=0.4}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=14},
+	},
+})
+
+minetest.register_tool("nssm:sword_of_envy", {
+	description = "Sword of Envy",
+	inventory_image = "sword_of_envy.png",
+	wield_scale= {x=2,y=2,z=1},
+	tool_capabilities = {
+		full_punch_interval =0.9 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.5, [3]=0.2}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=14},
+	},
+})
+
+minetest.register_tool("nssm:sword_of_gluttony", {
+	description = "Sword of Gluttony",
+	inventory_image = "sword_of_gluttony.png",
+	wield_scale= {x=2,y=2,z=1},
+	tool_capabilities = {
+		full_punch_interval =1 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.9, [2]=0.7, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.6, [3]=0.2}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=14},
+	},
+})
+
+minetest.register_tool("nssm:death_scythe", {
+	description = "Death Scythe",
+	wield_scale= {x=3,y=3,z=1.3},
+	inventory_image = "death_scythe.png",
+	tool_capabilities = {
+		full_punch_interval =0.2 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=28000, maxlevel=1},
+			fleshy={times={[2]=0.1, [3]=0.1}, uses=28000, maxlevel=1}
+		},
+		damage_groups = {fleshy=28},
 	},
 })
 
@@ -772,6 +877,69 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'nssm:axe_of_pride',
+	recipe = {
+		{'nssm:proud_moranga', 'nssm:proud_moranga', 'nssm:proud_moranga'},
+		{'nssm:proud_moranga', 'nssb:moranga_ingot', ''},
+		{'', 'nssb:moranga_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:gratuitnousness_battleaxe',
+	recipe = {
+		{'nssm:greedy_moranga', 'nssm:greedy_moranga', 'nssm:greedy_moranga'},
+		{'nssm:greedy_moranga', 'nssb:moranga_ingot', 'nssm:greedy_moranga'},
+		{'', 'nssb:moranga_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:sword_of_envy',
+	recipe = {
+		{'', 'nssm:envious_moranga', ''},
+		{'', 'nssm:envious_moranga', ''},
+		{'', 'nssb:moranga_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:sword_of_eagerness',
+	recipe = {
+		{'', 'nssm:slothful_moranga', ''},
+		{'', 'nssm:slothful_moranga', ''},
+		{'', 'nssb:moranga_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:sword_of_gluttony',
+	recipe = {
+		{'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga'},
+		{'', 'nssm:gluttonous_moranga', ''},
+		{'', 'nssb:moranga_ingot', ''},
+	}
+})
+
+function nssm_register_moranga (viz)
+minetest.register_craft({
+	output = 'nssm:'.. viz ..'_moranga',
+	recipe = {
+		{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
+		{'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot'},
+		{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
+	}
+})
+end
+nssm_register_moranga ("lustful")
+nssm_register_moranga ("greedy")
+nssm_register_moranga ("slothful")
+nssm_register_moranga ("wrathful")
+nssm_register_moranga ("gluttonous")
+nssm_register_moranga ("envious")
+nssm_register_moranga ("proud")
+
 --Eggs
 
 function nssm_register_egg (name, descr)
@@ -922,10 +1090,12 @@ minetest.register_abm({
 })
 --Eggs recipes
 
+
+
 minetest.register_craft({
 	output = 'nssm:duck_egg',
 	recipe = {
-		{'', 'nssm_duck_beak', ''},
+		{'', 'nssm:duck_beak', ''},
 		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
 		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
 	}
@@ -934,7 +1104,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:flying_duck_egg',
 	recipe = {
-		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_feather', 'nssm:duck_beak', 'nssm:duck_feather'},
 		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
 		{'nssm:duck_legs', 'nssm:duck_feather', 'nssm:duck_legs'},
 	}
@@ -943,7 +1113,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:enderduck_egg',
 	recipe = {
-		{'nssm:black_duck_feather', 'nssm_duck_beak', 'nssm:black_duck_feather'},
+		{'nssm:black_duck_feather', 'nssm:duck_beak', 'nssm:black_duck_feather'},
 		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
 		{'nssm:duck_legs', '', 'nssm:duck_legs'},
 	}
@@ -952,7 +1122,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:swimming_duck_egg',
 	recipe = {
-		{'nssm:duck_feather', 'nssm_duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_feather', 'nssm:duck_beak', 'nssm:duck_feather'},
 		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
 		{'nssm:duck_feather', 'nssm:duck_feather', 'nssm:duck_feather'},
 	}
@@ -961,8 +1131,27 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:spiderduck_egg',
 	recipe = {
-		{'nssm:duck_legs', 'nssm_duck_beak', 'nssm:duck_legs'},
+		{'nssm:duck_legs', 'nssm:duck_beak', 'nssm:duck_legs'},
 		{'nssm:black_duck_feather', 'nssm:energy_globe', 'nssm:black_duck_feather'},
 		{'nssm:duck_legs', 'nssm:black_duck_feather', 'nssm:duck_legs'},
 	}
 })
+
+minetest.register_craft({
+	output = 'nssm:duckking_egg',
+	recipe = {
+		{'', 'nssm:helmet_crown', ''},
+		{'nssm:duck_feather', 'nssm:duck_beak', 'nssm:duck_feather'},
+		{'nssm:duck_legs', 'nssm:superior_energy_globe', 'nssm:duck_legs'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:bloco_egg',
+	recipe = {
+		{'nssm:bloco_skin', 'nssm:bloco_skin', 'nssm:bloco_skin'},
+		{'nssm:bloco_skin', 'nssm:energy_globe', 'nssm:bloco_skin'},
+		{'nssm:bloco_skin', 'nssm:bloco_skin', 'nssm:bloco_skin'},
+	}
+})
+
