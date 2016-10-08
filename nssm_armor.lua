@@ -11,6 +11,7 @@ if minetest.get_modpath("3d_armor") then
 			manticore = {name="Manticore", armor=2.2, heal=0, use=900},
 			duck = {name="Duck", armor=1, heal=0, use=2000},
 			black_duck = {name="Black Duck", armor=1, heal=0, use=1800},
+			mor = {name="Morlu", armor=4, heal=0, use=100},
 		}
 		local materials = {
 			wolf="nssm:wolf_fur",
@@ -23,6 +24,7 @@ if minetest.get_modpath("3d_armor") then
 			manticore="nssm:manticore_fur",
 			duck="nssm:duck_feather",
 			black_duck="nssm:black_duck_feather",
+			mor= "nssm:lustful_moranga",
 		}
 
 		for k, v in pairs(stats) do
@@ -89,11 +91,13 @@ if minetest.get_modpath("3d_armor") then
 		if minetest.get_modpath("shields") then
 		local stats = {
 			crab = {name="Crab", armor=4, heal=0, use=500},
-			ice ={name="Ice Teeth", armor=3, heal=0, use=600}
+			ice ={name="Ice Teeth", armor=3, heal=0, use=600},
+			mor ={name="Morlu", armor=5, use=100},
 		}
 		local materials = {
 			crab="nssm:crab_carapace_fragment",
 			ice="nssm:little_ice_tooth",
+			mor="nssm:lustful_moranga",
 		}
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:shield_"..k, {
