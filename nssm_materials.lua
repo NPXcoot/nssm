@@ -1015,6 +1015,7 @@ nssm_register_egg ('morgut', 'Morgut')
 nssm_register_egg ('morde', 'Morde')
 nssm_register_egg ('morlu', 'Morlu')
 nssm_register_egg ('morwa', 'Morwa')
+nssm_register_egg ('morvalarr', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
