@@ -1,10 +1,13 @@
+local path = minetest.get_modpath("nssm")
+
 --non eatable craftitems
+
 
 function nssm_register_noneatcraftitems (name, descr)
 
 minetest.register_craftitem("nssm:"..name, {
 	description = descr,
-	image = name ..".png",
+	image = (path.. "/textures/craftitems/"..name..".png"),
 })
 
 end
@@ -30,7 +33,7 @@ nssm_register_noneatcraftitems ('tarantula_chelicerae','Tarantula Chelicerae')
 nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
 nssm_register_noneatcraftitems ('cursed_pumpkin_seed','Cursed Pumpkin Seed')
 nssm_register_noneatcraftitems ('mantis_claw','Mantis Claw')
---nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
+nssm_register_noneatcraftitems ('manticore_fur','Manticore Fur')
 nssm_register_noneatcraftitems ('ant_hard_skin','Ant Hard Skin')
 nssm_register_noneatcraftitems ('bloco_skin','Bloco Skin')
 nssm_register_noneatcraftitems ('crab_carapace_fragment','Crab Carapace Fragment')
@@ -69,7 +72,7 @@ function nssm_register_eatcraftitems (name, descr, gnam)
 
 minetest.register_craftitem("nssm:"..name, {
 	description = descr,
-	image = name..".png",
+	image = (path.. "/textures/food/"..name..".png"),
 	on_use = minetest.item_eat(gnam),
 	groups = { meat=1, eatable=1 },
 })
@@ -78,7 +81,7 @@ end
 
 nssm_register_eatcraftitems ('werewolf_leg','Werewolf Leg',3)
 nssm_register_eatcraftitems ('felucco_steak','Felucco Steak',3)
-nssm_register_eatcraftitems ('roasted_felucco_steak','Roasted Felucco Steak',3)
+nssm_register_eatcraftitems ('roasted_felucco_steak','Roasted Felucco Steak',6)
 nssm_register_eatcraftitems ('heron_leg','Moonheron Leg',2)
 nssm_register_eatcraftitems ('chichibios_heron_leg',"Chichibio's Moonheron Leg",4)
 nssm_register_eatcraftitems ('crocodile_tail','Crocodile Tail',3)
@@ -86,16 +89,16 @@ nssm_register_eatcraftitems ('roasted_crocodile_tail','Roasted Crocodile Tail',6
 nssm_register_eatcraftitems ('roasted_werewolf_leg','Roasted_Werewolf Leg',6)
 nssm_register_eatcraftitems ('duck_legs','Duck Legs',1)
 nssm_register_eatcraftitems ('roasted_duck_legs','Roasted Duck Leg',3)
-nssm_register_eatcraftitems ('ant_leg','Ant Leg',1)
+nssm_register_eatcraftitems ('ant_leg','Ant Leg',-1)
 nssm_register_eatcraftitems ('roasted_ant_leg','Roasted Ant Leg',4)
-nssm_register_eatcraftitems ('spider_leg','Spider Leg',1)
+nssm_register_eatcraftitems ('spider_leg','Spider Leg',-1)
 nssm_register_eatcraftitems ('roasted_spider_leg','Roasted Spider Leg',4)
 --nssm_register_eatcraftitems ('brain','Brain',3)
 --nssm_register_eatcraftitems ('roasted_brain','Roasted Brain',8)
 nssm_register_eatcraftitems ('tentacle','Tentacle',2)
 nssm_register_eatcraftitems ('roasted_tentacle','Roasted Tentacle',5)
-nssm_register_eatcraftitems ('worm_flesh','Worm Flesh',-1)
-nssm_register_eatcraftitems ('roasted_worm_flesh','Roasted Worm Flesh',3)
+nssm_register_eatcraftitems ('worm_flesh','Worm Flesh',-2)
+nssm_register_eatcraftitems ('roasted_worm_flesh','Roasted Worm Flesh',4)
 nssm_register_eatcraftitems ('amphibian_heart','Amphibian Heart',1)
 nssm_register_eatcraftitems ('roasted_amphibian_heart','Roasted Amphibian Heart',8)
 nssm_register_eatcraftitems ('raw_scrausics_wing','Raw Scrausics Wing',1)
@@ -104,6 +107,19 @@ nssm_register_eatcraftitems ('phoenix_nuggets','Phoenix Nuggets',20)
 nssm_register_eatcraftitems ('phoenix_tear','Phoenix Tear',20)
 nssm_register_eatcraftitems ('frosted_amphibian_heart','Frosted Amphibian Heart',-1)
 nssm_register_eatcraftitems ('surimi','Surimi',4)
+nssm_register_eatcraftitems ('amphibian_ribs','Amphibian Ribs',2)
+nssm_register_eatcraftitems ('roasted_amphibian_ribs','Roasted Amphibian Ribs',6)
+nssm_register_eatcraftitems ('dolidrosaurus_fin','Dolidrosaurus Fin',-2)
+nssm_register_eatcraftitems ('roasted_dolidrosaurus_fin','Roasted Dolidrosaurus Fin',4)
+nssm_register_eatcraftitems ('larva_meat','Larva Meat',-1)
+nssm_register_eatcraftitems ('larva_juice','Larva Juice',-3)
+nssm_register_eatcraftitems ('larva_soup','Larva Soup',10)
+nssm_register_eatcraftitems ('mantis_meat','Mantis Meat',1)
+nssm_register_eatcraftitems ('roasted_mantis_meat','Roasted Mantis Meat',4)
+nssm_register_eatcraftitems ('spider_meat','Spider Meat',-1)
+nssm_register_eatcraftitems ('roasted_spider_meat','Roasted Spider Meat',3)
+nssm_register_eatcraftitems ('silk_gland','Silk Gland',-1)
+nssm_register_eatcraftitems ('roasted_silk_gland','Roasted Silk Gland',3)
 
 --ore generation
 
@@ -466,7 +482,7 @@ minetest.register_tool("nssm:crab_light_mace", {
 		full_punch_interval =2 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=1.4, [3]=1}, uses=120, maxlevel=1}
+			fleshy={times={[2]=1.4, [3]=1}, uses=20, maxlevel=1}
 		},
 		damage_groups = {fleshy=8},
 	},
@@ -479,9 +495,22 @@ minetest.register_tool("nssm:crab_heavy_mace", {
 		full_punch_interval =4 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=2, [3]=1.4}, uses=120, maxlevel=1}
+			fleshy={times={[2]=2, [3]=1.4}, uses=20, maxlevel=1}
 		},
 		damage_groups = {fleshy=12},
+	},
+})
+
+minetest.register_tool("nssm:mantis_battleaxe", {
+	description = "Mantis Battleaxe",
+	inventory_image = "mantis_battleaxe.png",
+	tool_capabilities = {
+		full_punch_interval =3 ,
+		max_drop_level=1,
+		groupcaps={
+			fleshy={times={[2]=2, [3]=1.4}, uses=20, maxlevel=1}
+		},
+		damage_groups = {fleshy=10},
 	},
 })
 
@@ -517,13 +546,69 @@ minetest.register_tool("nssm:mantis_sword", {
 		full_punch_interval =0.7 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=1.0, [3]=0.4}, uses=50, maxlevel=1},
-			snappy={times={[2]=0.80, [3]=0.3}, uses=100, maxlevel=1},
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=30, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=40, maxlevel=1},
+		},
+		damage_groups = {fleshy=7},
+	},
+})
+
+minetest.register_tool("nssm:little_ice_tooth_knife", {
+	description = "Little Ice Tooth Knife",
+	inventory_image = "little_ice_tooth_knife.png",
+	tool_capabilities = {
+		full_punch_interval =0.3 ,
+		max_drop_level=1,
+		groupcaps={
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=7, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=13, maxlevel=1},
+		},
+		damage_groups = {fleshy=5},
+	},
+})
+
+minetest.register_tool("nssm:manticore_spine_knife", {
+	description = "Manticore Spine Knife",
+	inventory_image = "manticore_spine_knife.png",
+	tool_capabilities = {
+		full_punch_interval =0.4 ,
+		max_drop_level=1,
+		groupcaps={
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=10, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=15, maxlevel=1},
 		},
 		damage_groups = {fleshy=6},
 	},
 })
 
+minetest.register_tool("nssm:felucco_knife", {
+	description = "Felucco Knife",
+	inventory_image = "felucco_knife.png",
+	tool_capabilities = {
+		full_punch_interval =0.4 ,
+		max_drop_level=1,
+		groupcaps={
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=10, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=15, maxlevel=1},
+		},
+		damage_groups = {fleshy=6},
+	},
+})
+--[[
+farming:register_hoe("nssm:felucco_hoe", {
+	description = "Felucco Hoe",
+	inventory_image = "felucco_hoe.png",
+	max_uses = 290,
+	material = "nssm:felucco_horn"
+})
+
+farming:register_hoe("nssm:ant_hoe", {
+	description = "Ant Hoe",
+	inventory_image = "ant_hoe.png",
+	max_uses = 350,
+	material = "nssm:ant_mandible"
+})
+]]
 minetest.register_tool("nssm:ant_sword", {
 	description = "Ant Sword",
 	inventory_image = "ant_sword.png",
@@ -534,6 +619,117 @@ minetest.register_tool("nssm:ant_sword", {
 			snappy={times={[1]=1.30, [2]=0.90, [3]=0.40}, uses=40, maxlevel=3},
 		},
 		damage_groups = {fleshy=8},
+	},
+})
+
+
+
+minetest.register_tool("nssm:ant_shovel", {
+	description = "Ant Shovel",
+	inventory_image = "ant_shovel.png",
+	wield_image = "ant_shovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 1,
+		max_drop_level=1,
+		groupcaps={
+			crumbly = {times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=35, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+})
+
+minetest.register_tool("nssm:duck_beak_shovel", {
+	description = "Duck Beak Shovel",
+	inventory_image = "duck_beak_shovel.png",
+	wield_image = "duck_beak_shovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 0.6,
+		max_drop_level=1,
+		groupcaps={
+			crumbly = {times={[1]=1.10, [2]=0.80, [3]=0.20}, uses=5, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+})
+
+minetest.register_tool("nssm:mantis_axe", {
+	description = "Mantis Axe",
+	inventory_image = "mantis_axe.png",
+	tool_capabilities = {
+		full_punch_interval = 0.8,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+		},
+	})
+	
+minetest.register_tool("nssm:ant_billhook", {
+	description = "Ant Billhook",
+	inventory_image = "ant_billhook.png",
+	tool_capabilities = {
+		full_punch_interval = 0.8,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=1.40, [2]=1.00, [3]=0.60}, uses=30, maxlevel=3},
+			snappy={times={[1]=1.40, [2]=1.00, [3]=0.60}, uses=30, maxlevel=3},
+		},
+		damage_groups = {fleshy=6},
+		},
+	})
+
+minetest.register_tool("nssm:duck_beak_pick",{
+	description = "Duck Beak Pickaxe",
+	inventory_image = "duck_beak_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0.6,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=1.0, [2]=0.8, [3]=0.20}, uses=5, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+		},
+})
+
+minetest.register_tool("nssm:ant_pick", {
+	description = "Ant Pickaxe",
+	inventory_image = "ant_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 1.2,
+		max_drop_level=1,
+		groupcaps={
+			cracky = {times={[1]=2.00, [2]=1.20, [3]=0.80}, uses=30, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+})
+
+minetest.register_tool("nssm:mantis_pick", {
+	description = "Mantis Pickaxe",
+	inventory_image = "mantis_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 1,
+		max_drop_level=1,
+		groupcaps={
+			cracky = {times={[1]=1.6, [2]=1.0, [3]=0.60}, uses=20, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+})
+
+minetest.register_tool("nssm:tarantula_warhammer", {
+	description = "Tarantula Warhammer",
+	inventory_image = "tarantula_warhammer.png",
+	wield_scale= {x=2,y=2,z=1.5},
+	tool_capabilities = {
+		full_punch_interval =1,
+		max_drop_level=1,
+		groupcaps={
+			cracky={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=80, maxlevel=1},
+			fleshy={times={[2]=0.8, [3]=0.4}, uses=200, maxlevel=1}
+		},
+		damage_groups = {fleshy=13},
 	},
 })
 
@@ -947,7 +1143,7 @@ function nssm_register_egg (name, descr)
 
 minetest.register_craftitem("nssm:".. name .."_egg", {
 	description = descr .. " Egg",
-	image = name .. "_egg.png",
+	image = (path.. "/textures/eggs/"..name.."_egg.png"),
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
 		pos1.y=pos1.y+1.5
