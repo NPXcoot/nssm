@@ -322,16 +322,18 @@ local function nssm_register_weapon(name, def)
         custom_timer = 0,
     })
 
-    minetest.register_tool("nssm:"..name.."_hand", {
+    minetest.register_craftitem("nssm:"..name.."_hand", {
         description = def.description,
         inventory_image = name.."_hand.png",
         on_use = function(itemstack, placer, pointed_thing)
             weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
+            itemstack:take_item()
             return itemstack
         end,
         on_drop = def.on_drop or function(itemstack, user, pointed_thing)
 		end,
     })
+
 
     minetest.register_craft({
 		output = 'nssm:'..name.."_hand",

@@ -1,4 +1,4 @@
-mobs:register_mob("nssm:morvalar", {
+mobs:register_mob("nssm:morvalarr", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -46,38 +46,12 @@ mobs:register_mob("nssm:morvalar", {
 		punch_start = 55,
 		punch_end = 80,
 	},
-
-	do_custom = function (self)
-		self.flag = (self.flag or 0)
-
-		if self.inv_flag ~= 1 then
-			self.inventory = {}
-			self.invnum = 0
-			for i=1,6 do
-				self.inventory[i]={name = ''}
-			end
-		end
-		self.inv_flag = (self.inv_flag or 1)
-
-		if self.flag == 1 then
-			self.state = ""
-			set_animation(self, "run")
-			self.object:setyaw(self.dir)
-			set_velocity(self, 4)
-
-			if os.time() - self.morvalar_timer > 3 then
-				self.flag = 0
-				self.state = "stand"
-			end
-		end
-
-	end,
 	custom_attack = function (self)
 		self.curr_attack = (self.curr_attack or self.attack)
 		self.morvalar_timer = (self.morvalar_timer or os.time())
 
 		self.dir = (self.dir or 0)
-		if (os.time() - self.morvalar_timer) > 1 then
+		if (os.time() - self.morvalar_timer) > 2 then
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -110,18 +84,9 @@ mobs:register_mob("nssm:morvalar", {
 					if armor_num > 0 then
 						steal_pos = math.random(1,armor_num)
 						steal_pos = steal_pos-1
-						--[[for i=0,armor_num-1 do
-							minetest.chat_send_all("Posizione: "..armor_elements[i].pos.." Oggetto: "..armor_elements[i].name)
-						end
-						]]
-
-						--minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
 						local cpos = string.find(armor_elements[steal_pos].name, ":")
-						--minetest.chat_send_all("Posizione dei due punti: "..cpos)
-
 						local mod_name = string.sub(armor_elements[steal_pos].name, 0, cpos-1)
 						local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
-						--minetest.chat_send_all("Armor Mod name: "..mod_name)
 
 						if mod_name == "3d_armor" then
 							nname = "3d_armor_inv_"..nname..".png"
@@ -130,7 +95,6 @@ mobs:register_mob("nssm:morvalar", {
 						else
 							nname = "3d_armor_inv_chestplate_diamond.png"
 						end
-						--minetest.chat_send_all("Nome della texture: "..nname)
 
 						minetest.add_particlespawner(
 							1, --amount
@@ -160,28 +124,7 @@ mobs:register_mob("nssm:morvalar", {
                             armor_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
 
                             armor:set_player_armor(self.attack, self.attack)
-                            --armor:update_armor(self.attack)
                             armor:update_inventory(self.attack)
-                            --armor:update_player_visuals(self.attack)
-
-							--Update personal inventory of armors:
-							if (self.invnum ~= nil) and (self.invnum <= 5) then
-								--minetest.chat_send_all("Invnum: "..self.invnum)
-								--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
-								self.invnum = self.invnum + 1
-								self.inventory[self.invnum].name = armor_elements[steal_pos].name
-							end
-
-							set_animation(self, "run")
-							self.flag = 1
-							self.morvalar_timer = os.time()
-							self.curr_attack = self.attack
-							self.state = ""
-							local pyaw = self.curr_attack: get_look_yaw()
-							self.dir = pyaw
-							self.object:setyaw(pyaw)
-							set_velocity(self, 4)
-
 						end,self)
 					end
 				end
@@ -190,27 +133,838 @@ mobs:register_mob("nssm:morvalar", {
 	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
-		if (self.inventory ~= nil) then
-			if self.invnum > 0 then
-				for i=1,self.invnum do
-					local items = ItemStack(self.inventory[i].name.." 1")
-					local obj = minetest.add_item(pos, items)
-						obj:setvelocity({
-							x = math.random(-1, 1),
-							y = 6,
-							z = math.random(-1, 1)
-						})
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr6")
+
+	end,
+})
+
+mobs:register_mob("nssm:morvalarr6", {
+	type = "monster",
+	hp_max = 10,
+	hp_min = 10,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach =6,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 85,
+		stand_end = 86,
+		walk_start = 90,
+		walk_end = 130,
+		run_start = 90,
+		run_end = 130,
+		punch_start = 132,
+		punch_end = 162,
+	},
+	custom_attack = function (self)
+		self.morvalarr6_timer = (self.morvalarr6_timer or os.time())
+
+		self.dir = (self.dir or 0)
+		if (os.time() - self.morvalarr6_timer) > 1 then
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+			set_animation(self, "punch")
+			local m = 2
+
+
+
+			minetest.after(1, function (self)
+				if self.attack:is_player() then
+					local pname = self.attack:get_player_name()
+					local player_inv = minetest.get_inventory({type='player', name = pname})
+
+					if player_inv:is_empty('main') then
+						--minetest.chat_send_all("Inventory empty")
+					else
+						local imhungry = 0
+						for i = 1,32 do
+							--minetest.chat_send_all("Inventory is not empty")
+							local items = player_inv:get_stack('main', i)
+							local n = items:get_name()
+							if minetest.get_item_group(n, "eatable")==1 then
+								imhungry = 1
+								for t = 0,2 do
+									items:take_item()
+								end
+								player_inv:set_stack('main', i, items)
+							end
+						end
+						if imhungry == 0 then
+							self.attack:punch(self.object, 1.0, {
+								full_punch_interval = 1.0,
+								damage_groups = {fleshy = self.damage}
+							}, nil)
+						else
+							s.y = s.y+1.8
+							minetest.add_particlespawner(
+								1, --amount
+								1, --time
+								{x=p.x, y=p.y+1, z=p.z}, --minpos
+								{x=p.x, y=p.y+1, z=p.z}, --maxpos
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+								{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --minacc
+								{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --maxacc
+								0.5, --minexptime
+								0.5, --maxexptime
+								10, --minsize
+								10, --maxsize
+								false, --collisiondetection
+								"roasted_duck_legs.png" --texture
+							)
+						end
+						self.morvalarr6_timer = os.time()
+					end
+				end
+
+			end,self)
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr5")
+	end,
+})
+
+
+mobs:register_mob("nssm:morvalarr5", {
+	type = "monster",
+	hp_max = 10,
+	hp_min = 10,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach =6,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 165,
+		stand_end = 166,
+		walk_start = 170,
+		walk_end = 210,
+		run_start = 170,
+		run_end = 210,
+		punch_start = 215,
+		punch_end = 245,
+	},
+	custom_attack = function (self)
+		self.morvalarr5_timer = (self.morvalarr5_timer or os.time())
+
+		self.dir = (self.dir or 0)
+		if (os.time() - self.morvalarr5_timer) > 2 then
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+			minetest.after(2, function(self)
+				set_animation(self, "punch")
+				explosion(p, 3, 0, 1, self.sounds.explode)
+				self.morvalarr5_timer = os.time()
+			end,self)
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr4")
+	end,
+})
+
+
+mobs:register_mob("nssm:morvalarr4", {
+	type = "monster",
+	hp_max = 10,
+	hp_min = 10,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach = 3,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 250,
+		stand_end = 251,
+		walk_start = 255,
+		walk_end = 295,
+		run_start = 255,
+		run_end = 295,
+		punch_start = 300,
+		punch_end = 320,
+	},
+	custom_attack = function(self)
+		self.morvalarr4_timer = (self.morvalarr4_timer or os.time())
+		if (os.time() - self.morvalarr4_timer) > 1 then
+			self.morvalarr4_timer = os.time()
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			set_animation(self, "punch")
+
+			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+						object = self.object,
+						max_hear_distance = self.sounds.distance
+					})
+				end
+				-- punch player
+				self.attack:punch(self.object, 1.0,  {
+					full_punch_interval=1.0,
+					damage_groups = {fleshy=self.damage}
+				}, nil)
+			end
+
+			minetest.after(1.4, function()
+				local ty = s.y
+				local flag = 0
+				local m = 3
+
+				local v = {x=(p.x-s.x)*m, y = ty, z = (p.z-s.z)*m}
+				local d = {x=s.x+v.x, y = ty, z = s.z+v.z}
+
+				d.y = ty
+
+				for j = -3,3 do
+					ty = d.y + j
+					local current = minetest.env:get_node({x = d.x, y = ty, z = d.z}).name
+					local up = minetest.env:get_node({x = d.x, y = ty+1, z = d.z}).name
+					if up == "air" and current ~= "air" then
+						d.y = d.y + j+1.5
+						flag = 1
+						break
+					end
+				end
+
+				while flag ~= 1 do
+					d.x = p.x + math.random(-m,m)
+					d.z = p.z + math.random(-m,m)
+					d.y = p.y
+					local dist = dist_pos(d, p)
+					if dist>=2 then
+						for j = -3,3 do
+							ty = d.y + j
+							local current = minetest.env:get_node({x = d.x, y = ty, z = d.z}).name
+							local up = minetest.env:get_node({x = d.x, y = ty+1, z = d.z}).name
+							if up == "air" and current ~= "air" then
+								d.y = d.y + j+1.5
+								flag = 1
+								break
+							end
+						end
+					end
+				end
+				self.object:setpos(d)
+			end)
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr3")
+	end,
+})
+
+mobs:register_mob("nssm:morvalarr3", {
+	type = "monster",
+	hp_max = 10,
+	hp_min = 10,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach = 3,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogshoot",
+	dogshoot_switch = true,
+    arrow = "nssm:morarrow",
+    shoot_interval = 2,
+    shoot_offset = 0,
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 325,
+		stand_end = 326,
+		walk_start = 330,
+		walk_end = 370,
+		run_start = 330,
+		run_end = 370,
+		punch_start = 375,
+		punch_end = 395,
+		shoot_start = 400,
+    	shoot_end = 450,
+	},
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr2")
+	end,
+})
+
+mobs:register_mob("nssm:morvalarr2", {
+	type = "monster",
+	hp_max = 40,
+	hp_min = 40,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach = 6,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 455,
+		stand_end = 456,
+		walk_start = 460,
+		walk_end = 500,
+		run_start = 460,
+		run_end = 500,
+		punch_start = 505,
+		punch_end = 545,
+	},
+	custom_attack = function(self)
+		self.morvalarr2_timer = (self.morvalarr2_timer or os.time())
+		if (os.time() - self.morvalarr2_timer) > 1 then
+			self.morvalarr2_timer = os.time()
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+			minetest.chat_send_all("ciao ciao sono dentro")
+
+			local counter = 0
+			local objects = minetest.env:get_objects_inside_radius(s, 7)
+			for _,obj in ipairs(objects) do
+				if obj:get_luaentity() then
+					local name = obj:get_luaentity().name
+					if (name == "nssm:mordain" or name == "nssm:morde" or name == "nssm:morgut" or name == "nssm:morgre" or name == "nssm:morlu" or name == "nssm:morwa" or name == "nssm:morvy") then
+						counter = counter + 1
+					end
+				end
+			end
+			minetest.chat_send_all("Ne ho contati: "..counter)
+			if counter < 2 then
+				set_animation(self, "punch")
+				minetest.chat_send_all("Ora te li sbatto addosso")
+				minetest.add_entity(s, "nssm:morwa")
+				minetest.add_entity(s, "nssm:mordain")
+				minetest.add_entity(s, "nssm:morgre")
+				minetest.add_entity(s, "nssm:morlu")
+				minetest.add_entity(s, "nssm:morgut")
+				minetest.add_entity(s, "nssm:morde")
+				minetest.add_entity(s, "nssm:morvy")
+			end
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr1")
+	end,
+})
+
+mobs:register_mob("nssm:morvalarr1", {
+	type = "monster",
+	hp_max = 40,
+	hp_min = 40,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach = 6,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 550,
+		stand_end = 551,
+		walk_start = 560,
+		walk_end = 600,
+		run_start = 560,
+		run_end = 600,
+		punch_start = 610,
+		punch_end = 640,
+	},
+	custom_attack = function (self)
+		self.morvalarr1_timer = (self.morvalarr1_timer or os.time())
+		if (os.time() - self.morvalarr1_timer) > 3 then
+			self.morvalarr1_timer = os.time()
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			set_animation(self, "punch")
+
+			local m = 3
+
+			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+						object = self.object,
+						max_hear_distance = self.sounds.distance
+					})
+				end
+				-- punch player
+				self.health = self.health + (self.damage*3)
+				self.attack:punch(self.object, 1.0,  {
+					full_punch_interval=1.0,
+					damage_groups = {fleshy=self.damage}
+				}, nil)
+
+				minetest.add_particlespawner(
+			        6, --amount
+			        1, --time
+			        {x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
+			        {x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
+			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --minvel
+			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --maxvel
+			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --minacc
+			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --maxacc
+			        0.2, --minexptime
+			        0.3, --maxexptime
+			        2, --minsize
+			        3, --maxsize
+			        false, --collisiondetection
+			        "morparticle.png" --texture
+			    )
+			end
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		minetest.add_entity(pos, "nssm:morvalarr0")
+	end,
+})
+
+mobs:register_mob("nssm:morvalarr0", {
+	type = "monster",
+	hp_max = 100,
+	hp_min = 100,
+	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
+	visual = "mesh",
+	--rotate= 270,
+	mesh = "morvalar.x",
+	textures = {{"morvalar.png"}},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = true,
+	view_range = 50,
+	walk_velocity = 1.6,
+	reach = 6,
+	run_velocity = 3.2,
+	damage = 4,
+	runaway = true,
+	jump = true,
+    --[[sounds = {
+		random = "",
+	},]]
+	drops = {
+		{name = "nssm:life_energy",
+		chance = 1,
+		min = 1,
+		max = 1,},
+	},
+	armor = 50,
+	drawtype = "front",
+	water_damage = 0,
+	fear_height = 4,
+	floats = 1,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 30,
+		stand_start = 645,
+		stand_end = 646,
+		walk_start = 650,
+		walk_end = 690,
+		run_start = 650,
+		run_end = 690,
+		punch_start = 700,
+		punch_end = 750,
+	},
+	custom_attack = function (self)
+		self.morvalarr1_timer = (self.morvalarr1_timer or os.time())
+		if (os.time() - self.morvalarr1_timer) > 1 then
+			self.morvalarr1_timer = os.time()
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+			p.y = p.y +1
+
+			set_animation(self, "punch")
+
+			local m = 5 	--velocity of the kamehameha
+			local obj = minetest.add_entity(s, "nssm:kamehameha_bad")
+
+			local dir = {x=(p.x-s.x)*m, y=(p.y-s.y+1)*m, z=(p.z-s.z)*m} --direction of the kamehameha
+			obj:setvelocity(dir)
+		end
+	end,
+	on_die = function(self)
+		local pos = self.object:getpos()
+		self.object:remove()
+		minetest.add_particlespawner({
+			amount = 1000,
+			time = 2,
+			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+			minvel = {x=0, y=0, z=0},
+			maxvel = {x=1, y=2, z=1},
+			minacc = {x=-0.5,y=0.6,z=-0.5},
+			maxacc = {x=0.5,y=0.7,z=0.5},
+			minexptime = 2,
+			maxexptime = 3,
+			minsize = 3,
+			maxsize = 5,
+			collisiondetection = false,
+			vertical = false,
+			texture = "morparticle.png",
+		})
+		--minetest.add_entity(pos, "nssm:morvalarr3")
+	end,
+})
+
+minetest.register_entity("nssm:kamehameha_bad", {
+	textures = {"kamehameha.png"},
+	on_step = function(self, dtime)
+		local pos = self.object:getpos();
+
+		if self.timer == 0 then
+			self.timer = os.time()
+		end
+
+		if os.time() - self.timer > self.life_time then
+			self.object:remove()
+		end
+
+		local objects = minetest.env:get_objects_inside_radius(pos, 2)
+		for _,obj in ipairs(objects) do
+			if obj:get_luaentity() then
+				local name = obj:get_luaentity().name
+				if name ~= "nssm:morvalarr0" then
+		            obj:set_hp(obj:get_hp()-5)
+		            if (obj:get_hp() <= 0) then
+		                if (not obj:is_player()) then
+		                    obj:remove()
+		                end
+		            end
+				end
+	        end
+		end
+		local objects = minetest.env:get_objects_inside_radius(pos, 0)
+		for _,obj in ipairs(objects) do
+			if obj:get_luaentity() then
+				local name = obj:get_luaentity().name
+				if name ~= "nssm:morvalarr0" then
+					explosion(pos, 5, 0, 1)
+					self.object:remove()
 				end
 			end
 		end
-		self.object:remove()
+
+		local nodename = minetest.env:get_node(pos).name
+		--[[if nodename ~= "air" then
+			explosion(pos, 5, 0, 1)
+			self.object:remove()
+		end
+		]]
 	end,
+	life_time = 40,
+	timer = 0,
+	custom_timer = 0,
 })
 --[[
 7 code: ruba l'armatura come il morlu, ma poi non scappa e ti attacca normalmente. O un po' un po' o prima ruba e poi ti ara e basta.
 
 6 code: stand: 85-86 walk: 90-130 attack: 132-162
-Attacca come prima con 7 ma ruba il cibo come il Morgut al posto dell'armatura, e non scappa ma attacca.
+Attacca come prima con 7 ma ruba il cibo come il morvalarr6 al posto dell'armatura, e non scappa ma attacca.
 
 5 code: stand: 165-166 walk: 170-210 attack: 215-245
 Fa esplodere un po' la sua coda come un Morgre fa esplodere se stesso.
@@ -222,10 +976,10 @@ Attacca esattamente come un Mordain
 Dogshoot con lo stesso intervel del Morwa, che mi pare sia 2.
 
 2 code: stand: 455-456 walk: 460-500 attack: 505-545
-Evoca intorno a sé i 7 mostri del Morlendor contemporaneamente, non fa nulla fino a quando sono nel suo raggio visivo, quando muoiono ne evoca altri 7 e così via fino a che non lo abbatti, sei libero di reinterpretare questo attacco in base alle tue capacità.
+Evoca intorno a sï¿½ i 7 mostri del Morlendor contemporaneamente, non fa nulla fino a quando sono nel suo raggio visivo, quando muoiono ne evoca altri 7 e cosï¿½ via fino a che non lo abbatti, sei libero di reinterpretare questo attacco in base alle tue capacitï¿½.
 
 1 code: stand: 550-551 walk: 560-600 attack: 610-640
-Attacca assorbendo la vita come un morde, si ricarica in questo modo, ma di più del numero che assorbe.
+Attacca assorbendo la vita come un morde, si ricarica in questo modo, ma di piï¿½ del numero che assorbe.
 
 0 code: stand: 645-646 walk: 650-690 attack: 700-750
 Shoota delle kamehameha
