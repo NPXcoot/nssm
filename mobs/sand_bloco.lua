@@ -10,7 +10,7 @@ mobs:register_mob("nssm:sand_bloco", {
 	makes_footstep_sound = true,
 	view_range = 14,
 	fear_height = 4,
-	walk_velocity = 1,
+	walk_velocity = 0.8,
 	run_velocity = 2,
     rotate = 270,
     sounds = {

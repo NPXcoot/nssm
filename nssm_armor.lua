@@ -14,6 +14,11 @@ if minetest.get_modpath("3d_armor") then
 			duck = {name="Duck", armor=1, heal=0, use=2000},
 			black_duck = {name="Black Duck", armor=1, heal=0, use=1800},
 			mor = {name="Morlu", armor=4, heal=0, use=100},
+			sky = {name="Sky", armor=3, heal=0, use=100},
+			sandworm = {name="Sandworm", armor=2.4, heal=0, use=100},
+			sandbloco = {name="Sand Bloco", armor=1.6, heal=0, use=100},
+			web = {name="Cobweb String", armor=1.6, heal=0, use=100},
+			denseweb = {name="Dense Cobweb String", armor=1.6, heal=0, use=100},
 		}
 		local materials = {
 			wolf="nssm:wolf_fur",
@@ -27,6 +32,11 @@ if minetest.get_modpath("3d_armor") then
 			duck="nssm:duck_feather",
 			black_duck="nssm:black_duck_feather",
 			mor= "nssm:lustful_moranga",
+			sandbloco= "nssm:sandbloco_skin",
+			sandworm="nssm:sandworm_skin",
+			sky="nssm:sky_iron",
+			web="nssm:web_string",
+			denseweb="nssm:dense_web_string",
 		}
 
 		for k, v in pairs(stats) do
