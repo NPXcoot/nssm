@@ -1,6 +1,5 @@
 if minetest.get_modpath("3d_armor") then
 
-local path = minetest.get_modpath("nssm")
 
 --Armors
 		local stats = {
@@ -33,25 +32,25 @@ local path = minetest.get_modpath("nssm")
 		for k, v in pairs(stats) do
 			minetest.register_tool("nssm:helmet_"..k, {
 				description = v.name.." Helmet",
-				inventory_image =(path.."/textures/armors/inv_helmet_"..k..".png"),
+				inventory_image ="inv_helmet_"..k..".png",
 				groups = {armor_head=math.floor(4*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:chestplate_"..k, {
 				description = v.name.." Chestplate",
-				inventory_image =(path.."/textures/armors/inv_chestplate_"..k..".png"),
+				inventory_image ="inv_chestplate_"..k..".png",
 				groups = {armor_torso=math.floor(6*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:leggings_"..k, {
 				description = v.name.." Leggings",
-				inventory_image = (path.."/textures/armors/inv_leggings_"..k..".png"),
+				inventory_image = "inv_leggings_"..k..".png",
 				groups = {armor_legs=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
 			minetest.register_tool("nssm:boots_"..k, {
 				description = v.name.." Boots",
-				inventory_image =(path.."/textures/armors/inv_boots_"..k..".png"),
+				inventory_image ="inv_boots_"..k..".png",
 				groups = {armor_feet=math.floor(3*v.armor), armor_heal=v.heal, armor_use=v.use},
 				wear = 0,
 			})
@@ -105,7 +104,7 @@ local path = minetest.get_modpath("nssm")
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:shield_"..k, {
 					description = v.name.." Shield",
-					inventory_image =(path.."/textures/armors/inv_shield_"..k..".png"),
+					inventory_image ="inv_shield_"..k..".png",
 					groups = {armor_head=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 					wear = 0,
 				})
@@ -137,14 +136,14 @@ local stats = {
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:helmet_"..k, {
 					description = v.name.." ",
-					inventory_image =(path.."/textures/armors/inv_helmet_"..k..".png"),
+					inventory_image ="inv_helmet_"..k..".png",
 					groups = {armor_shield=math.floor(5*v.armor), armor_heal=v.heal, armor_use=v.use},
 					wear = 0,
 				})
 
 				minetest.register_tool("nssm:chestplate_snake", {
 				description = "Snake Scute Chestplate",
-				inventory_image =(path.."/textures/armors/inv_chestplate_snake.png"),
+				inventory_image ="inv_chestplate_snake.png",
 				groups = {armor_torso=40, armor_heal=0, armor_use=100},
 				wear = 0,
 				})

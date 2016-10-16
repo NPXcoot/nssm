@@ -1,5 +1,3 @@
-local path = minetest.get_modpath("nssm")
-
 --non eatable craftitems
 
 
@@ -7,7 +5,7 @@ function nssm_register_noneatcraftitems (name, descr)
 
 minetest.register_craftitem("nssm:"..name, {
 	description = descr,
-	image = (path.. "/textures/craftitems/"..name..".png"),
+	image = name..".png",
 })
 
 end
@@ -77,7 +75,7 @@ function nssm_register_eatcraftitems (name, descr, gnam)
 
 minetest.register_craftitem("nssm:"..name, {
 	description = descr,
-	image = (path.. "/textures/food/"..name..".png"),
+	image =name..".png",
 	on_use = minetest.item_eat(gnam),
 	groups = { meat=1, eatable=1 },
 })
@@ -600,14 +598,15 @@ minetest.register_tool("nssm:felucco_knife", {
 	},
 })
 --[[
-farming:register_hoe("nssm:felucco_hoe", {
+Bisognava dare la dipendenza da farming... Ma mi da ancora degli errori!
+farming:register_hoe(":farming:felucco_hoe", {
 	description = "Felucco Hoe",
 	inventory_image = "felucco_hoe.png",
 	max_uses = 290,
 	material = "nssm:felucco_horn"
 })
 
-farming:register_hoe("nssm:ant_hoe", {
+farming:register_hoe(":farming:ant_hoe", {
 	description = "Ant Hoe",
 	inventory_image = "ant_hoe.png",
 	max_uses = 350,
@@ -833,9 +832,8 @@ minetest.register_tool("nssm:death_scythe", {
 minetest.register_craft({
 	output = 'nssm:web_string',
 	recipe = {
-		{'nssm:web', 'nssm:web', ''},
-		{'nssm:web', 'nssm:web', ''},
-		{'', '', ''},
+		{'nssm:web', 'nssm:web'},
+		{'nssm:web', 'nssm:web'},
 	}
 })
 
@@ -851,36 +849,34 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:mantis_sword',
 	recipe = {
-		{'', 'nssm:mantis_claw', ''},
-		{'', 'nssm:mantis_claw', ''},
-		{'', 'group:stick', ''},
+		{'nssm:mantis_claw'},
+		{'nssm:mantis_claw'},
+		{'group:stick'},
 	}
 })
 
 minetest.register_craft({
 	output = 'nssm:masticone_fang_sword',
 	recipe = {
-		{'', 'nssm:masticone_fang', 'nssm:masticone_fang'},
-		{'', 'nssm:masticone_fang', ''},
-		{'', 'group:stick', ''},
+		{'nssm:masticone_fang', 'nssm:masticone_fang'},
+		{'nssm:masticone_fang', ''},
+		{'group:stick', ''},
 	}
 })
 
 minetest.register_craft({
 	output = 'nssm:black_ice_tooth',
-	recipe = {
-		{'', 'nssm:black_sand', ''},
-		{'', 'nssm:ice_tooth', ''},
-		{'', '', ''},
-	}
+	type = "shapeless",
+	recipe = {'nssm:black_sand', 'nssm:ice_tooth'},
+	
 })
 
 minetest.register_craft({
 	output = 'nssm:crab_light_mace',
 	recipe = {
-		{'', 'nssm:crab_chela', ''},
-		{'', 'group:stick', ''},
-		{'', 'group:stick', ''},
+		{'nssm:crab_chela'},
+		{'group:stick'},
+		{'group:stick'},
 	}
 })
 
@@ -922,11 +918,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	output = 'nssm:mese_egg',
-	recipe = {
-		{'nssm:tarantula_chelicerae', 'nssm:helmet_masticone_crowned', 'nssm:eyed_tentacle'},
-		{'nssm:black_ice_tooth', 'nssm:superior_energy_globe', 'nssm:sky_feather'},
-		{'nssm:cursed_pumpkin_seed', 'nssm:ant_queen_abdomen', 'nssm:snake_scute'},
-	}
+	type = "shapeless",
+	recipe = {'nssm:tarantula_chelicerae', 'nssm:helmet_masticone_crowned', 'nssm:eyed_tentacle','nssm:black_ice_tooth', 'nssm:superior_energy_globe', 'nssm:sky_feather','nssm:cursed_pumpkin_seed', 'nssm:ant_queen_abdomen', 'nssm:snake_scute'}
 })
 
 --[[minetest.register_craft({
@@ -940,11 +933,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
-	recipe = {
-		{'', 'nssm:lava_titan_eye', ''},
-		{'', 'nssm:tentacle_curly', ''},
-		{'', '', ''},
-	}
+	type = "shapeless",
+	recipe = {'nssm:lava_titan_eye','nssm:tentacle_curly'}
 })
 --[[
 minetest.register_craft({
@@ -957,43 +947,40 @@ minetest.register_craft({
 })]]
 
 minetest.register_craft({
-	output = 'nssm:rope 16',
+	output = 'nssm:rope 12',
 	recipe = {
-		{'', 'nssm:web', ''},
-		{'', 'nssm:web', ''},
-		{'', 'nssm:web', ''},
+		{'nssm:web_string'},
+		{'nssm:web_string'},
+		{'nssm:web_string'},
 	}
 })
 
 
 minetest.register_craft({
 	output = 'nssm:sky_feather',
-	recipe = {
-		{'', '', ''},
-		{'nssm:sun_feather', '', 'nssm:night_feather'},
-		{'', '', ''},
-	}
+	type = "shapeless",
+	recipe = {'nssm:sun_feather','nssm:night_feather'}
 })
 
 minetest.register_craft({
 	output = 'nssm:sun_sword',
 	recipe = {
-		{'', 'default:diamond', ''},
-		{'', 'nssm:sun_feather', ''},
-		{'', 'group:stick', ''},
+		{'default:diamond'},
+		{'nssm:sun_feather'},
+		{'group:stick'},
 	}
 })
 
 minetest.register_craft({
 	output = 'nssm:night_sword',
 	recipe = {
-		{'', 'default:diamond', ''},
-		{'', 'nssm:night_feather', ''},
-		{'', 'group:stick', ''},
+		{'default:diamond'},
+		{'nssm:night_feather'},
+		{'group:stick'},
 	}
 })
 
-function nssm_register_yummy (ingredient, dish, tictac)
+function nssm_register_recip (ingredient, dish, tictac)
 
 minetest.register_craft({
 	type = "cooking",
@@ -1004,41 +991,92 @@ minetest.register_craft({
 
 end
 
-minetest_register_yummy ('worm_flesh', 'roasted_worm_flesh', 12)
-minetest_register_yummy ('duck_legs', 'roasted_duck_legs', 6)
-minetest_register_yummy ('spider_leg', 'roasted_spider_leg', 6)
-minetest_register_yummy ('werewolf_leg', 'roasted_werewolf_leg', 10)
-minetest_register_yummy ('brain', 'roasted_brain', 6)
-minetest_register_yummy ('amphibian_heart', 'roasted_amphibian_heart', 6)
-minetest_register_yummy ('tentacle', 'roasted_tentacle', 6)
-minetest_register_yummy ('frosted_amphibian_heart', 'amphibian_heart', 8)
-minetest_register_yummy ('heron_leg', 'chichibios_heron_leg', 20)
-minetest_register_yummy ('raw_scrausics_wing', 'spicy_scrausics_wing', 12)
-minetest_register_yummy ('ant_leg', 'roasted_ant_leg', 6)
-minetest_register_yummy ('crocodile_tail', 'roasted_crocodile_tail', 16)
-minetest_register_yummy ('dolidrosaurus_fin', 'roasted_dolidrosaurus_fin', 8)
-minetest_register_yummy ('amphibian_ribs', 'roasted_amphibian_ribs', 12)
-minetest_register_yummy ('mantis_meat', 'roasted_mantis_meat', 6)
-minetest_register_yummy ('spider_meat', 'roasted_spider_meat', 6)
-minetest_register_yummy ('silk_gland', 'roasted_silk_gland', 4)
-minetest_register_yummy ('larva_juice', 'larva_soup', 20)
+nssm_register_recip ('worm_flesh', 'roasted_worm_flesh', 12)
+nssm_register_recip ('duck_legs', 'roasted_duck_legs', 6)
+nssm_register_recip ('spider_leg', 'roasted_spider_leg', 6)
+nssm_register_recip ('werewolf_leg', 'roasted_werewolf_leg', 10)
+nssm_register_recip ('brain', 'roasted_brain', 6)
+nssm_register_recip ('amphibian_heart', 'roasted_amphibian_heart', 6)
+nssm_register_recip ('tentacle', 'roasted_tentacle', 6)
+nssm_register_recip ('frosted_amphibian_heart', 'amphibian_heart', 8)
+nssm_register_recip ('heron_leg', 'chichibios_heron_leg', 20)
+nssm_register_recip ('raw_scrausics_wing', 'spicy_scrausics_wing', 12)
+nssm_register_recip ('ant_leg', 'roasted_ant_leg', 6)
+nssm_register_recip ('crocodile_tail', 'roasted_crocodile_tail', 16)
+nssm_register_recip ('dolidrosaurus_fin', 'roasted_dolidrosaurus_fin', 8)
+nssm_register_recip ('amphibian_ribs', 'roasted_amphibian_ribs', 12)
+nssm_register_recip ('mantis_meat', 'roasted_mantis_meat', 6)
+nssm_register_recip ('spider_meat', 'roasted_spider_meat', 6)
+nssm_register_recip ('silk_gland', 'roasted_silk_gland', 4)
+nssm_register_recip ('larva_juice', 'larva_soup', 20)
 
 
 
 minetest.register_craft({
 	output = 'nssm:larva_juice',
-	recipe = {
-		{'', '', ''},
-		{'', 'nssm:larva_meat', ''},
-		{'', 'buckets:empty_bucket', ''},
-	}
+	type = "shapeless",
+	recipe = {'nssm:larva_meat','buckets:empty_bucket'}
 })
 
 minetest.register_craft({
 	output = 'nssm:ant_sword',
 	recipe = {
-		{'', 'nssm:ant_mandible', ''},
-		{'', 'nssm:ant_mandible', ''},
+		{'nssm:ant_mandible'},
+		{'nssm:ant_mandible'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:ant_billhook',
+	recipe = {
+		{'nssm:ant_mandible', 'nssm:ant_mandible'},
+		{'nssm:ant_mandible', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:ant_shovel',
+	recipe = {
+		{'nssm:ant_mandible'},
+		{'group:stick'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:duck_beak_shovel',
+	recipe = {
+		{'nssm:duck_beak'},
+		{'group:stick'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:duck_beak_pick',
+	recipe = {
+		{'nssm:duck_beak', 'nssm:duck_beak', 'nssm:duck_beak'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:ant_hoe',
+	recipe = {
+		{'nssm:ant_mandible', 'nssm:ant_mandible'},
+		{'', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:ant_pick',
+	recipe = {
+		{'nssm:ant_mandible', 'nssm:ant_mandible', 'nssm:ant_mandible'},
+		{'', 'group:stick', ''},
 		{'', 'group:stick', ''},
 	}
 })
@@ -1057,6 +1095,75 @@ minetest.register_craft({
 	recipe = {
 		{'nssm:stoneater_mandible', 'nssm:stoneater_mandible', 'nssm:stoneater_mandible'},
 		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:felucco_knife',
+	recipe = {
+		{'nssm:felucco_horn'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:little_ice_tooth_knife',
+	recipe = {
+		{'nssm:little_ice_tooth'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:manticore_knife',
+	recipe = {
+		{'nssm:manticore_spine'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:felucco_hoe',
+	recipe = {
+		{'nssm:felucco_horn', 'nssm:felucco_horn'},
+		{'', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:mantis_pick',
+	recipe = {
+		{'nssm:mantis_claw', 'nssm:mantis_claw', 'nssm:mantis_claw'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:mantis_axe',
+	recipe = {
+		{'nssm:mantis_claw', 'nssm:mantis_claw'},
+		{'nssm:mantis_claw', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:tarantula_warhammer',
+	recipe = {
+		{'tarantula_chelicerae'},
+		{'group:stick'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:mantis_battleaxe',
+	recipe = {
+		{'nssm:mantis_claw', 'nssm:mantis_claw', 'nssm:mantis_claw'},
+		{'nssm:mantis_claw', 'group:stick', 'nssm:mantis_claw'},
 		{'', 'group:stick', ''},
 	}
 })
@@ -1082,18 +1189,18 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:sword_of_envy',
 	recipe = {
-		{'', 'nssm:envious_moranga', ''},
-		{'', 'nssm:envious_moranga', ''},
-		{'', 'nssb:moranga_ingot', ''},
+		{'nssm:envious_moranga'},
+		{'nssm:envious_moranga'},
+		{'nssb:moranga_ingot'},
 	}
 })
 
 minetest.register_craft({
 	output = 'nssm:sword_of_eagerness',
 	recipe = {
-		{'', 'nssm:slothful_moranga', ''},
-		{'', 'nssm:slothful_moranga', ''},
-		{'', 'nssb:moranga_ingot', ''},
+		{'nssm:slothful_moranga'},
+		{'nssm:slothful_moranga'},
+		{'nssb:moranga_ingot'},
 	}
 })
 
@@ -1131,7 +1238,7 @@ function nssm_register_egg (name, descr)
 
 minetest.register_craftitem("nssm:".. name .."_egg", {
 	description = descr .. " Egg",
-	image = (path.. "/textures/eggs/"..name.."_egg.png"),
+	image = name.."_egg.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
 		pos1.y=pos1.y+1.5
