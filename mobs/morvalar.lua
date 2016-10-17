@@ -352,7 +352,7 @@ mobs:register_mob("nssm:morvalarr5", {
 			local p = self.attack:getpos()
 			minetest.after(2, function(self)
 				set_animation(self, "punch")
-				explosion(p, 3, 0, 1, self.sounds.explode)
+				explosion(p, 5, 0, 1, true)
 				self.morvalarr5_timer = os.time()
 			end,self)
 		end
@@ -653,7 +653,6 @@ mobs:register_mob("nssm:morvalarr2", {
 			self.morvalarr2_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
-			minetest.chat_send_all("ciao ciao sono dentro")
 
 			local counter = 0
 			local objects = minetest.env:get_objects_inside_radius(s, 7)
@@ -668,14 +667,31 @@ mobs:register_mob("nssm:morvalarr2", {
 			minetest.chat_send_all("Ne ho contati: "..counter)
 			if counter < 2 then
 				set_animation(self, "punch")
-				minetest.chat_send_all("Ora te li sbatto addosso")
-				minetest.add_entity(s, "nssm:morwa")
-				minetest.add_entity(s, "nssm:mordain")
-				minetest.add_entity(s, "nssm:morgre")
-				minetest.add_entity(s, "nssm:morlu")
-				minetest.add_entity(s, "nssm:morgut")
-				minetest.add_entity(s, "nssm:morde")
-				minetest.add_entity(s, "nssm:morvy")
+
+				local v = vector.subtract(p,s)
+				--local v = {x = s.x-p.x, y = s.y-p.y , z= s.z-p.z}
+				v = vector.normalize(v)
+				local vv = vector.add(s,v)
+				local vvv
+				if math.abs(v.x) > math.abs (v.z) then
+					vvv = {x=1, y=0, z=0}
+				else
+					vvv = {x=0, y=0, z=1}
+				end
+
+				minetest.add_entity(vv, "nssm:morwa")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:mordain")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:morgre")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:morlu")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:morgut")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:morde")
+				vv = vector.add(vv,vvv)
+				minetest.add_entity(vv, "nssm:morvy")
 			end
 		end
 	end,
@@ -777,23 +793,6 @@ mobs:register_mob("nssm:morvalarr1", {
 					full_punch_interval=1.0,
 					damage_groups = {fleshy=self.damage}
 				}, nil)
-
-				minetest.add_particlespawner(
-			        6, --amount
-			        1, --time
-			        {x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
-			        {x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
-			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --minvel
-			        {x=(s.x-p.x)*m, y=(s.y-p.y+1)*m, z=(s.z-p.z)*m}, --maxvel
-			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --minacc
-			        {x=s.x-p.x, y=s.y-p.y+1, z=s.z-p.z}, --maxacc
-			        0.2, --minexptime
-			        0.3, --maxexptime
-			        2, --minsize
-			        3, --maxsize
-			        false, --collisiondetection
-			        "morparticle.png" --texture
-			    )
 			end
 		end
 	end,
@@ -834,7 +833,7 @@ mobs:register_mob("nssm:morvalarr0", {
 	makes_footstep_sound = true,
 	view_range = 50,
 	walk_velocity = 1.6,
-	reach = 6,
+	reach = 16,
 	run_velocity = 3.2,
 	damage = 4,
 	runaway = true,
@@ -876,14 +875,15 @@ mobs:register_mob("nssm:morvalarr0", {
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
-			p.y = p.y +1
 
 			set_animation(self, "punch")
 
 			local m = 5 	--velocity of the kamehameha
 			local obj = minetest.add_entity(s, "nssm:kamehameha_bad")
 
-			local dir = {x=(p.x-s.x)*m, y=(p.y-s.y+1)*m, z=(p.z-s.z)*m} --direction of the kamehameha
+			s.y = s.y+0.5
+			p.y = p.y+0.9
+			local dir = {x=(p.x-s.x)*m, y=(p.y-s.y)*m, z=(p.z-s.z)*m} --direction of the kamehameha
 			obj:setvelocity(dir)
 		end
 	end,
@@ -915,7 +915,6 @@ minetest.register_entity("nssm:kamehameha_bad", {
 	textures = {"kamehameha.png"},
 	on_step = function(self, dtime)
 		local pos = self.object:getpos();
-
 		if self.timer == 0 then
 			self.timer = os.time()
 		end
@@ -926,9 +925,13 @@ minetest.register_entity("nssm:kamehameha_bad", {
 
 		local objects = minetest.env:get_objects_inside_radius(pos, 2)
 		for _,obj in ipairs(objects) do
+			if obj:is_player() then
+				minetest.chat_send_all("Dentro il raggio grande")
+				obj:set_hp(obj:get_hp()-5)
+			end
 			if obj:get_luaentity() then
 				local name = obj:get_luaentity().name
-				if name ~= "nssm:morvalarr0" then
+				if name ~= "nssm:morvalarr0" and name ~="nssm:kamehameha_bad" then
 		            obj:set_hp(obj:get_hp()-5)
 		            if (obj:get_hp() <= 0) then
 		                if (not obj:is_player()) then
@@ -938,28 +941,34 @@ minetest.register_entity("nssm:kamehameha_bad", {
 				end
 	        end
 		end
-		local objects = minetest.env:get_objects_inside_radius(pos, 0)
+		local objects = minetest.env:get_objects_inside_radius(pos, 1)
 		for _,obj in ipairs(objects) do
+			if obj:is_player() then
+				explosion(pos, 5, 0, 1, true)
+				self.object:remove()
+				minetest.chat_send_all("Dentro il raggio piccolo")
+			end
 			if obj:get_luaentity() then
 				local name = obj:get_luaentity().name
-				if name ~= "nssm:morvalarr0" then
-					explosion(pos, 5, 0, 1)
+				if name ~= "nssm:morvalarr0" and name ~="nssm:kamehameha_bad" then
+					explosion(pos, 5, 0, 1, true)
 					self.object:remove()
 				end
 			end
 		end
 
 		local nodename = minetest.env:get_node(pos).name
-		--[[if nodename ~= "air" then
-			explosion(pos, 5, 0, 1)
+		if nodename ~= "air" then
+			explosion(pos, 5, 0, 1, true)
 			self.object:remove()
 		end
-		]]
 	end,
 	life_time = 40,
 	timer = 0,
 	custom_timer = 0,
 })
+
+
 --[[
 7 code: ruba l'armatura come il morlu, ma poi non scappa e ti attacca normalmente. O un po' un po' o prima ruba e poi ti ara e basta.
 

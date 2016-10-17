@@ -94,7 +94,7 @@ function explosion_particles(pos, exp_radius)
     )
 end
 
-function explosion(pos, exp_radius, fire)
+function explosion(pos, exp_radius, fire, kamehameha_bad)
     local radius = exp_radius
     -- if area protected or near map limits then no blast damage
 	if minetest.is_protected(pos, "")
@@ -118,12 +118,26 @@ function explosion(pos, exp_radius, fire)
         local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
         local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
 		local damage = (-exp_radius*dist+exp_radius^2)*2
-		obj:set_hp(obj:get_hp()-damage)
-        if (obj:get_hp() <= 0) then
-            if (not obj:is_player()) then
-                obj:remove()
-            end
-        end
+		if not kamehameha_bad then
+			obj:set_hp(obj:get_hp()-damage)
+	        if (obj:get_hp() <= 0) then
+	            if (not obj:is_player()) then
+	                obj:remove()
+	            end
+	        end
+		else
+			if (obj:get_luaentity()) then
+				local name = obj:get_luaentity().name
+				if (name~="nssm:morvalarr0") and (name~="nssm:morvalarr5") then
+					obj:set_hp(obj:get_hp()-(damage*3))
+			        if (obj:get_hp() <= 0) then
+			            if (not obj:is_player()) then
+			                obj:remove()
+			            end
+			        end
+				end
+			end
+		end
     end
 
     --damages blocks around and if necessary put some fire
