@@ -105,11 +105,13 @@ if minetest.get_modpath("3d_armor") then
 			crab = {name="Crab", armor=4, heal=0, use=500},
 			ice ={name="Ice Teeth", armor=3, heal=0, use=600},
 			mor ={name="Morlu", armor=5, use=100},
+			mast ={name="Masticone", armor=4, use=300},
 		}
 		local materials = {
 			crab="nssm:crab_carapace_fragment",
 			ice="nssm:little_ice_tooth",
 			mor="nssm:lustful_moranga",
+			mast="nssm:masticone_skull_fragments",
 		}
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:shield_"..k, {
