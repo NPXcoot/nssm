@@ -104,6 +104,9 @@ mobs:register_mob("nssm:morde", {
 
 minetest.register_entity("nssm:mortick", {
 	textures = {"mortick.png"},
+	hp_min = 10000,
+	hp_max = 10000,
+	armor = 0,
 	visual = "mesh",
 	mesh = "mortick.x",
 	visual_size = {x=3, y=3},

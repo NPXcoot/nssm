@@ -484,7 +484,7 @@ nssm_register_weapon("hellzone_grenade", {
             obj_p = obj_min:getpos()
 
             self.object:setvelocity(vec_min)
-            --[[if min_dist < 1 then
+            if min_dist < 1 then
 
                 local node = nssm:node_ok(pos).name
                 self.hit_node(self, pos, node)
@@ -493,17 +493,17 @@ nssm_register_weapon("hellzone_grenade", {
             else
                 self.object:setvelocity(vec_min)
             end
-            ]]
+
         end
         local n = minetest.env:get_node(pos).name
 
-        --[[if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
+        if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
             local node = nssm:node_ok(pos).name
             self.hit_node(self, pos, node)
             self.object:remove()
             return
         end
-        ]]
+
     end,
 
     hit_node = function(self, pos, node)
@@ -516,7 +516,7 @@ nssm_register_weapon("hellzone_grenade", {
     end,
     material = "group:wood",
     description = "Particles ball",
-})
+})]]
 
 
 nssm_register_weapon("light_ball", {
@@ -628,4 +628,3 @@ nssm_register_weapon("light_ball", {
     material = "group:sand",
     description = "Light Ball",
 })
-]]
