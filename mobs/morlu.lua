@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:morlu", {
 	type = "monster",
-	hp_max = 33,
+	hp_max = 36,
 	hp_min = 26,
 	collisionbox = {-0.3, -0.1, -0.3, 0.3, 0.6, 0.3},
 	visual = "mesh",
@@ -16,16 +16,21 @@ mobs:register_mob("nssm:morlu", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
+    sounds = {
+		random = "morlu1",
+		random = "morlu2"
+	},
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
+		min = 3,
+		max = 4,},
+		{name = "nssm:lustful_soul_fragment",
+		chance = 3,
 		min = 1,
 		max = 1,},
 	},
-	armor = 50,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,

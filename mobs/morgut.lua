@@ -16,16 +16,20 @@ mobs:register_mob("nssm:morgut", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
+    sounds = {
+		random = "morgut",
+	},
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
 		min = 1,
+		max = 3,},
+		{name = "nssm:gluttonous_soul_fragment",
+		chance = 3,
+		min = 1,
 		max = 1,},
 	},
-	armor = 80,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,

@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:mese_dragon", {
 	type = "monster",
-	hp_max = 333,
-	hp_min = 333,
+	hp_max = 666,
+	hp_min = 666,
 	collisionbox = {-1, 0, -1, 1, 5, 1},
 	visual = "mesh",
 	mesh = "mese_dragon.x",
@@ -18,7 +18,7 @@ mobs:register_mob("nssm:mese_dragon", {
 		attack = "mese_dragon",
 		distance = 60,
 	},
-	damage = 16,
+	damage = 18,
 	jump = true,
 	jump_height = 10,
 	drops = {
@@ -31,7 +31,7 @@ mobs:register_mob("nssm:mese_dragon", {
 		min = 99,
 		max = 99},
     },
-	armor = 60,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 0,

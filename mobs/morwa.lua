@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:morwa", {
 	type = "monster",
-	hp_max = 46,
-	hp_min = 39,
+	hp_max = 56,
+	hp_min = 49,
 	collisionbox = {-1, -0.1, -1, 1, 3, 1},
 	visual = "mesh",
 	mesh = "morwa.x",
@@ -12,9 +12,9 @@ mobs:register_mob("nssm:morwa", {
 	fear_height = 4,
 	walk_velocity = 0.5,
 	run_velocity = 4,
-	--sounds = {
-	--	random = "morwa",
-	--},
+	sounds = {
+		random = "morwa",
+	},
 	damage = 6,
 	jump = true,
 	drops = {
@@ -22,6 +22,10 @@ mobs:register_mob("nssm:morwa", {
 		chance = 1,
 		min = 3,
 		max = 4,},
+		{name = "nssm:wrathful_soul_fragment",
+		chance = 3,
+		min = 1,
+		max = 1,},
 	},
 	armor = 50,
 	drawtype = "front",

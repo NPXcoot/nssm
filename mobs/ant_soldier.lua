@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:ant_soldier", {
 	type = "monster",
-	hp_max = 20,
-	hp_min = 20,
+	hp_max = 36,
+	hp_min = 24,
 	collisionbox = {-0.49, 0.00, -0.49, 0.49, 0.9, 0.49},
 	visual = "mesh",
 	mesh = "ant_soldier.x",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:ant_soldier", {
     sounds = {
 		random = "ant",
 	},
-	damage = 4,
+	damage = 6,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -31,9 +31,13 @@ mobs:register_mob("nssm:ant_soldier", {
 		chance = 3,
 		min = 1,
 		max = 2,},
+		{name = "nssm:ant_hard_skin",
+		chance = 3,
+		min = 1,
+		max = 2,},
 	},
 	reach = 2,
-	armor = 90,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 7,

@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:felucco", {
 	type = "monster",
-	hp_max = 30,
-	hp_min = 25,
+	hp_max = 38,
+	hp_min = 27,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 1.2, 0.5},
 	visual = "mesh",
 	mesh = "felucco.x",
@@ -12,10 +12,10 @@ mobs:register_mob("nssm:felucco", {
 	walk_velocity = 1,
 	fear_height = 4,
 	run_velocity = 5,
-   --[[ sounds = {
-		random = "werewolf",
-	},]]
-	damage = 4,
+	sounds = {
+		random = "felucco",
+	},
+	damage = 5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -35,7 +35,7 @@ mobs:register_mob("nssm:felucco", {
 		min = 1,
 		max = 2},
     },
-	armor = 90,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,

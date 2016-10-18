@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:scrausics", {
 	type = "monster",
-	hp_max = 23,
+	hp_max = 33,
 	hp_min = 22,
 	collisionbox = {-0.4, -0.3, -0.4, 0.4, 0.3, 0.4},
 	visual = "mesh",
@@ -18,7 +18,7 @@ mobs:register_mob("nssm:scrausics", {
 		random = "scrausic",
 		distance = 40,
 	},
-	damage = 3,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -30,7 +30,7 @@ mobs:register_mob("nssm:scrausics", {
 		min = 1,
 		max = 2,},
 	},
-	armor = 100,
+	armor = 80,
 	drawtype = "front",
 	water_damage = 5,
 	lava_damage = 5,

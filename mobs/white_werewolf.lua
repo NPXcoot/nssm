@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:white_werewolf", {
 	type = "monster",
-	hp_max = 30,
+	hp_max = 40,
 	hp_min = 25,
 	collisionbox = {-0.85, -0.01, -0.85, 0.85, 3.50, 0.85},
 	visual = "mesh",
@@ -15,7 +15,7 @@ mobs:register_mob("nssm:white_werewolf", {
     sounds = {
 		random = "werewolf",
 	},
-	damage = 4,
+	damage = 5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -31,7 +31,7 @@ mobs:register_mob("nssm:white_werewolf", {
 		min = 1,
 		max = 1},
     },
-	armor = 100,
+	armor = 80,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,

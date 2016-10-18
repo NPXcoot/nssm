@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:lava_titan", {
 	type = "monster",
-	hp_max = 80,
-	hp_min = 80,
+	hp_max = 180,
+	hp_min = 180,
 	collisionbox = {-0.6, -0.05, -0.6, 0.6, 4.0, 0.6},
 	visual = "mesh",
 	mesh = "lava_titan.x",
@@ -17,7 +17,7 @@ mobs:register_mob("nssm:lava_titan", {
 	sounds = {
 		random = "lava_titan",
 	},
-	damage = 7,
+	damage = 10,
 	jump = false,
 	jump_height=0,
 	drops = {
@@ -34,7 +34,7 @@ mobs:register_mob("nssm:lava_titan", {
 		min = 1,
 		max = 3,},
 	},
-	armor = 40,
+	armor = 20,
 	drawtype = "front",
 	water_damage = 4,
   	rotate = 270,

@@ -14,11 +14,11 @@ if minetest.get_modpath("3d_armor") then
 			duck = {name="Duck", armor=1, heal=0, use=2000},
 			black_duck = {name="Black Duck", armor=1, heal=0, use=1800},
 			mor = {name="Morlu", armor=4, heal=0, use=100},
-			sky = {name="Sky", armor=3, heal=0, use=100},
-			sandworm = {name="Sandworm", armor=2.4, heal=0, use=100},
-			sandbloco = {name="Sand Bloco", armor=1.6, heal=0, use=100},
-			web = {name="Cobweb String", armor=1.6, heal=0, use=100},
-			denseweb = {name="Dense Cobweb String", armor=1.6, heal=0, use=100},
+			sky = {name="Sky", armor=3, heal=0, use=500},
+			sandworm = {name="Sandworm", armor=2.4, heal=0, use=1000},
+			sandbloco = {name="Sand Bloco", armor=2.5, heal=0, use=800},
+			web = {name="Cobweb String", armor=1.3, heal=0, use=1500},
+			denseweb = {name="Dense Cobweb String", armor=2, heal=0, use=600},
 		}
 		local materials = {
 			wolf="nssm:wolf_fur",
@@ -105,13 +105,13 @@ if minetest.get_modpath("3d_armor") then
 			crab = {name="Crab", armor=4, heal=0, use=500},
 			ice ={name="Ice Teeth", armor=3, heal=0, use=600},
 			mor ={name="Morlu", armor=5, use=100},
-			mast ={name="Masticone", armor=4, use=300},
+			masticone ={name="Masticone", armor=4, use=300},
 		}
 		local materials = {
 			crab="nssm:crab_carapace_fragment",
 			ice="nssm:little_ice_tooth",
 			mor="nssm:lustful_moranga",
-			mast="nssm:masticone_skull_fragments",
+			masticone="nssm:masticone_skull_fragments",
 		}
 			for k, v in pairs(stats) do
 				minetest.register_tool("nssm:shield_"..k, {

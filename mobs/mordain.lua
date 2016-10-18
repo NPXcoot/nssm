@@ -13,14 +13,18 @@ mobs:register_mob("nssm:mordain", {
 	walk_velocity = 1,
 	run_velocity = 3.5,
     rotate = 270,
-    --[[sounds = {
-		random = "bloco",
-	},]]
+    sounds = {
+		random = "mordain",
+	},
 	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
+		min = 1,
+		max = 1,},
+		{name = "nssm:slothful_soul_fragment",
+		chance = 3,
 		min = 1,
 		max = 1,},
 	},

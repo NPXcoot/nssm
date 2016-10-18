@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:pumpking", {
 	type = "monster",
-	hp_max = 100,
-	hp_min = 100,
+	hp_max = 220,
+	hp_min = 220,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 3.2, 0.4},
 	visual = "mesh",
 	mesh = "pumpking.x",
@@ -18,7 +18,7 @@ mobs:register_mob("nssm:pumpking", {
 		random = "king",
 		explode = "tnt_explode",
 	},
-	damage = 9,
+	damage = 13,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -30,7 +30,7 @@ mobs:register_mob("nssm:pumpking", {
 		min = 1,
 		max = 1,},
 	},
-	armor =50,
+	armor =40,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,

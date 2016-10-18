@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:stone_eater", {
 	type = "monster",
-	hp_max = 17,
-	hp_min = 15,
+	hp_max = 27,
+	hp_min = 19,
 	collisionbox = {-0.3, -0.05, -0.3, 0.3, 0.65, 0.3},
 	visual = "mesh",
 	mesh = "stone_eater.x",
@@ -15,7 +15,7 @@ mobs:register_mob("nssm:stone_eater", {
 	jump_height =0,
 	walk_velocity = 1,
 	run_velocity = 1.5,
-	damage = 3,
+	damage = 5,
 	reach = 1.5,
 	drops = {
         {name = "default:stone",
@@ -31,7 +31,7 @@ mobs:register_mob("nssm:stone_eater", {
 		min = 1,
 		max = 4,},
 	},
-	armor = 50,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 1,

@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:echidna", {
 	type = "monster",
-	hp_max = 90,
-	hp_min = 90,
+	hp_max = 240,
+	hp_min = 240,
 	collisionbox = {-0.6, 0.00, -0.6, 0.6, 2, 0.6},
 	visual = "mesh",
 	mesh = "echidna.x",
@@ -14,7 +14,7 @@ mobs:register_mob("nssm:echidna", {
 	fear_height = 4,
 	walk_velocity = 2,
 	run_velocity = 3.5,
-	damage = 10,
+	damage = 12,
 	jump = true,
     sounds = {
 		random = "echidna",
@@ -29,7 +29,7 @@ mobs:register_mob("nssm:echidna", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 60,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 0,
 	floats = 1,

@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:daddy_long_legs", {
 	type = "monster",
-	hp_max = 19,
+	hp_max = 29,
 	hp_min = 16,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.6, 0.4},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:daddy_long_legs", {
   	sounds = {
 		random = "daddy",
 	},
-	damage = 3,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -27,8 +27,12 @@ mobs:register_mob("nssm:daddy_long_legs", {
 		chance = 3,
 		min = 1,
 		max = 8,},
+		{name = "nssm:spider_meat",
+		chance = 4,
+		min = 1,
+		max = 2,},
 	},
-	armor = 100,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 7,

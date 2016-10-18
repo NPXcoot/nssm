@@ -336,7 +336,7 @@ local function nssm_register_weapon(name, def)
 
 
     minetest.register_craft({
-		output = 'nssm:'..name.."_hand",
+		output = 'nssm:'..name.."_hand 13",
 		recipe = {
 			{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
             {'nssm:great_energy_globe', def.material, 'nssm:great_energy_globe'},
@@ -367,7 +367,7 @@ nssm_register_weapon("kienzan", {
     end,
     hit_node = function(self, pos, node)
     end,
-    material = "nssm:king_duck_crown",
+    material = "default:bronzeblock",
     description = "Kienzan from DragonBall",
 })
 
@@ -381,7 +381,7 @@ nssm_register_weapon("spirit_ball", {
         explosion(pos, 4, 0)
     end,
 
-    material = "nssm:cursed_pumpkin_seed",
+    material = "default:goldblock",
     description = "Spirit Ball from DragonBall",
 })
 
@@ -399,11 +399,11 @@ nssm_register_weapon("hellzone_grenade", {
         local pos = user:getpos()
         activate_balls(pos)
     end,
-    material = "nssm:snake_scute",
+    material = "default:mese",
     description = "Hellzone grenade (Press q to activate)",
 })
 
-nssm_register_weapon("particles_ball", {
+--[[nssm_register_weapon("particles_ball", {
     velocity = 25,
     move = 0,
 
@@ -628,3 +628,4 @@ nssm_register_weapon("light_ball", {
     material = "group:sand",
     description = "Light Ball",
 })
+]]

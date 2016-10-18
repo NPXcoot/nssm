@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:morde", {
 	type = "monster",
-	hp_max = 41,
-	hp_min = 31,
+	hp_max = 47,
+	hp_min = 37,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.6, 0.4},
 	visual = "mesh",
 	rotate= 270,
@@ -13,14 +13,18 @@ mobs:register_mob("nssm:morde", {
 	walk_velocity = 0.5,
 	reach =3,
 	run_velocity = 3.5,
-	damage = 4,
+	damage = 5,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
+    sounds = {
+		random = "morde",
+	},
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
+		min = 2,
+		max = 4,},
+		{name = "nssm:proud_soul_fragment",
+		chance = 3,
 		min = 1,
 		max = 1,},
 	},

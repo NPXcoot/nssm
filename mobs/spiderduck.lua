@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:spiderduck", {
 	type = "monster",
-	hp_max = 25,
+	hp_max = 35,
 	hp_min = 24,
 	collisionbox = {-0.6, -0.8, -0.6, 0.6, 0.4, 0.5},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:spiderduck", {
     sounds = {
 		random = "duck",
 	},
-	damage = 4,
+	damage = 6,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -27,7 +27,7 @@ mobs:register_mob("nssm:spiderduck", {
 		chance = 1,
 		min = 1,
 		max = 8,},
-		{name = "nssm:web",
+		{name = "nssm:silk_gland",
 		chance = 2,
 		min = 1,
 		max = 2,},
@@ -40,7 +40,7 @@ mobs:register_mob("nssm:spiderduck", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 100,
+	armor = 80,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,

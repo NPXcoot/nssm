@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:morgre", {
 	type = "monster",
-	hp_max = 23,
+	hp_max = 33,
 	hp_min = 17,
 	collisionbox = {-0.20, -0.1, -0.20, 0.20, 1.60, 0.20},
 	visual = "mesh",
@@ -15,17 +15,22 @@ mobs:register_mob("nssm:morgre", {
 	walk_velocity = 0.5,
 	run_velocity = 3.5,
     sounds = {
-    explode = "tnt_explode"
+    explode = "tnt_explode",
+	random = "morgre1",
 	},
-	damage = 1.5,
+	damage = 1,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
 		min = 1,
-		max = 2,}
+		max = 2,},
+		{name = "nssm:greedy_soul_fragment",
+		chance = 3,
+		min = 1,
+		max = 1,},
 	},
-	armor = 90,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 0,

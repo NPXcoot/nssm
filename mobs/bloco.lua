@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:bloco", {
 	type = "monster",
-	hp_max = 15,
+	hp_max = 25,
 	hp_min = 14,
 	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:bloco", {
     sounds = {
 		random = "bloco",
 	},
-	damage = 2,
+	damage = 4,
 	reach = 2,
 	jump = true,
 	drops = {
@@ -28,8 +28,12 @@ mobs:register_mob("nssm:bloco", {
 		chance = 1,
 		min = 2,
 		max = 3,},
+		{name = "nssm:bloco_skin",
+		chance = 3,
+		min = 1,
+		max = 2,},
 	},
-	armor = 60,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 3,
 	lava_damage = 1,

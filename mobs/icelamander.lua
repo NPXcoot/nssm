@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:icelamander", {
 	type = "monster",
-	hp_max = 90,
-	hp_min = 90,
+	hp_max = 230,
+	hp_min = 230,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 2.3, 0.5},
 	visual = "mesh",
 	mesh = "icelamander.x",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:icelamander", {
     sounds = {
 		random = "icelamander",
 	},
-	damage = 8,
+	damage = 12,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -35,8 +35,12 @@ mobs:register_mob("nssm:icelamander", {
 		chance = 1,
 		min = 0,
 		max = 20},
+		{name = "nssm:amphibian_ribs",
+		chance = 2,
+		min = 1,
+		max = 1},
     },
-	armor = 60,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 30,

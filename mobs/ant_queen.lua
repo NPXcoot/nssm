@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:ant_queen", {
 	type = "monster",
-	hp_max = 120,
-	hp_min = 120,
+	hp_max = 220,
+	hp_min = 220,
 	collisionbox = {-1, 0.00, -1, 1, 1, 1},
 	visual = "mesh",
 	mesh = "ant_queen.x",
@@ -39,7 +39,7 @@ mobs:register_mob("nssm:ant_queen", {
 		max = 2,},
 	},
 	reach = 8,
-	armor = 70,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 7,

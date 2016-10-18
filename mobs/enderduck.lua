@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:enderduck", {
 	type = "monster",
-	hp_max = 20,
+	hp_max = 28,
 	hp_min = 18,
 	collisionbox = {-0.28, 0.00, -0.28, 0.28, 1.8, 0.28},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:enderduck", {
   	sounds = {
 		random = "duck",
 	},
-	damage = 3,
+	damage = 5,
 	reach = 2,
 	jump = true,
 	drops = {
@@ -37,7 +37,7 @@ mobs:register_mob("nssm:enderduck", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 100,
+	armor = 80,
 	drawtype = "front",
 	water_damage = 1,
 	floats=1,

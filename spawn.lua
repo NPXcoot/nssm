@@ -13,7 +13,7 @@ nssm:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletre
 
 -- CAVES
 nssm:spawn_specific("nssm:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 500, 3, -31000, -20)
-nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 8000, 1, -31000, -50)
+nssm:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 18000, 1, -31000, -50)
 nssm:spawn_specific("nssm:stone_eater", {"default:stone"}, {"default:stone"}, 0, 20, 40, 700, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"default:stone"}, {"default:stone"}, 0, 10, 20, 400, 2, -31000, -20)
 nssm:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5, -31000, 31000)
@@ -56,7 +56,7 @@ nssm:spawn_specific("nssm:masticone", {"default:dirt_with_grass"}, {"default:tre
 
 -- SKY
 nssm:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 100, 750000, 1, 10, 40)
-nssm:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 120, 5200000, 2, 10, 40)
+nssm:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 120, 10200000, 2, 10, 40)
 nssm:spawn_specific("nssm:phoenix", {"air"}, {"air"}, 10, 20, 120, 5200000, 1, 10, 40)
 nssm:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 100, 750000, 1, 10, 40)
 

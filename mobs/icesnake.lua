@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:icesnake", {
 	type = "monster",
-	hp_max = 17,
-	hp_min = 13,
+	hp_max = 27,
+	hp_min = 17,
 	collisionbox = {-0.7, 0, -0.7, 0.7, 0.50, 0.7},
 	visual = "mesh",
 	mesh = "icesnake.x",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:icesnake", {
   	sounds = {
 		random = "icesnake",
 	},
-	damage = 3,
+	damage = 5,
 	reach = 2,
 	jump = true,
 	drops = {
@@ -32,8 +32,12 @@ mobs:register_mob("nssm:icesnake", {
 		chance = 2,
 		min = 0,
 		max = 4},
+		{name = "nssm:amphibian_ribs",
+		chance = 2,
+		min = 1,
+		max = 1},
     },
-	armor = 100,
+	armor = 70,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 20,

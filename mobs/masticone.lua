@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:masticone", {
 	type = "monster",
-	hp_max = 15,
-	hp_min = 14,
+	hp_max = 25,
+	hp_min = 24,
 	collisionbox = {-0.45, 0.00, -0.45, 0.45, 0.40, 0.45},
 	visual = "mesh",
 	mesh = "masticone.x",
