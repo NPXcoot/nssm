@@ -1,3 +1,5 @@
+local time_limit = 10
+
 mobs:register_mob("nssm:morvalarr", {
 	type = "monster",
 	hp_max = 10,
@@ -46,6 +48,25 @@ mobs:register_mob("nssm:morvalarr", {
 		punch_start = 55,
 		punch_end = 80,
 	},
+
+	do_custom = function(self)
+		--start a timer if it doesn't exist
+		self.stop_timer = self.stop_timer or os.time()
+
+		--create a variable to record the hp if it doesn't exist
+		self.hp_record = self.hp_record or self.object:get_hp()
+
+		if self.hp_record ~= self.object:get_hp() then
+			self.stop_timer = os.time()
+			self.hp_record = self.object:get_hp()
+		else
+			if os.time() - self.stop_timer > time_limit then
+				self.object:remove()
+			end
+		end
+
+	end,
+
 	custom_attack = function (self)
 		self.curr_attack = (self.curr_attack or self.attack)
 		self.morvalar_timer = (self.morvalar_timer or os.time())
