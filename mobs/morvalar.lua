@@ -1,6 +1,6 @@
 local time_limit = 10
 
-mobs:register_mob("nssm:morvalarr", {
+mobs:register_mob("nssm:morvalar", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -172,12 +172,12 @@ mobs:register_mob("nssm:morvalarr", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr6")
+		minetest.add_entity(pos, "nssm:morvalar6")
 
 	end,
 })
 
-mobs:register_mob("nssm:morvalarr6", {
+mobs:register_mob("nssm:morvalar6", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -226,10 +226,10 @@ mobs:register_mob("nssm:morvalarr6", {
 		punch_end = 162,
 	},
 	custom_attack = function (self)
-		self.morvalarr6_timer = (self.morvalarr6_timer or os.time())
+		self.morvalar6_timer = (self.morvalar6_timer or os.time())
 
 		self.dir = (self.dir or 0)
-		if (os.time() - self.morvalarr6_timer) > 1 then
+		if (os.time() - self.morvalar6_timer) > 1 then
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -283,7 +283,7 @@ mobs:register_mob("nssm:morvalarr6", {
 								"roasted_duck_legs.png" --texture
 							)
 						end
-						self.morvalarr6_timer = os.time()
+						self.morvalar6_timer = os.time()
 					end
 				end
 
@@ -310,12 +310,12 @@ mobs:register_mob("nssm:morvalarr6", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr5")
+		minetest.add_entity(pos, "nssm:morvalar5")
 	end,
 })
 
 
-mobs:register_mob("nssm:morvalarr5", {
+mobs:register_mob("nssm:morvalar5", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -364,17 +364,17 @@ mobs:register_mob("nssm:morvalarr5", {
 		punch_end = 245,
 	},
 	custom_attack = function (self)
-		self.morvalarr5_timer = (self.morvalarr5_timer or os.time())
+		self.morvalar5_timer = (self.morvalar5_timer or os.time())
 
 		self.dir = (self.dir or 0)
-		if (os.time() - self.morvalarr5_timer) > 2 then
+		if (os.time() - self.morvalar5_timer) > 2 then
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 			minetest.after(2, function(self)
 				set_animation(self, "punch")
 				explosion(p, 5, 0, 1, true)
-				self.morvalarr5_timer = os.time()
+				self.morvalar5_timer = os.time()
 			end,self)
 		end
 	end,
@@ -398,12 +398,12 @@ mobs:register_mob("nssm:morvalarr5", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr4")
+		minetest.add_entity(pos, "nssm:morvalar4")
 	end,
 })
 
 
-mobs:register_mob("nssm:morvalarr4", {
+mobs:register_mob("nssm:morvalar4", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -452,9 +452,9 @@ mobs:register_mob("nssm:morvalarr4", {
 		punch_end = 320,
 	},
 	custom_attack = function(self)
-		self.morvalarr4_timer = (self.morvalarr4_timer or os.time())
-		if (os.time() - self.morvalarr4_timer) > 1 then
-			self.morvalarr4_timer = os.time()
+		self.morvalar4_timer = (self.morvalar4_timer or os.time())
+		if (os.time() - self.morvalar4_timer) > 1 then
+			self.morvalar4_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
@@ -538,11 +538,11 @@ mobs:register_mob("nssm:morvalarr4", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr3")
+		minetest.add_entity(pos, "nssm:morvalar3")
 	end,
 })
 
-mobs:register_mob("nssm:morvalarr3", {
+mobs:register_mob("nssm:morvalar3", {
 	type = "monster",
 	hp_max = 10,
 	hp_min = 10,
@@ -616,11 +616,11 @@ mobs:register_mob("nssm:morvalarr3", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr2")
+		minetest.add_entity(pos, "nssm:morvalar2")
 	end,
 })
 
-mobs:register_mob("nssm:morvalarr2", {
+mobs:register_mob("nssm:morvalar2", {
 	type = "monster",
 	hp_max = 40,
 	hp_min = 40,
@@ -669,9 +669,9 @@ mobs:register_mob("nssm:morvalarr2", {
 		punch_end = 545,
 	},
 	custom_attack = function(self)
-		self.morvalarr2_timer = (self.morvalarr2_timer or os.time())
-		if (os.time() - self.morvalarr2_timer) > 1 then
-			self.morvalarr2_timer = os.time()
+		self.morvalar2_timer = (self.morvalar2_timer or os.time())
+		if (os.time() - self.morvalar2_timer) > 1 then
+			self.morvalar2_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
@@ -736,11 +736,11 @@ mobs:register_mob("nssm:morvalarr2", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr1")
+		minetest.add_entity(pos, "nssm:morvalar1")
 	end,
 })
 
-mobs:register_mob("nssm:morvalarr1", {
+mobs:register_mob("nssm:morvalar1", {
 	type = "monster",
 	hp_max = 40,
 	hp_min = 40,
@@ -789,9 +789,9 @@ mobs:register_mob("nssm:morvalarr1", {
 		punch_end = 640,
 	},
 	custom_attack = function (self)
-		self.morvalarr1_timer = (self.morvalarr1_timer or os.time())
-		if (os.time() - self.morvalarr1_timer) > 3 then
-			self.morvalarr1_timer = os.time()
+		self.morvalar1_timer = (self.morvalar1_timer or os.time())
+		if (os.time() - self.morvalar1_timer) > 3 then
+			self.morvalar1_timer = os.time()
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -837,11 +837,11 @@ mobs:register_mob("nssm:morvalarr1", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		minetest.add_entity(pos, "nssm:morvalarr0")
+		minetest.add_entity(pos, "nssm:morvalar0")
 	end,
 })
 
-mobs:register_mob("nssm:morvalarr0", {
+mobs:register_mob("nssm:morvalar0", {
 	type = "monster",
 	hp_max = 100,
 	hp_min = 100,
@@ -890,9 +890,9 @@ mobs:register_mob("nssm:morvalarr0", {
 		punch_end = 750,
 	},
 	custom_attack = function (self)
-		self.morvalarr1_timer = (self.morvalarr1_timer or os.time())
-		if (os.time() - self.morvalarr1_timer) > 1 then
-			self.morvalarr1_timer = os.time()
+		self.morvalar1_timer = (self.morvalar1_timer or os.time())
+		if (os.time() - self.morvalar1_timer) > 1 then
+			self.morvalar1_timer = os.time()
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -928,7 +928,7 @@ mobs:register_mob("nssm:morvalarr0", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
-		--minetest.add_entity(pos, "nssm:morvalarr3")
+		--minetest.add_entity(pos, "nssm:morvalar3")
 	end,
 })
 
@@ -952,7 +952,7 @@ minetest.register_entity("nssm:kamehameha_bad", {
 			end
 			if obj:get_luaentity() then
 				local name = obj:get_luaentity().name
-				if name ~= "nssm:morvalarr0" and name ~="nssm:kamehameha_bad" then
+				if name ~= "nssm:morvalar0" and name ~="nssm:kamehameha_bad" then
 		            obj:set_hp(obj:get_hp()-5)
 		            if (obj:get_hp() <= 0) then
 		                if (not obj:is_player()) then
@@ -971,7 +971,7 @@ minetest.register_entity("nssm:kamehameha_bad", {
 			end
 			if obj:get_luaentity() then
 				local name = obj:get_luaentity().name
-				if name ~= "nssm:morvalarr0" and name ~="nssm:kamehameha_bad" then
+				if name ~= "nssm:morvalar0" and name ~="nssm:kamehameha_bad" then
 					explosion(pos, 5, 0, 1, true)
 					self.object:remove()
 				end
@@ -994,7 +994,7 @@ minetest.register_entity("nssm:kamehameha_bad", {
 7 code: ruba l'armatura come il morlu, ma poi non scappa e ti attacca normalmente. O un po' un po' o prima ruba e poi ti ara e basta.
 
 6 code: stand: 85-86 walk: 90-130 attack: 132-162
-Attacca come prima con 7 ma ruba il cibo come il morvalarr6 al posto dell'armatura, e non scappa ma attacca.
+Attacca come prima con 7 ma ruba il cibo come il morvalar6 al posto dell'armatura, e non scappa ma attacca.
 
 5 code: stand: 165-166 walk: 170-210 attack: 215-245
 Fa esplodere un po' la sua coda come un Morgre fa esplodere se stesso.

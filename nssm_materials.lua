@@ -668,7 +668,7 @@ minetest.register_tool("nssm:mantis_axe", {
 		damage_groups = {fleshy=5},
 		},
 	})
-	
+
 minetest.register_tool("nssm:ant_billhook", {
 	description = "Ant Billhook",
 	inventory_image = "ant_billhook.png",
@@ -868,7 +868,7 @@ minetest.register_craft({
 	output = 'nssm:black_ice_tooth',
 	type = "shapeless",
 	recipe = {'nssm:black_sand', 'nssm:ice_tooth'},
-	
+
 })
 
 minetest.register_craft({
@@ -1306,7 +1306,7 @@ nssm_register_egg ('morgut', 'Morgut')
 nssm_register_egg ('morde', 'Morde')
 nssm_register_egg ('morlu', 'Morlu')
 nssm_register_egg ('morwa', 'Morwa')
-nssm_register_egg ('morvalarr', 'Morvalar')
+nssm_register_egg ('morvalar', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
@@ -1446,4 +1446,3 @@ minetest.register_craft({
 		{'nssm:bloco_skin', 'nssm:bloco_skin', 'nssm:bloco_skin'},
 	}
 })
-
