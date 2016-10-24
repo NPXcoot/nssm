@@ -628,3 +628,52 @@ nssm_register_weapon("light_ball", {
     material = "group:sand",
     description = "Light Ball",
 })
+
+function nssm_register_throwitem(name, descr, def)
+
+    minetest.register_craftitem("nssm:"..name.."_bomb", {
+        description = descr,
+        inventory_image = name.."_bomb.png",
+        on_use = function(itemstack, placer, pointed_thing)
+            --weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
+            local velocity = 10
+            local dir = placer:get_look_dir();
+            local playerpos = placer:getpos();
+            local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "nssm:"..name.."_bomb_flying")
+            local vec = {x=dir.x*velocity,y=dir.y*velocity,z=dir.z*velocity}
+            local acc = {x=0, y=-9.8, z=0}
+            obj:setvelocity(vec)
+            obj:setacceleration(acc)
+            itemstack:take_item()
+            return itemstack
+        end,
+    })
+
+    minetest.register_entity("nssm:"..name.."_bomb_flying",{
+        textures = {name.."_bomb.png"},
+        on_step = function(self, dtime)
+            local pos = self.object:getpos()
+            local node = minetest.get_node(pos)
+            local n = node.name
+            if n ~= "air" then
+                def.hit_node(self, pos)
+                self.object:remove()
+            end
+        end,
+    })
+end
+
+nssm_register_throwitem("silk_gland", "Cobweb Bomb", {
+    hit_node = function(self,pos)
+        for dx = -1,1 do
+            for dy = -1,1 do
+                for dz = -1,1 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="nssm:web"})
+                    end
+                end
+            end
+        end
+    end,
+})

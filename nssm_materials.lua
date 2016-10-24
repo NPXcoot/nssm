@@ -750,6 +750,23 @@ minetest.register_tool("nssm:axe_of_pride", {
 		},
 		damage_groups = {fleshy=16},
 	},
+	on_drop = function(itemstack, dropper, pos)
+		local objects = minetest.env:get_objects_inside_radius(pos, 10)
+		local flag = 0
+		for _,obj in ipairs(objects) do
+			--scrivi qui
+			if flag == 0 then
+				flag=1
+	            if (obj:is_player()) then
+					obj:set_hp(obj:get_hp()-10)
+					dropper:set_hp(dropper:get_hp()+10)
+	            elseif (obj:get_luaentity()) then
+					obj:set_hp(obj:get_hp()-10)
+					dropper:set_hp(dropper:get_hp()+10)
+	            end
+			end
+        end
+	end,
 })
 
 minetest.register_tool("nssm:gratuitousness_battleaxe", {
