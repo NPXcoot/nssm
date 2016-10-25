@@ -2,11 +2,11 @@ mobs:register_mob("nssm:lava_titan", {
 	type = "monster",
 	hp_max = 180,
 	hp_min = 180,
-	collisionbox = {-0.6, -0.05, -0.6, 0.6, 4.0, 0.6},
+	collisionbox = {-0.45, -0.05, -0.45, 0.45, 1.8, 0.45},
 	visual = "mesh",
 	mesh = "lava_titan.x",
 	textures = {{"lava_titan.png"}},
-	visual_size = {x=4, y=4},
+	visual_size = {x=2.7, y=2.7},
 	makes_footstep_sound = true,
 	view_range = 20,
 	fear_height = 4,
@@ -17,7 +17,7 @@ mobs:register_mob("nssm:lava_titan", {
 	sounds = {
 		random = "lava_titan",
 	},
-	damage = 10,
+	damage = 8,
 	jump = false,
 	jump_height=0,
 	drops = {
@@ -36,19 +36,17 @@ mobs:register_mob("nssm:lava_titan", {
 	},
 	armor = 20,
 	drawtype = "front",
-	water_damage = 4,
+	water_damage = 25,
   	rotate = 270,
-	melter = true,
 	light_damage = 0,
 	lava_damage = 0,
 	on_rightclick = nil,
-	floats = 1,
+	floats = 0,
 	attack_type = "dogshoot",
-	dogshoot_stop = true,
+	dogshoot_switch = true,
   	arrow = "nssm:lava_arrow",
   	shoot_interval = 2,
   	shoot_offset = -1,
-	true_dist_attack = true,
 	--[[
 	on_dist_attack = function(self, player)
 		local pos = player:getpos()
@@ -80,7 +78,37 @@ mobs:register_mob("nssm:lava_titan", {
     	shoot_end=400,
 	},
 	do_custom = function (self)
-		digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})
-		putting_ability(self, "default:lava_source", self.run_velocity)
+		digging_attack(self, nil, self.run_velocity, {x=0, y=4, z=0})
+		--digging_ability(self, nil, self.run_velocity, {x=0, y=5, z=0})
+		--putting_ability(self, "default:lava_source", self.run_velocity)
 	end,
+	--[[
+	custom_attack = function (self)
+		digging_attack
+		set_animation(self, "punch")
+		local p2 = p
+		local s2 = s
+
+		p2.y = p2.y + 1.5
+		s2.y = s2.y + 1.5
+
+		if line_of_sight_water(self, p2, s2) == true then
+
+			-- play attack sound
+			if self.sounds.attack then
+
+				minetest.sound_play(self.sounds.attack, {
+					object = self.object,
+					max_hear_distance = self.sounds.distance
+				})
+			end
+
+			-- punch player
+			self.attack:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = self.damage}
+			}, nil)
+		end
+	end,
+	]]--
 })

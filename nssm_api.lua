@@ -224,7 +224,7 @@ function digging_ability(
 	dim 		--vector representing the dimensions of the mob
 	)
 
-	if math.random(1,nssm:virulence(self)) ~= 1 then return end
+	--if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 	local pos = self.object:getpos()
@@ -270,12 +270,56 @@ function digging_ability(
 				if group == nil then
 					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or (n == "bones:bones" and not nssm:affectbones(self) ) then
 					else
-						minetest.env:set_node(p, {name="air"})
+						--minetest.env:set_node(p, {name="air"})
+						minetest.remove_node(p)
 					end
 				else
 					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(p, "")) ) then
-						minetest.env:set_node(p, {name="air"})
+						--minetest.env:set_node(p, {name="air"})
+						minetest.remove_node(p)
 					end
+				end
+			end
+		end
+	end
+end
+
+function digging_attack(
+	self,		--the entity of the mob
+	group,		--group of the blocks the mob can dig: nil=everything
+	max_vel,	--max velocity of the mob
+	dim 		--vector representing the dimensions of the mob
+	)
+
+	--if math.random(1,nssm:virulence(self)) ~= 1 then return end
+	if self.attack and self.attack:is_player() then
+		local s = self.object:getpos()
+		local p = self.attack:getpos()
+
+		local dir = vector.subtract(p,s)
+		dir = vector.normalize(dir)
+
+		pos = vector.add(s,dir)
+		if minetest.is_protected(pos, "") then
+			return
+		end
+
+		for i = 0,dim.y do
+			local pos1 = pos
+			pos1.y = pos1.y+i
+
+			local n = minetest.env:get_node(pos1).name
+			--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+			if group == nil then
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(pos1, "") or (n == "bones:bones" and not nssm:affectbones(self) ) then
+				else
+					--minetest.env:set_node(p, {name="air"})
+					minetest.remove_node(pos1)
+				end
+			else
+				if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(pos1, "")) ) then
+					--minetest.env:set_node(p, {name="air"})
+					minetest.remove_node(pos1)
 				end
 			end
 		end
@@ -288,7 +332,7 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 	p_block, 	--definition of the block to use
 	max_vel	--max velocity of the mob
 	)
-	if math.random(1,nssm:virulence(self)) ~= 1 then return end
+	--if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 
