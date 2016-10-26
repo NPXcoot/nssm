@@ -70,6 +70,8 @@ nssm_register_noneatcraftitems ('sandworm_skin','Sandworm Skin')
 nssm_register_noneatcraftitems ('sky_iron','Sky Iron')
 nssm_register_noneatcraftitems ('web_string','Cobweb String')
 nssm_register_noneatcraftitems ('dense_web_string','Dense Cobweb String')
+nssm_register_noneatcraftitems ('black_powder','Black Powder')
+nssm_register_noneatcraftitems ('morelentir_dust','Dark Starred Stone Dust')
 
 function nssm_register_eatcraftitems (name, descr, gnam)
 

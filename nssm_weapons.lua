@@ -518,7 +518,7 @@ nssm_register_weapon("hellzone_grenade", {
     description = "Particles ball",
 })]]
 
-
+--[[
 nssm_register_weapon("light_ball", {
     velocity = 25,
     move = 0,
@@ -595,7 +595,7 @@ nssm_register_weapon("light_ball", {
             obj_p = obj_min:getpos()
 
             self.object:setvelocity(vec_min)
-            --[[if min_dist < 1 then
+            if min_dist < 1 then
 
                 local node = nssm:node_ok(pos).name
                 self.hit_node(self, pos, node)
@@ -604,17 +604,17 @@ nssm_register_weapon("light_ball", {
             else
                 self.object:setvelocity(vec_min)
             end
-            ]]
+            
         end
         local n = minetest.env:get_node(pos).name
 
-        --[[if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
+        if n ~= "air" and n ~= "default:water_source" and n ~= "default:water_flowing" then
             local node = nssm:node_ok(pos).name
             self.hit_node(self, pos, node)
             self.object:remove()
             return
         end
-        ]]
+        
     end,
 
     hit_node = function(self, pos, node)
@@ -628,7 +628,7 @@ nssm_register_weapon("light_ball", {
     material = "group:sand",
     description = "Light Ball",
 })
-
+]]
 function nssm_register_throwitem(name, descr, def)
 
     minetest.register_craftitem("nssm:"..name.."_bomb", {
@@ -636,7 +636,7 @@ function nssm_register_throwitem(name, descr, def)
         inventory_image = name.."_bomb.png",
         on_use = function(itemstack, placer, pointed_thing)
             --weapons_shot(itemstack, placer, pointed_thing, def.velocity, name)
-            local velocity = 10
+            local velocity = 15
             local dir = placer:get_look_dir();
             local playerpos = placer:getpos();
             local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "nssm:"..name.."_bomb_flying")
@@ -663,7 +663,7 @@ function nssm_register_throwitem(name, descr, def)
     })
 end
 
-nssm_register_throwitem("silk_gland", "Cobweb Bomb", {
+nssm_register_throwitem("cobweb", "Cobweb Bomb", {
     hit_node = function(self,pos)
         for dx = -1,1 do
             for dy = -1,1 do
@@ -675,5 +675,117 @@ nssm_register_throwitem("silk_gland", "Cobweb Bomb", {
                 end
             end
         end
+    end,
+})
+
+nssm_register_throwitem("ice", "Ice Bomb", {
+    hit_node = function(self,pos)
+        for dx = -1,1 do
+            for dy = 1,3 do
+                for dz = -1,1 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local pos2 = {x = pos.x, y=pos.y+1, z=pos.z}
+					local pos3 = {x = pos.x, y=pos.y+2, z=pos.z}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="default:ice"})
+						minetest.set_node(pos2, {name="air"})
+						minetest.set_node(pos3, {name="air"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("lava", "Lava Bomb", {
+    hit_node = function(self,pos)
+        for dx = -1,1 do
+            for dy = -1,0 do
+                for dz = -1,1 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="default:lava_source"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("water", "Water Bomb", {
+    hit_node = function(self,pos)
+        for dx = -2,2 do
+            for dy = -1,0 do
+                for dz = -2,2 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="default:water_source"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("fire", "Fire Bomb", {
+    hit_node = function(self,pos)
+        for dx = -1,1 do
+            for dy = 1,1 do
+                for dz = -1,1 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="fire:basic_flame"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("hole", "Hole Bomb", {
+    hit_node = function(self,pos)
+        for dx = -1,1 do
+            for dy = -10,0 do
+                for dz = -1,1 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="air"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("phoenix_fire", "Phoenix Fire Bomb", {
+    hit_node = function(self,pos)
+        for dx = -2,2 do
+            for dy = 0,1 do
+                for dz = -2,2 do
+                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                        minetest.set_node(pos1, {name="nssm:phoenix_fire"})
+                    end
+                end
+            end
+        end
+    end,
+})
+
+nssm_register_throwitem("kaboom", "Explosive Bomb", {
+    hit_node = function(self,pos)
+                    local pos1 = {x = pos.x, y=pos.y, z=pos.z}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                       explosion(pos1, 2, 1)
+                    end
+    end,
+})
+
+nssm_register_throwitem("boom", "Boom Bomb", {
+    hit_node = function(self,pos)
+                    local pos1 = {x = pos.x, y=pos.y, z=pos.z}
+                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+                       explosion(pos1, 4, 0)
+                    end
     end,
 })
