@@ -360,7 +360,7 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 	local n = minetest.env:get_node(pos).name
 	local n1 = minetest.env:get_node(pos1).name
 	local oldmetainf = {minetest.get_meta(pos):to_table(),minetest.get_meta(pos1):to_table() }
-	if n~=p_block and not minetest.is_protected(pos, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
+	if n~=p_block and not minetest.is_protected(pos, "") and (n == "bones:bones" and nssm:affectbones(self) ) and n~="air" then
 		minetest.env:set_node(pos, {name=p_block})
 		if nssm.cryosave then
 			local metai = minetest.get_meta(pos)
@@ -368,7 +368,7 @@ function putting_ability(		--puts under the mob the block defined as 'p_block'
 			metai:set_string("nssm",n)
 		end
 	end
-	if n1~=p_block and not minetest.is_protected(pos1, "") and (n == "bones:bones" and nssm:affectbones(self) ) then
+	if n1~=p_block and not minetest.is_protected(pos1, "") and (n == "bones:bones" and nssm:affectbones(self) ) and n~="air" then
 		minetest.env:set_node(pos1, {name=p_block})
 		if nssm.cryosave then
 			local metai = minetest.get_meta(pos1)
@@ -408,7 +408,7 @@ function midas_ability(		--ability to transform every blocks it touches in the m
 	mult, 		--multiplier of the dimensions of the area around that need the transformation
 	height 		--height of the mob
 	)
-	if math.random(1,nssm:virulence(self)) ~= 1 then return end
+	--if math.random(1,nssm:virulence(self)) ~= 1 then return end
 
 	local v = self.object:getvelocity()
 	local pos = self.object:getpos()
