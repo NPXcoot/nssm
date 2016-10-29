@@ -90,7 +90,12 @@ function ice_explosion(pos)
 	for i=pos.x-math.random(0, 1), pos.x+math.random(0, 1), 1 do
 		for j=pos.y-1, pos.y+4, 1 do
 			for k=pos.z-math.random(0, 1), pos.z+math.random(0, 1), 1 do
-				minetest.set_node({x=i, y=j, z=k}, {name="default:ice"})
+				local p = {x=i, y=j, z=k}
+				local n = minetest.env:get_node(p).name
+				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or (n == "bones:bones" and not nssm:affectbones(self)) then
+				else
+					minetest.set_node({x=i, y=j, z=k}, {name="default:ice"})
+				end
 			end
 		end
 	end
@@ -161,7 +166,7 @@ function explosion_web(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
-	pos.y = nssm:round(pos.y)
+	pos.y = round(pos.y)
     for i=pos.x-1, pos.x+1, 1 do
 		for j=pos.y-3, pos.y, 1 do
 			for k=pos.z-1, pos.z+1, 1 do
