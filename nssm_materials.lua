@@ -25,7 +25,7 @@ nssm_register_noneatcraftitems ('lava_titan_eye','Lava Titan Eye')
 nssm_register_noneatcraftitems ('duck_beak','Duck Beak')
 nssm_register_noneatcraftitems ('ice_tooth','Ice Tooth')
 nssm_register_noneatcraftitems ('little_ice_tooth','Little Ice Tooth')
-nssm_register_noneatcraftitems ('black_sand',"Black Sand")
+nssm_register_noneatcraftitems ('digested_sand',"Digested Sand")
 nssm_register_noneatcraftitems ('black_ice_tooth','Black Ice Tooth')
 nssm_register_noneatcraftitems ('tarantula_chelicerae','Tarantula Chelicerae')
 nssm_register_noneatcraftitems ('crab_chela','Crab Chela')
@@ -72,6 +72,7 @@ nssm_register_noneatcraftitems ('web_string','Cobweb String')
 nssm_register_noneatcraftitems ('dense_web_string','Dense Cobweb String')
 nssm_register_noneatcraftitems ('black_powder','Black Powder')
 nssm_register_noneatcraftitems ('morelentir_dust','Dark Starred Stone Dust')
+nssm_register_noneatcraftitems ('empty_evocation_bomb','Empty Evocation Bomb')
 
 function nssm_register_eatcraftitems (name, descr, gnam)
 
@@ -288,6 +289,27 @@ minetest.register_node("nssm:web", {
 	liquid_alternative_source = "nssm:web",
 	liquid_viscosity = 20,
 	groups = {flammable=2, snappy=1, liquid=1},
+})
+
+minetest.register_node("nssm:thick_web", {
+	description = "Thick Web",
+	inventory_image = "thick_web.png",
+	tile_images = {"thick_web.png"} ,
+    drawtype = "firelike",
+	paramtype = "light",
+	walkable = false,
+	pointable = true,
+	diggable = true,
+	buildable_to = false,
+	drop = "",
+	drowning = 0,
+	liquid_renewable = false,
+	liquidtype = "source",
+	liquid_range= 0,
+	liquid_alternative_flowing = "nssm:thick_web",
+	liquid_alternative_source = "nssm:thick_web",
+	liquid_viscosity = 30,
+	groups = {flammable=2, liquid=1},
 })
 
 minetest.register_node("nssm:ink", {
@@ -886,8 +908,13 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:black_ice_tooth',
 	type = "shapeless",
-	recipe = {'nssm:black_sand', 'nssm:ice_tooth'},
+	recipe = {'nssm:digested_sand', 'nssm:ice_tooth'},
+})
 
+minetest.register_craft({
+	output = 'nssm:web 4',
+	type = "shapeless",
+	recipe = {'nssm:silk_gland'},
 })
 
 minetest.register_craft({
@@ -1034,7 +1061,7 @@ nssm_register_recip ('larva_juice', 'larva_soup', 20)
 minetest.register_craft({
 	output = 'nssm:larva_juice',
 	type = "shapeless",
-	recipe = {'nssm:larva_meat','buckets:empty_bucket'}
+	recipe = {'nssm:larva_meat','bucket:bucket_empty'}
 })
 
 minetest.register_craft({
@@ -1103,9 +1130,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:sky_iron 30',
 	recipe = {
-		{'default:iron_block', 'default:iron_block', 'default:iron_block'},
-		{'default:iron_block', 'nssm:sky_feather', 'default:iron_block'},
-		{'default:iron_block', 'default:iron_block', 'default:iron_block'},
+		{'default:steelblock', 'default:steelblock', 'default:steelblock'},
+		{'default:steelblock', 'nssm:sky_feather', 'default:steelblock'},
+		{'default:steelblock', 'default:steelblock', 'default:steelblock'},
 	}
 })
 
@@ -1290,7 +1317,7 @@ nssm_register_egg ('icesnake', 'Icesnake')
 nssm_register_egg ('lava_titan', 'Lava Titan')
 nssm_register_egg ('masticone', 'Masticone')
 nssm_register_egg ('mantis_beast', 'Mantis Beast')
-nssm_register_egg ('mantis', 'mantis')
+nssm_register_egg ('mantis', 'Mantis')
 nssm_register_egg ('larva', 'Larva')
 nssm_register_egg ('phoenix', 'Phoenix')
 nssm_register_egg ('night_master', 'Night Master')
@@ -1318,7 +1345,6 @@ nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
 nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
 nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
 nssm_register_egg ('mordain', 'Mordain')
-nssm_register_egg ('pupumolle', 'PupuMolle')
 nssm_register_egg ('morgre', 'Morgre')
 nssm_register_egg ('morvy', 'Morvy')
 nssm_register_egg ('morgut', 'Morgut')

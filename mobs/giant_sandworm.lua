@@ -28,7 +28,7 @@ mobs:register_mob("nssm:giant_sandworm", {
 		chance = 1,
 		min = 7,
 		max = 8,},
-		{name = "nssm:black_sand",
+		{name = "nssm:digested_sand",
 		chance = 1,
 		min = 1,
 		max = 1,},
