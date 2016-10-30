@@ -20,6 +20,40 @@ function nssm:affectbones(mobe) -- as function for adaptable heuristic
 	return not nssm.safebones
 end
 
+function perpendicular_vector(vec) --returns a vector rotated of 90° in 2D
+	local ang = math.pi/2
+	local c = math.cos(ang)
+	local s = math.sin(ang)
+
+	local i = vec.x*c - vec.z*s
+	local k = vec.x*s + vec.z*c
+	local j = vec.y
+
+	vec = {x=i, y=j, z=k}
+	return vec
+end
+
+function add_entity_and_particles(entity, pos, particles, multiplier)
+	minetest.add_particlespawner({
+		amount = 100*multiplier,
+		time = 2,
+		minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
+		maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
+		minvel = {x=0, y=0, z=0},
+		maxvel = {x=1, y=2, z=1},
+		minacc = {x=-0.5,y=0.6,z=-0.5},
+		maxacc = {x=0.5,y=0.7,z=0.5},
+		minexptime = 2,
+		maxexptime = 3,
+		minsize = 3,
+		maxsize = 5,
+		collisiondetection = false,
+		vertical = false,
+		texture = particles,
+	})
+	minetest.add_entity(pos, entity)
+end
+
 -- get node but use fallback for nil or unknown
 function node_ok(pos, fallback)
 	fallback = fallback or "default:dirt"

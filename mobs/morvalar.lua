@@ -155,25 +155,7 @@ mobs:register_mob("nssm:morvalar", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar6")
-
+		add_entity_and_particles("nssm:morvalar6", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -293,24 +275,7 @@ mobs:register_mob("nssm:morvalar6", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar5")
+		add_entity_and_particles("nssm:morvalar5", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -381,24 +346,7 @@ mobs:register_mob("nssm:morvalar5", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar4")
+		add_entity_and_particles("nssm:morvalar4", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -521,24 +469,7 @@ mobs:register_mob("nssm:morvalar4", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar3")
+		add_entity_and_particles("nssm:morvalar3", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -599,24 +530,7 @@ mobs:register_mob("nssm:morvalar3", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar2")
+		add_entity_and_particles("nssm:morvalar2", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -692,51 +606,31 @@ mobs:register_mob("nssm:morvalar2", {
 				local v = vector.subtract(p,s)
 				--local v = {x = s.x-p.x, y = s.y-p.y , z= s.z-p.z}
 				v = vector.normalize(v)
-				local vv = vector.add(s,v)
-				local vvv
-				if math.abs(v.x) > math.abs (v.z) then
-					vvv = {x=1, y=0, z=0}
-				else
-					vvv = {x=0, y=0, z=1}
-				end
+				local per = perpendicular_vector(v)
+				local p1 = vector.add(s,v)
+				p1 = vector.subtract(p1,vector.multiply(per,4))
 
-				minetest.add_entity(vv, "nssm:morwa")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:mordain")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:morgre")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:morlu")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:morgut")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:morde")
-				vv = vector.add(vv,vvv)
-				minetest.add_entity(vv, "nssm:morvy")
+				add_entity_and_particles("nssm:morwa", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:mordain", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:morgre", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:morlu", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:morgut", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:morde", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
+				add_entity_and_particles("nssm:morvy", p1, "morparticle.png", 1)
+				p1 = vector.add(p1,per)
 			end
 		end
 	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar1")
+		add_entity_and_particles("nssm:morvalar1", pos, "morparticle.png", 10)
 	end,
 })
 
@@ -820,24 +714,7 @@ mobs:register_mob("nssm:morvalar1", {
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
-		minetest.add_particlespawner({
-			amount = 1000,
-			time = 2,
-			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
-			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
-			minvel = {x=0, y=0, z=0},
-			maxvel = {x=1, y=2, z=1},
-			minacc = {x=-0.5,y=0.6,z=-0.5},
-			maxacc = {x=0.5,y=0.7,z=0.5},
-			minexptime = 2,
-			maxexptime = 3,
-			minsize = 3,
-			maxsize = 5,
-			collisiondetection = false,
-			vertical = false,
-			texture = "morparticle.png",
-		})
-		minetest.add_entity(pos, "nssm:morvalar0")
+		add_entity_and_particles("nssm:morvalar0", pos, "morparticle.png", 10)
 	end,
 })
 
