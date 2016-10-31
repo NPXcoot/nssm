@@ -9,14 +9,14 @@ mobs:register_mob("nssm:daddy_long_legs", {
 	visual_size = {x=8, y=8},
 	makes_footstep_sound = true,
 	view_range = 12,
-	walk_velocity = 1.5,
+	walk_velocity = 0.7,
 	fear_height = 4,
 	run_velocity = 3.3,
   	rotate = 90,
   	sounds = {
 		random = "daddy",
 	},
-	damage = 4,
+	damage = 3,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

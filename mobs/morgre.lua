@@ -30,7 +30,7 @@ mobs:register_mob("nssm:morgre", {
 		min = 1,
 		max = 1,},
 	},
-	armor = 70,
+	armor = 60,
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 0,

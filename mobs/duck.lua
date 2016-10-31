@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:duck", {
 	type = "monster",
-	hp_max = 16,
+	hp_max = 12,
 	hp_min = 7,
 	collisionbox = {-0.3, 0.00, -0.3, 0.3, 0.95, 0.3},
 	visual = "mesh",

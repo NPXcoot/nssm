@@ -186,6 +186,55 @@ function explosion_web(pos)
 	end
 end
 
+
+-- thick_web arrow
+mobs:register_arrow("nssm:thickwebball", {
+	visual = "sprite",
+	visual_size = {x = 2, y = 2},
+	textures = {"thick_web_ball.png"},
+	velocity = 8,
+	-- direct hit
+	hit_player = function(self, player)
+		local p = player:getpos()
+		explosion_web(p)
+	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 6},
+		}, nil)
+	end,
+
+	hit_node = function(self, pos, node)
+		explosion_web(pos)
+	end
+})
+
+function explosion_web(pos)
+	if minetest.is_protected(pos, "") then
+		return
+	end
+	pos.y = round(pos.y)
+    for i=pos.x+0, pos.x+0, 1 do
+		for j=pos.y-2, pos.y, 1 do
+			for k=pos.z+0, pos.z+0, 1 do
+				local p = {x=i,y=j,z=k}
+				local k = {x=i,y=j+1,z=k}
+				local current = minetest.env:get_node(p).name
+				local ontop  = minetest.env:get_node(k).name
+				if 	(current ~= "air") and
+					(current ~= "nssm:thick_web") and
+					(ontop == "air") and not
+					minetest.is_protected(p,"") and not
+					minetest.is_protected(k,"") then
+						minetest.set_node(k, {name="nssm:thick_web"})
+				end
+			end
+		end
+	end
+end
+
 -- arrow=>phoenix arrow
 mobs:register_arrow("nssm:phoenix_arrow", {
 	visual = "sprite",

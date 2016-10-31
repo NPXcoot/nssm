@@ -16,7 +16,7 @@ mobs:register_mob("nssm:icesnake", {
   	sounds = {
 		random = "icesnake",
 	},
-	damage = 5,
+	damage = 4,
 	reach = 2,
 	jump = true,
 	drops = {
