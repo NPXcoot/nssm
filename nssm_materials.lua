@@ -126,6 +126,8 @@ nssm_register_eatcraftitems ('spider_meat','Spider Meat',-1)
 nssm_register_eatcraftitems ('roasted_spider_meat','Roasted Spider Meat',3)
 nssm_register_eatcraftitems ('silk_gland','Silk Gland',-1)
 nssm_register_eatcraftitems ('roasted_silk_gland','Roasted Silk Gland',3)
+nssm_register_eatcraftitems ('super_silk_gland','Super Silk Gland',-8)
+nssm_register_eatcraftitems ('roasted_super_silk_gland','Roasted Super Silk Gland',2)
 
 --ore generation
 
@@ -302,7 +304,7 @@ minetest.register_node("nssm:thick_web", {
 	diggable = true,
 	buildable_to = false,
 	drop = "",
-	drowning = 0,
+	drowning = 2,
 	liquid_renewable = false,
 	liquidtype = "source",
 	liquid_range= 0,
