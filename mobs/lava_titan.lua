@@ -46,7 +46,7 @@ mobs:register_mob("nssm:lava_titan", {
 	dogshoot_switch = true,
   	arrow = "nssm:lava_arrow",
   	shoot_interval = 2,
-  	shoot_offset = -1,
+  	shoot_offset = 0,
 	--[[
 	on_dist_attack = function(self, player)
 		local pos = player:getpos()

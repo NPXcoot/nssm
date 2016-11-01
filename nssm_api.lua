@@ -27,7 +27,7 @@ function perpendicular_vector(vec) --returns a vector rotated of 90° in 2D
 
 	local i = vec.x*c - vec.z*s
 	local k = vec.x*s + vec.z*c
-	local j = vec.y
+	local j = 0
 
 	vec = {x=i, y=j, z=k}
 	return vec
@@ -332,30 +332,48 @@ function digging_attack(
 
 		local dir = vector.subtract(p,s)
 		dir = vector.normalize(dir)
+		local per = perpendicular_vector(dir)
 
-		pos = vector.add(s,dir)
-		if minetest.is_protected(pos, "") then
-			return
-		end
 
-		for i = 0,dim.y do
-			local pos1 = pos
-			pos1.y = pos1.y+i
+		local posp = vector.add(s,dir)
 
-			local n = minetest.env:get_node(pos1).name
-			--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-			if group == nil then
-				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(pos1, "") or (n == "bones:bones" and not nssm:affectbones(self) ) then
-				else
-					--minetest.env:set_node(p, {name="air"})
-					minetest.remove_node(pos1)
-				end
-			else
-				if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(pos1, "")) ) then
-					--minetest.env:set_node(p, {name="air"})
-					minetest.remove_node(pos1)
-				end
+
+		--minetest.chat_send_all("La mia posizione:"..minetest.pos_to_string(s))
+		--minetest.chat_send_all("La posizione davanti:"..minetest.pos_to_string(posp))
+		posp = vector.subtract(posp,per)
+
+
+		for j = 1,3 do
+			--minetest.chat_send_all("pos1:"..minetest.pos_to_string(posp).." per.y= "..dim.y)
+			if minetest.is_protected(posp, "") then
+				return
 			end
+			local pos1 = posp
+
+			for i = 0,dim.y do
+
+
+				--minetest.chat_send_all("pos2:"..minetest.pos_to_string(posp).." per.y= "..per.y)
+
+				local n = minetest.env:get_node(pos1).name
+				--local up = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				if group == nil then
+					if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(pos1, "") or (n == "bones:bones" and not nssm:affectbones(self) ) then
+					else
+						--minetest.env:set_node(p, {name="air"})
+						minetest.remove_node(pos1)
+					end
+				else
+					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(pos1, "")) ) then
+						--minetest.env:set_node(p, {name="air"})
+						minetest.remove_node(pos1)
+					end
+				end
+				pos1.y = pos1.y+1
+			end
+			posp.y=s.y
+			posp=vector.add(posp,per)
+			--minetest.chat_send_all("pos3:"..minetest.pos_to_string(posp).." per.y= "..per.y)
 		end
 	end
 end
