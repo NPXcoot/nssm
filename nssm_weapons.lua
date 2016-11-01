@@ -225,10 +225,13 @@ local function default_on_step(
     local objects = minetest.env:get_objects_inside_radius(pos, 2)
     if self.timer > 0.3 then
         for _,obj in ipairs(objects) do
-            obj:set_hp(obj:get_hp()-damage)
-            if (obj:get_hp() <= 0) then
-                if (not obj:is_player()) and obj:get_entity_name() ~= self.object:get_luaentity().name then
-                    obj:remove()
+            if obj:get_entity_name() ~= self.object:get_luaentity().name then
+                if obj:is_player() then
+                    obj:set_hp(obj:get_hp()-damage)
+                elseif obj:get_luaentity().health then
+                    obj:get_luaentity().health = obj:get_luaentity().health - damage
+                    minetest.chat_send_all("Vita health: "..obj:get_luaentity().health)
+                    check_for_death(obj:get_luaentity())
                 end
             end
         end
@@ -604,7 +607,7 @@ nssm_register_weapon("light_ball", {
             else
                 self.object:setvelocity(vec_min)
             end
-            
+
         end
         local n = minetest.env:get_node(pos).name
 
@@ -614,7 +617,7 @@ nssm_register_weapon("light_ball", {
             self.object:remove()
             return
         end
-        
+
     end,
 
     hit_node = function(self, pos, node)

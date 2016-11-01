@@ -507,3 +507,87 @@ function midas_ability(		--ability to transform every blocks it touches in the m
 		end
 	end
 end
+
+function check_for_death_obj(obj)
+
+	local hp = obj:get_hp()
+
+	-- still got some health? play hurt sound
+	if self.health > 0 then
+
+		if self.sounds.damage then
+
+			minetest.sound_play(self.sounds.damage, {
+				object = self.object,
+				gain = 1.0,
+				max_hear_distance = self.sounds.distance
+			})
+		end
+
+		-- make sure health isn't higher than max
+		if self.health > self.hp_max then
+			self.health = self.hp_max
+		end
+
+		-- backup nametag so we can show health stats
+		if not self.nametag2 then
+			self.nametag2 = self.nametag or ""
+		end
+
+		self.htimer = 2
+
+		self.nametag = "health: " .. self.health .. " of " .. self.hp_max
+
+		update_tag(self)
+
+		return false
+	end
+
+	-- drop items when dead
+	local obj
+	local pos = self.object:getpos()
+
+	for n = 1, #self.drops do
+
+		if random(1, self.drops[n].chance) == 1 then
+
+			obj = minetest.add_item(pos,
+				ItemStack(self.drops[n].name .. " "
+					.. random(self.drops[n].min, self.drops[n].max)))
+
+			if obj then
+
+				obj:setvelocity({
+					x = random(-10, 10) / 9,
+					y = 5,
+					z = random(-10, 10) / 9,
+				})
+			end
+		end
+	end
+
+	-- play death sound
+	if self.sounds.death then
+
+		minetest.sound_play(self.sounds.death, {
+			object = self.object,
+			gain = 1.0,
+			max_hear_distance = self.sounds.distance
+		})
+	end
+
+	-- execute custom death function
+	if self.on_die then
+
+		self.on_die(self, pos)
+
+		return true
+	end
+
+	-- default death function
+	self.object:remove()
+
+	effect(pos, 20, "tnt_smoke.png")
+
+	return true
+end
