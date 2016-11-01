@@ -7,7 +7,7 @@ mobs:register_mob("nssm:swimming_duck", {
 	mesh = "swimming_duck.x",
 	textures = {{"swimming_duck.png"}},
 	visual_size = {x=2, y=2},
-	view_range = 15,
+	view_range = 25,
 	floats=1,
 	walk_velocity = 1,
 	run_velocity = 1,

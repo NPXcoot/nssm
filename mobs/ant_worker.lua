@@ -10,7 +10,7 @@ mobs:register_mob("nssm:ant_worker", {
 	makes_footstep_sound = true,
 	view_range = 20,
 	fear_height = 4,
-	walk_velocity = 1.5,
+	walk_velocity = 0.5,
 	run_velocity = 2,
   	rotate = 270,
 	sounds = {

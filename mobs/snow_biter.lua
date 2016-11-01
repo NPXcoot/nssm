@@ -19,7 +19,7 @@ mobs:register_mob("nssm:snow_biter", {
 		random = "snow_biter",
 	},
 	--pathfinding = true,
-	damage = 6,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

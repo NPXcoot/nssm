@@ -10,7 +10,7 @@ mobs:register_mob("nssm:bloco", {
 	makes_footstep_sound = true,
 	view_range = 8,
 	fear_height = 4,
-	walk_velocity = 1,
+	walk_velocity = 0.6,
 	run_velocity = 2.5,
     rotate = 270,
     sounds = {

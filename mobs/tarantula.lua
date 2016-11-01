@@ -10,7 +10,7 @@ mobs:register_mob("nssm:tarantula", {
 	makes_footstep_sound = true,
 	view_range = 20,
 	lifetimer = 500,
-	walk_velocity = 1.5,
+	walk_velocity = 0.7,
 	fear_height = 4,
 	run_velocity = 3,
     rotate = 270,
@@ -19,6 +19,12 @@ mobs:register_mob("nssm:tarantula", {
 	},
 	damage = 8,
 	jump = true,
+	drops = {
+		{name = "nssm:super_silk_gland",
+		chance = 1,
+		min = 3,
+		max = 5,},
+	},
 	armor = 60,
 	drawtype = "front",
 	water_damage = 1,
@@ -26,7 +32,11 @@ mobs:register_mob("nssm:tarantula", {
 	reach = 3,
 	light_damage = 0,
 	on_rightclick = nil,
-	attack_type = "dogfight",
+	dogshoot_switch = true,
+	attack_type = "dogshoot",
+    arrow = "nssm:thickwebball",
+    shoot_interval = 2,
+    shoot_offset = 1,
 	animation = {
 		speed_normal = 20,
 		speed_run = 25,
@@ -38,6 +48,8 @@ mobs:register_mob("nssm:tarantula", {
 		run_end = 160,
 		punch_start = 180,
 		punch_end = 200,
+		shoot_start = 180,
+		shoot_end = 200,
 	},
 	on_die = function(self, pos)
 		self.object:remove()
