@@ -779,18 +779,35 @@ minetest.register_tool("nssm:axe_of_pride", {
 	on_drop = function(itemstack, dropper, pos)
 		local objects = minetest.env:get_objects_inside_radius(pos, 10)
 		local flag = 0
+		local meta = minetest.get_meta({x=0,y=0,z=0})
+
 		for _,obj in ipairs(objects) do
-			--scrivi qui
-			if flag == 0 then
-				flag=1
-	            if (obj:is_player()) then
-					obj:set_hp(obj:get_hp()-10)
-					dropper:set_hp(dropper:get_hp()+10)
-	            elseif (obj:get_luaentity()) then
-					obj:set_hp(obj:get_hp()-10)
-					dropper:set_hp(dropper:get_hp()+10)
-	            end
+			local timer = meta:get_string("axe_of_pride_"..obj:get_player_name())
+			minetest.chat_send_all(timer)
+			if timer then
+
+				--timer = tonumber(timer)
+
+				local tim = os.time() - timer
+				if tim < 30 then
+					minetest.chat_send_player(dropper:get_player_name(),"Too soon. Wait for "..30-tim.." seconds")
+					return
+				end
 			end
+			meta:set_string("axe_of_pride_"..dropper:get_player_name(), tostring(os.time()))
+            if (obj:is_player()) then
+				--minetest.chat_send_all("Giocatore")
+				if (obj:get_player_name()~=dropper:get_player_name()) then
+					obj:set_hp(obj:get_hp()-10)
+					dropper:set_hp(dropper:get_hp()+10)
+				end
+            else
+				if (obj:get_luaentity().health) then
+					--minetest.chat_send_all("Entity")
+					obj:get_luaentity().health = obj:get_luaentity().health -10
+					dropper:set_hp(dropper:get_hp()+10)
+				end
+            end
         end
 	end,
 })
