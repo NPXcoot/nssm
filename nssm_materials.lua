@@ -623,22 +623,21 @@ minetest.register_tool("nssm:felucco_knife", {
 		damage_groups = {fleshy=6},
 	},
 })
---[[
-Bisognava dare la dipendenza da farming... Ma mi da ancora degli errori!
-farming:register_hoe(":farming:felucco_hoe", {
+
+farming.register_hoe(":farming:felucco_hoe", {
 	description = "Felucco Hoe",
 	inventory_image = "felucco_hoe.png",
 	max_uses = 290,
 	material = "nssm:felucco_horn"
 })
 
-farming:register_hoe(":farming:ant_hoe", {
+farming.register_hoe(":farming:ant_hoe", {
 	description = "Ant Hoe",
 	inventory_image = "ant_hoe.png",
 	max_uses = 350,
 	material = "nssm:ant_mandible"
 })
-]]
+
 minetest.register_tool("nssm:ant_sword", {
 	description = "Ant Sword",
 	inventory_image = "ant_sword.png",
