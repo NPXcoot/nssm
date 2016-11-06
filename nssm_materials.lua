@@ -780,9 +780,6 @@ minetest.register_tool("nssm:axe_of_pride", {
 		local flag = 0
 		for _,obj in ipairs(objects) do
 			if flag == 0 then
-
-				minetest.chat_send_all("Attenzione")
-
 				local pname = dropper:get_player_name()
 				local player_inv = minetest.get_inventory({type='player', name = pname})
 
@@ -791,15 +788,11 @@ minetest.register_tool("nssm:axe_of_pride", {
 				else
 					local found = 0
 					for i = 1,32 do
-						--minetest.chat_send_all("Inventory is not empty")
 						local items = player_inv:get_stack('main', i)
 						local n = items:get_name()
 						if n == "nssm:energy_globe" then
-							if found == 0 then
-								found = 1
-								items:take_item()
-								player_inv:set_stack('main', i, items)
-							end
+							found = i
+							break
 						end
 					end
 					if found == 0 then
@@ -811,14 +804,24 @@ minetest.register_tool("nssm:axe_of_pride", {
 							if (obj:get_player_name()~=dropper:get_player_name()) then
 								obj:set_hp(obj:get_hp()-10)
 								dropper:set_hp(dropper:get_hp()+10)
-								flag = 1
+								--flag = 1
+
+								local items = player_inv:get_stack('main', found)
+								items:take_item()
+								player_inv:set_stack('main', found, items)
 							end
 			            else
 							if (obj:get_luaentity().health) then
 								--minetest.chat_send_all("Entity")
 								obj:get_luaentity().health = obj:get_luaentity().health -10
+								check_for_death(obj:get_luaentity())
+
 								dropper:set_hp(dropper:get_hp()+10)
-								flag = 1
+								--flag = 1
+
+								local items = player_inv:get_stack('main', found)
+								items:take_item()
+								player_inv:set_stack('main', found, items)
 							end
 			            end
 					end
@@ -841,6 +844,38 @@ minetest.register_tool("nssm:gratuitousness_battleaxe", {
 		},
 		damage_groups = {fleshy=18},
 	},
+	on_drop = function(itemstack, dropper, pos)
+	    local objects = minetest.env:get_objects_inside_radius(pos, 10)
+	    local flag = 0
+		local vec = dropper:get_look_dir()
+		local pos = dropper:getpos()
+		vec.y = 0
+
+		for i=1,10 do
+			pos = vector.add(pos, vec)
+		end
+
+		local pname = dropper:get_player_name()
+		local player_inv = minetest.get_inventory({type='player', name = pname})
+		local found = 0
+		for i = 1,32 do
+			local items = player_inv:get_stack('main', i)
+			local n = items:get_name()
+			if n == "nssm:energy_globe" then
+				found = i
+				break
+			end
+		end
+		if found == 0 then
+			minetest.chat_send_player(pname, "You haven't got any Energy Globe!")
+			return
+		else
+			local items = player_inv:get_stack('main', found)
+			items:take_item()
+			player_inv:set_stack('main', found, items)
+			explosion(pos, 5, 1)
+		end
+	end,
 })
 
 minetest.register_tool("nssm:sword_of_eagerness", {
@@ -886,6 +921,72 @@ minetest.register_tool("nssm:sword_of_gluttony", {
 		},
 		damage_groups = {fleshy=14},
 	},
+	on_drop = function(itemstack, dropper, pos)
+		local objects = minetest.env:get_objects_inside_radius(pos, 10)
+		local flag = 0
+		for _,obj in ipairs(objects) do
+			if flag == 0 then
+				local pname = dropper:get_player_name()
+				local player_inv = minetest.get_inventory({type='player', name = pname})
+
+				if player_inv:is_empty('main') then
+					--minetest.chat_send_all("Inventory empty")
+				else
+					local found = 0
+					for i = 1,32 do
+						local items = player_inv:get_stack('main', i)
+						local n = items:get_name()
+						if n == "nssm:energy_globe" then
+							found = i
+							break
+						end
+					end
+					if found == 0 then
+						minetest.chat_send_player(pname, "You haven't got any Energy Globe!")
+						return
+					else
+						if (obj:is_player()) then
+							if (obj:get_player_name()~=dropper:get_player_name()) then
+								obj:set_hp(obj:get_hp()-10)
+								--flag = 1
+
+								--take energy globe from inventory:
+								local items = player_inv:get_stack('main', found)
+								items:take_item()
+								player_inv:set_stack('main', found, items)
+							end
+			            else
+							if (obj:get_luaentity().health) then
+								if obj:get_luaentity().health <= 10 then
+									local pos = obj:getpos()
+									obj:remove()
+
+									--check_for_death(obj:get_luaentity())
+									--flag = 1
+									--take energy globe from inventory:
+									local items = player_inv:get_stack('main', found)
+									items:take_item()
+									player_inv:set_stack('main', found, items)
+
+									for i = 1,math.random(1,4) do
+										drop = minetest.add_item(pos, "nssm:roasted_duck_legs 1")
+
+										if drop then
+											drop:setvelocity({
+												x = math.random(-10, 10) / 9,
+												y = 5,
+												z = math.random(-10, 10) / 9,
+											})
+										end
+									end
+								end
+							end
+			            end
+					end
+				end
+			end
+        end
+	end,
 })
 
 minetest.register_tool("nssm:death_scythe", {
