@@ -20,6 +20,16 @@ function nssm:affectbones(mobe) -- as function for adaptable heuristic
 	return not nssm.safebones
 end
 
+function drops(drop)
+	if drop then
+		drop:setvelocity({
+			x = math.random(-10, 10) / 9,
+			y = 5,
+			z = math.random(-10, 10) / 9,
+		})
+	end
+end
+
 function perpendicular_vector(vec) --returns a vector rotated of 90° in 2D
 	local ang = math.pi/2
 	local c = math.cos(ang)
@@ -153,21 +163,21 @@ function explosion(pos, exp_radius, fire, kamehameha_bad)
         local dist = (vec.x^2+vec.y^2+vec.z^2)^0.5
 		local damage = (-exp_radius*dist+exp_radius^2)*2
 		if not kamehameha_bad then
-			obj:set_hp(obj:get_hp()-damage)
-	        if (obj:get_hp() <= 0) then
-	            if (not obj:is_player()) then
-	                obj:remove()
-	            end
+			if obj:is_player() then
+				obj:set_hp(obj:get_hp()-damage)
+			elseif obj:get_luaentity().health then
+				obj:get_luaentity().health = obj:get_luaentity().health - damage
+				check_for_death(obj:get_luaentity())
 	        end
 		else
 			if (obj:get_luaentity()) then
 				local name = obj:get_luaentity().name
-				if (name~="nssm:morvalarr0") and (name~="nssm:morvalarr5") then
-					obj:set_hp(obj:get_hp()-(damage*3))
-			        if (obj:get_hp() <= 0) then
-			            if (not obj:is_player()) then
-			                obj:remove()
-			            end
+				if (name~="nssm:morvalar0") and (name~="nssm:morvalar5") then
+					if obj:is_player() then
+						obj:set_hp(obj:get_hp()-damage)
+					elseif obj:get_luaentity().health then
+						obj:get_luaentity().health = obj.get_luaentity().health - damage
+						check_for_death(obj:get_luaentity())
 			        end
 				end
 			end

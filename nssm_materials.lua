@@ -229,6 +229,12 @@ minetest.register_node("nssm:ant_dirt", {
 	groups = {crumbly=3},
 })
 
+minetest.register_node("nssm:dead_leaves", {
+	description = "Dead leaves",
+	tiles = {"dead_leaves.png"},
+	groups = {snappy=3,leaves=1},
+})
+
 minetest.register_node("nssm:invisible_light", {
 	description = "Invisible light source",
 	tiles = {"transparent.png"},
@@ -448,6 +454,16 @@ minetest.register_abm({
 	neighbors = {"air"},
 	interval = 3,
 	chance = 2,
+	action = function(pos, node)
+			minetest.set_node({x = pos.x, y = pos.y , z = pos.z}, {name = "air"})
+		end
+})
+
+minetest.register_abm({
+	nodenames = {"nssm:dead_leaves"},
+	neighbors = {"air"},
+	interval = 15,
+	chance = 3,
 	action = function(pos, node)
 			minetest.set_node({x = pos.x, y = pos.y , z = pos.z}, {name = "air"})
 		end
@@ -778,7 +794,9 @@ minetest.register_tool("nssm:axe_of_pride", {
 	on_drop = function(itemstack, dropper, pos)
 		local objects = minetest.env:get_objects_inside_radius(pos, 10)
 		local flag = 0
+		local part = 0
 		for _,obj in ipairs(objects) do
+			part = 0
 			if flag == 0 then
 				local pname = dropper:get_player_name()
 				local player_inv = minetest.get_inventory({type='player', name = pname})
@@ -809,6 +827,7 @@ minetest.register_tool("nssm:axe_of_pride", {
 								local items = player_inv:get_stack('main', found)
 								items:take_item()
 								player_inv:set_stack('main', found, items)
+								part = 1
 							end
 			            else
 							if (obj:get_luaentity().health) then
@@ -822,8 +841,31 @@ minetest.register_tool("nssm:axe_of_pride", {
 								local items = player_inv:get_stack('main', found)
 								items:take_item()
 								player_inv:set_stack('main', found, items)
+								part = 1
 							end
 			            end
+						if part == 1 then
+							local s = dropper:getpos()
+							local p = obj:getpos()
+							local m = 2
+
+							minetest.add_particlespawner(
+								3, --amount
+								0.1, --time
+								{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
+								{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+								{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --minacc
+								{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --maxacc
+								0.5, --minexptime
+								1, --maxexptime
+								3, --minsize
+								4, --maxsize
+								false, --collisiondetection
+								"heart.png" --texture
+							)
+						end
 					end
 				end
 			end
@@ -849,7 +891,7 @@ minetest.register_tool("nssm:gratuitousness_battleaxe", {
 	    local flag = 0
 		local vec = dropper:get_look_dir()
 		local pos = dropper:getpos()
-		vec.y = 0
+		--vec.y = 0
 
 		for i=1,10 do
 			pos = vector.add(pos, vec)
@@ -891,6 +933,172 @@ minetest.register_tool("nssm:sword_of_eagerness", {
 		},
 		damage_groups = {fleshy=14},
 	},
+	on_drop = function(itemstack, dropper, pos)
+	    local objects = minetest.env:get_objects_inside_radius(pos, 10)
+	    local flag = 0
+	    for _,obj in ipairs(objects) do
+			local part = 0
+	        if flag == 0 then
+	            local pname = dropper:get_player_name()
+	            local player_inv = minetest.get_inventory({type='player', name = pname})
+
+	            if player_inv:is_empty('main') then
+	                --minetest.chat_send_all("Inventory empty")
+	            else
+	                local found = 0
+	                for i = 1,32 do
+	                    local items = player_inv:get_stack('main', i)
+	                    local n = items:get_name()
+	                    if n == "nssm:energy_globe" then
+	                        found = i
+	                        break
+	                    end
+	                end
+	                if found == 0 then
+	                    minetest.chat_send_player(pname, "You haven't got any Energy Globe!")
+	                    return
+	                else
+						local pos = obj:getpos()
+						pos.y = pos.y + 15
+	                    if (obj:is_player()) then
+	                        if (obj:get_player_name()~=dropper:get_player_name()) then
+								part=1
+								obj:setpos(pos)
+	                            --flag = 1
+
+	                            local items = player_inv:get_stack('main', found)
+	                            items:take_item()
+	                            player_inv:set_stack('main', found, items)
+	                        end
+	                    else
+	                        if (obj:get_luaentity().health) then
+								obj:get_luaentity().old_y = pos.y
+	                            obj:setpos(pos)
+								part=1
+	                            --flag = 1
+
+	                            local items = player_inv:get_stack('main', found)
+	                            items:take_item()
+	                            player_inv:set_stack('main', found, items)
+	                        end
+	                    end
+						if part==1 then
+							local s = pos
+							s.y = s.y - 15
+							minetest.add_particlespawner(
+						    	25, --amount
+						        0.3, --time
+						        vector.subtract(s, 0.5), --minpos
+						        vector.add(s, 0.5), --maxpos
+						        {x=0, y=10, z=0}, --minvel
+						        {x=0.1, y=11, z=0.1}, --maxvel
+						        {x=0,y=1,z=0}, --minacc
+						        {x=0,y=1,z=0}, --maxacc
+						        0.5, --minexptime
+						        1, --maxexptime
+						        1, --minsize
+						        2, --maxsize
+						        false, --collisiondetection
+						        "slothful_soul_fragment.png" --texture
+						    )
+						end
+	                end
+	            end
+	        end
+	    end
+	end,
+})
+
+minetest.register_tool("nssm:falchion_of_eagerness", {
+	description = "Falchion of Eagerness",
+	inventory_image = "falchion_of_eagerness.png",
+	wield_scale= {x=2,y=2,z=1},
+	tool_capabilities = {
+		full_punch_interval =1 ,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=0.6, [2]=0.5, [3]=0.4}, uses=100, maxlevel=1},
+			fleshy={times={[2]=0.8, [3]=0.4}, uses=400, maxlevel=1}
+		},
+		damage_groups = {fleshy=16},
+	},
+	on_drop = function(itemstack, dropper, pos)
+		local vec = dropper:get_look_dir()
+		local pos = dropper:getpos()
+		--vec.y = 0
+
+		for i=1,16 do
+			pos = vector.add(pos, vec)
+		end
+
+		local pname = dropper:get_player_name()
+		local player_inv = minetest.get_inventory({type='player', name = pname})
+
+		if player_inv:is_empty('main') then
+			--minetest.chat_send_all("Inventory empty")
+		else
+			local found = 0
+			for i = 1,32 do
+				local items = player_inv:get_stack('main', i)
+				local n = items:get_name()
+				if n == "nssm:life_energy" then
+					if items:get_count() >= 5 then
+						found = i
+						break
+					end
+				end
+			end
+			if found == 0 then
+				minetest.chat_send_player(pname, "You haven't got enough life_energy!")
+				return
+			else
+				local s = dropper:getpos()
+				minetest.add_particlespawner(
+					25, --amount
+					0.3, --time
+					vector.subtract(s, 0.5), --minpos
+					vector.add(s, 0.5), --maxpos
+					{x=0, y=10, z=0}, --minvel
+					{x=0.1, y=11, z=0.1}, --maxvel
+					{x=0,y=1,z=0}, --minacc
+					{x=0,y=1,z=0}, --maxacc
+					0.5, --minexptime
+					1, --maxexptime
+					1, --minsize
+					2, --maxsize
+					false, --collisiondetection
+					"slothful_soul_fragment.png" --texture
+				)
+				minetest.remove_node(pos)
+				pos.y=pos.y+1
+				minetest.remove_node(pos)
+				pos.y=pos.y-2
+				minetest.remove_node(pos)
+				dropper:setpos(pos)
+				s = pos
+				s.y = s.y+10
+				minetest.add_particlespawner(
+					25, --amount
+					0.3, --time
+					vector.subtract(s, 0.5), --minpos
+					vector.add(s, 0.5), --maxpos
+					{x=0, y=-10, z=0}, --minvel
+					{x=0.1, y=-11, z=0.1}, --maxvel
+					{x=0,y=-1,z=0}, --minacc
+					{x=0,y=-1,z=0}, --maxacc
+					0.5, --minexptime
+					1, --maxexptime
+					1, --minsize
+					2, --maxsize
+					false, --collisiondetection
+					"slothful_soul_fragment.png" --texture
+				)
+				local items = player_inv:get_stack('main', found)
+				items:set_count(items:get_count()-5)
+				player_inv:set_stack('main', found, items)
+			end
+		end
+	end,
 })
 
 minetest.register_tool("nssm:sword_of_envy", {
@@ -906,6 +1114,64 @@ minetest.register_tool("nssm:sword_of_envy", {
 		},
 		damage_groups = {fleshy=14},
 	},
+	on_drop = function(itemstack, dropper, pos)
+	    local objects = minetest.env:get_objects_inside_radius(pos, 10)
+	    local flag = 0
+	    for _,obj in ipairs(objects) do
+	        if flag == 0 then
+	            local pname = dropper:get_player_name()
+	            local player_inv = minetest.get_inventory({type='player', name = pname})
+
+	            if player_inv:is_empty('main') then
+	                --minetest.chat_send_all("Inventory empty")
+	            else
+	                local found = 0
+	                for i = 1,32 do
+	                    local items = player_inv:get_stack('main', i)
+	                    local n = items:get_name()
+	                    if n == "nssm:energy_globe" then
+	                        found = i
+	                        break
+	                    end
+	                end
+	                if found == 0 then
+	                    minetest.chat_send_player(pname, "You haven't got any Energy Globe!")
+	                    return
+	                else
+	                    if (obj:is_player()) then
+	                        --minetest.chat_send_all("Giocatore")
+	                        if (obj:get_player_name()~=dropper:get_player_name()) then
+	                            local hpp = obj:get_hp()
+								obj:set_hp(dropper:get_hp())
+								dropper:set_hp(hpp)
+	                            flag = 1
+
+	                            local items = player_inv:get_stack('main', found)
+	                            items:take_item()
+	                            player_inv:set_stack('main', found, items)
+	                        end
+	                    else
+	                        if (obj:get_luaentity().health) then
+								local hpp = obj:get_luaentity().health
+								obj:get_luaentity().health = dropper:get_hp()
+								if hpp > 20 then
+									dropper:set_hp(20)
+								else
+									dropper:set_hp(hpp)
+								end
+	                            check_for_death(obj:get_luaentity())
+	                            flag = 1
+
+	                            local items = player_inv:get_stack('main', found)
+	                            items:take_item()
+	                            player_inv:set_stack('main', found, items)
+	                        end
+	                    end
+	                end
+	            end
+	        end
+	    end
+	end,
 })
 
 minetest.register_tool("nssm:sword_of_gluttony", {
@@ -957,7 +1223,7 @@ minetest.register_tool("nssm:sword_of_gluttony", {
 							end
 			            else
 							if (obj:get_luaentity().health) then
-								if obj:get_luaentity().health <= 10 then
+								if obj:get_luaentity().health <= 32 then
 									local pos = obj:getpos()
 									obj:remove()
 
@@ -970,15 +1236,30 @@ minetest.register_tool("nssm:sword_of_gluttony", {
 
 									for i = 1,math.random(1,4) do
 										drop = minetest.add_item(pos, "nssm:roasted_duck_legs 1")
-
-										if drop then
-											drop:setvelocity({
-												x = math.random(-10, 10) / 9,
-												y = 5,
-												z = math.random(-10, 10) / 9,
-											})
-										end
+										drops(drop)
 									end
+
+									local s = obj:getpos()
+									local p = dropper:getpos()
+									local m = 3
+
+									minetest.add_particlespawner(
+										10, --amount
+										0.1, --time
+										{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
+										{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
+										{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+										{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+										{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --minacc
+										{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --maxacc
+										0.5, --minexptime
+										1, --maxexptime
+										1, --minsize
+										2, --maxsize
+										false, --collisiondetection
+										"gluttonous_soul_fragment.png" --texture
+									)
+
 								end
 							end
 			            end
@@ -1002,6 +1283,73 @@ minetest.register_tool("nssm:death_scythe", {
 		},
 		damage_groups = {fleshy=28},
 	},
+	on_drop = function(itemstack, dropper, pos)
+	    local objects = minetest.env:get_objects_inside_radius(pos, 10)
+	    local flag = 0
+		dropper:set_hp(dropper:get_hp()-9)
+	    for _,obj in ipairs(objects) do
+			flag = 0
+            if (obj:is_player()) then
+                if (obj:get_player_name()~=dropper:get_player_name()) then
+                    obj:set_hp(obj:get_hp()-40)
+                    flag = 1
+                end
+            else
+                if (obj:get_luaentity().health) then
+                    obj:get_luaentity().health = obj:get_luaentity().health -40
+                    check_for_death(obj:get_luaentity())
+                    flag = 1
+                end
+            end
+			if flag == 1 then
+				for i = 1,math.random(1,2) do
+					drop = minetest.add_item(pos, "nssm:energy_globe 1")
+
+					if drop then
+						drop:setvelocity({
+							x = math.random(-10, 10) / 9,
+							y = 5,
+							z = math.random(-10, 10) / 9,
+						})
+					end
+				end
+			end
+	    end
+		local pos = dropper:getpos()
+		local vec = {x=5,y=5,z=5}
+		local poslist = minetest.find_nodes_in_area(vector.subtract(pos, vec), vector.add(pos,vec), "default:dirt_with_grass")
+		for _,v in pairs(poslist) do
+			--minetest.chat_send_all(minetest.pos_to_string(v))
+			minetest.set_node(v, {name="default:dirt_with_dry_grass"})
+			if math.random(1,3)==1 then
+				v.y = v.y +2
+				drop = minetest.add_item(v, "nssm:life_energy 1")
+				drops(drop)
+			end
+		end
+
+		local poslist = minetest.find_nodes_in_area_under_air(vector.subtract(pos, vec), vector.add(pos,vec), "group:flora")
+		for _,v in pairs(poslist) do
+			--minetest.chat_send_all(minetest.pos_to_string(v))
+			minetest.set_node(v, {name="default:dry_shrub"})
+			if math.random(1,3)==1 then
+				v.y = v.y +2
+				drop = minetest.add_item(v, "nssm:life_energy 1")
+				drops(drop)
+			end
+		end
+
+		local poslist = minetest.find_nodes_in_area(vector.subtract(pos, vec), vector.add(pos,vec), "group:leaves")
+		for _,v in pairs(poslist) do
+			--minetest.chat_send_all(minetest.pos_to_string(v))
+			minetest.set_node(v, {name="nssm:dead_leaves"})
+			if math.random(1,3)==1 then
+				v.y = v.y +2
+				drop = minetest.add_item(v, "nssm:life_energy 1")
+				drops(drop)
+			end
+		end
+	end,
 })
 
 --recipes
@@ -1117,6 +1465,12 @@ minetest.register_craft({
 	output = 'nssm:eyed_tentacle',
 	type = "shapeless",
 	recipe = {'nssm:lava_titan_eye','nssm:tentacle_curly'}
+})
+
+minetest.register_craft({
+	output = 'nssm:life_energy 9',
+	type = "shapeless",
+	recipe = {'nssm:energy_globe'}
 })
 --[[
 minetest.register_craft({
@@ -1383,6 +1737,15 @@ minetest.register_craft({
 		{'nssm:slothful_moranga'},
 		{'nssm:slothful_moranga'},
 		{'nssb:moranga_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:falchion_of_eagerness',
+	recipe = {
+		{'nssm:slothful_moranga','nssm:slothful_moranga'},
+		{'nssm:slothful_moranga', ''},
+		{'nssb:moranga_ingot',''},
 	}
 })
 
