@@ -1,4 +1,24 @@
 local time_limit = 120
+posmorvalarblock = {x=827, y=-30094, z=-817}
+
+function respawn_block(self)
+	--start a timer if it doesn't exist
+	self.stop_timer = self.stop_timer or os.time()
+
+	--create a variable to record the hp if it doesn't exist
+	self.hp_record = self.hp_record or self.health
+
+	if self.hp_record ~= self.health then
+		self.stop_timer = os.time()
+		self.hp_record = self.health
+	else
+		if os.time() - self.stop_timer > time_limit then
+			minetest.chat_send_all("Time is over!")
+			self.object:remove()
+			minetest.set_node(posmorvalarblock, {name="nssb:morvalar_block"})
+		end
+	end
+end
 
 mobs:register_mob("nssm:morvalar", {
 	type = "monster",
@@ -44,21 +64,7 @@ mobs:register_mob("nssm:morvalar", {
 	},
 
 	do_custom = function(self)
-		--start a timer if it doesn't exist
-		self.stop_timer = self.stop_timer or os.time()
-
-		--create a variable to record the hp if it doesn't exist
-		self.hp_record = self.hp_record or self.object:get_hp()
-
-		if self.hp_record ~= self.object:get_hp() then
-			self.stop_timer = os.time()
-			self.hp_record = self.object:get_hp()
-		else
-			if os.time() - self.stop_timer > time_limit then
-				self.object:remove()
-			end
-		end
-
+		respawn_block(self)
 	end,
 
 	custom_attack = function (self)
@@ -195,6 +201,9 @@ mobs:register_mob("nssm:morvalar6", {
 		punch_start = 132,
 		punch_end = 162,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function (self)
 		self.morvalar6_timer = (self.morvalar6_timer or os.time())
 
@@ -310,6 +319,9 @@ mobs:register_mob("nssm:morvalar5", {
 		punch_start = 215,
 		punch_end = 245,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function (self)
 		self.morvalar5_timer = (self.morvalar5_timer or os.time())
 
@@ -375,6 +387,9 @@ mobs:register_mob("nssm:morvalar4", {
 		punch_start = 300,
 		punch_end = 320,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function(self)
 		self.morvalar4_timer = (self.morvalar4_timer or os.time())
 		if (os.time() - self.morvalar4_timer) > 1 then
@@ -497,6 +512,9 @@ mobs:register_mob("nssm:morvalar3", {
 		shoot_start = 400,
     	shoot_end = 450,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	on_die = function(self)
 		local pos = self.object:getpos()
 		self.object:remove()
@@ -546,6 +564,9 @@ mobs:register_mob("nssm:morvalar2", {
 		punch_start = 505,
 		punch_end = 545,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function(self)
 		self.morvalar2_timer = (self.morvalar2_timer or os.time())
 		if (os.time() - self.morvalar2_timer) > 1 then
@@ -640,6 +661,9 @@ mobs:register_mob("nssm:morvalar1", {
 		punch_start = 610,
 		punch_end = 640,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function (self)
 		self.morvalar1_timer = (self.morvalar1_timer or os.time())
 		if (os.time() - self.morvalar1_timer) > 3 then
@@ -724,6 +748,9 @@ mobs:register_mob("nssm:morvalar0", {
 		punch_start = 700,
 		punch_end = 750,
 	},
+	do_custom = function(self)
+		respawn_block(self)
+	end,
 	custom_attack = function (self)
 		self.morvalar1_timer = (self.morvalar1_timer or os.time())
 		if (os.time() - self.morvalar1_timer) > 1 then

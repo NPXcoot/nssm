@@ -1259,7 +1259,6 @@ minetest.register_tool("nssm:sword_of_gluttony", {
 										false, --collisiondetection
 										"gluttonous_soul_fragment.png" --texture
 									)
-
 								end
 							end
 			            end
