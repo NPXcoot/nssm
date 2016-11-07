@@ -1,9 +1,9 @@
-local time_limit = 10
+local time_limit = 120
 
 mobs:register_mob("nssm:morvalar", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 10,
+	hp_max = 100,
+	hp_min = 100,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -13,19 +13,13 @@ mobs:register_mob("nssm:morvalar", {
 	makes_footstep_sound = true,
 	view_range = 50,
 	walk_velocity = 1.6,
-	reach =6,
+	reach =3,
 	run_velocity = 3.2,
-	damage = 4,
+	damage = 8,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar7",
 	},
 	armor = 50,
 	drawtype = "front",
@@ -161,8 +155,8 @@ mobs:register_mob("nssm:morvalar", {
 
 mobs:register_mob("nssm:morvalar6", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 10,
+	hp_max = 120,
+	hp_min = 120,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -172,19 +166,13 @@ mobs:register_mob("nssm:morvalar6", {
 	makes_footstep_sound = true,
 	view_range = 50,
 	walk_velocity = 1.6,
-	reach =6,
+	reach =4,
 	run_velocity = 3.2,
-	damage = 4,
+	damage = 8,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar6",
 	},
 	armor = 50,
 	drawtype = "front",
@@ -282,8 +270,8 @@ mobs:register_mob("nssm:morvalar6", {
 
 mobs:register_mob("nssm:morvalar5", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 10,
+	hp_max = 130,
+	hp_min = 130,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -298,16 +286,10 @@ mobs:register_mob("nssm:morvalar5", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar5",
 	},
-	armor = 50,
+	armor = 40,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
@@ -353,8 +335,8 @@ mobs:register_mob("nssm:morvalar5", {
 
 mobs:register_mob("nssm:morvalar4", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 10,
+	hp_max = 100,
+	hp_min = 100,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -369,16 +351,10 @@ mobs:register_mob("nssm:morvalar4", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar4",
 	},
-	armor = 50,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
@@ -475,8 +451,8 @@ mobs:register_mob("nssm:morvalar4", {
 
 mobs:register_mob("nssm:morvalar3", {
 	type = "monster",
-	hp_max = 10,
-	hp_min = 10,
+	hp_max = 120,
+	hp_min = 120,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -488,19 +464,13 @@ mobs:register_mob("nssm:morvalar3", {
 	walk_velocity = 1.6,
 	reach = 3,
 	run_velocity = 3.2,
-	damage = 4,
+	damage = 16,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar3",
 	},
-	armor = 50,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
@@ -536,8 +506,8 @@ mobs:register_mob("nssm:morvalar3", {
 
 mobs:register_mob("nssm:morvalar2", {
 	type = "monster",
-	hp_max = 40,
-	hp_min = 40,
+	hp_max = 90,
+	hp_min = 90,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -552,14 +522,8 @@ mobs:register_mob("nssm:morvalar2", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar2",
 	},
 	armor = 50,
 	drawtype = "front",
@@ -636,8 +600,8 @@ mobs:register_mob("nssm:morvalar2", {
 
 mobs:register_mob("nssm:morvalar1", {
 	type = "monster",
-	hp_max = 40,
-	hp_min = 40,
+	hp_max = 160,
+	hp_min = 160,
 	collisionbox = {-0.4, -0.1, -0.4, 0.4, 1.8, 0.4},
 	visual = "mesh",
 	--rotate= 270,
@@ -652,16 +616,10 @@ mobs:register_mob("nssm:morvalar1", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
-	drops = {
-		{name = "nssm:life_energy",
-		chance = 1,
-		min = 1,
-		max = 1,},
+    sounds = {
+		random = "morvalar1",
 	},
-	armor = 50,
+	armor = 20,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
@@ -736,16 +694,16 @@ mobs:register_mob("nssm:morvalar0", {
 	damage = 4,
 	runaway = true,
 	jump = true,
-    --[[sounds = {
-		random = "",
-	},]]
+    sounds = {
+		random = "kamehameha",
+	},
 	drops = {
-		{name = "nssm:life_energy",
+		{name = "nssm:death_scythe",
 		chance = 1,
 		min = 1,
 		max = 1,},
 	},
-	armor = 50,
+	armor = 30,
 	drawtype = "front",
 	water_damage = 0,
 	fear_height = 4,
