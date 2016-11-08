@@ -1,4 +1,5 @@
 default
 mobs
-farming
+farming?
+3d_armor?
 fire
