@@ -26,6 +26,8 @@ mobs:register_mob("nssm:night_master", {
 	water_damage = 0,
 	lava_damage = 5,
 	light_damage = 0,
+	blood_texture="nssm_blood.png",
+	blood_amount=50,
 	on_rightclick = nil,
 	fly = true,
 	attack_type = "dogfight",

@@ -42,6 +42,10 @@ mobs:register_mob("nssm:duck", {
 	floats = 1,
 	lava_damage = 5,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=5,
+	blood_texture="nssm_blood.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

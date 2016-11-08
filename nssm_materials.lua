@@ -640,6 +640,8 @@ minetest.register_tool("nssm:felucco_knife", {
 	},
 })
 
+if minetest.get_modpath("farming") then
+
 farming.register_hoe(":farming:felucco_hoe", {
 	description = "Felucco Hoe",
 	inventory_image = "felucco_hoe.png",
@@ -653,6 +655,26 @@ farming.register_hoe(":farming:ant_hoe", {
 	max_uses = 350,
 	material = "nssm:ant_mandible"
 })
+
+minetest.register_craft({
+	output = 'nssm:ant_hoe',
+	recipe = {
+		{'nssm:ant_mandible', 'nssm:ant_mandible'},
+		{'', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+minetest.register_craft({
+	output = 'nssm:felucco_hoe',
+	recipe = {
+		{'nssm:felucco_horn', 'nssm:felucco_horn'},
+		{'', 'group:stick'},
+		{'', 'group:stick'},
+	}
+})
+
+end
 
 minetest.register_tool("nssm:ant_sword", {
 	description = "Ant Sword",
@@ -1282,6 +1304,7 @@ minetest.register_tool("nssm:death_scythe", {
 		},
 		damage_groups = {fleshy=28},
 	},
+	groups ={not_in_creative_inventory=1},
 	on_drop = function(itemstack, dropper, pos)
 	    local objects = minetest.env:get_objects_inside_radius(pos, 10)
 	    local flag = 0
@@ -1471,6 +1494,18 @@ minetest.register_craft({
 	type = "shapeless",
 	recipe = {'nssm:energy_globe'}
 })
+
+minetest.register_craft({
+	output = 'nssm:energy_globe 9',
+	type = "shapeless",
+	recipe = {'nssm:great_energy_globe'}
+})
+
+minetest.register_craft({
+	output = 'nssm:great_energy_globe 9',
+	type = "shapeless",
+	recipe = {'nssm:superior_energy_globe'}
+})
 --[[
 minetest.register_craft({
 	output = 'nssm:masticone_skull',
@@ -1599,24 +1634,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:ant_hoe',
-	recipe = {
-		{'nssm:ant_mandible', 'nssm:ant_mandible'},
-		{'', 'group:stick'},
-		{'', 'group:stick'},
-	}
-})
-
-minetest.register_craft({
-	output = 'nssm:ant_pick',
-	recipe = {
-		{'nssm:ant_mandible', 'nssm:ant_mandible', 'nssm:ant_mandible'},
-		{'', 'group:stick', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
 	output = 'nssm:sky_iron 30',
 	recipe = {
 		{'default:steelblock', 'default:steelblock', 'default:steelblock'},
@@ -1659,11 +1676,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:felucco_hoe',
+	output = 'nssm:ant_pick',
 	recipe = {
-		{'nssm:felucco_horn', 'nssm:felucco_horn'},
-		{'', 'group:stick'},
-		{'', 'group:stick'},
+		{'nssm:ant_mandible', 'nssm:ant_mandible', 'nssm:ant_mandible'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
 	}
 })
 

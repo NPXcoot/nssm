@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:daddy_long_legs", {
 	type = "monster",
-	hp_max = 29,
+	hp_max = 22,
 	hp_min = 16,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.6, 0.4},
 	visual = "mesh",
@@ -37,6 +37,11 @@ mobs:register_mob("nssm:daddy_long_legs", {
 	water_damage = 1,
 	lava_damage = 7,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood_blue.png",
+	stepheight=1.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

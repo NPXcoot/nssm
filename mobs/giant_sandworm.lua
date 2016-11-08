@@ -38,6 +38,10 @@ mobs:register_mob("nssm:giant_sandworm", {
 	water_damage = 5,
 	lava_damage = 3,
 	light_damage = 0,
+	blood_texture="nssm_blood_blue.png",
+	blood_amount=50,
+	knock_back=0,
+	jump_height=0,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

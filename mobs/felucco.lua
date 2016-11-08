@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:felucco", {
 	type = "monster",
-	hp_max = 38,
+	hp_max = 36,
 	hp_min = 27,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 1.2, 0.5},
 	visual = "mesh",
@@ -40,6 +40,11 @@ mobs:register_mob("nssm:felucco", {
 	water_damage = 2,
 	lava_damage = 5,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood.png",
+	stepheight=1.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:bloco", {
 	type = "monster",
-	hp_max = 25,
+	hp_max = 24,
 	hp_min = 14,
 	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
 	visual = "mesh",
@@ -38,6 +38,12 @@ mobs:register_mob("nssm:bloco", {
 	water_damage = 3,
 	lava_damage = 1,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=0,
+	blood_texture="stone_blood.png",
+	immune_to={{'default:sword_stone', -2},{'default:stone', -2}, {'default:cobble', -2}, {'default:axe_stone', -2}, {'default:shovel_stone', -2}, {'default:pick_stone', -2}},
+	stepheight=1.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

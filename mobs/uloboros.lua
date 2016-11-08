@@ -42,6 +42,11 @@ mobs:register_mob("nssm:uloboros", {
 	water_damage = 1,
 	lava_damage = 7,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood_blue.png",
+	stepheight=1.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

@@ -41,6 +41,11 @@ mobs:register_mob("nssm:mantis", {
 	lava_damage = 5,
 	light_damage = 0,
 	on_rightclick = nil,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood_blue.png",
+	stepheight=1.1,
 	double_melee_attack = true,
 	attack_type = "dogfight",
 	animation = {

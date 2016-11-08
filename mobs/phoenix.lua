@@ -44,6 +44,8 @@ mobs:register_mob("nssm:phoenix", {
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 0,
+	blood_texture="nssm_blood_blue.png",
+	blood_amount=50,
 	on_rightclick = nil,
 	fly = true,
 	attack_type = "shoot",

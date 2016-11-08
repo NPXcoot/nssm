@@ -39,6 +39,11 @@ mobs:register_mob("nssm:pumpking", {
 	water_damage = 2,
 	lava_damage = 5,
 	light_damage = 0,
+	blood_texture="nssm_blood.png",
+	blood_amount=50,
+	stepheight=2.1,
+	knock_back=0,
+	jump_height=12,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

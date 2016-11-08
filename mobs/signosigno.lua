@@ -31,6 +31,10 @@ mobs:register_mob("nssm:signosigno", {
 	water_damage = 1,
 	lava_damage = 2,
 	light_damage = 1,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=4,
+	blood_texture="morparticle.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

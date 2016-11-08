@@ -35,6 +35,11 @@ mobs:register_mob("nssm:morde", {
 	floats = 1,
 	lava_damage = 0,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=1,
+	blood_texture="morparticle.png",
+	stepheight=1.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

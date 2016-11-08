@@ -38,6 +38,10 @@ mobs:register_mob("nssm:sand_bloco", {
 	water_damage = 10,
 	lava_damage = 1,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="stone_blood.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

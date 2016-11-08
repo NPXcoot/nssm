@@ -657,6 +657,8 @@ function nssm_register_throwitem(name, descr, def)
 
     minetest.register_entity("nssm:"..name.."_bomb_flying",{
         textures = {name.."_bomb.png"},
+		hp_max = 20,
+		collisionbox = {-0.1,-0.1,-0.1, 0.1,0.1,0.1},
         on_step = function(self, dtime)
             local pos = self.object:getpos()
             local node = minetest.get_node(pos)

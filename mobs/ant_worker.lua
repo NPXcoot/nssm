@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:ant_worker", {
 	type = "animal",
-	hp_max = 28,
+	hp_max = 24,
 	hp_min = 18,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.5, 0.4},
 	visual = "mesh",
@@ -43,6 +43,10 @@ mobs:register_mob("nssm:ant_worker", {
 	lava_damage = 7,
 	light_damage = 0,
 	on_rightclick = nil,
+	group_attack=true,
+	knock_back=4,
+	attack_animals=false,
+	blood_texture="nssm_blood_blue.png",
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 20,

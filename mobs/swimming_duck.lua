@@ -42,6 +42,10 @@ mobs:register_mob("nssm:swimming_duck", {
 	water_damage = 0,
 	lava_damage = 10,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=4,
+	blood_texture="nssm_blood.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

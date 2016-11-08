@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:ant_soldier", {
 	type = "monster",
-	hp_max = 36,
+	hp_max = 32,
 	hp_min = 24,
 	collisionbox = {-0.49, 0.00, -0.49, 0.49, 0.9, 0.49},
 	visual = "mesh",
@@ -43,6 +43,11 @@ mobs:register_mob("nssm:ant_soldier", {
 	lava_damage = 7,
 	light_damage = 0,
 	on_rightclick = nil,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood_blue.png",
+	stepheight=1.1,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 20,

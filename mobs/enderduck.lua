@@ -43,6 +43,12 @@ mobs:register_mob("nssm:enderduck", {
 	floats=1,
 	lava_damage = 5,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=4,
+	blood_texture="nssm_blood.png",
+	jump_height=12,
+	stepheight=2.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

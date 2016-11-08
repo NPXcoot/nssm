@@ -37,6 +37,10 @@ mobs:register_mob("nssm:dolidrosaurus", {
 	water_damage = 0,
 	lava_damage = 10,
 	light_damage = 0,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=3,
+	blood_texture="nssm_blood.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
