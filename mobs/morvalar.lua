@@ -798,7 +798,7 @@ mobs:register_mob("nssm:morvalar0", {
 		local pos = self.object:getpos()
 		self.object:remove()
 		minetest.add_particlespawner({
-			amount = 1000,
+			amount = 500,
 			time = 2,
 			minpos = {x=pos.x-2, y=pos.y-1, z=pos.z-2},
 			maxpos = {x=pos.x+2, y=pos.y+4, z=pos.z+2},
@@ -814,6 +814,7 @@ mobs:register_mob("nssm:morvalar0", {
 			vertical = false,
 			texture = "morparticle.png",
 		})
+		minetest.set_node(posmorvalarblock, {name="nssb:dis_morvalar_block"})
 		--minetest.add_entity(pos, "nssm:morvalar3")
 	end,
 })
