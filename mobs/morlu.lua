@@ -95,104 +95,126 @@ mobs:register_mob("nssm:morlu", {
 			local m = 1
 
 			if self.attack:is_player() then
-				local pname, player_inv, armor_inv, ppos = armor:get_valid_player(self.attack, "[set_player_armor]")
-				local pname = self.attack:get_player_name()
-				local player_inv = minetest.get_inventory({type='player', name = pname})
-				if player_inv:is_empty('armor') then
-					-- punch player if he doesn't own an armor
-					self.attack:punch(self.object, 1.0, {
-						full_punch_interval = 1.0,
-						damage_groups = {fleshy = self.damage}
-					}, nil)
-				else
-					local armor_elements = {}
-					local armor_num = 0
-					local steal_pos
+				if minetest.get_modpath("3d_armor") then
+					local pname, player_inv, armor_inv, ppos = armor:get_valid_player(self.attack, "[set_player_armor]")
+					local pname = self.attack:get_player_name()
+					local player_inv = minetest.get_inventory({type='player', name = pname})
+					if player_inv:is_empty('armor') then
+						-- punch player if he doesn't own an armor
+						self.attack:punch(self.object, 1.0, {
+							full_punch_interval = 1.0,
+							damage_groups = {fleshy = self.damage}
+						}, nil)
+					else
+						local armor_elements = {}
+						local armor_num = 0
+						local steal_pos
 
-					for i=1,6 do
-						local armor_stack = player_inv:get_stack("armor", i)
-						local armor_item = armor_stack:get_name()
-						if armor_stack:get_count() > 0 then
-							armor_elements[armor_num]={name=armor_item, pos=i}
-							armor_num = armor_num + 1
+						for i=1,6 do
+							local armor_stack = player_inv:get_stack("armor", i)
+							local armor_item = armor_stack:get_name()
+							if armor_stack:get_count() > 0 then
+								armor_elements[armor_num]={name=armor_item, pos=i}
+								armor_num = armor_num + 1
+							end
+						end
+						if armor_num > 0 then
+							steal_pos = math.random(1,armor_num)
+							steal_pos = steal_pos-1
+							--[[for i=0,armor_num-1 do
+								minetest.chat_send_all("Posizione: "..armor_elements[i].pos.." Oggetto: "..armor_elements[i].name)
+							end
+							]]
+
+							--minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
+							local cpos = string.find(armor_elements[steal_pos].name, ":")
+							--minetest.chat_send_all("Posizione dei due punti: "..cpos)
+
+							local mod_name = string.sub(armor_elements[steal_pos].name, 0, cpos-1)
+							local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
+							--minetest.chat_send_all("Armor Mod name: "..mod_name)
+
+							if mod_name == "3d_armor" then
+								nname = "3d_armor_inv_"..nname..".png"
+							elseif mod_name == "nssm" then
+								nname = "inv_"..nname..".png"
+							else
+								nname = "3d_armor_inv_chestplate_diamond.png"
+							end
+							--minetest.chat_send_all("Nome della texture: "..nname)
+
+							minetest.add_particlespawner(
+								1, --amount
+								1, --time
+								{x=p.x, y=p.y+1, z=p.z}, --minpos
+								{x=p.x, y=p.y+1, z=p.z}, --maxpos
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+								{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+								{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --minacc
+								{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --maxacc
+								0.5, --minexptime
+								0.5, --maxexptime
+								10, --minsize
+								10, --maxsize
+								false, --collisiondetection
+								nname --texture
+							)
+
+							minetest.after(1, function (self)
+
+	                            local armor_stack = player_inv:get_stack("armor", armor_elements[steal_pos].pos)
+	                            armor_stack:take_item()
+	                            player_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
+
+	                            armor_stack = armor_inv:get_stack("armor", armor_elements[steal_pos].pos)
+	                            armor_stack:take_item()
+	                            armor_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
+
+	                            armor:set_player_armor(self.attack, self.attack)
+	                            --armor:update_armor(self.attack)
+	                            armor:update_inventory(self.attack)
+	                            --armor:update_player_visuals(self.attack)
+
+								--Update personal inventory of armors:
+								if (self.invnum ~= nil) and (self.invnum <= 5) then
+									--minetest.chat_send_all("Invnum: "..self.invnum)
+									--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
+									self.invnum = self.invnum + 1
+									self.inventory[self.invnum].name = armor_elements[steal_pos].name
+								end
+
+								set_animation(self, "run")
+								self.flag = 1
+								self.morlu_timer = os.time()
+								self.curr_attack = self.attack
+								self.state = ""
+								local pyaw = self.curr_attack: get_look_yaw()
+								self.dir = pyaw
+								self.object:setyaw(pyaw)
+								set_velocity(self, 4)
+
+							end,self)
 						end
 					end
-					if armor_num > 0 then
-						steal_pos = math.random(1,armor_num)
-						steal_pos = steal_pos-1
-						--[[for i=0,armor_num-1 do
-							minetest.chat_send_all("Posizione: "..armor_elements[i].pos.." Oggetto: "..armor_elements[i].name)
+				else
+					local s = self.object:getpos()
+					local p = self.attack:getpos()
+
+					set_animation(self, "punch")
+
+					if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
+						-- play attack sound
+						if self.sounds.attack then
+							minetest.sound_play(self.sounds.attack, {
+								object = self.object,
+								max_hear_distance = self.sounds.distance
+							})
 						end
-						]]
-
-						--minetest.chat_send_all("Selezionato: pos: "..armor_elements[steal_pos].pos.." nome: "..armor_elements[steal_pos].name)
-						local cpos = string.find(armor_elements[steal_pos].name, ":")
-						--minetest.chat_send_all("Posizione dei due punti: "..cpos)
-
-						local mod_name = string.sub(armor_elements[steal_pos].name, 0, cpos-1)
-						local nname = string.sub(armor_elements[steal_pos].name, cpos+1)
-						--minetest.chat_send_all("Armor Mod name: "..mod_name)
-
-						if mod_name == "3d_armor" then
-							nname = "3d_armor_inv_"..nname..".png"
-						elseif mod_name == "nssm" then
-							nname = "inv_"..nname..".png"
-						else
-							nname = "3d_armor_inv_chestplate_diamond.png"
-						end
-						--minetest.chat_send_all("Nome della texture: "..nname)
-
-						minetest.add_particlespawner(
-							1, --amount
-							1, --time
-							{x=p.x, y=p.y+1, z=p.z}, --minpos
-							{x=p.x, y=p.y+1, z=p.z}, --maxpos
-							{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
-							{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
-							{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --minacc
-							{x=s.x-p.x, y=s.y-p.y-1, z=s.z-p.z}, --maxacc
-							0.5, --minexptime
-							0.5, --maxexptime
-							10, --minsize
-							10, --maxsize
-							false, --collisiondetection
-							nname --texture
-						)
-
-						minetest.after(1, function (self)
-
-                            local armor_stack = player_inv:get_stack("armor", armor_elements[steal_pos].pos)
-                            armor_stack:take_item()
-                            player_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
-
-                            armor_stack = armor_inv:get_stack("armor", armor_elements[steal_pos].pos)
-                            armor_stack:take_item()
-                            armor_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
-
-                            armor:set_player_armor(self.attack, self.attack)
-                            --armor:update_armor(self.attack)
-                            armor:update_inventory(self.attack)
-                            --armor:update_player_visuals(self.attack)
-
-							--Update personal inventory of armors:
-							if (self.invnum ~= nil) and (self.invnum <= 5) then
-								--minetest.chat_send_all("Invnum: "..self.invnum)
-								--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
-								self.invnum = self.invnum + 1
-								self.inventory[self.invnum].name = armor_elements[steal_pos].name
-							end
-
-							set_animation(self, "run")
-							self.flag = 1
-							self.morlu_timer = os.time()
-							self.curr_attack = self.attack
-							self.state = ""
-							local pyaw = self.curr_attack: get_look_yaw()
-							self.dir = pyaw
-							self.object:setyaw(pyaw)
-							set_velocity(self, 4)
-
-						end,self)
+						-- punch player
+						self.attack:punch(self.object, 1.0,  {
+							full_punch_interval=1.0,
+							damage_groups = {fleshy=self.damage}
+						}, nil)
 					end
 				end
 			end
