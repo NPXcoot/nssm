@@ -54,7 +54,7 @@ mobs:register_mob("nssm:pumpking", {
 		speed_normal = 15,		speed_run = 15,
 	},
 	on_die=function(self,pos)
-		explosion(pos, 3, 0, 1, self.sounds.explode)
+		explosion(pos, 3, 0)
 		self.object:remove()
 	end,
 	custom_attack = function(self)
