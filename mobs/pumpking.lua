@@ -54,12 +54,13 @@ mobs:register_mob("nssm:pumpking", {
 		speed_normal = 15,		speed_run = 15,
 	},
 	on_die=function(self,pos)
-		explosion(pos, 3, 0)
+		mobs:explosion(pos, 3, 1)
 		self.object:remove()
 	end,
 	custom_attack = function(self)
-		if self.timer >3 then
-			self.timer = 0
+		self.pumpking_timer = (self.pumpking_timer or os.time())
+		if (os.time() - self.pumpking_timer) >3 then
+			self.pumpking_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 			p.y = p.y + 1.5
