@@ -44,7 +44,7 @@ mobs:register_mob("nssm:ant_soldier", {
 	light_damage = 0,
 	on_rightclick = nil,
 	group_attack=true,
-	attack_animals=true,
+	attack_animals=false,
 	knock_back=2,
 	blood_texture="nssm_blood_blue.png",
 	stepheight=1.1,

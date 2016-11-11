@@ -196,7 +196,7 @@ mobs:register_arrow("nssm:thickwebball", {
 	-- direct hit
 	hit_player = function(self, player)
 		local p = player:getpos()
-		explosion_web(p)
+		explosion_thickweb(p)
 	end,
 
 	hit_mob = function(self, player)
@@ -207,11 +207,11 @@ mobs:register_arrow("nssm:thickwebball", {
 	end,
 
 	hit_node = function(self, pos, node)
-		explosion_web(pos)
+		explosion_thickweb(pos)
 	end
 })
 
-function explosion_web(pos)
+function explosion_thickweb(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
