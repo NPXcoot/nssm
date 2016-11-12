@@ -360,7 +360,7 @@ nssm_register_weapon("kamehameha", {
         default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25)
     end,
     hit_node = function(self, pos, node)
-        explosion(pos, 6, 1)
+        tnt.boom(pos, {damage_radius=8,radius=6,ignore_protection=false})
     end,
     material = "default:diamondblock",
     description = "Kamehameha from DragonBall",
@@ -385,7 +385,7 @@ nssm_register_weapon("spirit_ball", {
         search_on_step(self, dtime, 5, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        explosion(pos, 4, 0)
+        tnt.boom(pos, {damage_radius=4,radius=4,ignore_protection=false})
     end,
 
     material = "default:goldblock",
@@ -399,7 +399,7 @@ nssm_register_weapon("hellzone_grenade", {
         search_on_step2(self, dtime, 30, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        explosion(pos, 4, 0)
+        tnt.boom(pos, {damage_radius=4,radius=4,ignore_protection=false})
     end,
 
     on_drop = function(itemstack, user, pointed_thing)
@@ -926,7 +926,7 @@ nssm_register_throwitem("kaboom", "Explosive Bomb", {
     hit_node = function(self,pos)
                     local pos1 = {x = pos.x, y=pos.y, z=pos.z}
                     if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
-                       explosion(pos1, 2, 1)
+                        tnt.boom(pos1, {damage_radius=3,radius=2,ignore_protection=false})
                     end
     end,
 })
@@ -969,7 +969,7 @@ nssm_register_throwitem("boom", "Boom Bomb", {
     hit_node = function(self,pos)
                     local pos1 = {x = pos.x, y=pos.y, z=pos.z}
                     if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
-                       explosion(pos1, 5, 0)
+                        tnt.boom(pos1, {damage_radius=4,radius=3,ignore_protection=false})
                     end
     end,
 })
