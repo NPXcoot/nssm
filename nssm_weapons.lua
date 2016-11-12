@@ -227,13 +227,15 @@ local function default_on_step(
     if self.timer > 0.1 then
         self.timer = 0
         for _,obj in ipairs(objects) do
-            if (obj:get_entity_name() ~= self.object:get_luaentity().name) and (obj:get_luaentity().name ~= "__builtin:item") then
-                if obj:is_player() then
-                    obj:set_hp(obj:get_hp()-damage)
-                elseif obj:get_luaentity().health then
-                    obj:get_luaentity().health = obj:get_luaentity().health - damage
-                    --minetest.chat_send_all("Danneggiato: "..obj:get_entity_name().." Vita: "..obj:get_luaentity().health)
-                    check_for_death(obj:get_luaentity())
+            if obj:get_luaentity() then
+                if (obj:get_entity_name() ~= self.object:get_luaentity().name) and (obj:get_luaentity().name ~= "__builtin:item") then
+                    if obj:is_player() then
+                        obj:set_hp(obj:get_hp()-damage)
+                    elseif obj:get_luaentity().health then
+                        obj:get_luaentity().health = obj:get_luaentity().health - damage
+                        --minetest.chat_send_all("Danneggiato: "..obj:get_entity_name().." Vita: "..obj:get_luaentity().health)
+                        check_for_death(obj:get_luaentity())
+                    end
                 end
             end
         end
