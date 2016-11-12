@@ -368,7 +368,7 @@ minetest.register_node("nssm:pumpbomb", {
 	groups = {not_in_creative_inventory =1},
 	drop = "",
 	on_timer = function(pos, elapsed)
-		explosion(pos, 3, 1)
+		tnt.boom(pos, {damage_radius=4,radius=3,ignore_protection=false})
 		minetest.env:set_node(pos, {name="air"})
 	end,
 })
@@ -937,7 +937,7 @@ minetest.register_tool("nssm:gratuitousness_battleaxe", {
 			local items = player_inv:get_stack('main', found)
 			items:take_item()
 			player_inv:set_stack('main', found, items)
-			explosion(pos, 5, 1)
+			tnt.boom(pos, {damage_radius=5,radius=4,ignore_protection=false})
 		end
 	end,
 })

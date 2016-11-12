@@ -40,7 +40,7 @@ mobs:register_mob("nssm:pumpking", {
 	lava_damage = 5,
 	light_damage = 0,
 	blood_texture="nssm_blood.png",
-	blood_amount=50,
+	blood_amount=25,
 	stepheight=2.1,
 	knock_back=0,
 	jump_height=12,
@@ -54,12 +54,15 @@ mobs:register_mob("nssm:pumpking", {
 		speed_normal = 15,		speed_run = 15,
 	},
 	on_die=function(self,pos)
-		mobs:explosion(pos, 3, 1)
 		self.object:remove()
+		minetest.after(0.2, function(pos)
+			tnt.boom(pos, {damage_radius=5,radius=4,ignore_protection=false})
+		end, pos)
 	end,
 	custom_attack = function(self)
 		self.pumpking_timer = (self.pumpking_timer or os.time())
 		if (os.time() - self.pumpking_timer) >3 then
+			set_animation(self, "punch")
 			self.pumpking_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
@@ -74,8 +77,11 @@ mobs:register_mob("nssm:pumpking", {
 					})
 				end
 				local pos1 = {x=s.x+math.random(-1,1), y=s.y-1.5, z=s.z+math.random(-1,1)}
-				minetest.set_node(pos1, {name="nssm:pumpbomb"})
-				minetest.get_node_timer(pos1):start(2)
+				minetest.after(1, function(pos1)
+					minetest.set_node(pos1, {name="nssm:pumpbomb"})
+					minetest.get_node_timer(pos1):start(2)
+				end,
+				pos1)
 			end
 		end
 	end
