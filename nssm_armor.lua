@@ -3,22 +3,22 @@ if minetest.get_modpath("3d_armor") then
 
 --Armors
 		local stats = {
-			wolf = {name="Werewolf", armor=1.7, heal=0, use=1100},
-			whitewolf = {name="White Werewolf", armor=1.7, heal=0, use=1100},
-			bloco = {name="Bloco", armor=2.5, heal=0, use=800},
-			croco = {name="Crocodile", armor=1.6, heal=0, use=600},
-			ant = {name="Ant", armor=2, heal=0, use=500},
-			ice = {name="Ice Teeth", armor=2.2, heal=0, use=600},
-			felucco = {name="Felucco", armor=1.7, heal=0, use=1000},
-			manticore = {name="Manticore", armor=2.2, heal=0, use=900},
-			duck = {name="Duck", armor=1, heal=0, use=2000},
-			black_duck = {name="Black Duck", armor=1, heal=0, use=1800},
-			mor = {name="Morlu", armor=4, heal=0, use=100},
-			sky = {name="Sky", armor=3, heal=0, use=500},
-			sandworm = {name="Sandworm", armor=2.4, heal=0, use=1000},
-			sandbloco = {name="Sand Bloco", armor=2.5, heal=0, use=800},
-			web = {name="Cobweb String", armor=1.3, heal=0, use=1500},
-			denseweb = {name="Dense Cobweb String", armor=2, heal=0, use=600},
+			wolf = {name="Werewolf", armor=2.8, heal=0, use=800},
+			whitewolf = {name="White Werewolf", armor=2.8, heal=0, use=800},
+			bloco = {name="Bloco", armor=3.2, heal=0, use=500},
+			croco = {name="Crocodile", armor=3, heal=0, use=450},
+			ant = {name="Ant", armor=3, heal=0, use=400},
+			ice = {name="Ice Teeth", armor=3.2, heal=0, use=410},
+			felucco = {name="Felucco", armor=2.8, heal=0, use=800},
+			manticore = {name="Manticore", armor=3.4, heal=0, use=440},
+			duck = {name="Duck", armor=1.5, heal=0, use=1000},
+			black_duck = {name="Black Duck", armor=1.5, heal=0, use=900},
+			mor = {name="Morlu", armor=5.3, heal=0, use=30},
+			sky = {name="Sky", armor=4.2, heal=0, use=100},
+			sandworm = {name="Sandworm", armor=3.4, heal=0, use=400},
+			sandbloco = {name="Sand Bloco", armor=3.2, heal=0, use=500},
+			web = {name="Cobweb String", armor=2.4, heal=0, use=900},
+			denseweb = {name="Dense Cobweb String", armor=3.5, heal=0, use=400},
 		}
 		local materials = {
 			wolf="nssm:wolf_fur",
@@ -103,9 +103,9 @@ if minetest.get_modpath("3d_armor") then
 		if minetest.get_modpath("shields") then
 		local stats = {
 			crab = {name="Crab", armor=4, heal=0, use=500},
-			ice ={name="Ice Teeth", armor=3, heal=0, use=600},
+			ice ={name="Ice Teeth", armor=3.5, heal=0, use=600},
 			mor ={name="Morlu", armor=5, use=100},
-			masticone ={name="Masticone", armor=4, use=300},
+			masticone ={name="Masticone", armor=4.5, use=300},
 			mantis ={name="Mantis", armor=3, use=500},
 		}
 		local materials = {
@@ -141,7 +141,7 @@ if minetest.get_modpath("3d_armor") then
 
 
 local stats = {
-			pumpking = {name="Pumpking Head", armor=3, heal=0, use=100},
+			pumpking = {name="Pumpking Head", armor=4, heal=0, use=100},
 			masticone ={name="Masticone Head", armor=4, heal=0, use=100},
 			crown ={name="Dukking Crown", armor=2, heal=0, use=50},
 			masticone_crowned ={name="Masticone Crowned Head", armor=6, heal=0, use=20},

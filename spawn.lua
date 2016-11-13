@@ -20,7 +20,8 @@ if mymapgenis == 6 then
     mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 20, 250, 1, -31000, 31000)
     mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 120, 3000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 900, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 8000, 1, 1, 31000)
+    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 20000, 1, 1, 31000)
+	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 4000, 1, 1, 31000)
     mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 850, 1, -31000, 31000)
     mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 31000)
 
@@ -32,7 +33,7 @@ if mymapgenis == 6 then
     -- ICE
     mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 15000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 9000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 9000, 1, 20, 31000)
     mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000, 1, -31000, 31000)
 
     -- FOREST
@@ -47,31 +48,31 @@ if mymapgenis == 6 then
 
 else
 
-
     -- SPIDERS
     mobs:spawn_specific("nssm:black_widow", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 20, 30, 2200, 2, -31000, 31000)
     mobs:spawn_specific("nssm:daddy_long_legs", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 30, 10, 2200, 2, -31000, 31000)
     mobs:spawn_specific("nssm:tarantula", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 14, 120, 5000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 20, 30, 2200, 1, -31000, 31000)
 
-
     -- DUCKS
     mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 40, 1000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 300, 10000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 60, 1200, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 400, 80000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 3200, 1, -31000, 31000)
     mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 8000, 1, 1, 31000)
-    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 80, 1400, 1, -31000, 31000)
+	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 20000, 1, 1, 31000)
+    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 3400, 1, -31000, 31000)
     mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 31000)
+	mobs:spawn_specific("nssm:swimming_duck", {"default:river_water_source"}, {"default:sand","default:river_water_source"}, 0, 20, 60, 3000, 1, -31000, 31000)
 
     -- MOUNTAINS
-    mobs:spawn_specific("nssm:echidna", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 20, 120, 50000, 1, 60, 31000)
-    mobs:spawn_specific("nssm:manticore", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 10, 20, 40, 12000, 1, 50, 31000)
-    mobs:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 10, 40, 12000, 1, 50, 31000)
+    mobs:spawn_specific("nssm:echidna", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 20, 120, 50000, 1, 50, 31000)
+    mobs:spawn_specific("nssm:manticore", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 10, 20, 40, 12000, 1, 35, 31000)
+    mobs:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 10, 40, 12000, 1, 35, 31000)
 
     -- ICE
     mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 180, 80000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 22000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 35, 22000, 1, 50, 31000)
     mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000, 1, -31000, 31000)
 
     -- FOREST
@@ -85,21 +86,21 @@ else
     mobs:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 8000, 1, -31000, 31000)
 
     -- SAVANNA
-mobs:spawn_specific("nssm:felucco", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 80, 20000, 1, -200, 31000)
+	mobs:spawn_specific("nssm:felucco", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 80, 20000, 1, -200, 31000)
 
 end
 
 -- NSSB SPECIAL
 if minetest.get_modpath("nssb") then
-mobs:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
-mobs:spawn_specific("nssm:morbat1", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
-mobs:spawn_specific("nssm:morbat2", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
-mobs:spawn_specific("nssm:morbat3", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
-mobs:spawn_specific("nssm:morvy", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 120, 1200, 1, -31000, -93)
-mobs:spawn_specific("nssm:morlu", {"nssb:morentir"}, {"nssb:mornen"}, 0, 20, 80, 700, 1, -31000, -93)
-mobs:spawn_specific("nssm:morde", {"nssb:morenrir"}, {"nssb:mornar"}, 0, 20, 50, 500, 1, -31000, -93)
-mobs:spawn_specific("nssm:mordain", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 90, 900, 1, -31000, .93)
-mobs:spawn_specific("nssm:morgut", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 50, 500, 1, -31000, -93)
+	mobs:spawn_specific("nssm:xgaloctopus", {"default:water_source"}, {"nssb:marine_brick"}, 0, 20, 20, 800, 1, -31000, 0)
+	mobs:spawn_specific("nssm:morbat1", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+	mobs:spawn_specific("nssm:morbat2", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+	mobs:spawn_specific("nssm:morbat3", {"air"}, {"nssb:morelentir"}, 0, 20, 100, 1000, 1, -31000, 0)
+	mobs:spawn_specific("nssm:morvy", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 120, 1200, 1, -31000, -93)
+	mobs:spawn_specific("nssm:morlu", {"nssb:morentir"}, {"nssb:mornen"}, 0, 20, 80, 700, 1, -31000, -93)
+	mobs:spawn_specific("nssm:morde", {"nssb:morenrir"}, {"nssb:mornar"}, 0, 20, 50, 500, 1, -31000, -93)
+	mobs:spawn_specific("nssm:mordain", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 90, 900, 1, -31000, .93)
+	mobs:spawn_specific("nssm:morgut", {"nssb:morentir"}, {"nssb:morentir"}, 0, 20, 50, 500, 1, -31000, -93)
 end
 
 -- CAVES
@@ -112,6 +113,7 @@ mobs:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5,
 -- SEA
 mobs:spawn_specific("nssm:crab", {"default:sand"}, {"default:water_source"}, 0, 20, 60, 4000, 1, -31000, 31000)
 mobs:spawn_specific("nssm:crocodile", {"default:sand","default:water_source"}, {"default:water_source"}, 0, 20, 100, 35000, 1, -31000, 31000)
+mobs:spawn_specific("nssm:crocodile", {"default:sand","default:river_water_source"}, {"default:river_water_source"}, 0, 20, 60, 12000, 1, -31000, 31000)
 mobs:spawn_specific("nssm:dolidrosaurus", {"default:water_source"}, {"default:water_source"}, 0, 20, 100, 35000, 1, -31000, -1)
 mobs:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_source"}, 0, 20, 400, 500000, 1, -31000, 0)
 mobs:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 80, 38000, 1, -31000, 0)

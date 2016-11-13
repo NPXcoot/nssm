@@ -753,7 +753,7 @@ minetest.register_tool("nssm:duck_beak_pick",{
 		full_punch_interval = 0.6,
 		max_drop_level=3,
 		groupcaps={
-			cracky = {times={[1]=1.0, [2]=0.8, [3]=0.20}, uses=5, maxlevel=3},
+			cracky = {times={[1]=1.0, [2]=0.8, [3]=0.20}, uses=3, maxlevel=3},
 		},
 		damage_groups = {fleshy=5},
 		},
@@ -1720,78 +1720,79 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = 'nssm:axe_of_pride',
-	recipe = {
-		{'nssm:proud_moranga', 'nssm:proud_moranga', 'nssm:proud_moranga'},
-		{'nssm:proud_moranga', 'nssb:moranga_ingot', ''},
-		{'', 'nssb:moranga_ingot', ''},
-	}
-})
+if minetest.get_modpath("nssb") then
+	minetest.register_craft({
+		output = 'nssm:axe_of_pride',
+		recipe = {
+			{'nssm:proud_moranga', 'nssm:proud_moranga', 'nssm:proud_moranga'},
+			{'nssm:proud_moranga', 'nssb:moranga_ingot', ''},
+			{'', 'nssb:moranga_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'nssm:gratuitnousness_battleaxe',
-	recipe = {
-		{'nssm:greedy_moranga', 'nssm:greedy_moranga', 'nssm:greedy_moranga'},
-		{'nssm:greedy_moranga', 'nssb:moranga_ingot', 'nssm:greedy_moranga'},
-		{'', 'nssb:moranga_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:gratuitnousness_battleaxe',
+		recipe = {
+			{'nssm:greedy_moranga', 'nssm:greedy_moranga', 'nssm:greedy_moranga'},
+			{'nssm:greedy_moranga', 'nssb:moranga_ingot', 'nssm:greedy_moranga'},
+			{'', 'nssb:moranga_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'nssm:sword_of_envy',
-	recipe = {
-		{'nssm:envious_moranga'},
-		{'nssm:envious_moranga'},
-		{'nssb:moranga_ingot'},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:sword_of_envy',
+		recipe = {
+			{'nssm:envious_moranga'},
+			{'nssm:envious_moranga'},
+			{'nssb:moranga_ingot'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'nssm:sword_of_eagerness',
-	recipe = {
-		{'nssm:slothful_moranga'},
-		{'nssm:slothful_moranga'},
-		{'nssb:moranga_ingot'},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:sword_of_eagerness',
+		recipe = {
+			{'nssm:slothful_moranga'},
+			{'nssm:slothful_moranga'},
+			{'nssb:moranga_ingot'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'nssm:falchion_of_eagerness',
-	recipe = {
-		{'nssm:slothful_moranga','nssm:slothful_moranga'},
-		{'nssm:slothful_moranga', ''},
-		{'nssb:moranga_ingot',''},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:falchion_of_eagerness',
+		recipe = {
+			{'nssm:slothful_moranga','nssm:slothful_moranga'},
+			{'nssm:slothful_moranga', ''},
+			{'nssb:moranga_ingot',''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'nssm:sword_of_gluttony',
-	recipe = {
-		{'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga'},
-		{'', 'nssm:gluttonous_moranga', ''},
-		{'', 'nssb:moranga_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:sword_of_gluttony',
+		recipe = {
+			{'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga', 'nssm:gluttonous_moranga'},
+			{'', 'nssm:gluttonous_moranga', ''},
+			{'', 'nssb:moranga_ingot', ''},
+		}
+	})
 
-function nssm_register_moranga (viz)
-minetest.register_craft({
-	output = 'nssm:'.. viz ..'_moranga',
-	recipe = {
-		{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
-		{'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot'},
-		{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
-	}
-})
+	function nssm_register_moranga (viz)
+	minetest.register_craft({
+		output = 'nssm:'.. viz ..'_moranga',
+		recipe = {
+			{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
+			{'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot'},
+			{'nssm:'.. viz ..'_soul_fragment', 'nssb:moranga_ingot', 'nssm:'.. viz ..'_soul_fragment'},
+		}
+	})
+	end
+	nssm_register_moranga ("lustful")
+	nssm_register_moranga ("greedy")
+	nssm_register_moranga ("slothful")
+	nssm_register_moranga ("wrathful")
+	nssm_register_moranga ("gluttonous")
+	nssm_register_moranga ("envious")
+	nssm_register_moranga ("proud")
 end
-nssm_register_moranga ("lustful")
-nssm_register_moranga ("greedy")
-nssm_register_moranga ("slothful")
-nssm_register_moranga ("wrathful")
-nssm_register_moranga ("gluttonous")
-nssm_register_moranga ("envious")
-nssm_register_moranga ("proud")
-
 --Eggs
 
 function nssm_register_egg (name, descr)

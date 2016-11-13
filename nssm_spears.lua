@@ -225,7 +225,7 @@ spears_register_spear('felucco_horn', 'Felucco Horn', 7, 9, 'nssm:felucco_horn')
 					if obj:get_luaentity() ~= nil then
 						if obj:get_luaentity().name ~= "nssm:spear_" .. kind .. "_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 							local speed = vector.length(self.object:getvelocity())
-							minetest.chat_send_all(speed)
+							--minetest.chat_send_all(speed)
 							local damage = (speed + eq)^1.12-20
 							obj:punch(self.object, 1.0, {
 								full_punch_interval=1.0,

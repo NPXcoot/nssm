@@ -724,34 +724,35 @@ minetest.register_craft({
 		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
 	}
 })
+if minetest.get_modpath("nssb") then
+	nssm_register_throwitem("mantis", "Mantis Clay Bomb", {
+		hit_node = function(self,pos)
+			for dx = -1,1 do
+				for dy = 1,3 do
+					for dz = -1,1 do
+						local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+						local pos2 = {x = pos.x, y=pos.y+1, z=pos.z}
+						local pos3 = {x = pos.x, y=pos.y+2, z=pos.z}
+						if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+							minetest.set_node(pos1, {name="nssb:hardened_mantis_clay"})
+							minetest.set_node(pos2, {name="air"})
+							minetest.set_node(pos3, {name="air"})
+						end
+					end
+				end
+			end
+		end,
+	})
 
-nssm_register_throwitem("mantis", "Mantis Clay Bomb", {
-    hit_node = function(self,pos)
-        for dx = -1,1 do
-            for dy = 1,3 do
-                for dz = -1,1 do
-                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local pos2 = {x = pos.x, y=pos.y+1, z=pos.z}
-					local pos3 = {x = pos.x, y=pos.y+2, z=pos.z}
-                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
-                        minetest.set_node(pos1, {name="nssb:hardened_mantis_clay"})
-						minetest.set_node(pos2, {name="air"})
-						minetest.set_node(pos3, {name="air"})
-                    end
-                end
-            end
-        end
-    end,
-})
-
-minetest.register_craft({
-	output = 'nssm:mantis_bomb 2',
-	recipe = {
-		{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
-		{'nssm:black_powder', 'nssb:hardened_mantis_clay', 'nssm:black_powder'},
-		{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:mantis_bomb 2',
+		recipe = {
+			{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
+			{'nssm:black_powder', 'nssb:hardened_mantis_clay', 'nssm:black_powder'},
+			{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
+		}
+	})
+end
 
 nssm_register_throwitem("lava", "Lava Bomb", {
     hit_node = function(self,pos)
@@ -825,29 +826,31 @@ minetest.register_craft({
 	}
 })
 
-nssm_register_throwitem("mornar", "Mornar Bomb", {
-    hit_node = function(self,pos)
-        for dx = -1,1 do
-            for dy = 1,1 do
-                for dz = -1,1 do
-                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
-                        minetest.set_node(pos1, {name="nssb:mornar"})
-                    end
-                end
-            end
-        end
-    end,
-})
+if minetest.get_modpath("nssb") then
+	nssm_register_throwitem("mornar", "Mornar Bomb", {
+		hit_node = function(self,pos)
+			for dx = -1,1 do
+				for dy = 1,1 do
+					for dz = -1,1 do
+						local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+						if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+							minetest.set_node(pos1, {name="nssb:mornar"})
+						end
+					end
+				end
+			end
+		end,
+	})
 
-minetest.register_craft({
-	output = 'nssm:mornar_bomb',
-	recipe = {
-		{'nssm:wrathful_soul_fragment', 'nssm:black_powder', 'nssm:wrathful_soul_fragment'},
-		{'nssm:black_powder', 'nssm:wrathful_soul_fragment', 'nssm:black_powder'},
-		{'nssm:wrathful_soul_fragment', 'nssm:black_powder', 'nssm:wrathful_soul_fragment'},
-	}
-})
+	minetest.register_craft({
+		output = 'nssm:mornar_bomb',
+		recipe = {
+			{'nssm:wrathful_soul_fragment', 'nssm:black_powder', 'nssm:wrathful_soul_fragment'},
+			{'nssm:black_powder', 'nssm:wrathful_soul_fragment', 'nssm:black_powder'},
+			{'nssm:wrathful_soul_fragment', 'nssm:black_powder', 'nssm:wrathful_soul_fragment'},
+		}
+	})
+end
 
 nssm_register_throwitem("hole", "Hole Bomb", {
     hit_node = function(self,pos)
@@ -1114,38 +1117,40 @@ minetest.register_craft({
 	}
 })
 
-nssm_register_throwitem("cage", "Cage Bomb", {
-    hit_node = function(self,pos)
-        for dx = -2,2 do
-            for dy = 0,3 do
-                for dz = -2,2 do
-                    local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-                    if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
-                        minetest.set_node(pos1, {name="nssb:morentir"})
-						 for dx = -1,1 do
-							for dy = 1,2 do
-								for dz = -1,1 do
-									local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-									minetest.set_node(pos1, {name="air"})
+if minetest.get_modpath("nssb") then
+	nssm_register_throwitem("cage", "Cage Bomb", {
+		hit_node = function(self,pos)
+			for dx = -2,2 do
+				for dy = 0,3 do
+					for dz = -2,2 do
+						local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+						if not minetest.is_protected(pos1, "") or not minetest.get_item_group(minetest.get_node(pos1).name, "unbreakable") == 1 then
+							minetest.set_node(pos1, {name="nssb:morentir"})
+							 for dx = -1,1 do
+								for dy = 1,2 do
+									for dz = -1,1 do
+										local pos1 = {x = pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+										minetest.set_node(pos1, {name="air"})
+									end
 								end
 							end
 						end
-                    end
-                end
-            end
-        end
-    end,
-})
+					end
+				end
+			end
+		end,
+	})
 
-minetest.register_craft({
-	output = 'nssm:cage_bomb 3',
-	recipe = {
-		{'nssm:lustful_soul_fragment', 'nssm:black_powder', 'nssm:lustful_soul_fragment'},
-		{'nssm:black_powder', 'nssm:lustful_soul_fragment', 'nssm:black_powder'},
-		{'nssm:lustful_soul_fragment', 'nssm:black_powder', 'nssm:lustful_soul_fragment'},
-	}
-})
-
+	minetest.register_craft({
+		output = 'nssm:cage_bomb 3',
+		recipe = {
+			{'nssm:lustful_soul_fragment', 'nssm:black_powder', 'nssm:lustful_soul_fragment'},
+			{'nssm:black_powder', 'nssm:lustful_soul_fragment', 'nssm:black_powder'},
+			{'nssm:lustful_soul_fragment', 'nssm:black_powder', 'nssm:lustful_soul_fragment'},
+		}
+	})
+end
+	
 nssm_register_throwitem("water_column", "Water Column Bomb", {
     hit_node = function(self,pos)
         for dx = 0,0 do

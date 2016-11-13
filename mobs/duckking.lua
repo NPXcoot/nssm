@@ -2,7 +2,7 @@ mobs:register_mob("nssm:duckking", {
 	type = "monster",
 	hp_max = 180,
 	hp_min = 180,
-	collisionbox = {-1.5, -0.25, -1.5, 1.5, 4.95, 1.5},
+	collisionbox = {-1.2, -0.25, -1.2, 1.2, 4, 1.2},
 	visual = "mesh",
 	mesh = "king_duck.x",
 	textures = {{"king_duck.png"}},
