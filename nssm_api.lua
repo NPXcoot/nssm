@@ -362,7 +362,6 @@ function digging_attack(
 
 			for i = 0,dim.y do
 
-
 				--minetest.chat_send_all("pos2:"..minetest.pos_to_string(posp).." per.y= "..per.y)
 
 				local n = minetest.env:get_node(pos1).name
@@ -374,7 +373,7 @@ function digging_attack(
 						minetest.remove_node(pos1)
 					end
 				else
-					if (minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n == "bones:bones" and not (minetest.is_protected(pos1, "")) ) then
+					if ((minetest.get_item_group(n, group)==1) and (minetest.get_item_group(n, "unbreakable") ~= 1) and (n ~= "bones:bones") and not (minetest.is_protected(pos1, "")) ) then
 						--minetest.env:set_node(p, {name="air"})
 						minetest.remove_node(pos1)
 					end
