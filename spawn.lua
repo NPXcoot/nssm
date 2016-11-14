@@ -17,13 +17,13 @@ if mymapgenis == 6 then
     mobs:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 20, 20, 1200, 1, -31000, 31000)
 
     -- DUCKS
-    mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 20, 350, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 300, 5000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 900, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 24000, 1, 1, 31000)
-	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 6000, 1, 1, 31000)
-    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 850, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 20, 350, 1, -31000, 20)
+    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 300, 5000, 1, -31000, 20)
+    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 900, 1, -31000, 20)
+    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 24000, 1, 1, 25)
+	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 6000, 1, 1, 25)
+    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 850, 1, -31000, 20)
+    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 20)
 
     -- MOUNTAINS
     mobs:spawn_specific("nssm:echidna", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 20, 200, 100000, 1, 22, 31000)
@@ -55,14 +55,14 @@ else
     mobs:spawn_specific("nssm:uloboros", {"default:jungle_grass", "default:jungletree", "nssm:web" }, {"air"}, 0, 20, 30, 2200, 1, -31000, 31000)
 
     -- DUCKS
-    mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 40, 1300, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 400, 120000, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 4600, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 8000, 1, 1, 31000)
-	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 20000, 1, 1, 31000)
-    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 4800, 1, -31000, 31000)
-    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 31000)
-	mobs:spawn_specific("nssm:swimming_duck", {"default:river_water_source"}, {"default:sand","default:river_water_source"}, 0, 20, 60, 3000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:duck", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 40, 1300, 1, -31000, 40)
+    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 400, 120000, 1, -31000, 40)
+    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 4600, 1, -31000, 40)
+    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 8000, 1, 1, 40)
+	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 20000, 1, 1, 40)
+    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 4800, 1, -31000, 45)
+    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000, 1, -31000, 40)
+	mobs:spawn_specific("nssm:swimming_duck", {"default:river_water_source"}, {"default:sand","default:river_water_source"}, 0, 20, 60, 3000, 1, -31000, 300)
 
     -- MOUNTAINS
     mobs:spawn_specific("nssm:echidna", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 20, 200, 100000, 1, 50, 31000)
