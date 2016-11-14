@@ -368,7 +368,7 @@ minetest.register_node("nssm:pumpbomb", {
 	groups = {not_in_creative_inventory =1},
 	drop = "",
 	on_timer = function(pos, elapsed)
-		tnt.boom(pos, {damage_radius=4,radius=3,ignore_protection=false})
+		tnt_boom_nssm(pos, {damage_radius=4,radius=3,ignore_protection=false})
 		minetest.env:set_node(pos, {name="air"})
 	end,
 })
