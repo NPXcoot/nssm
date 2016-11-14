@@ -1668,7 +1668,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:manticore_knife',
+	output = 'nssm:manticore_spine_knife',
 	recipe = {
 		{'nssm:manticore_spine'},
 		{'group:stick'},
