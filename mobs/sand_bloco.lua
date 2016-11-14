@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:sand_bloco", {
 	type = "monster",
-	hp_max = 28,
+	hp_max = 24,
 	hp_min = 17,
 	collisionbox = {-0.5, -0.2, -0.5, 0.5, 1.3, 0.5},
 	visual = "mesh",
@@ -28,7 +28,7 @@ mobs:register_mob("nssm:sand_bloco", {
 		chance = 1,
 		min = 2,
 		max = 3,},
-		{name = "nssm:sandbloco_skin",
+		{name = "nssm:sand_bloco_skin",
 		chance = 2,
 		min = 1,
 		max = 3,},

@@ -108,7 +108,7 @@ mobs:spawn_specific("nssm:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 3
 mobs:spawn_specific("nssm:lava_titan", {"default:stone"}, {"air"}, 0, 120, 12, 22000, 1, -31000, -100)
 mobs:spawn_specific("nssm:stone_eater", {"default:stone"}, {"default:stone"}, 0, 20, 40, 700, 2, -31000, -20)
 mobs:spawn_specific("nssm:signosigno", {"default:stone"}, {"default:stone"}, 0, 10, 20, 400, 2, -31000, -20)
-mobs:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 3, 1, 5, -31000, 31000)
+mobs:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 10, 2, 5, -31000, 31000)
 
 -- SEA
 mobs:spawn_specific("nssm:crab", {"default:sand"}, {"default:water_source"}, 0, 20, 60, 4000, 1, -31000, 31000)
