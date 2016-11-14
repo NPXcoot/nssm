@@ -15,6 +15,10 @@ mobs:register_mob("nssm:sandworm", {
 	walk_velocity = 2,
 	run_velocity = 2,
 	damage = 6,
+	sounds = {
+		random = "sandworm",
+		distance = 40,
+	},
 	jump = false,
 	drops = {
         {name = "nssm:worm_flesh",

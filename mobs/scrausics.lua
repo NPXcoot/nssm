@@ -15,7 +15,7 @@ mobs:register_mob("nssm:scrausics", {
 	 stepheight = 3,
 	floats=1,
 	sounds = {
-		random = "scrausic",
+		random = "scrausics",
 		distance = 40,
 	},
 	damage = 4,
