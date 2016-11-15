@@ -191,7 +191,9 @@ mobs:register_mob("nssm:morlu", {
 								local pyaw = self.curr_attack: get_look_yaw()
 								self.dir = pyaw
 								self.object:setyaw(pyaw)
-								set_velocity(self, 4)
+								if self then
+									set_velocity(self, 4)
+								end
 
 							end,self)
 						end
