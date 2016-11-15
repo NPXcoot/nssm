@@ -178,7 +178,7 @@ spears_register_spear('felucco_horn', 'Felucco Horn', 7, 9, 'nssm:felucco_horn')
 			groupcaps={
 				snappy = {times={[3]=0.2, [2]=0.2, [1]=0.2}, uses=500, maxlevel=1},
 			},
-			damage_groups = {fleshy=12},
+			damage_groups = {fleshy=18},
 		}
 	})
 	
@@ -245,7 +245,7 @@ spears_register_spear('felucco_horn', 'Felucco Horn', 7, 9, 'nssm:felucco_horn')
 	return SUPERSPEAR_ENTITY
 end
 	
-	SUPERSPEAR_ENTITY=spears_set_sentity("of_peace", 10, 500)
+	SUPERSPEAR_ENTITY=spears_set_sentity("of_peace", 30, 300)
 	
 	minetest.register_entity("nssm:spear_of_peace_entity", SUPERSPEAR_ENTITY)
 	
