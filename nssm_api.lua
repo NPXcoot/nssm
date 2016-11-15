@@ -137,7 +137,7 @@ function explosion_particles(pos, exp_radius)
         "tnt_smoke.png" --texture
     )
 end
-
+--[[
 function explosion(pos, exp_radius, fire, kamehameha_bad)
     local radius = exp_radius
     -- if area protected or near map limits then no blast damage
@@ -259,9 +259,10 @@ function explosion(pos, exp_radius, fire, kamehameha_bad)
         end
     end
 end
+]]
 
 --			SPECIAL ABILITIES OF SOME MOBS
-function digging_ability(
+--[[function digging_ability(
 	self,		--the entity of the mob
 	group,		--group of the blocks the mob can dig: nil=everything
 	max_vel,	--max velocity of the mob
@@ -327,7 +328,7 @@ function digging_ability(
 		end
 	end
 end
-
+]]--
 function digging_attack(
 	self,		--the entity of the mob
 	group,		--group of the blocks the mob can dig: nil=everything
