@@ -2557,6 +2557,7 @@ function mobs:register_arrow(name, def)
 			if self.hit_node then
 
 				local node = node_ok(pos).name
+				if minetest.is_protected(pos,"") then return end
 
 				--if minetest.registered_nodes[node].walkable then
 				if node ~= "air" then
