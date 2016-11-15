@@ -1564,6 +1564,7 @@ end
 nssm_register_recip ('worm_flesh', 'roasted_worm_flesh', 12)
 nssm_register_recip ('duck_legs', 'roasted_duck_legs', 6)
 nssm_register_recip ('spider_leg', 'roasted_spider_leg', 6)
+nssm_register_recip ('felucco_steak', 'roasted_felucco_steak', 10)
 nssm_register_recip ('werewolf_leg', 'roasted_werewolf_leg', 10)
 nssm_register_recip ('brain', 'roasted_brain', 6)
 nssm_register_recip ('amphibian_heart', 'roasted_amphibian_heart', 6)
