@@ -1,5 +1,6 @@
 mobs:register_mob("nssm:ant_worker", {
-	type = "animal",
+	type = "monster",
+	passive = true,
 	hp_max = 24,
 	hp_min = 18,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.5, 0.4},

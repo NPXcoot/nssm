@@ -27,7 +27,7 @@ mobs:register_mob("nssm:snow_biter", {
 		min = 2,
 		max = 3},
 		{name = "nssm:frosted_amphibian_heart",
-		chance = 1,
+		chance = 2,
 		min = 1,
 		max = 1},
 		{name = "nssm:amphibian_ribs",

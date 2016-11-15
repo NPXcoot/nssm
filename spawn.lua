@@ -31,7 +31,7 @@ if mymapgenis == 6 then
     mobs:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 10, 60, 12000, 1, 20, 31000)
 
     -- ICE
-    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 15000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 25000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 9000, 1, 20, 31000)
     mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000, 1, -31000, 31000)
@@ -70,7 +70,7 @@ else
     mobs:spawn_specific("nssm:werewolf", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 10, 60, 13000, 1, 40, 31000)
 
     -- ICE
-    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 180, 80000, 1, -31000, 31000)
+    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 180, 120000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000, 1, -31000, 31000)
     mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 35, 22000, 1, 50, 31000)
     mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000, 1, -31000, 31000)
@@ -125,6 +125,6 @@ mobs:spawn_specific("nssm:sand_bloco", {"default:desert_sand", "default:desert_s
 
 -- SKY
 mobs:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 100, 850000, 1, 10, 180)
-mobs:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 400, 3500000, 2, 10, 180)
+mobs:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 400, 4500000, 2, 10, 180)
 mobs:spawn_specific("nssm:phoenix", {"air"}, {"air"}, 10, 20, 300, 5000000, 1, 10, 180)
 mobs:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 100, 850000, 1, 10, 180)

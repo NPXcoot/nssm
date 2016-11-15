@@ -605,8 +605,8 @@ minetest.register_tool("nssm:little_ice_tooth_knife", {
 		full_punch_interval =0.3 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=1.0, [3]=0.4}, uses=7, maxlevel=1},
-			snappy={times={[2]=0.80, [3]=0.3}, uses=13, maxlevel=1},
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=4, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=7, maxlevel=1},
 		},
 		damage_groups = {fleshy=5},
 	},
@@ -619,8 +619,8 @@ minetest.register_tool("nssm:manticore_spine_knife", {
 		full_punch_interval =0.4 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=1.0, [3]=0.4}, uses=10, maxlevel=1},
-			snappy={times={[2]=0.80, [3]=0.3}, uses=15, maxlevel=1},
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=6, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=6, maxlevel=1},
 		},
 		damage_groups = {fleshy=6},
 	},
@@ -633,8 +633,8 @@ minetest.register_tool("nssm:felucco_knife", {
 		full_punch_interval =0.4 ,
 		max_drop_level=1,
 		groupcaps={
-			fleshy={times={[2]=1.0, [3]=0.4}, uses=10, maxlevel=1},
-			snappy={times={[2]=0.80, [3]=0.3}, uses=15, maxlevel=1},
+			fleshy={times={[2]=1.0, [3]=0.4}, uses=6, maxlevel=1},
+			snappy={times={[2]=0.80, [3]=0.3}, uses=6, maxlevel=1},
 		},
 		damage_groups = {fleshy=6},
 	},
@@ -1867,7 +1867,7 @@ nssm_register_egg ('morgut', 'Morgut')
 nssm_register_egg ('morde', 'Morde')
 nssm_register_egg ('morlu', 'Morlu')
 nssm_register_egg ('morwa', 'Morwa')
-nssm_register_egg ('morvalar', 'Morvalar')
+--nssm_register_egg ('morvalar', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
 	description = "Mese Egg",
