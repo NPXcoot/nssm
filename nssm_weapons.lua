@@ -343,7 +343,7 @@ local function nssm_register_weapon(name, def)
 
 
     minetest.register_craft({
-		output = 'nssm:'..name.."_hand 13",
+		output = 'nssm:'..name.."_hand 23",
 		recipe = {
 			{'nssm:great_energy_globe', 'nssm:great_energy_globe', 'nssm:great_energy_globe'},
             {'nssm:great_energy_globe', def.material, 'nssm:great_energy_globe'},
@@ -360,7 +360,7 @@ nssm_register_weapon("kamehameha", {
         default_on_step(self, dtime, 4, 20, default_dir, 1, "stone", 25)
     end,
     hit_node = function(self, pos, node)
-        tnt.boom(pos, {damage_radius=8,radius=6,ignore_protection=false})
+        tnt.boom(pos, {damage_radius=10,radius=6,ignore_protection=false})
     end,
     material = "default:diamondblock",
     description = "Kamehameha from DragonBall",
@@ -385,7 +385,7 @@ nssm_register_weapon("spirit_ball", {
         search_on_step(self, dtime, 5, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        tnt.boom(pos, {damage_radius=4,radius=4,ignore_protection=false})
+        tnt.boom(pos, {damage_radius=8,radius=4,ignore_protection=false})
     end,
 
     material = "default:goldblock",
@@ -399,7 +399,7 @@ nssm_register_weapon("hellzone_grenade", {
         search_on_step2(self, dtime, 30, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        tnt.boom(pos, {damage_radius=4,radius=4,ignore_protection=false})
+        tnt.boom(pos, {damage_radius=8,radius=4,ignore_protection=false})
     end,
 
     on_drop = function(itemstack, user, pointed_thing)
@@ -689,7 +689,7 @@ nssm_register_throwitem("cobweb", "Cobweb Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:cobweb_bomb 1',
+	output = 'nssm:cobweb_bomb 8',
 	recipe = {
 		{'nssm:silk_gland', 'nssm:black_powder', 'nssm:silk_gland'},
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
@@ -717,7 +717,7 @@ nssm_register_throwitem("ice", "Ice Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:ice_bomb 1',
+	output = 'nssm:ice_bomb 8',
 	recipe = {
 		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
@@ -745,7 +745,7 @@ if minetest.get_modpath("nssb") then
 	})
 
 	minetest.register_craft({
-		output = 'nssm:mantis_bomb 2',
+		output = 'nssm:mantis_bomb 8',
 		recipe = {
 			{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
 			{'nssm:black_powder', 'nssb:hardened_mantis_clay', 'nssm:black_powder'},
@@ -770,7 +770,7 @@ nssm_register_throwitem("lava", "Lava Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:lava_bomb 4',
+	output = 'nssm:lava_bomb 12',
 	recipe = {
 		{'bucket:bucket_lava', 'nssm:black_powder', 'bucket:bucket_lava'},
 		{'nssm:black_powder', 'nssm:lava_titan_eye', 'nssm:black_powder'},
@@ -794,7 +794,7 @@ nssm_register_throwitem("water", "Water Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:water_bomb 6',
+	output = 'nssm:water_bomb 10',
 	recipe = {
 		{'bucket:bucket_water', 'nssm:black_powder', 'bucket:bucket_water'},
 		{'nssm:black_powder', 'nssm:tentacle_curly', 'nssm:black_powder'},
@@ -818,7 +818,7 @@ nssm_register_throwitem("fire", "Fire Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:fire_bomb',
+	output = 'nssm:fire_bomb 6',
 	recipe = {
 		{'fire:flint_and_steel', 'nssm:black_powder', 'fire:flint_and_steel'},
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
@@ -843,7 +843,7 @@ if minetest.get_modpath("nssb") then
 	})
 
 	minetest.register_craft({
-		output = 'nssm:mornar_bomb',
+		output = 'nssm:mornar_bomb 6',
 		recipe = {
 			{'nssm:wrathful_soul_fragment', 'nssm:black_powder', 'nssm:wrathful_soul_fragment'},
 			{'nssm:black_powder', 'nssm:wrathful_soul_fragment', 'nssm:black_powder'},
@@ -868,7 +868,7 @@ nssm_register_throwitem("hole", "Hole Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:hole_bomb 8',
+	output = 'nssm:hole_bomb 10',
 	recipe = {
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
 		{'nssm:black_powder', 'nssm:digested_sand', 'nssm:black_powder'},
@@ -893,7 +893,7 @@ nssm_register_throwitem("food", "Food Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:food_bomb 3',
+	output = 'nssm:food_bomb 8',
 	recipe = {
 		{'nssm:gluttonous_soul_fragment', 'nssm:black_powder', 'nssm:gluttonous_soul_fragment'},
 		{'nssm:black_powder', 'nssm:gluttonous_soul_fragment', 'nssm:black_powder'},
@@ -917,7 +917,7 @@ nssm_register_throwitem("phoenix_fire", "Phoenix Fire Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:phoenix_fire_bomb 8',
+	output = 'nssm:phoenix_fire_bomb 10',
 	recipe = {
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
 		{'nssm:black_powder', 'nssm:sun_feather', 'nssm:black_powder'},
@@ -935,7 +935,7 @@ nssm_register_throwitem("kaboom", "Explosive Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:kaboom_bomb 2',
+	output = 'nssm:kaboom_bomb 3',
 	recipe = {
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
@@ -960,7 +960,7 @@ nssm_register_throwitem("teleport", "Teleport Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:teleport_bomb 2',
+	output = 'nssm:teleport_bomb 10',
 	recipe = {
 		{'nssm:slothful_soul_fragment', 'nssm:black_powder', 'nssm:slothful_soul_fragment'},
 		{'nssm:black_powder', 'nssm:slothful_soul_fragment', 'nssm:black_powder'},
@@ -978,7 +978,7 @@ nssm_register_throwitem("boom", "Boom Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:boom_bomb 2',
+	output = 'nssm:boom_bomb 10',
 	recipe = {
 		{'nssm:greedy_soul_fragment', 'nssm:black_powder', 'nssm:greedy_soul_fragment'},
 		{'nssm:black_powder', 'nssm:greedy_soul_fragment', 'nssm:black_powder'},
@@ -1009,7 +1009,7 @@ nssm_register_throwitem("smoke", "Smoke Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:smoke_bomb 2',
+	output = 'nssm:smoke_bomb 6',
 	recipe = {
 		{'nssm:proud_soul_fragment', 'nssm:black_powder', 'nssm:proud_soul_fragment'},
 		{'nssm:black_powder', 'nssm:proud_soul_fragment', 'nssm:black_powder'},
@@ -1053,7 +1053,7 @@ nssm_register_throwitem("poison", "Poison Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:poison_bomb 8',
+	output = 'nssm:poison_bomb 10',
 	recipe = {
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
 		{'nssm:black_powder', 'nssm:snake_scute', 'nssm:black_powder'},
@@ -1077,7 +1077,7 @@ nssm_register_throwitem("stone", "Cobblestone Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:stone_bomb 2',
+	output = 'nssm:stone_bomb 6',
 	recipe = {
 		{'default:stone', 'nssm:black_powder', 'default:stone'},
 		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
@@ -1109,7 +1109,7 @@ nssm_register_throwitem("fire_ring", "Fire Ring Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:fire_ring_bomb',
+	output = 'nssm:fire_ring_bomb 3',
 	recipe = {
 		{'fire:flint_and_steel', 'fire:flint_and_steel', 'fire:flint_and_steel'},
 		{'fire:flint_and_steel', 'nssm:black_powder', 'fire:flint_and_steel'},
@@ -1142,7 +1142,7 @@ if minetest.get_modpath("nssb") then
 	})
 
 	minetest.register_craft({
-		output = 'nssm:cage_bomb 3',
+		output = 'nssm:cage_bomb 10',
 		recipe = {
 			{'nssm:lustful_soul_fragment', 'nssm:black_powder', 'nssm:lustful_soul_fragment'},
 			{'nssm:black_powder', 'nssm:lustful_soul_fragment', 'nssm:black_powder'},
@@ -1167,7 +1167,7 @@ nssm_register_throwitem("water_column", "Water Column Bomb", {
 })
 
 minetest.register_craft({
-	output = 'nssm:water_column_bomb 2',
+	output = 'nssm:water_column_bomb 6',
 	recipe = {
 		{'bucket:bucket_water', 'nssm:black_powder', 'bucket:bucket_water'},
 		{'bucket:bucket_water', 'nssm:black_powder', 'bucket:bucket_water'},
@@ -1176,7 +1176,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:empty_evocation_bomb',
+	output = 'nssm:empty_evocation_bomb 10',
 	recipe = {
 		{'nssm:envious_soul_fragment', 'nssm:black_powder', 'nssm:envious_soul_fragment'},
 		{'nssm:black_powder', 'nssm:envious_soul_fragment', 'nssm:black_powder'},
