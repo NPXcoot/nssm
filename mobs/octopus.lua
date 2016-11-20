@@ -97,6 +97,10 @@ mobs:register_mob("nssm:xgaloctopus", {
 	lava_damage = 10,
 	light_damage = 0,
 	on_rightclick = nil,
+	group_attack=true,
+	attack_animals=true,
+	knock_back=2,
+	blood_texture="nssm_blood_blue.png",
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 25,

@@ -896,7 +896,7 @@ minetest.register_tool("nssm:axe_of_pride", {
 })
 
 minetest.register_tool("nssm:gratuitousness_battleaxe", {
-	description = "Gratuittousness Battleaxe",
+	description = "Gratuitousness Battleaxe",
 	inventory_image = "gratuitousness_battleaxe.png",
 	wield_scale= {x=2.2,y=2.2,z=1.5},
 	tool_capabilities = {
@@ -1706,7 +1706,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'nssm:tarantula_warhammer',
 	recipe = {
-		{'tarantula_chelicerae'},
+		{'nssm:tarantula_chelicerae'},
 		{'group:stick'},
 		{'group:stick'},
 	}
@@ -1732,7 +1732,7 @@ if minetest.get_modpath("nssb") then
 	})
 
 	minetest.register_craft({
-		output = 'nssm:gratuitnousness_battleaxe',
+		output = 'nssm:gratuitousness_battleaxe',
 		recipe = {
 			{'nssm:greedy_moranga', 'nssm:greedy_moranga', 'nssm:greedy_moranga'},
 			{'nssm:greedy_moranga', 'nssb:moranga_ingot', 'nssm:greedy_moranga'},
