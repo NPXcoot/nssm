@@ -1,5 +1,8 @@
 local path = minetest.get_modpath("nssm")
 nssm = {}
+
+nssm.mymapgenis = tonumber(minetest.setting_get('mymapgenis')) or 7
+
 dofile(path.."/spawn.lua")
 
 --Mobs

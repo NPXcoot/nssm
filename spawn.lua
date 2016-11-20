@@ -1,5 +1,6 @@
 --Before starting a new game write 6 or 7 in order to regulate the spawns (7 works also with flat and fractal).
- local mymapgenis = 7
+
+local mymapgenis = nssm.mymapgenis
 
 -- Spawning parameters
 
