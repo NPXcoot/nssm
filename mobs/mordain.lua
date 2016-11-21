@@ -16,7 +16,7 @@ mobs:register_mob("nssm:mordain", {
     sounds = {
 		random = "mordain",
 	},
-	damage = 4,
+	damage = 6,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

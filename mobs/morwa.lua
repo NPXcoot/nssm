@@ -15,7 +15,7 @@ mobs:register_mob("nssm:morwa", {
 	sounds = {
 		random = "morwa",
 	},
-	damage = 6,
+	damage = 8,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

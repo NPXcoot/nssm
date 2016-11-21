@@ -86,79 +86,80 @@ mobs:register_mob("nssm:morgut", {
 
 		self.dir = (self.dir or 0)
 		if (os.time() - self.morgut_timer) > 1 then
+			if self.attack then
+				local s = self.object:getpos()
+				local p = self.attack:getpos()
+				set_animation(self, "punch")
+				local m = 2
 
-			local s = self.object:getpos()
-			local p = self.attack:getpos()
-			set_animation(self, "punch")
-			local m = 2
+				minetest.add_particlespawner(
+					6, --amount
+					1, --time
+					{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
+					{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
+					{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
+					{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
+					{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --minacc
+					{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --maxacc
+					0.2, --minexptime
+					0.3, --maxexptime
+					2, --minsize
+					3, --maxsize
+					false, --collisiondetection
+					"roasted_duck_legs.png" --texture
+				)
 
-			minetest.add_particlespawner(
-				6, --amount
-				1, --time
-				{x=p.x-0.5, y=p.y-0.5, z=p.z-0.5}, --minpos
-				{x=p.x+0.5, y=p.y+0.5, z=p.z+0.5}, --maxpos
-				{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --minvel
-				{x=(s.x-p.x)*m, y=(s.y-p.y)*m, z=(s.z-p.z)*m}, --maxvel
-				{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --minacc
-				{x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}, --maxacc
-				0.2, --minexptime
-				0.3, --maxexptime
-				2, --minsize
-				3, --maxsize
-				false, --collisiondetection
-				"roasted_duck_legs.png" --texture
-			)
+				minetest.after(1, function (self)
+					if self.attack:is_player() then
+						local pname = self.attack:get_player_name()
+						local player_inv = minetest.get_inventory({type='player', name = pname})
 
-			minetest.after(1, function (self)
-				if self.attack:is_player() then
-					local pname = self.attack:get_player_name()
-					local player_inv = minetest.get_inventory({type='player', name = pname})
-
-					if player_inv:is_empty('main') then
-						--minetest.chat_send_all("Inventory empty")
-					else
-						for i = 1,32 do
-							--minetest.chat_send_all("Inventory is not empty")
-							local items = player_inv:get_stack('main', i)
-							local n = items:get_name()
-							if minetest.get_item_group(n, "eatable")==1 then
-								local index
-								local found = 0
-								for j = 1,32 do
-									if found == 0 then
-										if self.inventory[j].num == 0 then
-											--found an empty place
-											found = 2
-											index = j
-										else
-											--found a corrsponding itemstack
-											if self.inventory[j].name == n then
-												self.inventory[j].num = self.inventory[j].num +1
-												found = 1
+						if player_inv:is_empty('main') then
+							--minetest.chat_send_all("Inventory empty")
+						else
+							for i = 1,32 do
+								--minetest.chat_send_all("Inventory is not empty")
+								local items = player_inv:get_stack('main', i)
+								local n = items:get_name()
+								if minetest.get_item_group(n, "eatable")==1 then
+									local index
+									local found = 0
+									for j = 1,32 do
+										if found == 0 then
+											if self.inventory[j].num == 0 then
+												--found an empty place
+												found = 2
+												index = j
+											else
+												--found a corrsponding itemstack
+												if self.inventory[j].name == n then
+													self.inventory[j].num = self.inventory[j].num +1
+													found = 1
+												end
 											end
 										end
 									end
+									if found == 2  then
+										self.inventory[index].name = n
+										self.inventory[index].num = 1
+									end
+									items:take_item()
+									player_inv:set_stack('main', i, items)
 								end
-								if found == 2  then
-									self.inventory[index].name = n
-									self.inventory[index].num = 1
-								end
-								items:take_item()
-								player_inv:set_stack('main', i, items)
 							end
 						end
+						set_animation(self, "run")
+						self.flag = 1
+						self.morgut_timer = os.time()
+						self.curr_attack = self.attack
+						self.state = ""
+						local pyaw = self.curr_attack: get_look_yaw()
+						self.dir = pyaw
+						self.object:setyaw(pyaw)
+						set_velocity(self, 4)
 					end
-					set_animation(self, "run")
-					self.flag = 1
-					self.morgut_timer = os.time()
-					self.curr_attack = self.attack
-					self.state = ""
-					local pyaw = self.curr_attack: get_look_yaw()
-					self.dir = pyaw
-					self.object:setyaw(pyaw)
-					set_velocity(self, 4)
-				end
-			end,self)
+				end,self)
+			end
 		end
 	end,
 	on_die = function(self)

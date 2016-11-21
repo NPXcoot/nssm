@@ -13,7 +13,7 @@ mobs:register_mob("nssm:morde", {
 	walk_velocity = 0.5,
 	reach =3,
 	run_velocity = 3.5,
-	damage = 5,
+	damage = 6,
 	jump = true,
     sounds = {
 		random = "morde",
