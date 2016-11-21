@@ -1797,22 +1797,35 @@ end
 --Eggs
 
 function nssm_register_egg (name, descr)
+	minetest.register_craftitem("nssm:".. name, {
+		description = descr .. " Egg",
+		image = name.."_egg.png",
+		on_place = function(itemstack, placer, pointed_thing)
+			local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
+			pos1.y=pos1.y+1.5
+			core.after(0.1, function()
+				minetest.add_entity(pos1, "nssm:".. name)
+			end)
+			itemstack:take_item()
+			return itemstack
+		end,
+	})
+end
 
-
-minetest.register_craftitem("nssm:".. name .."_egg", {
-	description = descr .. " Egg",
-	image = name.."_egg.png",
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
-		pos1.y=pos1.y+1.5
-		core.after(0.1, function()
-			minetest.add_entity(pos1, "nssm:".. name)
-		end)
-		itemstack:take_item()
-		return itemstack
-	end,
-})
-
+function nssm_register_egg2 (name, descr)				--mobs you can't catch
+	minetest.register_craftitem("nssm:".. name.."_egg", {
+		description = descr .. " Egg",
+		image = name.."_egg.png",
+		on_place = function(itemstack, placer, pointed_thing)
+			local pos1=minetest.get_pointed_thing_position(pointed_thing, true)
+			pos1.y=pos1.y+1.5
+			core.after(0.1, function()
+				minetest.add_entity(pos1, "nssm:".. name)
+			end)
+			itemstack:take_item()
+			return itemstack
+		end,
+	})
 end
 
 nssm_register_egg ('flying_duck', 'Flying Duck')
@@ -1822,27 +1835,27 @@ nssm_register_egg ('bloco', 'Bloco')
 nssm_register_egg ('sand_bloco', 'Sand Bloco')
 nssm_register_egg ('swimming_duck', 'Swimming Duck')
 nssm_register_egg ('duck', 'Duck')
-nssm_register_egg ('duckking', 'Duckking')
+nssm_register_egg2 ('duckking', 'Duckking')
 nssm_register_egg ('enderduck', 'Enderduck')
 nssm_register_egg ('spiderduck', 'Spiderduck')
-nssm_register_egg ('echidna', 'Echidna')
+nssm_register_egg2 ('echidna', 'Echidna')
 nssm_register_egg ('werewolf', 'Werewolf')
 nssm_register_egg ('white_werewolf', 'White Werewolf')
 nssm_register_egg ('snow_biter', 'Snow Biter')
-nssm_register_egg ('icelamander', 'Icelamander')
+nssm_register_egg2 ('icelamander', 'Icelamander')
 nssm_register_egg ('icesnake', 'Icesnake')
-nssm_register_egg ('lava_titan', 'Lava Titan')
+nssm_register_egg2 ('lava_titan', 'Lava Titan')
 nssm_register_egg ('masticone', 'Masticone')
 nssm_register_egg ('mantis_beast', 'Mantis Beast')
 nssm_register_egg ('mantis', 'Mantis')
 nssm_register_egg ('larva', 'Larva')
-nssm_register_egg ('phoenix', 'Phoenix')
-nssm_register_egg ('night_master', 'Night Master')
+nssm_register_egg2 ('phoenix', 'Phoenix')
+nssm_register_egg2 ('night_master', 'Night Master')
 nssm_register_egg ('scrausics', 'Scrausics')
 nssm_register_egg ('moonheron', 'Moonheron')
 nssm_register_egg ('sandworm', 'Sandworm')
-nssm_register_egg ('giant_sandworm', 'Giant Sandworm')
-nssm_register_egg ('ant_queen', 'Ant Queen')
+nssm_register_egg2 ('giant_sandworm', 'Giant Sandworm')
+nssm_register_egg2 ('ant_queen', 'Ant Queen')
 nssm_register_egg ('ant_soldier', 'Ant Soldier')
 nssm_register_egg ('ant_worker', 'Ant Worker')
 nssm_register_egg ('crocodile', 'Crocodile')
@@ -1852,22 +1865,22 @@ nssm_register_egg ('octopus', 'Octopus')
 nssm_register_egg ('xgaloctopus', 'Xgaloctopus')
 nssm_register_egg ('black_widow', 'Black Widow')
 nssm_register_egg ('uloboros', 'Uloboros')
-nssm_register_egg ('tarantula', 'Tarantula')
+nssm_register_egg2 ('tarantula', 'Tarantula')
 nssm_register_egg ('daddy_long_legs', 'Daddy Long Legs')
-nssm_register_egg ('kraken', 'Kraken')
-nssm_register_egg ('pumpking', 'Pumpking')
+nssm_register_egg2 ('kraken', 'Kraken')
+nssm_register_egg2 ('pumpking', 'Pumpking')
 nssm_register_egg ('manticore', 'Manticore')
 nssm_register_egg ('felucco', 'Felucco')
 nssm_register_egg ('pumpboom_large', 'Large Pumpboom')
 nssm_register_egg ('pumpboom_small', 'Small Pumpboom')
 nssm_register_egg ('pumpboom_medium', 'Medium Pumpboom')
-nssm_register_egg ('mordain', 'Mordain')
-nssm_register_egg ('morgre', 'Morgre')
-nssm_register_egg ('morvy', 'Morvy')
-nssm_register_egg ('morgut', 'Morgut')
-nssm_register_egg ('morde', 'Morde')
-nssm_register_egg ('morlu', 'Morlu')
-nssm_register_egg ('morwa', 'Morwa')
+nssm_register_egg2 ('mordain', 'Mordain')
+nssm_register_egg2 ('morgre', 'Morgre')
+nssm_register_egg2 ('morvy', 'Morvy')
+nssm_register_egg2 ('morgut', 'Morgut')
+nssm_register_egg2 ('morde', 'Morde')
+nssm_register_egg2 ('morlu', 'Morlu')
+nssm_register_egg2 ('morwa', 'Morwa')
 --nssm_register_egg ('morvalar', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
