@@ -8,6 +8,8 @@ mymapgenis (Mapgen) int 7
 # 10 = default
 # 100 = suicide is not the fastest way of dying
 # anothernumber = multiplier of the spawn abundance
-# multimobs (Multimobs) int 10
+multimobs (Multimobs) int 1000
 
 # Difficult-level:
+
+mob_difficulty (Mob_difficulty) int 2
