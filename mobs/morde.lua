@@ -111,7 +111,7 @@ minetest.register_entity("nssm:mortick", {
 	textures = {"mortick.png"},
 	hp_min = 10000,
 	hp_max = 10000,
-	armor = 0,
+	armor = 100,
 	visual = "mesh",
 	mesh = "mortick.x",
 	visual_size = {x=3, y=3},
@@ -154,7 +154,7 @@ minetest.register_entity("nssm:mortick", {
 			p.y = p.y + 1
 			p.x = p.x-math.cos(yawp)/2.5
 			p.z = p.z-math.sin(yawp)/2.5
-			local m = 30
+			local m = 10
 			local v = {x=-(s.x-p.x)*m, y=-(s.y-p.y)*m, z=-(s.z-p.z)*m}
 			local yaws = yawp +pi
 
@@ -162,7 +162,7 @@ minetest.register_entity("nssm:mortick", {
 			self.object:setvelocity(v)
 			self.object:setyaw(yaws)
 
-			--damage player every second:
+			--damage player every ten seconds:
 			if (self.timer>10) then
 				self.timer = 0
 				self.attack:set_hp(self.attack:get_hp() - self.damage)
