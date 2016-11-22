@@ -1922,7 +1922,7 @@ minetest.register_node("nssm:morwa_statue", {
    mesh = 'morwa_statue.b3d',
    tiles = {'morwa_statue.png'},
    inventory_image = 'morwa_statue.png',
-   groups = {oddly_breakable_by_hand=2, --[[not_in_creative_inventory=1]]},
+   groups = {not_in_creative_inventory=1},
    paramtype = 'light',
    paramtype2 = 'facedir',
    selection_box = {

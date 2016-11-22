@@ -161,40 +161,41 @@ mobs:register_mob("nssm:morlu", {
 							)
 
 							minetest.after(1, function (self)
-
-	                            local armor_stack = player_inv:get_stack("armor", armor_elements[steal_pos].pos)
-	                            armor_stack:take_item()
-	                            player_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
-
-	                            armor_stack = armor_inv:get_stack("armor", armor_elements[steal_pos].pos)
-	                            armor_stack:take_item()
-	                            armor_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
-
-	                            armor:set_player_armor(self.attack, self.attack)
-	                            --armor:update_armor(self.attack)
-	                            armor:update_inventory(self.attack)
-	                            --armor:update_player_visuals(self.attack)
-
-								--Update personal inventory of armors:
-								if (self.invnum ~= nil) and (self.invnum <= 5) then
-									--minetest.chat_send_all("Invnum: "..self.invnum)
-									--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
-									self.invnum = self.invnum + 1
-									self.inventory[self.invnum].name = armor_elements[steal_pos].name
-								end
-
-								set_animation(self, "run")
-								self.flag = 1
-								self.morlu_timer = os.time()
-								self.curr_attack = self.attack
-								self.state = ""
-								local pyaw = self.curr_attack: get_look_yaw()
-								self.dir = pyaw
-								self.object:setyaw(pyaw)
 								if self then
-									set_velocity(self, 4)
-								end
 
+		                            local armor_stack = player_inv:get_stack("armor", armor_elements[steal_pos].pos)
+		                            armor_stack:take_item()
+		                            player_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
+
+		                            armor_stack = armor_inv:get_stack("armor", armor_elements[steal_pos].pos)
+		                            armor_stack:take_item()
+		                            armor_inv:set_stack('armor', armor_elements[steal_pos].pos, armor_stack)
+
+		                            armor:set_player_armor(self.attack, self.attack)
+		                            --armor:update_armor(self.attack)
+		                            armor:update_inventory(self.attack)
+		                            --armor:update_player_visuals(self.attack)
+
+									--Update personal inventory of armors:
+									if (self.invnum ~= nil) and (self.invnum <= 5) then
+										--minetest.chat_send_all("Invnum: "..self.invnum)
+										--minetest.chat_send_all("Salvo: "..armor_elements[steal_pos].name)
+										self.invnum = self.invnum + 1
+										self.inventory[self.invnum].name = armor_elements[steal_pos].name
+									end
+
+									set_animation(self, "run")
+									self.flag = 1
+									self.morlu_timer = os.time()
+									self.curr_attack = self.attack
+									self.state = ""
+									local pyaw = self.curr_attack: get_look_yaw()
+									self.dir = pyaw
+									self.object:setyaw(pyaw)
+									if self then
+										set_velocity(self, 4)
+									end
+								end
 							end,self)
 						end
 					end

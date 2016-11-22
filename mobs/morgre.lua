@@ -26,7 +26,7 @@ mobs:register_mob("nssm:morgre", {
 		min = 1,
 		max = 2,},
 		{name = "nssm:greedy_soul_fragment",
-		chance = 3,
+		chance = 5,
 		min = 1,
 		max = 1,},
 	},

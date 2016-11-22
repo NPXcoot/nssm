@@ -110,54 +110,56 @@ mobs:register_mob("nssm:morgut", {
 				)
 
 				minetest.after(1, function (self)
-					if self.attack:is_player() then
-						local pname = self.attack:get_player_name()
-						local player_inv = minetest.get_inventory({type='player', name = pname})
+					if self then
+						if self.attack:is_player() then
+							local pname = self.attack:get_player_name()
+							local player_inv = minetest.get_inventory({type='player', name = pname})
 
-						if player_inv:is_empty('main') then
-							--minetest.chat_send_all("Inventory empty")
-						else
-							for i = 1,32 do
-								--minetest.chat_send_all("Inventory is not empty")
-								local items = player_inv:get_stack('main', i)
-								local n = items:get_name()
-								if minetest.get_item_group(n, "eatable")==1 then
-									local index
-									local found = 0
-									for j = 1,32 do
-										if found == 0 then
-											if self.inventory[j].num == 0 then
-												--found an empty place
-												found = 2
-												index = j
-											else
-												--found a corrsponding itemstack
-												if self.inventory[j].name == n then
-													self.inventory[j].num = self.inventory[j].num +1
-													found = 1
+							if player_inv:is_empty('main') then
+								--minetest.chat_send_all("Inventory empty")
+							else
+								for i = 1,32 do
+									--minetest.chat_send_all("Inventory is not empty")
+									local items = player_inv:get_stack('main', i)
+									local n = items:get_name()
+									if minetest.get_item_group(n, "eatable")==1 then
+										local index
+										local found = 0
+										for j = 1,32 do
+											if found == 0 then
+												if self.inventory[j].num == 0 then
+													--found an empty place
+													found = 2
+													index = j
+												else
+													--found a corrsponding itemstack
+													if self.inventory[j].name == n then
+														self.inventory[j].num = self.inventory[j].num +1
+														found = 1
+													end
 												end
 											end
 										end
+										if found == 2  then
+											self.inventory[index].name = n
+											self.inventory[index].num = 1
+										end
+										items:take_item()
+										player_inv:set_stack('main', i, items)
 									end
-									if found == 2  then
-										self.inventory[index].name = n
-										self.inventory[index].num = 1
-									end
-									items:take_item()
-									player_inv:set_stack('main', i, items)
 								end
 							end
-						end
-						set_animation(self, "run")
-						self.flag = 1
-						self.morgut_timer = os.time()
-						self.curr_attack = self.attack
-						self.state = ""
-						local pyaw = self.curr_attack: get_look_yaw()
-						self.dir = pyaw
-						self.object:setyaw(pyaw)
-						if self then
-							set_velocity(self, 4)
+							set_animation(self, "run")
+							self.flag = 1
+							self.morgut_timer = os.time()
+							self.curr_attack = self.attack
+							self.state = ""
+							local pyaw = self.curr_attack: get_look_yaw()
+							self.dir = pyaw
+							self.object:setyaw(pyaw)
+							if self then
+								set_velocity(self, 4)
+							end
 						end
 					end
 				end,self)
