@@ -1238,6 +1238,12 @@ minetest.register_craft({
 
 })
 
+minetest.register_craft({
+	output = 'nssm:duckking_bomb',
+	type = "shapeless",
+	recipe = {'nssm:empty_evocation_bomb', 'nssm:duckking_egg'},
+
+})
 end
 
 nssm_register_evocation ("duck","Duck Evocation", 4)
