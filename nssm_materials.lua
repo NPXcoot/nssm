@@ -1960,7 +1960,7 @@ minetest.register_abm({
 
 
 minetest.register_craft({
-	output = 'nssm:duck_egg',
+	output = 'nssm:duck',
 	recipe = {
 		{'', 'nssm:duck_beak', ''},
 		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
@@ -1969,7 +1969,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:flying_duck_egg',
+	output = 'nssm:flying_duck',
 	recipe = {
 		{'nssm:duck_feather', 'nssm:duck_beak', 'nssm:duck_feather'},
 		{'nssm:duck_feather', 'nssm:energy_globe', 'nssm:duck_feather'},
@@ -1978,7 +1978,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:enderduck_egg',
+	output = 'nssm:enderduck',
 	recipe = {
 		{'nssm:black_duck_feather', 'nssm:duck_beak', 'nssm:black_duck_feather'},
 		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
@@ -1987,7 +1987,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:swimming_duck_egg',
+	output = 'nssm:swimming_duck',
 	recipe = {
 		{'nssm:duck_feather', 'nssm:duck_beak', 'nssm:duck_feather'},
 		{'nssm:duck_legs', 'nssm:energy_globe', 'nssm:duck_legs'},
@@ -1996,7 +1996,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:spiderduck_egg',
+	output = 'nssm:spiderduck',
 	recipe = {
 		{'nssm:duck_legs', 'nssm:duck_beak', 'nssm:duck_legs'},
 		{'nssm:black_duck_feather', 'nssm:energy_globe', 'nssm:black_duck_feather'},
@@ -2014,7 +2014,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'nssm:bloco_egg',
+	output = 'nssm:bloco',
 	recipe = {
 		{'nssm:bloco_skin', 'nssm:bloco_skin', 'nssm:bloco_skin'},
 		{'nssm:bloco_skin', 'nssm:energy_globe', 'nssm:bloco_skin'},
