@@ -265,10 +265,21 @@ minetest.register_node("nssm:venomous_gas", {
 	diggable = false,
 	buildable_to = true,
 	drop = "",
-	drowning = 1,
+	drowning = 9,
 	damage_per_second = 1,
 	post_effect_color = {a=100, r=1, g=100, b=1},
 	groups = {flammable = 2},
+})
+
+minetest.register_node("nssm:coldest_ice", {
+	description = "Coldest Ice",
+	tile_images = {"coldest_ice.png"} ,
+	paramtype = "light",
+	drowning = 2,
+	damage_per_second = 1,
+	drop = "",
+	light_source = 3,
+	groups = {cracky=1, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:modders_block", {
