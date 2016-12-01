@@ -49,8 +49,9 @@ mobs:register_mob("nssm:mantis", {
 	stepheight=1.1,
 	double_melee_attack = true,
 	attack_type = "dogfight",
+	die_anim = true,
 	animation = {
-		speed_normal = 25,
+		speed_normal = 15,
 		speed_run = 25,
 		stand_start = 130,
 		stand_end = 130,
@@ -60,6 +61,8 @@ mobs:register_mob("nssm:mantis", {
 		run_end = 30,
 		punch_start = 40,
 		punch_end = 70,
+		die_start = 115,
+		die_end = 130,
 		punch2_start = 80,
 		punch2_end = 110,
 	}
