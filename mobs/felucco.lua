@@ -12,6 +12,7 @@ mobs:register_mob("nssm:felucco", {
 	walk_velocity = 1,
 	fear_height = 4,
 	run_velocity = 5,
+	attack_specific = {"player", "nssm:kele"},
 	sounds = {
 		random = "felucco",
 	},
@@ -40,8 +41,8 @@ mobs:register_mob("nssm:felucco", {
 	water_damage = 2,
 	lava_damage = 5,
 	light_damage = 0,
-	group_attack=true,
-	attack_animals=true,
+--	group_attack=true,
+--	attack_animals=true,
 	knock_back=2,
 	blood_texture="nssm_blood.png",
 	stepheight=1.1,
