@@ -12,7 +12,7 @@ mobs:register_mob("nssm:felucco", {
 	walk_velocity = 1,
 	fear_height = 4,
 	run_velocity = 5,
-	attack_specific = {"player", "nssm:kele"},
+	specific_attack = {"player", "nssm:kele"},
 	sounds = {
 		random = "felucco",
 	},

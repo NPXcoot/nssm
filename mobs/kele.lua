@@ -36,7 +36,7 @@ mobs:register_mob("nssm:kele", {
 	stepheight=2.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
-	attack_specific = {"player", "nssm:felucco"},
+	specific_attack = {"player", "nssm:felucco"},
 	animation = {
 		speed_normal = 20,
 		speed_run = 25,
@@ -48,9 +48,39 @@ mobs:register_mob("nssm:kele", {
 		run_end = 30,
 		punch_start = 130,
 		punch_end = 160,
-	--	punchalt_start = 90,
-	--	punchalt_end = 120,
+		punch2_start = 90,
+		punch2_end = 120,
 		die_start = 170,
 		die_end = 190,
-    }
+    },
+	custom_attack = function (self)
+		self.kele_timer = (self.kele_timer or os.time())
+		if (os.time() - self.kele_timer) > 1 then
+			self.kele_timer = os.time()
+
+			local s = self.object:getpos()
+			local p = self.attack:getpos()
+
+			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
+				if self.health > 10 then
+					set_animation(self, "punch")
+				else
+					set_animation(self, "punch2")
+					self.health = self.health + (self.damage*2)
+				end
+				-- play attack sound
+				if self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {
+						object = self.object,
+						max_hear_distance = self.sounds.distance
+					})
+				end
+				-- punch player
+				self.attack:punch(self.object, 1.0,  {
+					full_punch_interval=1.0,
+					damage_groups = {fleshy=self.damage}
+				}, nil)
+			end
+		end
+	end,
 })
