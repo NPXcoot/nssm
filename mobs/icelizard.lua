@@ -66,6 +66,11 @@ mobs:register_mob("nssm:icelizard", {
 		punch_start = 160,
 		punch_end = 170,
 	},
+	custom_attack = function(self)
+		local pos = self.object:getpos()
+		tnt_boom_nssm(pos, {damage_radius=0,radius=4,ignore_protection=false},"nssm:coldest_ice")
+		self.object:remove()
+	end,
 	do_custom = function(self)
 		putting_ability(self, "default:ice", self.run_velocity)
 	end,

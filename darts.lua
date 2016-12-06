@@ -94,7 +94,7 @@ function ice_explosion(pos)
 				local n = minetest.env:get_node(p).name
 				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") or (n == "bones:bones" and not nssm:affectbones(self)) then
 				else
-					minetest.set_node({x=i, y=j, z=k}, {name="default:ice"})
+					minetest.set_node({x=i, y=j, z=k}, {name="nssm:coldest_ice"})
 				end
 			end
 		end

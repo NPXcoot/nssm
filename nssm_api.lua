@@ -782,10 +782,11 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, bloc
 	local c_tnt = minetest.get_content_id("tnt:tnt")
 	local c_tnt_burning = minetest.get_content_id("tnt:tnt_burning")
 	local c_tnt_boom = minetest.get_content_id("tnt:boom")
+	local c_air
 	if block then
-		local c_air = minetest.get_content_id(block)
+		c_air = minetest.get_content_id(block)
 	else
-		local c_air = minetest.get_content_id("air")
+		c_air = minetest.get_content_id("air")
 	end
 
 	for z = pos.z - 2, pos.z + 2 do
