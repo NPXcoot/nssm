@@ -363,7 +363,7 @@ mobs:register_mob("nssm:morvalar5", {
 			local p = self.attack:getpos()
 			minetest.after(2, function(self)
 				set_animation(self, "punch")
-				tnt_boom_nssm(p, {damage_radius=6,radius=5,ignore_protection=false})
+				tnt_boom_nssm(p, {damage_radius=6,radius=5,ignore_protection=false}, nil, true)
 				self.morvalar5_timer = os.time()
 			end,self)
 		end
@@ -874,14 +874,14 @@ minetest.register_entity("nssm:kamehameha_bad", {
 		local objects = minetest.env:get_objects_inside_radius(pos, 1)
 		for _,obj in ipairs(objects) do
 			if obj:is_player() then
-				tnt_boom_nssm(pos, {damage_radius=6,radius=5,ignore_protection=false})
+				tnt_boom_nssm(pos, {damage_radius=6,radius=5,ignore_protection=false}, nil, true)
 				self.object:remove()
 				minetest.chat_send_all("Dentro il raggio piccolo")
 			end
 			if obj:get_luaentity() then
 				local name = obj:get_luaentity().name
 				if name ~= "nssm:morvalar0" and name ~="nssm:kamehameha_bad" then
-					tnt_boom_nssm(pos, {damage_radius=6,radius=5,ignore_protection=false})
+					tnt_boom_nssm(pos, {damage_radius=6,radius=5,ignore_protection=false}, nil, true)
 					self.object:remove()
 				end
 			end

@@ -55,6 +55,7 @@ mobs:register_mob("nssm:icelizard", {
 	animation = {
 		speed_normal = 20,
 		speed_run = 40,
+		speed_punch = 5,
 		stand_start = 0,
 		stand_end = 80,
 		walk_start = 110,
@@ -67,9 +68,13 @@ mobs:register_mob("nssm:icelizard", {
 		punch_end = 170,
 	},
 	custom_attack = function(self)
-		local pos = self.object:getpos()
-		tnt_boom_nssm(pos, {damage_radius=0,radius=4,ignore_protection=false},"nssm:coldest_ice")
-		self.object:remove()
+		self.icelizard_timer = self.icelizard_timer or os.time()
+		set_animation(self, "punch")
+		if (os.time()-self.icelizard_timer) > 0.9 then
+			local pos = self.object:getpos()
+			tnt_boom_nssm(pos, {damage_radius=0,radius=4,ignore_protection=false},"nssm:coldest_ice", false)
+			self.object:remove()
+		end
 	end,
 	do_custom = function(self)
 		putting_ability(self, "default:ice", self.run_velocity)

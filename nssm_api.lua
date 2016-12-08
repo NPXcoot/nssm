@@ -874,7 +874,7 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, bloc
 	return drops, radius
 end
 
-function tnt_boom_nssm(pos, def, block)
+function tnt_boom_nssm(pos, def, block, effects)
 	minetest.sound_play("tnt_explode", {pos = pos, gain = 1.5, max_hear_distance = 2*64})
 	minetest.set_node(pos, {name = "tnt:boom"})
 	local drops, radius = tnt_explode(pos, def.radius, def.ignore_protection, def.ignore_on_blast, block)
@@ -884,5 +884,7 @@ function tnt_boom_nssm(pos, def, block)
 	if not def.disable_drops then
 		eject_drops(drops, pos, radius)
 	end
-	add_effects(pos, radius, drops)
+	if effects then
+		add_effects(pos, radius, drops)
+	end
 end
