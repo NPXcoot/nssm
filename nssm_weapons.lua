@@ -1234,7 +1234,7 @@ nssm_register_throwegg(evomob, evodescr.." Bomb", {
 minetest.register_craft({
 	output = 'nssm:'..evomob.."_bomb",
 	type = "shapeless",
-	recipe = {'nssm:empty_evocation_bomb', 'nssm:'..evomob.."_egg"},
+	recipe = {'nssm:empty_evocation_bomb', 'nssm:'..evomob},
 
 })
 
