@@ -32,7 +32,7 @@ if minetest.get_modpath("3d_armor") then
 			duck="nssm:duck_feather",
 			black_duck="nssm:black_duck_feather",
 			mor= "nssm:lustful_moranga",
-			sandbloco= "nssm:sandbloco_skin",
+			sandbloco= "nssm:sand_bloco_skin",
 			sandworm="nssm:sandworm_skin",
 			sky="nssm:sky_iron",
 			web="nssm:web_string",
@@ -168,9 +168,9 @@ local stats = {
 		minetest.register_craft({
 					output = "nssm:chestplate_snake",
 					recipe = {
-						{"default:iron_ingot", "", "default:iron_ingot"},
-						{"default:iron_ingot", "nssm:snake_scute", "default:iron_ingot"},
-						{"default:iron_ingot", "default:iron_ingot", "default:iron_ingot"},
+						{"default:steel_ingot", "", "default:steel_ingot"},
+						{"default:steel_ingot", "nssm:snake_scute", "default:steel_ingot"},
+						{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
 					},
 				})
 		minetest.register_craft({
