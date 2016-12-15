@@ -746,7 +746,7 @@ local function add_drop(drops, item)
 	end
 end
 
-local function destroy(drops, npos, cid, c_air, c_fire, on_blast_queue, ignore_protection, ignore_on_blast)
+local function destroy(drops, npos, cid, c_air, on_blast_queue, ignore_protection, ignore_on_blast)
 	if not ignore_protection and minetest.is_protected(npos, "") then
 		return cid
 	end
@@ -758,8 +758,6 @@ local function destroy(drops, npos, cid, c_air, c_fire, on_blast_queue, ignore_p
 	elseif not ignore_on_blast and def.on_blast then
 		on_blast_queue[#on_blast_queue + 1] = {pos = vector.new(npos), on_blast = def.on_blast}
 		return cid
-	elseif def.flammable then
-		return c_fire
 	else
 		local node_drops = minetest.get_node_drops(def.name, "")
 		for _, item in pairs(node_drops) do
@@ -821,7 +819,6 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, bloc
 	local drops = {}
 	local on_blast_queue = {}
 
-	local c_fire = minetest.get_content_id("fire:basic_flame")
 	for z = -radius, radius do
 	for y = -radius, radius do
 	local vi = a:index(pos.x + (-radius), pos.y + y, pos.z + z)
@@ -831,7 +828,7 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, bloc
 			local cid = data[vi]
 			local p = {x = pos.x + x, y = pos.y + y, z = pos.z + z}
 			if cid ~= c_air then
-				data[vi] = destroy(drops, p, cid, c_air, c_fire,
+				data[vi] = destroy(drops, p, cid, c_air,
 					on_blast_queue, ignore_protection,
 					ignore_on_blast)
 			end
