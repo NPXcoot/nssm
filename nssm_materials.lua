@@ -271,6 +271,37 @@ minetest.register_node("nssm:venomous_gas", {
 	groups = {flammable = 2},
 })
 
+minetest.register_node("nssm:crystal_gas", {
+	description = "Crystal Gas",
+	--inventory_image = minetest.inventorycube("venomous_gas.png"),
+	drawtype = "airlike",
+	--tiles = {
+		--{name="venomous_gas_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
+	--},
+	paramtype = "light",
+	walkable = false,
+	sunlight_propagates = true,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	drop = "",
+	drowning = 2,
+	post_effect_color = {a=300, r=300, g=300, b=300},
+	groups = {flammable = 2, not_in_creative_inventory =1},
+})
+
+minetest.register_node("nssm:slug_crystal", {
+	description = "Slug Crystal",
+	tile_images = {"slug_crystal.png"} ,
+	paramtype = "light",
+	drawtype = "glasslike",
+	drowning = 10,
+	damage_per_second = 1,
+	drop = "",
+	light_source = 2,
+	groups = {cracky=1, not_in_creative_inventory =1},
+})
+
 minetest.register_node("nssm:coldest_ice", {
 	description = "Coldest Ice",
 	tile_images = {"coldest_ice.png"} ,
@@ -414,6 +445,15 @@ minetest.register_abm({
 		if n== "air" then
 			minetest.set_node({x = pos.x, y = pos.y + 1, z = pos.z}, {name = "nssm:web"})
 		end
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"nssm:crystal_gas"},
+	interval = 1,
+	chance = 4,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+			minetest.set_node({x = pos.x, y = pos.y, z = pos.z}, {name = "nssm:slug_crystal"})
 	end
 })
 
@@ -1859,6 +1899,7 @@ nssm_register_egg ('icesnake', 'Icesnake')
 nssm_register_egg ('icelizard', 'Icelizard')
 nssm_register_egg2 ('lava_titan', 'Lava Titan')
 nssm_register_egg ('kele', 'Kele')
+nssm_register_egg ('crystal_slug', 'Crystal Slug')
 nssm_register_egg2 ('masticone', 'Masticone')
 nssm_register_egg ('mantis_beast', 'Mantis Beast')
 nssm_register_egg ('mantis', 'Mantis')

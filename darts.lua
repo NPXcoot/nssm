@@ -314,6 +314,45 @@ function gas_explosion(pos)
 	end
 end
 
+--crystalgas arrow
+
+mobs:register_arrow("nssm:crystal_gas_arrow", {
+	visual = "sprite",
+	visual_size = {x = 1, y = 1},
+	textures = {"crystal_arrow.png"},
+	velocity = 8,
+	-- direct hit
+	hit_player = function(self, player)
+		local p = player:getpos()
+		crystal_gas_explosion(p)
+	end,
+
+	hit_node = function(self, pos, node)
+		crystal_gas_explosion(pos)
+	end
+})
+
+
+function crystal_gas_explosion(pos)
+	if minetest.is_protected(pos, "") then
+		return
+	end
+	for dx=-1,1 do
+		for dy=-1,2 do
+			for dz=-1,1 do
+				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+				if minetest.is_protected(p, "") then
+					return
+				end
+				local n = minetest.env:get_node(p).name
+				if n== "air" then
+					minetest.set_node(p, {name="nssm:crystal_gas"})
+				end
+			end
+		end
+	end
+end
+
 --
 mobs:register_arrow("nssm:roar_of_the_dragon", {
 	visual = "sprite",

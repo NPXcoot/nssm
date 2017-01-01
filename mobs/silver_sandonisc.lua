@@ -49,5 +49,7 @@ mobs:register_mob("nssm:silver_sandonisc", {
 		run_end = 70,
 		punch_start = 130,
 		punch_end = 160,
+		die_start = 235,
+		die_end = 255,
 	},
 })
