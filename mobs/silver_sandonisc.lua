@@ -15,10 +15,10 @@ mobs:register_mob("nssm:silver_sandonisc", {
 	walk_velocity = 0.6,
 	run_velocity = 3.5,
 	damage = 3,
-	sounds = {
-		random = "silver_sandonisc",
-		distance = 40,
-	},
+--	sounds = {
+	--	random = "silver_sandonisc",
+		--distance = 40,
+	--},
 	jump = false,
 	drops = {
 		{name = "nssm:life_energy",

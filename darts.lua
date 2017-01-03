@@ -353,6 +353,30 @@ function crystal_gas_explosion(pos)
 	end
 end
 
+--Pumpkid bomb
+
+mobs:register_arrow("nssm:pumpkid_bomb", {
+	visual = "cube",
+	visual_size = {x = 1, y = 1},
+	textures = {"pumpbomb_top.png","pumpbomb_bottom.png", "pumpbomb_side.png", "pumpbomb_side.png", "pumpbomb_side.png", "pumpbomb_front.png"},
+	velocity = 8,
+	-- direct hit
+	hit_player = function(self, player)
+		local p = player:getpos()
+		--local pos1 = {x = pos.x, y=pos.y, z=pos.z}
+                    if not minetest.is_protected(p, "") or not minetest.get_item_group(minetest.get_node(p).name, "unbreakable") == 1 then
+                        tnt.boom(p, {damage_radius=3,radius=2,ignore_protection=false})
+                    end
+	end,
+
+	hit_node = function(self, pos, node)
+		--local pos1 = {x = pos.x, y=pos.y, z=pos.z}
+                    if not minetest.is_protected(pos, "") or not minetest.get_item_group(minetest.get_node(pos).name, "unbreakable") == 1 then
+                        tnt.boom(pos, {damage_radius=3,radius=2,ignore_protection=false})
+                    end
+	end
+})
+
 --
 mobs:register_arrow("nssm:roar_of_the_dragon", {
 	visual = "sprite",

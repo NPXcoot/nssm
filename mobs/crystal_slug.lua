@@ -40,7 +40,7 @@ mobs:register_mob("nssm:crystal_slug", {
 	shoot_offset = 1,
 	arrow = "nssm:crystal_gas_arrow",
 	reach = 1,
-	shoot_interval = 2,
+	shoot_interval = 4,
 	animation = {
 		speed_normal = 20,
 		speed_run = 20,
