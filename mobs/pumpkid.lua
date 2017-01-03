@@ -5,7 +5,7 @@ mobs:register_mob("nssm:pumpkid", {
 	collisionbox = {-0.4, 0, -0.4, 0.4, 1.5, 0.4},
 	visual = "mesh",
 	mesh = "pumpkid.x",
-	textures = {{"pumpkid.png"}},
+	textures = {{"pump.png"}},
 	visual_size = {x=3, y=3},
 	view_range = 40,
 	floats=0,
