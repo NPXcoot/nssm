@@ -1,6 +1,7 @@
 default
 mobs
 farming?
+nssbombs?
 3d_armor?
 fire
 tnt

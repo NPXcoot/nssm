@@ -636,6 +636,7 @@ nssm_register_weapon("light_ball", {
     description = "Light Ball",
 })
 ]]
+
 function nssm_register_throwitem(name, descr, def)
 
     minetest.register_craftitem("nssm:"..name.."_bomb", {
@@ -673,6 +674,76 @@ function nssm_register_throwitem(name, descr, def)
     })
 end
 
+if minetest.get_modpath("nssbombs") then
+    nssbombs:register_throwitem("cobweb", "Cobweb Bomb", {
+        textures = "cobweb_bomb.png",
+        recipe_number = 8,
+        recipe = {
+    		{'nssm:silk_gland', 'nssm:black_powder', 'nssm:silk_gland'},
+    		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
+    		{'nssm:silk_gland', 'nssm:black_powder', 'nssm:silk_gland'},
+    	},
+        explosion = {
+            shape = "cube",
+            radius = 1,
+            block = "nssm:web",
+            particles = true,
+        },
+    })
+
+    nssbombs:register_throwitem("ice", "Cubic Ice Shell Bomb", {
+        textures = "ice_bomb.png",
+        recipe_number = 8,
+        recipe = {
+    		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
+    		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
+    		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
+    	},
+        explosion = {
+            shape = "cubic_shell",
+            radius = 2,
+            block = "default:ice",
+            particles = true,
+        },
+    })
+
+    nssbombs:register_throwitem("ice", "Cubic Ice Shell Bomb", {
+        textures = "ice_bomb.png",
+        recipe_number = 8,
+        recipe = {
+    		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
+    		{'nssm:black_powder', 'nssm:black_powder', 'nssm:black_powder'},
+    		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
+    	},
+        explosion = {
+            shape = "cubic_shell",
+            radius = 1,
+            block = "default:ice",
+            particles = true,
+        },
+    })
+
+    if minetest.get_modpath("nssb") then
+        nssbombs:register_throwitem("mantis", "Cubic Mantis Clay Shell Bomb", {
+            textures = "mantis_bomb.png",
+            recipe_number = 8,
+            recipe = {
+    			{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
+    			{'nssm:black_powder', 'nssb:hardened_mantis_clay', 'nssm:black_powder'},
+    			{'nssm:mantis_meat', 'nssm:black_powder', 'nssm:mantis_meat'},
+    		},
+            explosion = {
+                shape = "cubic_shell",
+                radius = 1,
+                block = "nssb:hardened_mantis_clay",
+                particles = true,
+            },
+        })
+    end
+
+
+end
+--[[
 nssm_register_throwitem("cobweb", "Cobweb Bomb", {
     hit_node = function(self,pos)
         for dx = -1,1 do
@@ -724,6 +795,8 @@ minetest.register_craft({
 		{'nssm:frosted_amphibian_heart', 'nssm:black_powder', 'nssm:frosted_amphibian_heart'},
 	}
 })
+
+
 if minetest.get_modpath("nssb") then
 	nssm_register_throwitem("mantis", "Mantis Clay Bomb", {
 		hit_node = function(self,pos)
@@ -753,6 +826,7 @@ if minetest.get_modpath("nssb") then
 		}
 	})
 end
+]]
 
 nssm_register_throwitem("lava", "Lava Bomb", {
     hit_node = function(self,pos)
@@ -1150,7 +1224,7 @@ if minetest.get_modpath("nssb") then
 		}
 	})
 end
-	
+
 nssm_register_throwitem("water_column", "Water Column Bomb", {
     hit_node = function(self,pos)
         for dx = 0,0 do
