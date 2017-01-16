@@ -865,6 +865,15 @@ if minetest.get_modpath("nssbombs") then
         end,
     })
 
+    minetest.register_craft({
+    	output = "nssbombs:teleport_bomb 10",
+        recipe = {
+            {'nssm:slothful_soul_fragment', 'nssm:black_powder', 'nssm:slothful_soul_fragment'},
+            {'nssm:black_powder', 'nssm:slothful_soul_fragment', 'nssm:black_powder'},
+            {'nssm:slothful_soul_fragment', 'nssm:black_powder', 'nssm:slothful_soul_fragment'},
+        },
+    })
+    --[[
     nssbombs:register_throwitem("nssm:teleport_bomb", "Teleport Bomb", {
         textures = "teleport_bomb.png",
         recipe_number = 10,
@@ -883,6 +892,7 @@ if minetest.get_modpath("nssbombs") then
 			end
         end,
     })
+    ]]
 
     nssbombs:register_throwitem("nssm:boom_bomb", "Boom Bomb", {
         textures = "boom_bomb.png",
