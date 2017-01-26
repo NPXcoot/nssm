@@ -12,7 +12,7 @@ mobs:register_mob("nssm:pumpboom_small", {
 	makes_footstep_sound = true,
 	view_range = 20,
 	fear_height = 4,
-	walk_velocity = 2,
+	walk_velocity = 1,
 	run_velocity = 2.5,
     sounds = {
     explode = "tnt_explode",
@@ -70,7 +70,7 @@ mobs:register_mob("nssm:pumpboom_medium", {
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
 	view_range = 25,
-	walk_velocity = 2,
+	walk_velocity = 1.5,
 	explosion_radius = 3,
 	run_velocity = 2.5,
     sounds = {

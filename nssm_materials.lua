@@ -231,7 +231,7 @@ minetest.register_node("nssm:ant_dirt", {
 minetest.register_node("nssm:dead_leaves", {
 	description = "Dead leaves",
 	tiles = {"dead_leaves.png"},
-	groups = {snappy=3,leaves=1},
+	groups = {snappy=3,leaves=1, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:invisible_light", {
@@ -245,7 +245,7 @@ minetest.register_node("nssm:invisible_light", {
 	diggable = false,
 	buildable_to = true,
 	is_ground_content = false,
-	groups = {unbreakable=1},
+	groups = {unbreakable=1, not_in_creative_inventory =1},
 	drop = "",
 	light_source = 15,
 })
@@ -267,7 +267,7 @@ minetest.register_node("nssm:venomous_gas", {
 	drowning = 9,
 	damage_per_second = 1,
 	post_effect_color = {a=100, r=1, g=100, b=1},
-	groups = {flammable = 2},
+	groups = {flammable = 2, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:crystal_gas", {
@@ -279,13 +279,13 @@ minetest.register_node("nssm:crystal_gas", {
 	--},
 	paramtype = "light",
 	walkable = false,
-	sunlight_propagates = true,
+	--sunlight_propagates = true,
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
 	drop = "",
 	drowning = 2,
-	post_effect_color = {a=300, r=300, g=300, b=300},
+	post_effect_color = {a=1000, r=1000, g=1000, b=1000},
 	groups = {flammable = 2, not_in_creative_inventory =1},
 })
 
@@ -297,6 +297,7 @@ minetest.register_node("nssm:slug_crystal", {
 	drowning = 10,
 	damage_per_second = 1,
 	drop = "",
+	post_effect_color = {a=1000, r=1000, g=1000, b=1000},
 	light_source = 2,
 	groups = {cracky=1, not_in_creative_inventory =1},
 })
@@ -392,7 +393,7 @@ minetest.register_node("nssm:ink", {
 	liquid_alternative_source = "nssm:ink",
 	liquid_viscosity = 1,
 	post_effect_color = {a=2000, r=30, g=30, b=30},
-	groups = {water=3, liquid=3, puts_out_fire=1},
+	groups = {water=3, liquid=3, puts_out_fire=1, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:mese_meteor", {
@@ -400,7 +401,7 @@ minetest.register_node("nssm:mese_meteor", {
 	tile_images = {"mese_meteor.png"} ,
 	paramtype = "light",
 	drop = "",
-	groups = {crumbly=1, falling_node=1, flammable = 2},
+	groups = {crumbly=1, falling_node=1, flammable = 2, not_in_creative_inventory =1},
 })
 
 minetest.register_node("nssm:pumpbomb", {
@@ -453,6 +454,15 @@ minetest.register_abm({
 	chance = 4,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 			minetest.set_node({x = pos.x, y = pos.y, z = pos.z}, {name = "nssm:slug_crystal"})
+	end
+})
+
+minetest.register_abm({
+	nodenames = {"nssm:slug_crystal"},
+	interval = 20,
+	chance = 3,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+			minetest.set_node({x = pos.x, y = pos.y, z = pos.z}, {name = "air"})
 	end
 })
 
@@ -1903,7 +1913,6 @@ nssm_register_egg2 ('lava_titan', 'Lava Titan')
 nssm_register_egg ('kele', 'Kele')
 nssm_register_egg ('crystal_slug', 'Crystal Slug')
 nssm_register_egg2 ('masticone', 'Masticone')
-nssm_register_egg ('mantis_beast', 'Mantis Beast')
 nssm_register_egg ('mantis', 'Mantis')
 nssm_register_egg ('larva', 'Larva')
 nssm_register_egg ('berinhog', 'Berinhog')

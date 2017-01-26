@@ -1,8 +1,8 @@
 mobs:register_mob("nssm:bloco", {
 	type = "monster",
-	hp_max = 24,
+	hp_max = 20,
 	hp_min = 14,
-	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
+	collisionbox = {-0.5, 0, -0.5, 0.5, 1.2, 0.5},
 	visual = "mesh",
 	mesh = "bloco.x",
 	textures = {{"bloco.png"}},
@@ -10,13 +10,13 @@ mobs:register_mob("nssm:bloco", {
 	makes_footstep_sound = true,
 	view_range = 8,
 	fear_height = 4,
-	walk_velocity = 0.6,
+	walk_velocity = 0.4,
 	run_velocity = 2.5,
     rotate = 270,
     sounds = {
 		random = "bloco",
 	},
-	damage = 4,
+	damage = 3,
 	reach = 2,
 	jump = true,
 	drops = {
@@ -33,9 +33,9 @@ mobs:register_mob("nssm:bloco", {
 		min = 1,
 		max = 2,},
 	},
-	armor = 40,
+	armor = 50,
 	drawtype = "front",
-	water_damage = 3,
+	water_damage = 5,
 	lava_damage = 1,
 	light_damage = 0,
 	group_attack=true,
@@ -57,5 +57,7 @@ mobs:register_mob("nssm:bloco", {
 		run_end = 160,
 		punch_start = 170,
 		punch_end = 190,
+		die_start = 200,
+		die_end = 220,
 	}
 })
