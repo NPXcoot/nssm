@@ -1,11 +1,11 @@
 mobs:register_mob("nssm:icesnake", {
 	type = "monster",
-	hp_max = 27,
+	hp_max = 23,
 	hp_min = 17,
 	collisionbox = {-0.7, 0, -0.7, 0.7, 0.50, 0.7},
 	visual = "mesh",
 	mesh = "icesnake.x",
-	textures = {{"icesnake.png"}},
+	textures = {{"snow_biter.png"}},
 	visual_size = {x=7, y=7},
 	makes_footstep_sound = false,
 	view_range = 10,
@@ -50,7 +50,7 @@ mobs:register_mob("nssm:icesnake", {
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
-		speed_normal = 15,
+		speed_normal = 20,
 		speed_run = 25,
 		stand_start = 170,
 		stand_end = 220,
@@ -60,6 +60,8 @@ mobs:register_mob("nssm:icesnake", {
 		run_end = 120,
 		punch_start = 130,
 		punch_end = 160,
+		die_start = 230,
+		die_end = 250,
 	},
 	do_custom = function(self)
 		putting_ability(self, "default:ice", self.run_velocity)

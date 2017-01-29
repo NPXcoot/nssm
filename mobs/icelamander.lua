@@ -5,14 +5,14 @@ mobs:register_mob("nssm:icelamander", {
 	collisionbox = {-0.5, 0, -0.5, 0.5, 2.3, 0.5},
 	visual = "mesh",
 	mesh = "icelamander.x",
-	textures = {{"icelamander.png"}},
-	visual_size = {x=4, y=4},
+	textures = {{"snow_biter.png"}},
+	visual_size = {x=5, y=5},
 	makes_footstep_sound = true,
-	view_range = 35,
+	view_range = 25,
 	lifetimer = 500,
 	fear_height = 4,
-	walk_velocity = 2,
-	run_velocity = 4,
+	walk_velocity = 0.8,
+	run_velocity = 3,
     sounds = {
 		random = "icelamander",
 	},
@@ -57,7 +57,7 @@ mobs:register_mob("nssm:icelamander", {
 	arrow = "nssm:snow_arrow",
 	shoot_interval = 2,
 	animation = {
-		speed_normal = 15,
+		speed_normal = 20,
 		speed_run = 25,
 		stand_start = 1,
 		stand_end = 40,
@@ -69,6 +69,8 @@ mobs:register_mob("nssm:icelamander", {
 		punch_end = 190,
 		shoot_start = 190,
 		shoot_end = 210,
+		die_start = 220,
+		die_end = 240,
 	},
 	do_custom = function(self)
 		midas_ability(self, "default:ice", self.run_velocity,1, 3)

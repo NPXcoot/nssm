@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:snow_biter", {
 	type = "monster",
-	hp_max = 30,
+	hp_max = 24,
 	hp_min = 15,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 0.60, 0.5},
 	visual = "mesh",
@@ -8,7 +8,7 @@ mobs:register_mob("nssm:snow_biter", {
 	textures = {{"snow_biter.png"}},
 	visual_size = {x=6, y=6},
 	makes_footstep_sound = true,
-	view_range = 18,
+	view_range = 14,
 	rotate = 270,
 	mele_number = 2,
 	fear_height = 4,
@@ -64,7 +64,9 @@ mobs:register_mob("nssm:snow_biter", {
 		punch_start = 175,
 		punch_end = 190,
 		punch2_start = 200,
-		punch2_end = 215
+		punch2_end = 215,
+		die_start = 220,
+		die_end = 240,
 	},
 	do_custom = function(self)
 		putting_ability(self, "default:ice", self.run_velocity)
