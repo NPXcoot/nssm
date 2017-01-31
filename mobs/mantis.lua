@@ -49,7 +49,6 @@ mobs:register_mob("nssm:mantis", {
 	stepheight=1.1,
 	double_melee_attack = true,
 	attack_type = "dogfight",
-	die_anim = true,
 	animation = {
 		speed_normal = 20,
 		speed_run = 25,
