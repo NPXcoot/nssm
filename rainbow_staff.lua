@@ -4,6 +4,9 @@ minetest.register_entity("nssm:rainbow", {
 	velocity = 10,
 	on_step = function (self, pos, node, dtime)
 				local pos = self.object:getpos()
+					if minetest.is_protected(pos, "") then
+						return
+					end
 								local n = minetest.env:get_node(pos).name
 								if n ~= "default:nyancat_rainbow" then
 									if n=="air" then

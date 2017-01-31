@@ -22,6 +22,9 @@ mobs:register_arrow("nssm:duck_father", {
 })
 
 function duck_explosion(pos)
+	if minetest.is_protected(pos, "") then
+		return
+	end
 	pos.y = pos.y+1;
 	minetest.add_particlespawner({
 		amount = 10,

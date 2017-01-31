@@ -381,6 +381,9 @@ minetest.register_abm({
 	interval = 1,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+		if minetest.is_protected(pos, "") then
+			return
+		end
 		--local under = {x=pos.x, y=pos.y-1, z=pos.z}
 		--local n = minetest.env:get_node(under).name
 		--if n~= "air" then
@@ -485,7 +488,7 @@ minetest.register_tool('nssm:sun_sword', {
 	},
 	minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 		if puncher:get_wielded_item():get_name() == 'nssm:sun_sword' then
-			if node.name ~= "air" then
+			if node.name ~= "air" and not minetest.is_protected(pos, "") then
 				minetest.add_node(pointed_thing.above, {name = "fire:basic_flame"})
 			end
 		end
