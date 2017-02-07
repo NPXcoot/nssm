@@ -170,6 +170,9 @@ function explosion_web(pos)
 		return
 	end
 	pos.y = round(pos.y)
+	if minetest.is_protected(pos, "") then
+		return
+	end
     for i=pos.x-1, pos.x+1, 1 do
 		for j=pos.y-3, pos.y, 1 do
 			for k=pos.z-1, pos.z+1, 1 do
@@ -219,6 +222,9 @@ function explosion_thickweb(pos)
 		return
 	end
 	pos.y = round(pos.y)
+	if minetest.is_protected(pos, "") then
+		return
+	end
     for i=pos.x+0, pos.x+0, 1 do
 		for j=pos.y-2, pos.y, 1 do
 			for k=pos.z+0, pos.z+0, 1 do
@@ -251,6 +257,9 @@ mobs:register_arrow("nssm:phoenix_arrow", {
 	on_step = function(self, dtime)
 
 		local pos = self.object:getpos()
+		if minetest.is_protected(pos, "") then
+			return
+		end
 
 		local n = minetest.env:get_node(pos).name
 
@@ -356,6 +365,9 @@ mobs:register_arrow("nssm:roar_of_the_dragon", {
 			dx = math.random(-1,1)
 			dy = math.random(-1,1)
 			dz = math.random(-1,1)
+			if minetest.is_protected(p, "") then
+				return
+			end
 			local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 			minetest.env:set_node(p, {name="air"})
 		end
@@ -371,6 +383,9 @@ mobs:register_arrow("nssm:lava_arrow", {
 	-- direct hit
 	hit_player = function(self, player)
 		local pos = self.object:getpos()
+		if minetest.is_protected(pos, "") then
+			return
+		end
 		for dy=-1, 6, 1 do
 			for dx=-1, 1, 2 do
 				for dz=-1, 1, 2 do
