@@ -75,6 +75,9 @@ mobs:register_mob("nssm:mese_dragon", {
 			self.attack_rip = self.attack_rip+1
 
 			local s = self.object:getpos()
+			if minetest.is_protected(s, "") then
+				return
+			end
 			local p = self.attack:getpos()
 
 			p.y = p.y + 1.5

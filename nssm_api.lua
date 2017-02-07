@@ -345,9 +345,7 @@ function digging_attack(
 		dir = vector.normalize(dir)
 		local per = perpendicular_vector(dir)
 
-
 		local posp = vector.add(s,dir)
-
 
 		--minetest.chat_send_all("La mia posizione:"..minetest.pos_to_string(s))
 		--minetest.chat_send_all("La posizione davanti:"..minetest.pos_to_string(posp))
