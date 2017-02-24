@@ -66,6 +66,7 @@ mobs:register_mob("nssm:ant_queen", {
 
 	custom_attack = function(self)
 		self.ant_queen_counter = (self.ant_queen_counter or 0) + 1
+		--attacks every 4 seconds
 		if self.ant_queen_counter == 4 then
 			self.ant_queen_counter = 0
 			local counter = 0
@@ -83,7 +84,11 @@ mobs:register_mob("nssm:ant_queen", {
 					max_hear_distance = self.sounds.distance
 					})
 				end
-				local pos1 = {x=s.x+math.random(-3,3), y=s.y-1, z=s.z+math.random(-3,3)}
+
+				--determine where to add the mob
+				local pos1 = vector.subtract(p, s)
+				pos1 = vector.normalize(pos1)
+				pos1 = vector.add(s,vector.multiply(pos1,2))
 
 				local objects = minetest.env:get_objects_inside_radius(s, 10)
 			    for _,obj in ipairs(objects) do
