@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:duck", {
 	type = "monster",
 	hp_max = 12,
-	hp_min = 7,
+	hp_min = 11,
 	collisionbox = {-0.3, 0.00, -0.3, 0.3, 0.95, 0.3},
 	visual = "mesh",
 	mesh = "duck.x",
@@ -14,6 +14,7 @@ mobs:register_mob("nssm:duck", {
 	run_velocity = 2,
 	damage = 2,
 	jump = true,
+	jump_height = 4,
     sounds = {
 		random = "duck",
 	},
@@ -42,9 +43,9 @@ mobs:register_mob("nssm:duck", {
 	floats = 1,
 	lava_damage = 5,
 	light_damage = 0,
-	group_attack=true,
-	attack_animals=true,
-	knock_back=5,
+	group_attack = true,
+	attack_animals = true,
+	knock_back = 5,
 	blood_texture="nssm_blood.png",
 	on_rightclick = nil,
 	attack_type = "dogfight",
@@ -59,6 +60,6 @@ mobs:register_mob("nssm:duck", {
 		run_end = 40,
 		punch_start = 40,
 		punch_end = 60,
-	}
+	},
 	--pathfinding = 1,
 })

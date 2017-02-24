@@ -60,6 +60,7 @@ mobs:register_mob("nssm:mantis", {
 		run_end = 30,
 		punch_start = 40,
 		punch_end = 70,
+		speed_die = 10,
 		die_start = 110,
 		die_end = 130,
 		punch2_start = 80,

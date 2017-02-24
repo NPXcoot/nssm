@@ -60,6 +60,7 @@ mobs:register_mob("nssm:berinhog", {
 		run_end = 160,
 		punch_start = 170,
 		punch_end = 200,
+		speed_die = 10,
 		die_start = 110,
 		die_end = 130,
     }

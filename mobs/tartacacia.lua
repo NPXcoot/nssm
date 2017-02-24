@@ -51,6 +51,7 @@ mobs:register_mob("nssm:tartacacia", {
 		punch_end = 220,
 		punch2_start = 230,
 		punch2_end = 250,
+		speed_die = 10,
 		die_start = 160,
 		die_end = 180,
     },

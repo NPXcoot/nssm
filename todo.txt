@@ -1,0 +1,5 @@
+Modelli:
+ - correggere mantis che si sdraia
+
+Armi energetiche:
+ - controllo modalità creativa

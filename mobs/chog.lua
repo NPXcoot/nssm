@@ -49,6 +49,7 @@ mobs:register_mob("nssm:chog", {
 		punch_end = 240,
     	shoot_start =170,
     	shoot_end=210,
+		speed_die = 10,
 		die_start = 140,
 		die_end = 160,
     },

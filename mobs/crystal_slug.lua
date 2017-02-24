@@ -8,7 +8,7 @@ mobs:register_mob("nssm:crystal_slug", {
 	textures = {{"crystal_slug.png"}},
 	visual_size = {x=4, y=4},
 	view_range = 40,
-	floats=1,
+	floats = 1,
 	rotate = 270,
 	group_attack=true,
 	attack_animals=true,
@@ -54,6 +54,7 @@ mobs:register_mob("nssm:crystal_slug", {
 		punch_end = 150,
 		shoot_start = 100,
 		shoot_end = 150,
+		speed_die = 10,
 		die_start = 70,
 		die_end = 90,
 	}

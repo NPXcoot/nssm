@@ -42,6 +42,7 @@ mobs:register_mob("nssm:bloco", {
 	attack_animals=true,
 	knock_back=0,
 	blood_texture="stone_blood.png",
+	--Bloco is immune to stone weapons
 	immune_to={{'default:sword_stone', -2},{'default:stone', -2}, {'default:cobble', -2}, {'default:axe_stone', -2}, {'default:shovel_stone', -2}, {'default:pick_stone', -2}},
 	stepheight=1.1,
 	on_rightclick = nil,
