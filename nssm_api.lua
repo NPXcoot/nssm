@@ -450,6 +450,11 @@ function webber_ability(		--puts randomly around the block defined as w_block
 	if (nssm:virulence(self)~=0) and (math.random(1,nssm:virulence(self)) ~= 1) then return end
 
 	local pos = self.object:getpos()
+
+	if minetest.is_protected(pos, "") then
+		return
+	end
+
 	if (math.random(1,55)==1) then
 		local dx=math.random(1,radius)
 		local dz=math.random(1,radius)
