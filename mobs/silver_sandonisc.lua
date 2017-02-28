@@ -13,7 +13,7 @@ mobs:register_mob("nssm:silver_sandonisc", {
 	reach = 2,
 	fear_height = 3,
 	walk_velocity = 0.6,
-	run_velocity = 3.5,
+	run_velocity = 5,
 	damage = 3,
 --	sounds = {
 	--	random = "silver_sandonisc",
@@ -49,7 +49,18 @@ mobs:register_mob("nssm:silver_sandonisc", {
 		run_end = 70,
 		punch_start = 130,
 		punch_end = 160,
+		punch2_start = 40,
+		punch2_end = 70,
+		speed_punch2 = 40,
 		die_start = 235,
 		die_end = 255,
 	},
+	do_custom = function (self)
+		if self.other_state and self.other_state == "charge" then
+			do_charge(self)
+		end
+	end,
+	custom_attack = function (self)
+		charge_attack(self)
+	end,
 })

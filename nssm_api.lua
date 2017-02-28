@@ -890,3 +890,50 @@ function tnt_boom_nssm(pos, def, block, effects)
 		add_effects(pos, radius, drops)
 	end
 end
+
+function charge_attack(self)
+	local s = self.object:getpos()
+	local p = self.attack:getpos()
+	local vec = vector.multiply(vector.normalize(vector.subtract(p,s)),self.run_velocity)
+
+	if self.other_state and self.other_state == "charge" then 	--the mob was already charging
+		do_charge(self)
+	else
+		self.other_state = "charge"
+		vec.y = -5
+		self.charge_vec = vec
+		self.charge_dir = self.object:getyaw()
+		do_charge(self)
+		self.charge_timer = os.time()
+		minetest.after(3, function(self)
+			self.other_state = "stand"
+			self.state = "stand"
+		end,self)
+	end
+end
+
+function do_charge(self)
+	self.state = ""
+	if self.charge_vec and self.charge_dir then
+		set_animation(self, "punch2")
+		self.object:setvelocity(self.charge_vec)
+		self.object:setyaw(self.charge_dir)
+		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 0.75)
+		local _,obj
+		for _,obj in ipairs(all_objects) do
+			if obj:is_player() then
+				obj:set_hp(obj:get_hp()-1)
+				--[[obj.object:punch(self.object, 1.0, {
+					full_punch_interval = 1.0,
+					damage_groups = {fleshy = self.damage}
+				}, nil)]]
+			elseif obj:get_luaentity() and obj:get_luaentity().health and obj:get_luaentity().name ~= self.object:get_luaentity().name then
+				obj:get_luaentity().health = obj:get_luaentity().health - self.damage
+			end
+		end
+	end
+	if os.time() - self.charge_timer > 5 then
+		self.other_state = "stand"
+		self.state = "stand"
+	end
+end

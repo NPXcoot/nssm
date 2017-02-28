@@ -12,7 +12,7 @@ mobs:register_mob("nssm:river_lord", {
 	walk_velocity = 0.6,
 	rotate = 270,
 	fear_height = 4,
-	run_velocity = 4,
+	run_velocity = 5,
 	--[[sounds = {
 		random = "river_lord",
 	},]]
@@ -48,11 +48,20 @@ mobs:register_mob("nssm:river_lord", {
 		run_end = 180,
 		punch_start = 260,
 		punch_end = 280,
+		punch2_start = 230,	--charge_start
+		punch2_end = 250,	--charge_end
 		die_start = 290,
 		die_end = 310,
+		speed_die = 10,
 		--Arena di fango inizio: 190
 		--Arena di fango fine: 220
-		--Inizio carica 230
-		--Fine carica 250
     },
+	do_custom = function (self)
+		if self.other_state and self.other_state == "charge" then
+			do_charge(self)
+		end
+	end,
+	custom_attack = function (self)
+		charge_attack(self)
+	end,
 })
