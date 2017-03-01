@@ -10,7 +10,7 @@ mobs:register_mob("nssm:silver_sandonisc", {
 	makes_footstep_sound = false,
 	view_range = 17,
 	rotate = 270,
-	reach = 2,
+	reach = 5,
 	fear_height = 3,
 	walk_velocity = 0.6,
 	run_velocity = 5,

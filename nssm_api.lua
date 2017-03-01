@@ -903,8 +903,8 @@ function charge_attack(self)
 		vec.y = -5
 		self.charge_vec = vec
 		self.charge_dir = self.object:getyaw()
-		do_charge(self)
 		self.charge_timer = os.time()
+		do_charge(self)
 		minetest.after(3, function(self)
 			self.other_state = "stand"
 			self.state = "stand"
@@ -918,11 +918,12 @@ function do_charge(self)
 		set_animation(self, "punch2")
 		self.object:setvelocity(self.charge_vec)
 		self.object:setyaw(self.charge_dir)
-		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 0.75)
+		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1*self.collisionbox[5]/3)
+		--minetest.chat_send_all("Altezza: "..self.collisionbox[5])
 		local _,obj
 		for _,obj in ipairs(all_objects) do
 			if obj:is_player() then
-				obj:set_hp(obj:get_hp()-1)
+				obj:set_hp(obj:get_hp()-self.damage/5)
 				--[[obj.object:punch(self.object, 1.0, {
 					full_punch_interval = 1.0,
 					damage_groups = {fleshy = self.damage}
@@ -932,7 +933,7 @@ function do_charge(self)
 			end
 		end
 	end
-	if os.time() - self.charge_timer > 5 then
+	if self.charge_timer and os.time() - self.charge_timer > 5 then
 		self.other_state = "stand"
 		self.state = "stand"
 	end
