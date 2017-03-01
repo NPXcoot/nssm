@@ -12,7 +12,7 @@ mobs:register_mob("nssm:river_lord", {
 	walk_velocity = 0.6,
 	rotate = 270,
 	fear_height = 4,
-	run_velocity = 5,
+	run_velocity = 4,
 	--[[sounds = {
 		random = "river_lord",
 	},]]
@@ -28,7 +28,7 @@ mobs:register_mob("nssm:river_lord", {
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 5,
-	reach = 6,
+	reach = 8,
 	light_damage = 0,
 	--group_attack=true,
 	--attack_animals=true,
@@ -53,8 +53,9 @@ mobs:register_mob("nssm:river_lord", {
 		die_start = 290,
 		die_end = 310,
 		speed_die = 10,
-		--Arena di fango inizio: 190
-		--Arena di fango fine: 220
+		shoot_start = 190, 	--Arena di fango inizio: 190
+		shoot_end = 220,	--Arena di fango fine: 220
+		speed_shoot = 20,
     },
 	do_custom = function (self)
 		if self.other_state and self.other_state == "charge" then
@@ -62,6 +63,43 @@ mobs:register_mob("nssm:river_lord", {
 		end
 	end,
 	custom_attack = function (self)
-		charge_attack(self)
+		if self.mud_timer then
+			if os.time() - self.mud_timer > 15 then
+				mud_attack(self)
+			else
+				local s = self.object:getpos()
+				local p = self.attack:getpos()
+				local l = vector.length(vector.subtract(p,s))
+				charge_attack(self)
+			end
+		else
+			mud_attack(self)
+		end
 	end,
 })
+
+function mud_attack (self) -- replace soil with mud
+	self.mud_timer = os.time()
+	local radius = 10
+	set_animation(self, "shoot")
+	local s = self.object:getpos()
+	local vec = {x=radius,y=1,z=radius}
+	minetest.after(0.5, function (self)
+		local poslist = minetest.find_nodes_in_area(vector.subtract(s, vec), vector.add(s,vec), "group:crumbly")
+		for _,v in pairs(poslist) do
+			local l = vector.length(vector.subtract(v,s))
+			if l <= radius and not minetest.is_protected(v, "") then
+				minetest.set_node(v, {name="nssm:mud"})
+			end
+		end
+	end, self)
+	--[[
+	local poslist = minetest.find_nodes_in_area(vector.subtract(s, vec), vector.add(s,vec), "default:dirt")
+	for _,v in pairs(poslist) do
+		minetest.set_node(v, {name="nssm:mud"})
+	end
+	local poslist = minetest.find_nodes_in_area(vector.subtract(s, vec), vector.add(s,vec), "default:dirt_with_dry_grass")
+	for _,v in pairs(poslist) do
+		minetest.set_node(v, {name="nssm:mud"})
+	end]]
+end
