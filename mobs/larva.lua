@@ -76,11 +76,8 @@ mobs:register_mob("nssm:larva", {
 				false, --collisiondetection
 				"tnt_smoke.png" --texture
 			)
-			if math.random(1,2)==1 then
-				minetest.add_entity(pos, "nssm:mantis")
-			else
-				minetest.add_entity(pos, "nssm:mantis_beast")
-			end
+			
+			minetest.add_entity(pos, "nssm:mantis")
 			return
 		end
 	end

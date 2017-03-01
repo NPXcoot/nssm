@@ -1,5 +1,5 @@
 Modelli:
- - correggere mantis che si sdraia
+ - correggere mantis che si sdraia (la mantis dev'essere invisibile, la si vede solo quando corre o attacca!)
 
 Armi energetiche:
  - controllo modalità creativa

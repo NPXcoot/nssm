@@ -343,9 +343,12 @@ minetest.register_node("nssm:web", {
 
 minetest.register_node("nssm:mud", {
 	description = "Mud",
-	inventory_image = "mud.png",
-	tile_images = {"mud.png"} ,
+	inventory_image = "mude.png",
+	tiles = {
+		{name="mud_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=16.0}}
+	},
 	walkable = false,
+	paramtype = "light",
 	pointable = true,
 	buildable_to = false,
 	drop = "",
@@ -355,8 +358,8 @@ minetest.register_node("nssm:mud", {
 	liquid_range= 0,
 	liquid_alternative_flowing = "nssm:mud",
 	liquid_alternative_source = "nssm:mud",
-	liquid_viscosity = 20,
-	groups = {flammable=0, snappy=1, liquid=1},
+	liquid_viscosity = 10,
+	groups = {crumbly=1, liquid=1},
 })
 
 minetest.register_abm({
