@@ -206,7 +206,7 @@ minetest.register_ore({
 		clust_size     = 2,
 		height_min     = -20,
 		height_max     = 200,
-			})
+})
 
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -339,6 +339,24 @@ minetest.register_node("nssm:web", {
 	liquid_alternative_source = "nssm:web",
 	liquid_viscosity = 20,
 	groups = {flammable=2, snappy=1, liquid=1},
+})
+
+minetest.register_node("nssm:mud", {
+	description = "Mud",
+	inventory_image = "mud.png",
+	tile_images = {"mud.png"} ,
+	walkable = false,
+	pointable = true,
+	buildable_to = false,
+	drop = "",
+	drowning = 0,
+	liquid_renewable = false,
+	liquidtype = "source",
+	liquid_range= 0,
+	liquid_alternative_flowing = "nssm:mud",
+	liquid_alternative_source = "nssm:mud",
+	liquid_viscosity = 20,
+	groups = {flammable=0, snappy=1, liquid=1},
 })
 
 minetest.register_node("nssm:thick_web", {
