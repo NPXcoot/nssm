@@ -359,6 +359,20 @@ minetest.register_node("nssm:mud", {
 	groups = {flammable=0, snappy=1, liquid=1},
 })
 
+minetest.register_abm({
+	nodenames = {"nssm:mud"},
+	neighbors = {"air"},
+	interval = 15,
+	chance = 10,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local vec={x=1, y=1, z=1}
+		local poslist = minetest.find_nodes_in_area(vector.subtract(pos, vec), vector.add(pos,vec), "group:water")
+		if #poslist == 0 then
+			minetest.set_node(pos, {name="default:dirt"})
+		end
+	end
+})
+
 minetest.register_node("nssm:thick_web", {
 	description = "Thick Web",
 	inventory_image = "thick_web.png",
