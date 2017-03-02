@@ -1,5 +1,7 @@
-Modelli:
- - correggere mantis che si sdraia (la mantis dev'essere invisibile, la si vede solo quando corre o attacca!)
-
-Armi energetiche:
- - controllo modalità creativa
+Codice:
+ - Mantis deve diventare invisibile se non sta attaccando/correndo
+ - Scorpione deve fare un colpo letale con il pungiglione
+ - Il Berinhog danneggia con i suoi aculei chi lo attacca
+ - Icelizard ha un raggio d'azione troppo ampio!
+ - I Pumboom droppano gli oggetti quando esplodono!
+ - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.
