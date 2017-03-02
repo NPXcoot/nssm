@@ -918,18 +918,13 @@ function do_charge(self)
 		set_animation(self, "punch2")
 		self.object:setvelocity(self.charge_vec)
 		self.object:setyaw(self.charge_dir)
-		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1*self.collisionbox[5]/3)
-		--minetest.chat_send_all("Altezza: "..self.collisionbox[5])
+		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1.5*self.collisionbox[5]/2)
 		local _,obj
 		for _,obj in ipairs(all_objects) do
 			if obj:is_player() then
 				obj:set_hp(obj:get_hp()-self.damage/5)
-				--[[obj.object:punch(self.object, 1.0, {
-					full_punch_interval = 1.0,
-					damage_groups = {fleshy = self.damage}
-				}, nil)]]
 			elseif obj:get_luaentity() and obj:get_luaentity().health and obj:get_luaentity().name ~= self.object:get_luaentity().name then
-				obj:get_luaentity().health = obj:get_luaentity().health - self.damage
+				obj:get_luaentity().health = obj:get_luaentity().health - self.damage/5
 			end
 		end
 	end

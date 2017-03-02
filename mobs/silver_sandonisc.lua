@@ -2,7 +2,7 @@ mobs:register_mob("nssm:silver_sandonisc", {
 	type = "monster",
 	hp_max = 40,
 	hp_min = 25,
-	collisionbox = {-0.4, -0.2, -0.4, 0.4, 0.5, 0.4},
+	collisionbox = {-0.4, -0.2, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",
 	mesh = "silver_sandonisc.x",
 	textures = {{"silver_sandonisc.png"}},
@@ -14,7 +14,7 @@ mobs:register_mob("nssm:silver_sandonisc", {
 	fear_height = 3,
 	walk_velocity = 0.6,
 	run_velocity = 5,
-	damage = 3,
+	damage = 5,
 --	sounds = {
 	--	random = "silver_sandonisc",
 		--distance = 40,
