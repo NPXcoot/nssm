@@ -15,7 +15,7 @@ mobs:register_mob("nssm:black_scorpion", {
 --[[	sounds = {
 		random = "black_scorpion",
 	},]]
-	damage = 1,
+	damage = 4,
 	reach = 4,
 	jump = true,
 	drops = {
@@ -34,7 +34,7 @@ mobs:register_mob("nssm:black_scorpion", {
 	blood_texture="nssm_blood_blue.png",
 	stepheight=1.1,
 	on_rightclick = nil,
-	double_melee_attack = true,
+--	double_melee_attack = true,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 20,
@@ -52,4 +52,19 @@ mobs:register_mob("nssm:black_scorpion", {
 		die_start = 190,
 		die_end = 210,
 	},
+	custom_attack = function (self)
+		if math.random(1,100) == 1 then
+			set_animation(self, "punch2")
+			self.attack:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = self.damage*10}
+			}, nil)
+		else
+			set_animation(self, "punch")
+			self.attack:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = self.damage}
+			}, nil)
+		end
+	end,
 })
