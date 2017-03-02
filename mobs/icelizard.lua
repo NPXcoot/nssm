@@ -72,7 +72,7 @@ mobs:register_mob("nssm:icelizard", {
 		set_animation(self, "punch")
 		if (os.time()-self.icelizard_timer) > 0.9 then
 			local pos = self.object:getpos()
-			tnt_boom_nssm(pos, {damage_radius=0,radius=4,ignore_protection=false},"nssm:coldest_ice", false)
+			tnt_boom_nssm(pos, {damage_radius=0,radius=2,ignore_protection=false},"nssm:coldest_ice", false)
 			self.object:remove()
 		end
 	end,
