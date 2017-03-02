@@ -55,4 +55,34 @@ mobs:register_mob("nssm:tartacacia", {
 		die_start = 160,
 		die_end = 180,
     },
+	custom_attack = function (self)
+		local s = self.object:getpos()
+		local p = self.attack:getpos()
+		local d = vector.subtract (p,s)
+		local l = vector.length(d)
+		minetest.chat_send_all("l="..l)
+
+		if math.random(1,5) == 1 then
+			if l <= 6 then
+				set_animation(self, "punch")
+				for y = 0,3 do
+					p.y = p.y - y
+					minetest.remove_node(p)
+				end
+				self.attack:punch(self.object, 1.0, {
+					full_punch_interval = 1.0,
+					damage_groups = {fleshy = self.damage}
+				}, nil)
+			end
+		else
+			set_animation(self, "punch2")
+			self.attack:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {fleshy = self.damage}
+			}, nil)
+			if l < 4 then
+				self.attack:setpos(vector.subtract(p, {x=0, y=2, z=0}))
+			end
+		end
+	end,
 })
