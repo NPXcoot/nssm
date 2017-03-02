@@ -1,7 +1,11 @@
 Codice:
- - Mantis deve diventare invisibile se non sta attaccando/correndo
- - Scorpione deve fare un colpo letale con il pungiglione
+ - Mantis deve diventare invisibile se non sta attaccando/correndo                              -> semifatto
+ - Scorpione deve fare un colpo letale con il pungiglione                                       -> fatto (probabilità 1 su 100)
  - Il Berinhog danneggia con i suoi aculei chi lo attacca
- - Icelizard ha un raggio d'azione troppo ampio!
- - I Pumboom droppano gli oggetti quando esplodono!
- - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.
+ - Icelizard ha un raggio d'azione troppo ampio!                -> dimezzato il raggio dell'esplosione
+ - I Pumboom droppano gli oggetti quando esplodono! (Controllare se anche quelli di tenplus)
+ - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.     -> Iniziato
+
+
+Modelli:
+ - controllare animazioni mantis
