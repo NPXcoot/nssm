@@ -65,5 +65,16 @@ mobs:register_mob("nssm:mantis", {
 		die_end = 130,
 		punch2_start = 80,
 		punch2_end = 110,
-	}
+	},
+	do_custom = function (self)
+		if self.state == "attack" then
+			self.textures = {"mantis.png"}
+			self.object:set_properties(self)
+			--self.object:set_properties({textures = {{"mantis.png"}}})
+		else
+			self.textures = {"mantis-alfa.png"}
+			self.object:set_properties(self)
+		--	self.object:set_properties({textures = {{"mantis-alfa.png"}},})
+		end
+	end,
 })
