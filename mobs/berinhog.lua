@@ -63,5 +63,20 @@ mobs:register_mob("nssm:berinhog", {
 		speed_die = 10,
 		die_start = 110,
 		die_end = 130,
-    }
+    },
+	do_custom = function (self)
+		self.berinhog_timer = (self.berinhog_timer) or os.time()
+		if os.time() - self.berinhog_timer > 1 then
+			self.berinhog_timer = os.time()
+			local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1)
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					obj:set_hp(obj:get_hp()-1)
+				elseif obj:get_luaentity() and obj:get_luaentity().health and obj:get_luaentity().name ~= self.object:get_luaentity().name then
+					obj:get_luaentity().health = obj:get_luaentity().health - 1
+				end
+			end
+		end
+	end
 })
