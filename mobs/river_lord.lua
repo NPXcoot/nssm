@@ -93,13 +93,4 @@ function mud_attack (self) -- replace soil with mud
 			end
 		end
 	end, self)
-	--[[
-	local poslist = minetest.find_nodes_in_area(vector.subtract(s, vec), vector.add(s,vec), "default:dirt")
-	for _,v in pairs(poslist) do
-		minetest.set_node(v, {name="nssm:mud"})
-	end
-	local poslist = minetest.find_nodes_in_area(vector.subtract(s, vec), vector.add(s,vec), "default:dirt_with_dry_grass")
-	for _,v in pairs(poslist) do
-		minetest.set_node(v, {name="nssm:mud"})
-	end]]
 end
