@@ -48,9 +48,8 @@ mobs:register_mob("nssm:phoenix", {
 	blood_amount=50,
 	on_rightclick = nil,
 	fly = true,
-	attack_type = "shoot",
-	arrow = "nssm:phoenix_arrow",
-	reach = 1,
+	attack_type = "dogfight",
+	reach = 15,
 	shoot_interval = 4,
 	animation = {
 		speed_normal = 25,
@@ -65,5 +64,68 @@ mobs:register_mob("nssm:phoenix", {
 		punch_end = 110,
 		shoot_start = 80,
 		shoot_end = 110,
-	}
+	},
+	custom_attack = function(self)
+		local p = self.attack:getpos()
+		local s = self.object:getpos()
+		local vel = vector.subtract(p,s)
+
+		minetest.add_particlespawner(
+			125, --amount
+			0.5, --time
+			s, --minpos
+			s, --maxpos
+			vector.multiply(vel, 0.5), --minvel
+			vector.multiply(vel, 1.4), --maxvel
+			{x=0,y=0,z=0}, --minacc
+			{x=0,y=0,z=0}, --maxacc
+			2, --minexptime
+			4, --maxexptime
+			10, --minsize
+			20, --maxsize
+			true, --collisiondetection
+			"phoenix_fire.png" --texture
+		)
+
+
+		--local dir = placer:get_look_dir()
+		--local playerpos = placer:getpos()
+		local obj = minetest.add_entity(s, "nssm:phoenix_dart")
+		local ran = math.random(7,14)/10
+		local vec = vector.multiply(vel, ran)
+		obj:setvelocity(vec)
+
+		minetest.after(0.5, function()
+			local p = self.attack:getpos()
+			local vel = vector.subtract(p,s)
+			local obj = minetest.add_entity(s, "nssm:phoenix_dart")
+			local ran = math.random(7,14)/10
+			local vec = vector.multiply(vel, ran)
+			obj:setvelocity(vec)
+		end)
+
+	end,
+})
+
+
+minetest.register_entity("nssm:phoenix_dart", {
+	textures = {"transparent.png"},
+	on_step = function(self, dtime)
+		self.timer = (self.timer) or os.time()
+		self.attack = (self.attack) or os.time()
+		if os.time() - self.timer > 4 then
+			self.object:remove()
+		end
+		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1)
+		local players = {}
+		local _,obj
+		for _,obj in ipairs(all_objects) do
+			if obj:is_player() then
+				obj:punch(self.object, 1.0, {
+					full_punch_interval = 1.0,
+					damage_groups = {fleshy = 1}
+				}, nil)
+			end
+		end
+	end,
 })

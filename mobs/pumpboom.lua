@@ -15,8 +15,8 @@ mobs:register_mob("nssm:pumpboom_small", {
 	walk_velocity = 1,
 	run_velocity = 2.5,
     sounds = {
-    explode = "tnt_explode",
-	random = "pumpboom",
+	    explode = "tnt_explode",
+		random = "pumpboom",
 	},
 	damage = 1.5,
 	jump = true,
@@ -74,8 +74,8 @@ mobs:register_mob("nssm:pumpboom_medium", {
 	explosion_radius = 3,
 	run_velocity = 2.5,
     sounds = {
-    explode = "tnt_explode",
-	random = "pumpboom",
+	    explode = "tnt_explode",
+		random = "pumpboom",
 	},
 	damage = 1.5,
 	jump = true,
@@ -133,8 +133,8 @@ mobs:register_mob("nssm:pumpboom_large", {
 	walk_velocity = 2,
 	run_velocity = 3,
     sounds = {
-    explode = "tnt_explode",
-	random = "pumpboom",
+	    explode = "tnt_explode",
+		random = "pumpboom",
 	},
 	damage = 1.5,
 	jump = true,

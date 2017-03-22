@@ -67,6 +67,7 @@ dofile(path.."/mobs/tartacacia.lua")
 dofile(path.."/mobs/uloboros.lua")
 dofile(path.."/mobs/werewolf.lua")
 dofile(path.."/mobs/white_werewolf.lua")
+dofile(path.."/mobs/salamander.lua")
 
 --Final Boss
 dofile(path.."/mobs/mese_dragon.lua")
