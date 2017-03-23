@@ -377,6 +377,28 @@ mobs:register_arrow("nssm:pumpkid_bomb", {
 	end
 })
 
+--Lava_block bomb
+
+mobs:register_arrow("nssm:lava_block_bomb", {
+	visual = "cube",
+	visual_size = {x = 1, y = 1},
+	textures = {"default_lava.png","default_lava.png", "default_lava.png", "default_lava.png", "default_lava.png", "default_lava.png"},
+	velocity = 8,
+	-- direct hit
+	hit_player = function(self, player)
+		local p = player:getpos()
+        if not minetest.is_protected(p, "") or not minetest.get_item_group(minetest.get_node(p).name, "unbreakable") == 1 then
+            minetest.set_node(p, {name="default:lava_source"})
+        end
+	end,
+
+	hit_node = function(self, pos, node)
+        if not minetest.is_protected(pos, "") or not minetest.get_item_group(minetest.get_node(pos).name, "unbreakable") == 1 then
+            minetest.set_node(pos, {name="default:lava_source"})
+        end
+	end
+})
+
 --
 mobs:register_arrow("nssm:roar_of_the_dragon", {
 	visual = "sprite",

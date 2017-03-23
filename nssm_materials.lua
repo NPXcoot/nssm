@@ -1901,7 +1901,9 @@ function nssm_register_egg (name, descr)
 			core.after(0.1, function()
 				minetest.add_entity(pos1, "nssm:".. name)
 			end)
-			itemstack:take_item()
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:take_item()
+			end
 			return itemstack
 		end,
 	})
@@ -1917,7 +1919,9 @@ function nssm_register_egg2 (name, descr)				--mobs you can't catch
 			core.after(0.1, function()
 				minetest.add_entity(pos1, "nssm:".. name)
 			end)
-			itemstack:take_item()
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:take_item()
+			end
 			return itemstack
 		end,
 	})
@@ -1985,6 +1989,7 @@ nssm_register_egg2 ('morgut', 'Morgut')
 nssm_register_egg2 ('morde', 'Morde')
 nssm_register_egg2 ('morlu', 'Morlu')
 nssm_register_egg2 ('morwa', 'Morwa')
+nssm_register_egg ('salamander', 'Salamander')
 --nssm_register_egg ('morvalar', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
@@ -2013,7 +2018,9 @@ minetest.register_craftitem("nssm:mese_egg", {
 		core.after(0.4, function()
 			minetest.add_entity(pos1, "nssm:mese_dragon")
 		end)
-		itemstack:take_item()
+		if not minetest.setting_getbool("creative_mode") then
+			itemstack:take_item()
+		end
 		return itemstack
 	end,
 })

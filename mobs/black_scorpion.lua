@@ -53,7 +53,7 @@ mobs:register_mob("nssm:black_scorpion", {
 		die_end = 210,
 	},
 	custom_attack = function (self)
-		if math.random(1,100) == 1 then
+		if math.random(1,30) == 1 then
 			set_animation(self, "punch2")
 			self.attack:punch(self.object, 1.0, {
 				full_punch_interval = 1.0,

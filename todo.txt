@@ -1,20 +1,16 @@
 Codice:
- - Mantis deve diventare invisibile se non sta attaccando/correndo       (texture e animazioni Emmo)                       -> semifatto
- - Scorpione deve fare un colpo letale con il pungiglione                                       -> fatto (probabilità 1 su 30 Fra)
- - Il Berinhog danneggia con i suoi aculei chi lo attacca -> fatto
- - Icelizard ha un raggio d'azione troppo ampio!                -> dimezzato il raggio dell'esplosione
+ - Mantis problema animazioni (fra)
  - I Pumboom droppano gli oggetti quando esplodono! (Controllare se anche quelli di tenplus, Fra)
  - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.     -> Iniziato Fra
  - Attacco lanciafango del chog
- - Nuovo modo di attaccare della Fenice
+ - Nuovo modo di attaccare della Fenice                         ->semifatto
  - Icelamander lagga malissimo (controllare anche i suoi amici)
  - Mese Dragon da rifare (lagga, più piccolo, non attacca)
  - Envy sword scambia life energy
- - Uova in modalità creativa
  - Mantis beast
  - Ahuizotl (?)
  - Albino Spider
- - Salamander (dogshootta lava (un blocco))
+ - Salamander (dogshootta lava (un blocco))                     ->semifatto
  - Flust mangia le armature di metallo e non viene danneggiato dalle armi di metallo
  - Spawn
  - Togliere il coccodrillo e la swimming duck dai fiumi
@@ -28,7 +24,6 @@ Emmo vorrebbe:
 
 
 Modelli:
- -Animazioni Salamandra
  -Animazioni Ahuizotl
  -Animazioni Albino Spider
  -Flust
