@@ -1980,6 +1980,7 @@ nssm_register_egg2 ('morde', 'Morde')
 nssm_register_egg2 ('morlu', 'Morlu')
 nssm_register_egg2 ('morwa', 'Morwa')
 nssm_register_egg ('salamander', 'Salamander')
+nssm_register_egg ('flust', 'Flust')
 --nssm_register_egg ('morvalar', 'Morvalar')
 
 minetest.register_craftitem("nssm:mese_egg", {
