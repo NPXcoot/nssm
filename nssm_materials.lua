@@ -1242,49 +1242,39 @@ minetest.register_tool("nssm:sword_of_envy", {
 	            if player_inv:is_empty('main') then
 	                --minetest.chat_send_all("Inventory empty")
 	            else
-	                local found = 0
-	                for i = 1,32 do
-	                    local items = player_inv:get_stack('main', i)
-	                    local n = items:get_name()
-	                    if n == "nssm:energy_globe" then
-	                        found = i
-	                        break
-	                    end
-	                end
-	                if found == 0 then
-	                    minetest.chat_send_player(pname, "You haven't got any Energy Globe!")
-	                    return
-	                else
-	                    if (obj:is_player()) then
-	                        --minetest.chat_send_all("Giocatore")
-	                        if (obj:get_player_name()~=dropper:get_player_name()) then
-	                            local hpp = obj:get_hp()
+					local hp_num = nil
+					if (obj:is_player()) and (obj:get_player_name()~=dropper:get_player_name()) then
+						hp_num = obj:get_hp()
+					else
+						if obj:get_luaentity() and (obj:get_luaentity().health)  then
+							hp_num = obj:get_luaentity().health
+						end
+					end
+					if hp_num ~= nil then
+						minetest.chat_send_all("hp_num = "..hp_num)
+						local stack = {name="nssm:life_energy", count=hp_num, wear=0, metadata=""}
+						if player_inv:contains_item("main", stack) then
+							--minetest.chat_send_all("trovato!")
+
+							if obj:is_player() and (obj:get_player_name()~=dropper:get_player_name()) then
 								obj:set_hp(dropper:get_hp())
-								dropper:set_hp(hpp)
-	                            flag = 1
-
-	                            local items = player_inv:get_stack('main', found)
-	                            items:take_item()
-	                            player_inv:set_stack('main', found, items)
-	                        end
-	                    else
-	                        if (obj:get_luaentity().health) then
-								local hpp = obj:get_luaentity().health
-								obj:get_luaentity().health = dropper:get_hp()
-								if hpp > 20 then
-									dropper:set_hp(20)
-								else
-									dropper:set_hp(hpp)
+								dropper:set_hp(hp_num)
+							else
+								if obj:get_luaentity() and (obj:get_luaentity().health) then
+									obj:get_luaentity().health = dropper:get_hp()
+									if hp_num > 20 then
+										dropper:set_hp(20)
+									else
+										dropper:set_hp(hp_num)
+									end
 								end
-	                            check_for_death(obj:get_luaentity())
-	                            flag = 1
+							end
 
-	                            local items = player_inv:get_stack('main', found)
-	                            items:take_item()
-	                            player_inv:set_stack('main', found, items)
-	                        end
-	                    end
-	                end
+							player_inv:remove_item("main", stack)
+						else
+							minetest.chat_send_player(dropper:get_player_name(), "You haven't enough life energy!")
+						end
+					end
 	            end
 	        end
 	    end

@@ -69,6 +69,7 @@ mobs:register_mob("nssm:phoenix", {
 		local p = self.attack:getpos()
 		local s = self.object:getpos()
 		local vel = vector.subtract(p,s)
+		set_animation(self, "shoot")
 
 		minetest.add_particlespawner(
 			125, --amount
@@ -87,23 +88,35 @@ mobs:register_mob("nssm:phoenix", {
 			"phoenix_fire.png" --texture
 		)
 
-
-		--local dir = placer:get_look_dir()
-		--local playerpos = placer:getpos()
 		local obj = minetest.add_entity(s, "nssm:phoenix_dart")
 		local ran = math.random(7,14)/10
 		local vec = vector.multiply(vel, ran)
 		obj:setvelocity(vec)
 
 		minetest.after(0.5, function()
-			local p = self.attack:getpos()
-			local vel = vector.subtract(p,s)
-			local obj = minetest.add_entity(s, "nssm:phoenix_dart")
-			local ran = math.random(7,14)/10
-			local vec = vector.multiply(vel, ran)
-			obj:setvelocity(vec)
+			if self.attack then
+				local p = self.attack:getpos()
+				local vel = vector.subtract(p,s)
+				local obj = minetest.add_entity(s, "nssm:phoenix_dart")
+				local ran = math.random(7,14)/10
+				local vec = vector.multiply(vel, ran)
+				obj:setvelocity(vec)
+			end
 		end)
-
+	end,
+	do_custom = function (self)
+		--minetest.chat_send_all(s.y.."-"..p.y.."="..(s.y-p.y))
+		if self.state == "attack" then
+			if self.attack then
+				local s = self.object:getpos()
+				local p = self.attack:getpos()
+				if (s.y - p.y ) < 10 then
+					local v = self.object:getvelocity()
+					v.y = 10
+					self.object:setvelocity(v)
+				end
+			end
+		end
 	end,
 })
 
@@ -116,16 +129,23 @@ minetest.register_entity("nssm:phoenix_dart", {
 		if os.time() - self.timer > 4 then
 			self.object:remove()
 		end
-		local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 1)
+		local p = self.object:getpos()
+		local all_objects = minetest.get_objects_inside_radius(p, 1)
 		local players = {}
 		local _,obj
 		for _,obj in ipairs(all_objects) do
 			if obj:is_player() then
 				obj:punch(self.object, 1.0, {
 					full_punch_interval = 1.0,
-					damage_groups = {fleshy = 1}
+					damage_groups = {fleshy = 7}
 				}, nil)
+				self.object:remove()
 			end
+		end
+
+		local node = minetest.get_node(p).name
+		if node ~= "air" then
+			self.object:remove()
 		end
 	end,
 })
