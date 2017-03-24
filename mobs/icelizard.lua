@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:icelizard", {
 	type = "monster",
-	hp_max = 24,
-	hp_min = 18,
+	hp_max = 15,
+	hp_min = 13,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 0.60, 0.5},
 	visual = "mesh",
 	mesh = "icelizard.x",

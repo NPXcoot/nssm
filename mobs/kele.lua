@@ -16,7 +16,7 @@ mobs:register_mob("nssm:kele", {
 	--[[sounds = {
 		random = "kele",
 	},]]
-	damage = 5,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

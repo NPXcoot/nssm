@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:signosigno", {
 	type = "monster",
-	hp_max = 20,
+	hp_max = 12,
 	hp_min = 8,
 	collisionbox = {-0.2, 0.00, -0.2, 0.2, 1.6, 0.2},
 	visual = "mesh",
@@ -13,7 +13,7 @@ mobs:register_mob("nssm:signosigno", {
 	fear_height = 4,
 	run_velocity = 2.5,
 	rotate = 270,
-	damage = 4,
+	damage = 3,
 	reach = 1.5,
 	jump = true,
 	drops = {
@@ -22,7 +22,7 @@ mobs:register_mob("nssm:signosigno", {
 		min = 1,
 		max = 2,},
 		{name = "nssm:slothful_soul_fragment",
-		chance = 20,
+		chance = 60,
 		min = 1,
 		max = 1,},
 	},

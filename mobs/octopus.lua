@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:octopus", {
 	type = "monster",
-	hp_max = 32,
-	hp_min = 25,
+	hp_max = 24,
+	hp_min = 22,
 	collisionbox = {-0.9, -0.5, -0.9, 0.9, 0.92, 0.9},
 	visual = "mesh",
 	mesh = "octopus.x",

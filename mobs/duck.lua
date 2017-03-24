@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:duck", {
 	type = "monster",
-	hp_max = 12,
-	hp_min = 11,
+	hp_max = 9,
+	hp_min = 8,
 	collisionbox = {-0.3, 0.00, -0.3, 0.3, 0.95, 0.3},
 	visual = "mesh",
 	mesh = "duck.x",
@@ -12,7 +12,7 @@ mobs:register_mob("nssm:duck", {
 	walk_velocity = 1,
 	reach =1.5,
 	run_velocity = 2,
-	damage = 2,
+	damage = 1,
 	jump = true,
 	jump_height = 4,
     sounds = {

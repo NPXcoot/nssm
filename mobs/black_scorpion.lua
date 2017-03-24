@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:black_scorpion", {
 	type = "monster",
-	hp_max = 28,
+	hp_max = 24,
 	hp_min = 17,
 	collisionbox = {-0.5, 0.00, -0.5, 0.5, 0.8, 0.5},
 	visual = "mesh",

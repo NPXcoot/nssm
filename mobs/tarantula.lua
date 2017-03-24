@@ -141,5 +141,7 @@ mobs:register_mob("nssm:tarantula_propower", {
 		run_end = 160,
 		punch_start = 180,
 		punch_end = 200,
+		die_start = 250,
+		die_end = 270,
 	}
 })

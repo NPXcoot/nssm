@@ -61,5 +61,7 @@ mobs:register_mob("nssm:crab", {
 		run_end = 140,
 		punch_start = 90,
 		punch_end = 110,
+		die_start = 150,
+		die_end = 170,
 	}
 })

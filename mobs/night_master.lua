@@ -132,8 +132,8 @@ mobs:register_mob("nssm:night_master_2", {
 
 mobs:register_mob("nssm:night_master_1", {
 	type = "monster",
-	hp_max = 70,
-	hp_min = 70,
+	hp_max = 80,
+	hp_min = 80,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "night_master_1.x",

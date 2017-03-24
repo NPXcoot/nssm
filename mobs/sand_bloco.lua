@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:sand_bloco", {
 	type = "monster",
-	hp_max = 24,
+	hp_max = 20,
 	hp_min = 17,
 	collisionbox = {-0.5, -0.2, -0.5, 0.5, 1.3, 0.5},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:sand_bloco", {
     sounds = {
 		random = "bloco",
 	},
-	damage = 4,
+	damage = 3,
 	reach = 1.5,
 	jump = true,
 	drops = {

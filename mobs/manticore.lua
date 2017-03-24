@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:manticore", {
 	type = "monster",
-	hp_max = 55,
-	hp_min = 34,
+	hp_max = 42,
+	hp_min = 40,
 	collisionbox = {-0.8, -0.85, -0.8, 0.8, 1.9, 0.8},
 	visual = "mesh",
 	mesh = "manticore.x",
@@ -15,7 +15,7 @@ mobs:register_mob("nssm:manticore", {
 	sounds = {
 		random = "manticore",
 	},
-	damage = 6,
+	damage = 5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

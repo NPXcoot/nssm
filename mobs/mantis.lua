@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:mantis", {
 	type = "monster",
-	hp_max = 31,
+	hp_max = 26,
 	hp_min = 24,
 	collisionbox = {-0.5, 0.00, -0.5, 0.5, 2.30, 0.5},
 	visual = "mesh",
@@ -66,7 +66,7 @@ mobs:register_mob("nssm:mantis", {
 		punch2_start = 80,
 		punch2_end = 110,
 	},
-	do_custom = function (self)
+--[[	do_custom = function (self)
 		if self.state == "attack" then
 			self.textures = {"mantis.png"}
 			self.object:set_properties(self)
@@ -76,5 +76,5 @@ mobs:register_mob("nssm:mantis", {
 			self.object:set_properties(self)
 		--	self.object:set_properties({textures = {{"mantis-alfa.png"}},})
 		end
-	end,
+	end,]]
 })

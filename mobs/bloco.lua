@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:bloco", {
 	type = "monster",
-	hp_max = 20,
+	hp_max = 18,
 	hp_min = 14,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 1.2, 0.5},
 	visual = "mesh",

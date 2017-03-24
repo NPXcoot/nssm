@@ -16,7 +16,7 @@ mobs:register_mob("nssm:ant_soldier", {
     sounds = {
 		random = "ant",
 	},
-	damage = 6,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -60,5 +60,7 @@ mobs:register_mob("nssm:ant_soldier", {
 		run_end = 130,
 		punch_start = 60,
 		punch_end = 80,
+		die_start = 140,
+		die_end = 160,
 	}
 })

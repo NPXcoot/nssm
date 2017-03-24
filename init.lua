@@ -7,6 +7,7 @@ nssm.multimobs = tonumber(minetest.setting_get('multimobs')) or 1000
 dofile(path.."/spawn.lua")
 
 --Mobs
+dofile(path.."/mobs/albino_spider.lua")
 dofile(path.."/mobs/ant_queen.lua")
 dofile(path.."/mobs/ant_soldier.lua")
 dofile(path.."/mobs/ant_worker.lua")
@@ -16,9 +17,13 @@ dofile(path.."/mobs/black_widow.lua")
 dofile(path.."/mobs/bloco.lua")
 dofile(path.."/mobs/chog.lua")
 dofile(path.."/mobs/crab.lua")
+<<<<<<< HEAD
+--dofile(path.."/mobs/crocodile.lua")
+=======
+>>>>>>> 9df90787cb157b1f09b862b7f1cda1899db867ae
 dofile(path.."/mobs/crystal_slug.lua")
 dofile(path.."/mobs/daddy_long_legs.lua")
-dofile(path.."/mobs/dolidrosaurus.lua")
+--dofile(path.."/mobs/dolidrosaurus.lua")
 dofile(path.."/mobs/duck.lua")
 dofile(path.."/mobs/duckking.lua")
 dofile(path.."/mobs/echidna.lua")
@@ -66,8 +71,8 @@ dofile(path.."/mobs/swimming_duck.lua")
 dofile(path.."/mobs/tarantula.lua")
 dofile(path.."/mobs/tartacacia.lua")
 dofile(path.."/mobs/uloboros.lua")
-dofile(path.."/mobs/werewolf.lua")
-dofile(path.."/mobs/white_werewolf.lua")
+--dofile(path.."/mobs/werewolf.lua")
+--dofile(path.."/mobs/white_werewolf.lua")
 
 
 --Final Boss

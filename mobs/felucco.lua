@@ -11,7 +11,8 @@ mobs:register_mob("nssm:felucco", {
 	view_range = 30,
 	walk_velocity = 1,
 	fear_height = 4,
-	run_velocity = 5,
+	rotate = 90,
+	run_velocity = 4,
 	specific_attack = {"player", "nssm:kele"},
 	sounds = {
 		random = "felucco",
@@ -59,5 +60,7 @@ mobs:register_mob("nssm:felucco", {
 		run_end = 160,
 		punch_start = 200,
 		punch_end = 240,
+		die_start = 250,
+		die_end = 260,
     }
 })

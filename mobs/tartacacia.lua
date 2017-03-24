@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:tartacacia", {
 	type = "monster",
-	hp_max = 36,
-	hp_min = 27,
+	hp_max = 360,
+	hp_min = 360,
 	collisionbox = {-2, 0, -2, 2, 3, 2},
 	visual = "mesh",
 	mesh = "tartacacia.x",
@@ -22,10 +22,10 @@ mobs:register_mob("nssm:tartacacia", {
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
-		min = 3,
-		max = 4},
+		min = 33,
+		max = 43},
     },
-	armor = 70,
+	armor = 50,
 	drawtype = "front",
 	water_damage = 2,
 	lava_damage = 5,
@@ -37,7 +37,6 @@ mobs:register_mob("nssm:tartacacia", {
 	stepheight=2.1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
-	specific_attack = {"player", "nssm:felucco"},
 	animation = {
 		speed_normal = 20,
 		speed_run = 40,

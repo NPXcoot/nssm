@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:moonheron", {
 	type = "monster",
-	hp_max = 33,
+	hp_max = 25,
 	hp_min = 22,
 	collisionbox = {-0.45, -0.3, -0.45, 0.45, 0.3, 0.45},
 	visual = "mesh",
@@ -17,7 +17,7 @@ mobs:register_mob("nssm:moonheron", {
 		random = "moonheron",
 		distance =40,
 	},
-	damage = 5,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

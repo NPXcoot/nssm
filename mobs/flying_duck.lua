@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:flying_duck", {
 	type = "monster",
-	hp_max = 20,
+	hp_max = 13,
 	hp_min = 10,
 	collisionbox = {-0.3, -0.2, -0.3, 0.3, 0.2, 0.3},
 	visual = "mesh",
@@ -15,7 +15,7 @@ mobs:register_mob("nssm:flying_duck", {
 	sounds = {
 		random = "duck",
 	},
-	damage = 3,
+	damage = 2,
 	reach = 2,
 	jump = true,
 	drops = {

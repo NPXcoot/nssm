@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:chog", {
 	type = "monster",
-	hp_max = 36,
-	hp_min = 27,
+	hp_max = 25,
+	hp_min = 21,
 	collisionbox = {-0.4, 0, -0.4, 0.4, 1.4, 0.4},
 	visual = "mesh",
 	mesh = "chog.x",

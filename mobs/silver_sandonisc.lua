@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:silver_sandonisc", {
 	type = "monster",
-	hp_max = 40,
+	hp_max = 33,
 	hp_min = 25,
 	collisionbox = {-0.4, -0.2, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",

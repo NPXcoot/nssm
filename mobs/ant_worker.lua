@@ -1,8 +1,8 @@
 mobs:register_mob("nssm:ant_worker", {
 	type = "monster",
 	passive = true,
-	hp_max = 24,
-	hp_min = 18,
+	hp_max = 15,
+	hp_min = 13,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.5, 0.4},
 	visual = "mesh",
 	mesh = "ant_worker.x",
@@ -13,7 +13,7 @@ mobs:register_mob("nssm:ant_worker", {
 	fear_height = 4,
 	walk_velocity = 0.5,
 	run_velocity = 2,
-  	rotate = 270,
+  rotate = 270,
 	sounds = {
 		random = "ant",
 	},
@@ -60,5 +60,7 @@ mobs:register_mob("nssm:ant_worker", {
 		run_end = 160,
 		punch_start = 50,
 		punch_end = 70,
+		die_start = 80,
+		die_end = 100,
 	}
 })

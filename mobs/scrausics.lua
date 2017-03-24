@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:scrausics", {
 	type = "monster",
-	hp_max = 33,
+	hp_max = 25,
 	hp_min = 22,
 	collisionbox = {-0.4, -0.3, -0.4, 0.4, 0.3, 0.4},
 	visual = "mesh",
@@ -17,7 +17,7 @@ mobs:register_mob("nssm:scrausics", {
 		random = "scrausics",
 		distance = 40,
 	},
-	damage = 4,
+	damage = 3,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

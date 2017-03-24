@@ -52,6 +52,8 @@ mobs:register_mob("nssm:larva", {
 		run_end = 160,
 		punch_start = 180,
 		punch_end = 230,
+		die_start = 240,
+		die_end = 260,
 	},
 	do_custom = function (self)
 		self.metatimer = (self.metatimer) or os.time()
@@ -76,7 +78,7 @@ mobs:register_mob("nssm:larva", {
 				false, --collisiondetection
 				"tnt_smoke.png" --texture
 			)
-			
+
 			minetest.add_entity(pos, "nssm:mantis")
 			return
 		end

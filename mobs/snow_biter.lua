@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:snow_biter", {
 	type = "monster",
-	hp_max = 24,
+	hp_max = 18,
 	hp_min = 15,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 0.60, 0.5},
 	visual = "mesh",

@@ -62,6 +62,8 @@ mobs:register_mob("nssm:ant_queen", {
 		run_end = 160,
 		punch_start = 170,
 		punch_end = 190,
+		die_start = 200,
+		die_end = 220,
 	},
 
 	custom_attack = function(self)

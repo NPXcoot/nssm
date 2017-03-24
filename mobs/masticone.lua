@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:masticone", {
 	type = "monster",
-	hp_max = 25,
-	hp_min = 24,
+	hp_max = 18,
+	hp_min = 17,
 	collisionbox = {-0.45, 0.00, -0.45, 0.45, 0.40, 0.45},
 	visual = "mesh",
 	mesh = "masticone.x",
@@ -17,7 +17,7 @@ mobs:register_mob("nssm:masticone", {
   	sounds = {
 		random = "masticone",
 	},
-	damage = 5,
+	damage = 7,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",

@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:daddy_long_legs", {
 	type = "monster",
-	hp_max = 22,
-	hp_min = 16,
+	hp_max = 14,
+	hp_min = 12,
 	collisionbox = {-0.4, 0.00, -0.4, 0.4, 0.6, 0.4},
 	visual = "mesh",
 	mesh = "daddy_long_legs.x",

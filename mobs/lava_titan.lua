@@ -11,7 +11,7 @@ mobs:register_mob("nssm:lava_titan", {
 	view_range = 20,
 	fear_height = 4,
 	lifetimer = 500,
-	walk_velocity = 0.5,
+	walk_velocity = 0.3,
 	run_velocity = 1.3,
 	floats = 1,
 	sounds = {

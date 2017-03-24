@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:spiderduck", {
 	type = "monster",
-	hp_max = 35,
+	hp_max = 27,
 	hp_min = 24,
 	collisionbox = {-0.6, -0.8, -0.6, 0.6, 0.4, 0.5},
 	visual = "mesh",
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:spiderduck", {
     sounds = {
 		random = "duck",
 	},
-	damage = 6,
+	damage = 5,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
