@@ -28,7 +28,7 @@ if mm ~= 0 then
 	    mobs:spawn_specific("nssm:duckking", {"default:dirt_with_grass"}, {"group:flora"}, 10, 20, 300, 10000000/mm, 1, -31000, 20)
 	    mobs:spawn_specific("nssm:enderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 900000/mm, 1, -31000, 20)
 	    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:leaves"}, 10, 20, 120, 24000000/mm, 1, 1, 25)
-	  	mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 6000000/mm, 1, 1, 25)
+	    mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 6000000/mm, 1, 1, 25)
 	    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 45, 850000/mm, 1, -31000, 20)
 	    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000000/mm, 1, -31000, 20)
 
@@ -74,10 +74,7 @@ if mm ~= 0 then
 		  mobs:spawn_specific("nssm:flying_duck", {"air"}, {"group:flora"}, 10, 20, 120, 25000000/mm, 1, 1, 40)
 	    mobs:spawn_specific("nssm:spiderduck", {"default:dirt_with_grass"}, {"group:flora"}, 0, 10, 120, 5000000/mm, 1, -31000, 45)
 	    mobs:spawn_specific("nssm:swimming_duck", {"default:water_source"}, {"default:water_source"}, 0, 20, 60, 45000000/mm, 1, -31000, 40)
-<<<<<<< HEAD
 	   	--mobs:spawn_specific("nssm:swimming_duck", {"default:river_water_source"}, {"default:sand","default:river_water_source"}, 0, 20, 60, 3000000/mm, 1, -31000, 300)
-=======
->>>>>>> 9df90787cb157b1f09b862b7f1cda1899db867ae
 
 	    -- MOUNTAINS
 	    mobs:spawn_specific("nssm:echidna", {"default:dirt_with_grass"}, {"default:dirt_with_grass"}, 0, 20, 200, 200000000/mm, 1, 50, 31000)
@@ -139,9 +136,6 @@ if mm ~= 0 then
 
 	-- SEA
 	mobs:spawn_specific("nssm:crab", {"default:sand"}, {"default:water_source"}, 0, 20, 60, 4000000/mm, 1, -31000, 31000)
-	--mobs:spawn_specific("nssm:crocodile", {"default:sand","default:water_source"}, {"default:water_source"}, 0, 20, 100, 35000000/mm, 1, -31000, 31000)
-	--mobs:spawn_specific("nssm:crocodile", {"default:sand","default:river_water_source"}, {"default:river_water_source"}, 0, 20, 60, 12000000/mm, 1, -31000, 31000)
-	mobs:spawn_specific("nssm:dolidrosaurus", {"default:water_source"}, {"default:water_source"}, 0, 20, 100, 35000000/mm, 1, -31000, -1)
 	mobs:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_source"}, 0, 20, 400, 500000000/mm, 1, -31000, 0)
 	mobs:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 80, 38000000/mm, 1, -31000, 0)
 

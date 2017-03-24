@@ -17,10 +17,6 @@ dofile(path.."/mobs/black_widow.lua")
 dofile(path.."/mobs/bloco.lua")
 dofile(path.."/mobs/chog.lua")
 dofile(path.."/mobs/crab.lua")
-<<<<<<< HEAD
---dofile(path.."/mobs/crocodile.lua")
-=======
->>>>>>> 9df90787cb157b1f09b862b7f1cda1899db867ae
 dofile(path.."/mobs/crystal_slug.lua")
 dofile(path.."/mobs/daddy_long_legs.lua")
 --dofile(path.."/mobs/dolidrosaurus.lua")
