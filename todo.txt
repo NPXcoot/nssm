@@ -3,17 +3,14 @@ Codice:
  - I Pumboom droppano gli oggetti quando esplodono! (Controllare se anche quelli di tenplus, Fra)
  - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.     -> Iniziato Fra
  - Attacco lanciafango del chog
- - Nuovo modo di attaccare della Fenice                         ->semifatto
  - Icelamander lagga malissimo (controllare anche i suoi amici)
  - Mese Dragon da rifare (lagga, più piccolo, non attacca)
- - Envy sword scambia life energy
  - Mantis beast
  - Ahuizotl (?)
  - Albino Spider
  - Salamander (dogshootta lava (un blocco))                     ->semifatto
  - Flust mangia le armature di metallo e non viene danneggiato dalle armi di metallo
- - Spawn
- - Togliere il coccodrillo e la swimming duck dai fiumi
+ - Spawn mostri nuovi
  - Danno River Lord e Sandonisc
  - Silversand Dragon (?)
 
