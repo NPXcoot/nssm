@@ -57,7 +57,25 @@ local function search_on_step2(
     local obj_p = nil
     local vec_min = nil
     for _,obj in ipairs(objects) do
-        if (obj:is_player()) then
+        if ((obj:is_player()) or (obj:get_luaentity() and (
+                    (obj:get_luaentity().name == "mese_dart") or
+                    (obj:get_luaentity().name == "phoenix_dart") or
+                    (obj:get_luaentity().name == "duck_father") or
+                    (obj:get_luaentity().name == "thickwebball") or
+                    (obj:get_luaentity().name == "webball") or
+                    (obj:get_luaentity().name == "super_gas") or
+                    (obj:get_luaentity().name == "lava_arrow") or
+                    (obj:get_luaentity().name == "snow_arrow") or
+                    (obj:get_luaentity().name == "spine") or
+                    (obj:get_luaentity().name == "mese_dart") or
+                    (obj:get_luaentity().name == "morarrow") or
+                    (obj:get_luaentity().name == "lava_block_bomb") or
+                    (obj:get_luaentity().name == "crystal_gas_arrow") or
+                    (obj:get_luaentity().name == "pumpkid_bomb"))
+                )) then
+            if (obj:get_luaentity()) then
+                minetest.chat_send_all(""..obj:get_luaentity().name)
+            end
         elseif (obj:get_luaentity() and obj:get_luaentity().name ~= "__builtin:item" and obj:get_luaentity().name ~= self.object:get_luaentity().name) then
             obj_p = obj:getpos()
             local vec = {x=obj_p.x-pos.x, y=obj_p.y-pos.y, z=obj_p.z-pos.z}
@@ -99,6 +117,10 @@ local function search_on_step2(
 
             --hit(pos,self)
         elseif min_dist<=1 and self.move==1 then
+            obj_min:punch(obj_min, 1.0, {
+                full_punch_interval = 1.0,
+                damage_groups = {fleshy = 20},
+            }, nil)
             hit(pos,self)
         else
             self.object:setvelocity(vec_min)
@@ -178,6 +200,12 @@ local function search_on_step(
         obj_p = obj_min:getpos()
         if min_dist < 1 then
             local node = node_ok(pos).name
+
+            obj_min:punch(obj_min, 1.0, {
+                full_punch_interval = 1.0,
+                damage_groups = {fleshy = 30},
+            }, nil)
+
             self.hit_node(self, pos, node)
             self.object:remove()
             return
@@ -387,7 +415,8 @@ nssm_register_weapon("spirit_ball", {
         search_on_step(self, dtime, 5, 30, 25)
     end,
     hit_node = function(self, pos, node)
-        tnt.boom(pos, {damage_radius=8,radius=4,ignore_protection=false})
+        --tnt.boom(pos, {damage_radius=8,radius=4,ignore_protection=false})
+        tnt_boom_nssm(pos, {damage_radius=4,radius=3,ignore_protection=false, damage_all = true})
     end,
 
     material = "default:goldblock",

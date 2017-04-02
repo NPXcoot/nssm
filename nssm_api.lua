@@ -681,13 +681,13 @@ local function calc_velocity(pos1, pos2, old_vel, power)
 	return vel
 end
 
-local function entity_physics(pos, radius, drops)
+local function entity_physics(pos, radius, drops, damage_all)
 	local objs = minetest.get_objects_inside_radius(pos, radius)
 	for _, obj in pairs(objs) do
 		local obj_pos = obj:getpos()
 		local dist = math.max(1, vector.distance(pos, obj_pos))
 
-		local damage = (4 / dist) * radius
+		local damage = (8 / (dist+1)) * radius
 		if obj:is_player() then
 			-- currently the engine has no method to set
 			-- player velocity. See #2960
@@ -708,7 +708,7 @@ local function entity_physics(pos, radius, drops)
 			local name = luaobj.name
 
 			if objdef and objdef.on_blast then
-				if ((name == "nssm:pumpking") or (name == "nssm:morvalar0") or (name== "nssm:morvalar5")) then
+				if ((not damage_all) and ((name == "nssm:pumpking") or (name == "nssm:morvalar0") or (name== "nssm:morvalar5"))) then
 					do_damage = false
 					do_knockback = false
 				else
@@ -882,7 +882,11 @@ function tnt_boom_nssm(pos, def, block, effects)
 	local drops, radius = tnt_explode(pos, def.radius, def.ignore_protection, def.ignore_on_blast, block)
 	-- append entity drops
 	local damage_radius = (radius / def.radius) * def.damage_radius
-	entity_physics(pos, damage_radius, drops)
+	if def.damage_all then
+		entity_physics(pos, damage_radius, drops, def.damage_all)
+	else
+		entity_physics(pos, damage_radius, drops)
+	end
 	if not def.disable_drops then
 		eject_drops(drops, pos, radius)
 	end

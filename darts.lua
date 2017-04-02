@@ -236,6 +236,7 @@ function explosion_thickweb(pos)
 end
 
 -- arrow=>phoenix arrow
+--[[
 mobs:register_arrow("nssm:phoenix_arrow", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
@@ -276,7 +277,7 @@ mobs:register_arrow("nssm:phoenix_arrow", {
 
 	end,
 })
-
+]]
 mobs:register_arrow("nssm:super_gas", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
@@ -399,7 +400,7 @@ mobs:register_arrow("nssm:lava_block_bomb", {
 	end
 })
 
---
+--[[
 mobs:register_arrow("nssm:roar_of_the_dragon", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
@@ -442,7 +443,7 @@ mobs:register_arrow("nssm:roar_of_the_dragon", {
 			minetest.env:set_node(p, {name="air"})
 		end
 	end
-})
+})]]
 
 
 mobs:register_arrow("nssm:lava_arrow", {

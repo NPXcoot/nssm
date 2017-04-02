@@ -13,6 +13,9 @@ Codice:
  - Spawn mostri nuovi
  - Danno River Lord e Sandonisc
  - Silversand Dragon (?)
+ - togliere le chat (hp_num -> envy sword)
+ - ascia esplosiva
+ 
 
 Emmo vorrebbe:
  -Nuove armature dei nuovi mostri
