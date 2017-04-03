@@ -43,8 +43,6 @@ mobs:register_mob("nssm:mese_dragon", {
 	stepheight=3.1,
 	knock_back=0,
 	jump_height=12,
-	dogshoot_count_max = 9,
-	arrow = "nssm:roar_of_the_dragon",
 	reach = 25,
 	shoot_interval = 3,
 	shoot_offset = -1,

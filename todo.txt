@@ -1,21 +1,20 @@
 Codice:
  - Mantis problema animazioni (fra)
- - I Pumboom droppano gli oggetti quando esplodono! (Controllare se anche quelli di tenplus, Fra)
  - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.     -> Iniziato Fra
- - Attacco lanciafango del chog
+ - Attacco lanciafango del chog                                 ->iniziato
  - Icelamander lagga malissimo (controllare anche i suoi amici)
- - Mese Dragon da rifare (lagga, più piccolo, non attacca)
- - Mantis beast
+ - Mese Dragon da rifare (lagga, più piccolo, non attacca)      ->iniziato
+ - Mantis beast                                                 ->fatto?
  - Ahuizotl (?)
  - Albino Spider
  - Salamander (dogshootta lava (un blocco))                     ->semifatto
  - Flust mangia le armature di metallo e non viene danneggiato dalle armi di metallo
  - Spawn mostri nuovi
- - Danno River Lord e Sandonisc
+ - Danno River Lord e Sandonisc                                 -> fatto?
  - Silversand Dragon (?)
- - togliere le chat (hp_num -> envy sword)
+ - togliere le chat
  - ascia esplosiva
- 
+
 
 Emmo vorrebbe:
  -Nuove armature dei nuovi mostri

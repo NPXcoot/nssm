@@ -1251,7 +1251,6 @@ minetest.register_tool("nssm:sword_of_envy", {
 						end
 					end
 					if hp_num ~= nil then
-						minetest.chat_send_all("hp_num = "..hp_num)
 						local stack = {name="nssm:life_energy", count=hp_num, wear=0, metadata=""}
 						if player_inv:contains_item("main", stack) then
 							--minetest.chat_send_all("trovato!")
