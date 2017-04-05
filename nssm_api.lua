@@ -937,3 +937,107 @@ function do_charge(self)
 		self.state = "stand"
 	end
 end
+
+function node_to_entity(pos)
+	local nodename = minetest.get_node(pos).name
+	print("Nodename:"..nodename)
+	local node=minetest.registered_nodes[minetest.get_node(pos).name]
+	--minetest.registered_nodes["<node name>"].<field>
+	local name = "nssm:nte"
+	minetest.register_craftitem("nssm:cazziemazzi", {
+		description = "Gravity gun",
+		image = "bloco_egg.png",
+		on_place = function(itemstack, placer, pointed_thing)
+
+		end,
+	})
+	--[[
+	minetest.register_entity("nssm:bubbolina", {
+		textures = {"web_ball.png"},
+	    collisionbox = {-0.1,-0.1,-0.1, 0.1,0.1,0.1},
+	    physical = true,
+		on_step = function(self, dtime)
+		end,
+	})
+
+	minetest.register_entity("nssm:ciaociao", {
+		visual = "cube",
+		visual_size = {x = 1, y = 1},
+		textures = {"web_ball.png"},
+		collisionbox = {-0.2,-0.2,-0.2, 0.2,0.2,0.2},
+		hp_max = 100,
+		physical = true,
+	})
+	]]
+	--[[
+	local tiles={}
+	local stop=0
+	for i, t in pairs(node.tiles) do
+		tiles[i]=t
+		stop=stop+1
+		if type(tiles[i])~="string" then
+		if stop==1 then tiles[i]="default_dirt.png" end
+			stop=stop-1
+			break
+		end
+	end
+	]]
+	minetest.remove_node(pos)
+	obj = minetest.add_entity(pos, "nssm:bubbolina")
+	return obj
+end
+
+function get_tiles(node)
+	local tiles={}
+	local stop=0
+	if type(node.tiles)=="table" then
+		for i, t in pairs(node.tiles) do
+			tiles[i]=t
+			stop=stop+1
+			if type(tiles[i])~="string" then
+			if stop==1 then tiles[i]="default_dirt.png" end
+				stop=stop-1
+				break
+			end
+		end
+	else
+		return node.tiles
+	end
+	return tiles
+end
+
+minetest.register_craftitem("nssm:gravitygun", {
+	description = "Gravity gun",
+	image = "stone_eater_egg.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		local pos=minetest.get_pointed_thing_position(pointed_thing, false)
+		minetest.remove_node(pos)
+		obj = minetest.add_entity(pos, "nssm:mese_volante")
+		obj:set_velocity({x=0, y=1, z=0})
+		return itemstack
+	end,
+})
+
+minetest.register_entity("nssm:mese_volante", {
+	textures = {"default_mese_block.png","default_mese_block.png", "default_mese_block.png", "default_mese_block.png", "default_mese_block.png", "default_mese_block.png"},
+	visual = "cube",
+	visual_size = {x = 1, y = 1},
+	collisionbox = {-0.1,-0.1,-0.1, 0.1,0.1,0.1},
+	physical = true,
+	on_step = function(self, dtime)
+		self.cube_timer = (self.cube_timer) or os.time()
+		if (os.time() - self.cube_timer > 3) then
+			local all_objects = minetest.get_objects_inside_radius({x=0, y=0, z=0}, 50)
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					local vec = vector.subtract(obj:getpos(), self.object:getpos())
+					vec = vector.normalize(vec)
+					vec = vector.multiply(vec, 5)
+					self.object:set_velocity(vec)
+					break
+				end
+			end
+		end
+	end,
+})
