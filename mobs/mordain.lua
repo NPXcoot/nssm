@@ -60,7 +60,7 @@ mobs:register_mob("nssm:mordain", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
-			mobs:set_animation(self, "punch")
+			mobs.set_animation(self, "punch")
 
 			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
 				-- play attack sound

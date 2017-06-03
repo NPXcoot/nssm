@@ -69,7 +69,7 @@ mobs:register_mob("nssm:morgut", {
 
 		if self.flag == 1 then
 			self.state = ""
-			mobs:set_animation(self, "run")
+			mobs.set_animation(self, "run")
 			self.object:setyaw(self.dir)
 			set_velocity(self, 4)
 
@@ -89,7 +89,7 @@ mobs:register_mob("nssm:morgut", {
 			if self.attack then
 				local s = self.object:getpos()
 				local p = self.attack:getpos()
-				mobs:set_animation(self, "punch")
+				mobs.set_animation(self, "punch")
 				local m = 2
 
 				minetest.add_particlespawner(
@@ -149,7 +149,7 @@ mobs:register_mob("nssm:morgut", {
 									end
 								end
 							end
-							mobs:set_animation(self, "run")
+							mobs.set_animation(self, "run")
 							self.flag = 1
 							self.morgut_timer = os.time()
 							self.curr_attack = self.attack

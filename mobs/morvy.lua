@@ -55,10 +55,10 @@ mobs:register_mob("nssm:morvy", {
 	},
 
 	custom_attack = function(self)
-		mobs:set_animation(self, "stand")
+		mobs.set_animation(self, "stand")
 		self.morvy_counter = (self.morvy_counter or 0) + 1
 		if self.morvy_counter == 4 then
-			mobs:set_animation(self, "punch")
+			mobs.set_animation(self, "punch")
 			self.morvy_counter = 0
 			local counter = 0
 

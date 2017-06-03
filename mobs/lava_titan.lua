@@ -88,7 +88,7 @@ mobs:register_mob("nssm:lava_titan", {
 	--[[
 	custom_attack = function (self)
 		digging_attack
-		mobs:set_animation(self, "punch")
+		mobs.set_animation(self, "punch")
 		local p2 = p
 		local s2 = s
 

@@ -71,7 +71,7 @@ mobs:register_mob("nssm:morlu", {
 
 		if self.flag == 1 then
 			self.state = ""
-			mobs:set_animation(self, "run")
+			mobs.set_animation(self, "run")
 			self.object:setyaw(self.dir)
 			set_velocity(self, 4)
 
@@ -91,7 +91,7 @@ mobs:register_mob("nssm:morlu", {
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
-			mobs:set_animation(self, "punch")
+			mobs.set_animation(self, "punch")
 			local m = 1
 
 			if self.attack:is_player() then
@@ -184,7 +184,7 @@ mobs:register_mob("nssm:morlu", {
 										self.inventory[self.invnum].name = armor_elements[steal_pos].name
 									end
 
-									mobs:set_animation(self, "run")
+									mobs.set_animation(self, "run")
 									self.flag = 1
 									self.morlu_timer = os.time()
 									self.curr_attack = self.attack
@@ -203,7 +203,7 @@ mobs:register_mob("nssm:morlu", {
 					local s = self.object:getpos()
 					local p = self.attack:getpos()
 
-					mobs:set_animation(self, "punch")
+					mobs.set_animation(self, "punch")
 
 					if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
 						-- play attack sound
