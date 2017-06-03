@@ -62,7 +62,7 @@ mobs:register_mob("nssm:pumpking", {
 	custom_attack = function(self)
 		self.pumpking_timer = (self.pumpking_timer or os.time())
 		if (os.time() - self.pumpking_timer) >3 then
-			set_animation(self, "punch")
+			mobs.set_animation(self, "punch")
 			self.pumpking_timer = os.time()
 			local s = self.object:getpos()
 			local p = self.attack:getpos()

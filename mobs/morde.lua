@@ -62,7 +62,7 @@ mobs:register_mob("nssm:morde", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
-			set_animation(self, "punch")
+			mobs.set_animation(self, "punch")
 
 			self.health = self.health + (self.damage*2)
 			local m = 3
