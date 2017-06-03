@@ -99,7 +99,7 @@ mobs:register_mob("nssm:mese_dragon", {
 			end
 			if self.attack_rip>=8 then
 				self.attack_rip =0
-				set_animation("punch1")
+				mobs:set_animation("punch1")
 				for dx = -17,17 do
 					for dz= -17,17 do
 						local k = {x = s.x+dx, y=s.y+20, z=s.z+dz}

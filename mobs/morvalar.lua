@@ -79,7 +79,7 @@ mobs:register_mob("nssm:morvalar", {
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
-			set_animation(self, "punch")
+			mobs:set_animation(self, "punch")
 			local m = 1
 
 			if self.attack:is_player() then
@@ -157,7 +157,7 @@ mobs:register_mob("nssm:morvalar", {
 					local s = self.object:getpos()
 					local p = self.attack:getpos()
 
-					set_animation(self, "punch")
+					mobs:set_animation(self, "punch")
 
 					if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
 						-- play attack sound
@@ -240,7 +240,7 @@ mobs:register_mob("nssm:morvalar6", {
 
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
-			set_animation(self, "punch")
+			mobs:set_animation(self, "punch")
 			local m = 2
 
 
@@ -362,7 +362,7 @@ mobs:register_mob("nssm:morvalar5", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 			minetest.after(2, function(self)
-				set_animation(self, "punch")
+				mobs:set_animation(self, "punch")
 				tnt_boom_nssm(p, {damage_radius=6,radius=5,ignore_protection=false})
 				self.morvalar5_timer = os.time()
 			end,self)
@@ -431,7 +431,7 @@ mobs:register_mob("nssm:morvalar4", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
-			set_animation(self, "punch")
+			mobs:set_animation(self, "punch")
 
 			if minetest.line_of_sight({x = p.x, y = p.y +1.5, z = p.z}, {x = s.x, y = s.y +1.5, z = s.z}) == true then
 				-- play attack sound
@@ -626,7 +626,7 @@ mobs:register_mob("nssm:morvalar2", {
 			end
 			minetest.chat_send_all("Ne ho contati: "..counter)
 			if counter < 2 then
-				set_animation(self, "punch")
+				mobs:set_animation(self, "punch")
 
 				local v = vector.subtract(p,s)
 				--local v = {x = s.x-p.x, y = s.y-p.y , z= s.z-p.z}
@@ -715,7 +715,7 @@ mobs:register_mob("nssm:morvalar1", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
-			set_animation(self, "punch")
+			mobs:set_animation(self, "punch")
 
 			local m = 3
 
@@ -805,7 +805,7 @@ mobs:register_mob("nssm:morvalar0", {
 			local s = self.object:getpos()
 			local p = self.attack:getpos()
 
-			set_animation(self, "punch")
+			mobs:set_animation(self, "punch")
 
 			local m = 5 	--velocity of the kamehameha
 			local obj = minetest.add_entity(s, "nssm:kamehameha_bad")
