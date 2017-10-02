@@ -23,8 +23,8 @@ mobs:register_mob("nssm:lava_titan", {
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
-		min = 7,
-		max = 9,},
+		min = 90,
+		max = 100,},
 		{name = "nssm:lava_titan_eye",
 		chance = 1,
 		min = 1,

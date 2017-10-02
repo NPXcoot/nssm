@@ -22,8 +22,8 @@ mobs:register_mob("nssm:echidna", {
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
-		min = 6,
-		max = 7,},
+		min = 90,
+		max = 120,},
 		{name = "nssm:snake_scute",
 		chance = 1,
 		min = 1,
@@ -34,6 +34,7 @@ mobs:register_mob("nssm:echidna", {
 	water_damage = 0,
 	floats = 1,
 	lava_damage = 0,
+	suffocation = 0,
 	light_damage = 0,
 	blood_texture="nssm_blood.png",
 	blood_amount=10,

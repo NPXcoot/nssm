@@ -1,7 +1,7 @@
 mobs:register_mob("nssm:icelamander", {
 	type = "monster",
-	hp_max = 230,
-	hp_min = 230,
+	hp_max = 190,
+	hp_min = 190,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 2.3, 0.5},
 	visual = "mesh",
 	mesh = "icelamander.x",
@@ -21,8 +21,8 @@ mobs:register_mob("nssm:icelamander", {
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
-		min = 6,
-		max = 8},
+		min = 60,
+		max = 80},
 		{name = "nssm:frosted_amphibian_heart",
 		chance = 1,
 		min = 1,
@@ -45,6 +45,7 @@ mobs:register_mob("nssm:icelamander", {
 	water_damage = 0,
 	lava_damage = 30,
 	light_damage = 0,
+	suffocation = 0,
 	on_rightclick = nil,
 	attack_type = "dogshoot",
 	dogshoot_switch = true,

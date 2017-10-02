@@ -8,7 +8,7 @@ mobs:register_mob("nssm:chog", {
 	textures = {{"chog.png"}},
 	visual_size = {x=4, y=4},
 	makes_footstep_sound = true,
-	view_range = 10,
+	view_range = 13,
 	walk_velocity = 1,
 	rotate = 270,
 	fear_height = 4,
@@ -16,7 +16,7 @@ mobs:register_mob("nssm:chog", {
 	--[[sounds = {
 		random = "chog",
 	},]]
-	damage = 1,
+	damage = 4,
 	jump = true,
 	drops = {
 		{name = "nssm:life_energy",
@@ -24,11 +24,12 @@ mobs:register_mob("nssm:chog", {
 		min = 3,
 		max = 4},
     },
-	armor = 70,
+	armor = 100,
 	drawtype = "front",
 	water_damage = 0,
-	lava_damage = 5,
+	lava_damage = 15,
 	light_damage = 0,
+	suffocation = 6,
 	--group_attack=true,
 	--attack_animals=true,
 	knock_back=2,

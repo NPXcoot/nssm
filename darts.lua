@@ -338,9 +338,9 @@ function crystal_gas_explosion(pos)
 	if minetest.is_protected(pos, "") then
 		return
 	end
-	for dx=-1,1 do
+	for dx= 0,0 do
 		for dy=-1,2 do
-			for dz=-1,1 do
+			for dz= 0,0 do
 				local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 				if minetest.is_protected(p, "") then
 					return

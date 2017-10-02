@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:bloco", {
 	type = "monster",
-	hp_max = 18,
+	hp_max = 16,
 	hp_min = 14,
 	collisionbox = {-0.5, 0, -0.5, 0.5, 1.2, 0.5},
 	visual = "mesh",
@@ -23,7 +23,7 @@ mobs:register_mob("nssm:bloco", {
 		{name = "nssm:life_energy",
 		chance = 1,
 		min = 1,
-		max = 1,},
+		max = 2,},
 		{name = "default:stone",
 		chance = 1,
 		min = 2,

@@ -1,3 +1,5 @@
+--Remove?
+
 mobs:register_mob("nssm:dolidrosaurus", {
 	type = "monster",
 	hp_max = 46,

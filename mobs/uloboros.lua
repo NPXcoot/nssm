@@ -1,6 +1,6 @@
 mobs:register_mob("nssm:uloboros", {
 	type = "monster",
-	hp_max = 28,
+	hp_max = 23,
 	hp_min = 17,
 	collisionbox = {-0.5, 0.00, -0.5, 0.5, 0.8, 0.5},
 	visual = "mesh",
@@ -38,8 +38,8 @@ mobs:register_mob("nssm:uloboros", {
 	},
 	armor = 80,
 	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 7,
+	water_damage = 2,
+	lava_damage = 17,
 	light_damage = 0,
 	group_attack=true,
 	attack_animals=true,

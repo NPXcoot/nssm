@@ -9,7 +9,7 @@ mobs:register_mob("nssm:ant_worker", {
 	textures = {{"ant_worker.png"}},
 	visual_size = {x=2, y=2},
 	makes_footstep_sound = true,
-	view_range = 20,
+	view_range = 15,
 	fear_height = 4,
 	walk_velocity = 0.5,
 	run_velocity = 2,

@@ -1,5 +1,6 @@
 mobs:register_mob("nssm:spiderduck", {
 	type = "monster",
+	docile_by_day = true,
 	hp_max = 27,
 	hp_min = 24,
 	collisionbox = {-0.6, -0.8, -0.6, 0.6, 0.4, 0.5},
@@ -43,7 +44,7 @@ mobs:register_mob("nssm:spiderduck", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 2,
-	lava_damage = 5,
+	lava_damage = 15,
 	light_damage = 0,
 	group_attack=true,
 	attack_animals=true,

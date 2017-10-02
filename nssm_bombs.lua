@@ -101,6 +101,24 @@ if minetest.get_modpath("nssbombs") then
                 particles = true,
             },
         })
+
+        nssbombs:register_throwitem("nssm:portal_bomb", "Morlendor Portal Bomb", {
+            textures = "portal_bomb.png",
+            recipe_number = 1,
+            recipe = {
+        		{'nssm:slothful_soul_fragment', 'nssm:slothful_soul_fragment', 'nssm:slothful_soul_fragment'},
+        		{'nssm:slothful_soul_fragment', 'nssm:black_powder', 'nssm:slothful_soul_fragment'},
+        		{'nssm:slothful_soul_fragment', 'nssm:slothful_soul_fragment', 'nssm:slothful_soul_fragment'},
+        	},
+            explosion = {
+                shape = "schematic",
+                radius = 9,
+                block = minetest.get_modpath("nssb").."/schems/portal.mts",
+                particles = true,
+            }
+        })
+
+
     end
 
     nssbombs:register_throwitem("nssm:water_bomb", "Water Bomb", {
@@ -306,4 +324,5 @@ if minetest.get_modpath("nssbombs") then
             particles = false,
         }
     })
+
 end

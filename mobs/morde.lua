@@ -109,6 +109,7 @@ mobs:register_mob("nssm:morde", {
 
 minetest.register_entity("nssm:mortick", {
 	textures = {"mortick.png"},
+	collisionbox = {-0.05, -0.05, -0.05, 0.05, 0.05, 0.05},
 	hp_min = 10000,
 	hp_max = 10000,
 	armor = 100,

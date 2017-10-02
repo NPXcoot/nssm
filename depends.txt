@@ -1,6 +1,7 @@
 default
 mobs
 farming?
+bows?
 nssbombs?
 3d_armor?
 fire

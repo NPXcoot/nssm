@@ -44,6 +44,7 @@ mobs:register_mob("nssm:snow_biter", {
 	water_damage = 0,
 	lava_damage = 30,
 	light_damage = 0,
+	suffocation = 4,
 	group_attack=true,
 	attack_animals=true,
 	knock_back=4,

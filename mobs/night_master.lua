@@ -67,8 +67,8 @@ mobs:register_mob("nssm:night_master", {
 
 mobs:register_mob("nssm:night_master_2", {
 	type = "monster",
-	hp_max = 60,
-	hp_min = 60,
+	hp_max = 70,
+	hp_min = 70,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "night_master_2.x",
@@ -86,7 +86,7 @@ mobs:register_mob("nssm:night_master_2", {
 		random = "night_master",
 		distance = 45,
 	},
-	damage = 10,
+	damage = 11,
 	jump = false,
 	armor = 60,
 	drawtype = "front",
@@ -156,8 +156,8 @@ mobs:register_mob("nssm:night_master_1", {
 	drops = {
 		{name = "nssm:life_energy",
 		chance = 1,
-		min = 6,
-		max = 7,},
+		min = 50,
+		max = 60,},
 		{name = "nssm:heron_leg",
 		chance = 1,
 		min = 1,

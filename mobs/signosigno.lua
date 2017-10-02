@@ -32,7 +32,7 @@ mobs:register_mob("nssm:signosigno", {
 	lava_damage = 2,
 	light_damage = 1,
 	group_attack=true,
-	attack_animals=true,
+	attack_animals=false,
 	knock_back=4,
 	blood_texture="morparticle.png",
 	on_rightclick = nil,

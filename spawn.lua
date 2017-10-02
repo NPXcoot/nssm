@@ -40,10 +40,10 @@ if mm ~= 0 then
 
 	    -- ICE
 	    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 120, 35000000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
 			--mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 60, 9000000/mm, 1, 20, 31000)
-	    mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
-			mobs:spawn_specific("nssm:icelizard", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
+			mobs:spawn_specific("nssm:icelizard", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 30, 6000000/mm, 1, -31000, 31000)
 
 	    -- FOREST
 	    mobs:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 40, 200000/mm, 1, -31000, 140)
@@ -51,11 +51,11 @@ if mm ~= 0 then
 			mobs:spawn_specific("nssm:crystal_slug", {"default:leaves", "default:aspen_leaves"}, {"air"}, 0, 20, 40, 4000000/mm, 1, -31000, 140)
 
 	    -- PINE FOREST
-	    mobs:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 600000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 800000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 1000000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 8000000/mm, 1, -31000, 31000)
-			mobs:spawn_specific("nssm:pumpkid", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 2000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock", "default:snow"}, {"default:pine_tree"}, 0, 20, 30, 800000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock", "default:snow"}, {"default:pine_tree"}, 0, 20, 30, 1000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock", "default:snow"}, {"default:pine_tree"}, 0, 20, 30, 1200000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock", "default:snow"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 8000000/mm, 1, -31000, 31000)
+			mobs:spawn_specific("nssm:pumpkid", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock", "default:snow"}, {"default:pine_tree"}, 0, 20, 60, 3000000/mm, 1, -31000, 31000)
 
 	else
 		minetest.chat_send_all("You are using a "..mm.." multiplier for mobs' spawn rate")
@@ -84,10 +84,10 @@ if mm ~= 0 then
 
 	    -- ICE
 	    mobs:spawn_specific("nssm:icelamander", {"default:snowblock", "default:ice"}, {"default:snowblock", "default:ice"}, 0, 20, 180, 220000000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:icesnake", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
 	    --mobs:spawn_specific("nssm:white_werewolf", {"default:dirt_with_snow","default:snowblock"}, {"air"}, 0, 20, 35, 22000000/mm, 1, 50, 31000)
-	    mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
-			mobs:spawn_specific("nssm:icelizard", {"default:snowblock", "default:ice", "default:dirt_with_snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:snow_biter", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
+			mobs:spawn_specific("nssm:icelizard", {"default:snowblock", "default:ice", "default:dirt_with_snow", "default:snow"}, {"default:snowblock", "default:ice", "default:dirt_with_snow"}, 0, 20, 40, 20000000/mm, 1, -31000, 31000)
 
 	    -- FOREST
 	    mobs:spawn_specific("nssm:larva", {"default:dirt_with_grass"}, {"default:tree","default:aspen_tree"}, 0, 20, 40, 800000/mm, 1, -31000, 140)
@@ -95,21 +95,21 @@ if mm ~= 0 then
 			mobs:spawn_specific("nssm:crystal_slug", {"default:leaves", "default:aspen_leaves"}, {"air"}, 0, 20, 40, 4000000/mm, 1, -31000, 140)
 
 	    -- PINE FOREST
-	    mobs:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 1400000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 1600000/mm, 1, -31000, 31000)
-	    mobs:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 1800000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_small", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 1600000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_medium", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 1800000/mm, 1, -31000, 31000)
+	    mobs:spawn_specific("nssm:pumpboom_large", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 80, 2000000/mm, 1, -31000, 31000)
 	    mobs:spawn_specific("nssm:pumpking", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_needles", "default:pine_tree"}, 0, 12, 120, 8000000/mm, 1, -31000, 31000)
-			mobs:spawn_specific("nssm:pumpkid", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 30, 2200000/mm, 1, -31000, 31000)
+			mobs:spawn_specific("nssm:pumpkid", {"default:dirt_with_grass", "default:dirt_with_snow","default:snowblock"}, {"default:pine_tree"}, 0, 20, 60, 3300000/mm, 1, -31000, 31000)
 
 	    -- SAVANNA
 		  mobs:spawn_specific("nssm:felucco", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 80, 30000000/mm, 1, -200, 31000)
 			mobs:spawn_specific("nssm:kele", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 80, 30000000/mm, 1, -200, 31000)
-			mobs:spawn_specific("nssm:tartacacia", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 80, 2000000000/mm, 1, -200, 31000)
+			mobs:spawn_specific("nssm:tartacacia", {"default:dirt_with_dry_grass"}, {"default:dirt_with_dry_grass"}, 0, 20, 180, 2000000000/mm, 1, -200, 31000)
 
 			--COLD DESERT
 			mobs:spawn_specific("nssm:silver_sandonisc", {"default:silver_sand"}, {"default:silver_sand"}, 0, 20, 80, 300000000/mm, 1, -200, 31000)
 			mobs:spawn_specific("nssm:black_scorpion", {"default:silver_sand"}, {"default:silver_sand"}, 0, 20, 80, 300000000/mm, 1, -200, 31000)
-			--mobs:spawn_specific("nssm:silversand_dragon", {"default:silver_sand"}, {"default:silver_sand"}, 0, 20, 80, 2000000000/mm, 1, -200, 31000)
+			mobs:spawn_specific("nssm:silversand_dragon", {"default:silver_sand"}, {"default:silver_sand"}, 0, 20, 180, 2000000000/mm, 1, -200, 31000)
 
 			--RIVER
 			mobs:spawn_specific("nssm:chog", {"default:river_water_source"}, {"default:sand","default:river_water_source"}, 0, 20, 60, 3000000/mm, 1, -31000, 300)
@@ -123,21 +123,22 @@ if mm ~= 0 then
 	end
 
 	-- CAVES
-	mobs:spawn_specific("nssm:bloco", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 30, 500000/mm, 3, -31000, -20)
-	mobs:spawn_specific("nssm:lava_titan", {"default:stone", "default:desert_stone"}, {"air"}, 0, 120, 12, 22000000/mm, 1, -31000, -200)
-	mobs:spawn_specific("nssm:stone_eater", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 40, 700000/mm, 2, -31000, -60)
-	mobs:spawn_specific("nssm:signosigno", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 10, 20, 400000/mm, 2, -31000, -40)
+	mobs:spawn_specific("nssm:bloco", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 30, 500000/mm, 3, -31000, -30)
+	mobs:spawn_specific("nssm:lava_titan", {"default:stone", "default:desert_stone"}, {"air"}, 0, 120, 12, 22000000/mm, 1, -31000, -300)
+	mobs:spawn_specific("nssm:stone_eater", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 40, 700000/mm, 2, -31000, -100)
+	mobs:spawn_specific("nssm:signosigno", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 10, 20, 400000/mm, 2, -31000, -60)
 	mobs:spawn_specific("nssm:signosigno", {"bones:bones"}, {"air"}, 0, 15, 20, 5000/mm, 5, -31000, 31000)
 	mobs:spawn_specific("nssm:albino_spider", {"default:stone"}, {"default:stone"}, 0, 20, 30, 500000/mm, 3, -31000, -150)
-	mobs:spawn_specific("nssm:salamander", {"default:lava_source"}, {"default:stone", "default:lava_flowing", "default:lava_source", "air"}, 0, 20, 30, 500000/mm, 3, -31000, -100)
-	mobs:spawn_specific("nssm:flust", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 30, 500000/mm, 3, -31000, -64)
+	mobs:spawn_specific("nssm:salamander", {"default:lava_source"}, {"default:stone", "default:lava_flowing", "default:lava_source", "air"}, 0, 20, 30, 500000/mm, 3, -31000, -200)
+	mobs:spawn_specific("nssm:flust", {"default:stone", "default:desert_stone"}, {"default:stone", "default:desert_stone"}, 0, 20, 30, 500000/mm, 3, -31000, -164)
 
 
 
 	-- SEA
 	mobs:spawn_specific("nssm:crab", {"default:sand"}, {"default:water_source"}, 0, 20, 60, 4000000/mm, 1, -31000, 31000)
 	mobs:spawn_specific("nssm:kraken", {"default:water_source"}, {"default:water_source"}, 0, 20, 400, 500000000/mm, 1, -31000, 0)
-	mobs:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 80, 38000000/mm, 1, -31000, 0)
+	mobs:spawn_specific("nssm:octopus", {"default:water_source"}, {"default:water_source"}, 0, 20, 80, 40000000/mm, 1, -31000, 0)
+	mobs:spawn_specific("nssm:pelagia", {"default:water_source"}, {"default:water_source"}, 0, 20, 80, 40000000/mm, 1, -31000, 0)
 
 	-- DESERT
 	mobs:spawn_specific("nssm:sandworm", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 100, 28000000/mm, 1, -31000, 31000)
@@ -145,9 +146,9 @@ if mm ~= 0 then
 	mobs:spawn_specific("nssm:sand_bloco", {"default:desert_sand", "default:desert_stone"}, {"air"}, 0, 20, 90, 20000000/mm, 1, -31000, 31000)
 
 	-- SKY
-	mobs:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 110, 1500000000/mm, 1, 10, 180)
+	mobs:spawn_specific("nssm:moonheron", {"air"}, {"air"}, 0, 10, 120, 2000000000/mm, 1, 10, 180)
 	mobs:spawn_specific("nssm:night_master", {"air"}, {"air"}, 0, 7, 400, 50000000000/mm, 2, 10, 180)
 	mobs:spawn_specific("nssm:phoenix", {"air"}, {"air"}, 10, 20, 400, 500000000000/mm, 1, 10, 180)
-	mobs:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 110, 1500000000/mm, 1, 10, 180)
+	mobs:spawn_specific("nssm:scrausics", {"air"}, {"air"}, 10, 20, 120, 2000000000/mm, 1, 10, 180)
 
 end
