@@ -1,0 +1,34 @@
+Codice:
+ - Mantis problema animazioni (fra)
+ - Attacco tartacacia: ti pianta nel terreno facendo danno o apre una voragine sotto di te.     -> Iniziato Fra
+ - Attacco lanciafango del chog                                 ->iniziato
+ - Icelamander lagga malissimo (controllare anche i suoi amici)
+ - Mese Dragon da rifare (lagga, più piccolo, non attacca)      ->iniziato
+ - Mantis beast                                                 ->fatto?
+ - Ahuizotl (?)
+ - Albino Spider
+ - Salamander (dogshootta lava (un blocco))                     ->semifatto
+ - Flust mangia le armature di metallo e non viene danneggiato dalle armi di metallo
+ - Spawn mostri nuovi
+ - Danno River Lord e Sandonisc                                 -> fatto?
+ - Silversand Dragon (?)
+ - togliere le chat
+ - ascia esplosiva
+
+
+Emmo vorrebbe:
+ -Nuove armature dei nuovi mostri
+ -Archi e frecche dei mostri
+ -Armi fighette difficili da fare e senza la wiki cosicché nessuno possa usarle a parte me, fatte con i drop dei boss di superfichie
+
+
+Modelli:
+ -Animazioni Ahuizotl
+ -Animazioni Albino Spider
+ -Flust
+ -Animazioni Silversand Dragon (Che fa?)
+
+ Suoni nuovi mostri (Emmo)
+
+Cose futurose:
+-Addomesticare e cavalcare
